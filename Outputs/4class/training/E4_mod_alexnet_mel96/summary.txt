@@ -1,0 +1,12 @@
+Run: E4_mod_alexnet_mel96
+Model: modified_alexnet
+Total params: 3,750,980
+Test accuracy: 0.9518
+Test macro-F1: 0.9383
+Best val F1:   0.9492
+
+Per-class F1:
+  healthy 1              P=0.948  R=0.977  F1=0.962  (n=855)
+  stator short 1         P=1.000  R=1.000  F1=1.000  (n=171)
+  bearing bpfo 3         P=0.862  R=0.731  F1=0.791  (n=171)
+  broken rotor bar       P=1.000  R=1.000  F1=1.000  (n=171)

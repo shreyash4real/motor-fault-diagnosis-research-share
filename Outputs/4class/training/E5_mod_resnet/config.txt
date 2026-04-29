@@ -1,0 +1,21 @@
+RUN NAME          : E5_mod_resnet
+started           : 2026-04-21T01:44:20
+device            : cpu
+mixed precision   : False
+model type        : modified_resnet
+features dir      : C:\Project Work\Outputs\4class\v2_speed_strat\features
+classes           : ['healthy 1', 'stator short 1', 'bearing bpfo 3', 'broken rotor bar']
+train / val / test: 5757 / 1254 / 1368
+total params      : 2,796,068
+params/sample     : 485.7
+healthy subsample : None
+class weights     : False
+dropout           : 0.3 / 0.3
+weight decay      : 0.0001
+label smoothing   : 0.0
+batch size        : 64
+max epochs        : 40
+early stop        : patience=8, min_epochs=12
+optimizer         : AdamW  lr=0.001
+scheduler         : CosineAnnealingLR
+seed              : 42

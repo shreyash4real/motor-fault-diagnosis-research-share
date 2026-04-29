@@ -1,0 +1,12 @@
+RUN NAME         : ENSEMBLE_stft_dwt_envelope
+Created          : 2026-04-27T13:31:03
+Strategy         : soft voting (equal-weight mean of softmaxes)
+Members          : ['stft', 'dwt', 'envelope']
+
+Member sources:
+  stft       run=E4_mod_alexnet_227
+             ckpt=C:\Project Work\Outputs\4class\training\E4_mod_alexnet_227\best_model.pt
+  dwt        run=DWT_multibranch_plain_v1
+             ckpt=C:\Project Work\Outputs\4class\training\DWT_multibranch_plain_v1\best_model.pt
+  envelope   run=ENVELOPE_dilated1d_v1
+             ckpt=C:\Project Work\Outputs\4class\training\ENVELOPE_dilated1d_v1\best_model.pt

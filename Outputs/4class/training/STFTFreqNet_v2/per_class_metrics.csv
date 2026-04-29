@@ -1,0 +1,5 @@
+class,precision,recall,f1,support
+healthy 1,0.9208,0.9661,0.9429,855
+stator short 1,1.0,1.0,1.0,171
+bearing bpfo 3,0.7769,0.5906,0.6711,171
+broken rotor bar,1.0,0.9942,0.9971,171

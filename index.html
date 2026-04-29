@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Motor Fault Diagnosis Research Share</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5d6875;
+      --line: #d9e0e8;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --blue: #245a9c;
+      --green: #21745b;
+      --amber: #a45f11;
+      --red: #a33a31;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      letter-spacing: 0;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+      gap: 28px;
+      align-items: center;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 4.2rem);
+      line-height: 1.02;
+      font-weight: 780;
+      color: #111820;
+    }
+    .lede {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.55;
+    }
+    .hero-image {
+      min-height: 260px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #111820;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 4 / 3;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    nav a, .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 0.9rem;
+    }
+    main .wrap { padding-top: 18px; }
+    section {
+      margin: 28px 0;
+      padding: 24px 0 0;
+      border-top: 1px solid var(--line);
+    }
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.55rem;
+      line-height: 1.2;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      line-height: 1.25;
+    }
+    p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    code {
+      font-family: Consolas, Monaco, monospace;
+      background: #edf2f7;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .metric, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 1.65rem;
+      line-height: 1.1;
+      color: var(--green);
+    }
+    .metric span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .table-scroll {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 740px;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+    th {
+      color: #263241;
+      background: #edf2f7;
+      font-weight: 700;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #edf2f7;
+      color: #263241;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+    .good { color: var(--green); font-weight: 700; }
+    .warn { color: var(--amber); font-weight: 700; }
+    .risk { color: var(--red); font-weight: 700; }
+    .gallery-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .sample {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .sample img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background: #111820;
+    }
+    .sample figcaption {
+      padding: 9px 10px 11px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.35;
+      min-height: 55px;
+    }
+    .links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .links ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    footer {
+      margin-top: 28px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    @media (max-width: 900px) {
+      .hero, .grid-2, .links { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 18px; }
+      .metrics, .gallery { grid-template-columns: 1fr; }
+      h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div>
+        <h1>Motor Fault Diagnosis Research Share</h1>
+        <p class="lede">Clean private export of the 4-class motor fault diagnosis pipeline: source code, canonical split metadata, training artifacts, diagnostics, and a small representative image gallery. Raw data and regenerated bulk tensors are intentionally excluded.</p>
+        <nav aria-label="Dashboard navigation">
+          <a href="#leaderboard">Leaderboard</a>
+          <a href="#representations">Representations</a>
+          <a href="#diagnostics">BPFO-3 diagnostic</a>
+          <a href="#gallery">Sample gallery</a>
+          <a href="#artifacts">Artifacts</a>
+          <a href="code_graph_explainer.html">Code graph</a>
+        </nav>
+      </div>
+      <div class="hero-image">
+        <img src="sample_gallery/stft/bearing_bpfo_3_speed_100.png" alt="Representative STFT channel 1 sample for bearing BPFO 3 at 100 percent speed">
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="metrics" aria-label="Key metrics">
+        <div class="metric"><strong>96.49%</strong><span>Best test accuracy from STFT + DWT + envelope temperature ensemble</span></div>
+        <div class="metric"><strong>0.9524</strong><span>Best macro-F1 on the canonical v2 speed-stratified split</span></div>
+        <div class="metric"><strong>0.837</strong><span>Best BPFO-3 F1, still the dominant remaining error source</span></div>
+        <div class="metric"><strong>48</strong><span>Representative gallery images: 4 reps x 4 classes x 3 speeds</span></div>
+      </div>
+
+      <section id="leaderboard">
+        <h2>Current Leaderboard</h2>
+        <p>Values are copied from <code>Outputs/4class/training/ensemble_leaderboard_temperature.csv</code> and the per-class-F1 temperature leaderboard.</p>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Run</th>
+                <th>Test Acc</th>
+                <th>Macro-F1</th>
+                <th>BPFO-3 F1</th>
+                <th>Interpretation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/summary.txt">ENSEMBLE_stft_dwt_envelope_temperature</a></td>
+                <td class="good">0.9649</td>
+                <td class="good">0.9524</td>
+                <td class="good">0.8367</td>
+                <td>Best overall. Envelope is weaker solo but adds useful signal in the ensemble.</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_temperature/summary.txt">ENSEMBLE_stft_dwt_temperature</a></td>
+                <td>0.9605</td>
+                <td>0.9470</td>
+                <td>0.8188</td>
+                <td>Strong two-representation ensemble.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_clarke_temperature/summary.txt">ENSEMBLE_stft_dwt_clarke_temperature</a></td>
+                <td>0.9598</td>
+                <td>0.9449</td>
+                <td>0.8110</td>
+                <td>Clarke does not improve the best ensemble.</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><a href="Outputs/4class/training/E4_mod_alexnet_227/summary.txt">(solo, T=2.400) E4_mod_alexnet_227</a></td>
+                <td>0.9539</td>
+                <td>0.9393</td>
+                <td>0.7934</td>
+                <td>Best solo STFT model.</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><a href="Outputs/4class/training/DWT_multibranch_plain_v1/summary.txt">(solo, T=0.743) DWT_multibranch_plain_v1</a></td>
+                <td>0.9503</td>
+                <td>0.9347</td>
+                <td>0.7778</td>
+                <td>Best solo DWT model.</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><a href="Outputs/4class/training/ENVELOPE_dilated1d_v1/summary.txt">(solo, T=1.172) ENVELOPE_dilated1d_v1</a></td>
+                <td>0.9327</td>
+                <td>0.9132</td>
+                <td>0.7922</td>
+                <td>Weaker solo, useful in the best ensemble.</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td><a href="Outputs/4class/training/CLARKE_mod_alexnet_v1/summary.txt">(solo, T=2.849) CLARKE_mod_alexnet_v1</a></td>
+                <td>0.8121</td>
+                <td>0.7903</td>
+                <td class="risk">0.4390</td>
+                <td>Not useful in the best ensemble.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="representations">
+        <h2>Representation Comparison</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>STFT</h3>
+            <p>Best solo performer with the modified AlexNet 227 model: 95.39% accuracy and 0.9393 macro-F1. Strong base representation for ensembling.</p>
+            <span class="tag">solo leader</span>
+          </div>
+          <div class="card">
+            <h3>DWT</h3>
+            <p>Plain multi-branch CNN reaches 95.03% accuracy and 0.9347 macro-F1. It complements STFT well and is part of every top ensemble.</p>
+            <span class="tag">ensemble core</span>
+          </div>
+          <div class="card">
+            <h3>Envelope</h3>
+            <p>Solo result is lower at 93.27% accuracy and 0.9132 macro-F1, but temperature-calibrated envelope logits produce the best ensemble.</p>
+            <span class="tag">useful complement</span>
+          </div>
+          <div class="card">
+            <h3>Clarke</h3>
+            <p>Solo performance is much weaker at 81.21% accuracy and 0.7903 macro-F1. Adding Clarke to STFT + DWT does not beat STFT + DWT + envelope.</p>
+            <span class="tag">not in best ensemble</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="diagnostics">
+        <h2>BPFO-3 col5@100 Diagnostic</h2>
+        <p>The remaining failures concentrate in <code>bearing bpfo 3</code> at 100% speed, <code>col_index=5</code>. The canonical test split contains only that column for BPFO-3 at 100% speed, so the leaderboard is sensitive to that single test column.</p>
+        <div class="grid-2">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr><th>Run</th><th>col5@100 share of BPFO-3 errors</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>E4_mod_alexnet_227</td><td class="risk">48/50 (96.0%)</td></tr>
+                <tr><td>DWT_multibranch_plain_v1</td><td class="risk">40/51 (78.4%)</td></tr>
+                <tr><td>ENVELOPE_dilated1d_v1</td><td class="risk">43/48 (89.6%)</td></tr>
+                <tr><td>CLARKE_mod_alexnet_v1</td><td class="warn">40/80 (50.0%)</td></tr>
+                <tr><td>STFTFreqNet_v2</td><td class="warn">48/70 (68.6%)</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card">
+            <h3>Diagnostic Files</h3>
+            <p>The diagnostic CSVs show BPFO-3 col5@100 is consistently closer to healthy@100 than to other BPFO-3 samples for several feature spaces.</p>
+            <ul>
+              <li><a href="Outputs/4class/diagnostics/bpfo3_error_share.txt">bpfo3_error_share.txt</a></li>
+              <li><a href="Outputs/4class/diagnostics/bpfo3_error_counts_by_column.csv">bpfo3_error_counts_by_column.csv</a></li>
+              <li><a href="Outputs/4class/diagnostics/bpfo3_cross_representation_similarity.csv">bpfo3_cross_representation_similarity.csv</a></li>
+              <li><a href="Outputs/4class/diagnostics/bpfo3_col5_vs_others.png">bpfo3_col5_vs_others.png</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <h2>Sample Gallery</h2>
+        <p>One deterministic test-split image per representation, class, and speed. Source rule: first sorted sample in the class/speed folder; STFT uses channel 1.</p>
+        <div class="gallery-controls" aria-label="Gallery filters">
+          <span class="pill">STFT ch1</span>
+          <span class="pill">DWT</span>
+          <span class="pill">Envelope</span>
+          <span class="pill">Clarke</span>
+          <a class="pill" href="sample_gallery/index.html">gallery page</a>
+          <a class="pill" href="sample_gallery/manifest.csv">manifest.csv</a>
+        </div>
+        <div class="gallery" id="galleryGrid"></div>
+      </section>
+
+      <section id="artifacts">
+        <h2>Artifacts To Inspect</h2>
+        <div class="links">
+          <div class="card">
+            <h3>Code</h3>
+            <ul>
+              <li><a href="Scripts_4/train_stft_cnn_e4_modalex_227.py">STFT modified AlexNet</a></li>
+              <li><a href="Scripts_4/train_dwt_cnn.py">DWT multi-branch CNN</a></li>
+              <li><a href="Scripts_4/train_envelope_cnn_v1.py">Envelope CNN</a></li>
+              <li><a href="Scripts_4/ensemble_evaluate_v2_temperature.py">Temperature ensemble</a></li>
+              <li><a href="Scripts_4/diagnose_bpfo3_v1.py">BPFO-3 diagnostic script</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Configs, Metrics, Plots</h3>
+            <ul>
+              <li><a href="Outputs/4class/training/ensemble_leaderboard_temperature.csv">temperature leaderboard</a></li>
+              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/ensemble_config.txt">best ensemble config</a></li>
+              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/per_class_metrics.csv">best per-class metrics</a></li>
+              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/confusion_matrix.png">best confusion matrix</a></li>
+              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/misclassified_samples.csv">best misclassifications</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Checkpoints And Splits</h3>
+            <ul>
+              <li><a href="Outputs/4class/training/E4_mod_alexnet_227/best_model.pt">STFT checkpoint</a></li>
+              <li><a href="Outputs/4class/training/DWT_multibranch_plain_v1/best_model.pt">DWT checkpoint</a></li>
+              <li><a href="Outputs/4class/training/ENVELOPE_dilated1d_v1/best_model.pt">Envelope checkpoint</a></li>
+              <li><a href="Outputs/4class/v2_speed_strat/split_report.txt">canonical split report</a></li>
+              <li><a href="Outputs/4class/v2_speed_strat/splits.csv">canonical split CSV</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Export prepared on 2026-04-30. Private repo target: <code>motor-fault-diagnosis-research-share</code>.
+    </div>
+  </footer>
+
+  <script>
+    const reps = [
+      ['stft', 'STFT ch1'],
+      ['dwt', 'DWT'],
+      ['envelope', 'Envelope'],
+      ['clarke', 'Clarke']
+    ];
+    const classes = [
+      ['healthy_1', 'healthy 1'],
+      ['stator_short_1', 'stator short 1'],
+      ['bearing_bpfo_3', 'bearing bpfo 3'],
+      ['broken_rotor_bar', 'broken rotor bar']
+    ];
+    const speeds = [50, 75, 100];
+    const grid = document.getElementById('galleryGrid');
+
+    for (const [repKey, repLabel] of reps) {
+      for (const [classKey, classLabel] of classes) {
+        for (const speed of speeds) {
+          const fig = document.createElement('figure');
+          fig.className = 'sample';
+          const img = document.createElement('img');
+          img.src = `sample_gallery/${repKey}/${classKey}_speed_${speed}.png`;
+          img.alt = `${repLabel} sample for ${classLabel} at ${speed} percent speed`;
+          const cap = document.createElement('figcaption');
+          cap.textContent = `${repLabel} - ${classLabel} - ${speed}% speed`;
+          fig.appendChild(img);
+          fig.appendChild(cap);
+          grid.appendChild(fig);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

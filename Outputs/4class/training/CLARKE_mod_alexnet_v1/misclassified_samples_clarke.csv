@@ -1,0 +1,259 @@
+test_sample_idx,true_class,pred_class,ch1_path,col_index,seg_idx,speed_pct
+35,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,2,35,50
+47,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,2,47,50
+52,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,2,52,50
+56,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,2,56,50
+58,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,1,50
+59,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,2,50
+60,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,3,50
+62,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,5,50
+63,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,6,50
+64,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,7,50
+65,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,8,50
+66,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,9,50
+70,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,13,50
+72,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,15,50
+73,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,16,50
+81,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,24,50
+87,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,30,50
+88,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,31,50
+91,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,34,50
+92,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,35,50
+93,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,36,50
+94,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,37,50
+98,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,41,50
+99,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,42,50
+102,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,45,50
+103,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,46,50
+104,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,47,50
+105,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,48,50
+108,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,51,50
+109,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,52,50
+110,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,53,50
+111,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,54,50
+112,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,3,55,50
+114,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,5,0,50
+134,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,5,20,50
+138,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,5,24,50
+152,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,5,38,50
+162,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,5,48,50
+163,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,5,49,50
+169,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,5,55,50
+217,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,17,46,50
+218,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,17,47,50
+220,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,17,49,50
+228,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,20,0,50
+239,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,20,11,50
+240,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,20,12,50
+242,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,20,14,50
+275,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,20,47,50
+276,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,20,48,50
+282,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,20,54,50
+283,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,20,55,50
+284,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,20,56,50
+287,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,2,75
+288,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,3,75
+289,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,4,75
+290,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,5,75
+294,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,9,75
+295,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,10,75
+296,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,11,75
+298,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,13,75
+299,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,14,75
+300,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,15,75
+312,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,27,75
+313,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,28,75
+315,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,30,75
+318,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,33,75
+319,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,34,75
+326,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,41,75
+329,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,44,75
+330,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,45,75
+331,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,46,75
+332,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,47,75
+333,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,48,75
+334,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,49,75
+341,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,9,56,75
+359,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,12,17,75
+387,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,12,45,75
+395,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,12,53,75
+401,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,2,75
+406,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,7,75
+408,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,9,75
+409,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,10,75
+410,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,11,75
+411,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,12,75
+412,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,13,75
+413,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,14,75
+414,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,15,75
+415,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,16,75
+434,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,35,75
+435,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,36,75
+436,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,37,75
+437,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,38,75
+439,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,40,75
+454,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,55,75
+455,healthy 1,stator short 1,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,16,56,75
+465,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,9,75
+466,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,10,75
+477,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,21,75
+478,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,22,75
+479,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,23,75
+480,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,24,75
+481,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,25,75
+482,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,26,75
+485,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,29,75
+492,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,36,75
+493,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,37,75
+494,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,38,75
+495,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,39,75
+502,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,46,75
+503,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,47,75
+504,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,48,75
+507,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,51,75
+508,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,21,52,75
+513,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,0,75
+515,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,2,75
+516,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,3,75
+517,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,4,75
+518,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,5,75
+525,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,12,75
+528,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,15,75
+529,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,16,75
+530,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,17,75
+531,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,18,75
+532,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,19,75
+533,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,20,75
+534,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,21,75
+535,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,22,75
+544,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,31,75
+545,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,32,75
+546,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,33,75
+547,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,34,75
+548,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,35,75
+551,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,38,75
+553,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,40,75
+558,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,45,75
+559,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,46,75
+560,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,47,75
+600,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,9,30,100
+601,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,9,31,100
+618,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,9,48,100
+619,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,9,49,100
+620,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,9,50,100
+621,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,9,51,100
+679,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,14,52,100
+680,healthy 1,stator short 1,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,14,53,100
+693,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,9,100
+756,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,34,15,100
+762,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,34,21,100
+763,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,34,22,100
+764,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,34,23,100
+804,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,35,6,100
+830,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,35,32,100
+855,stator short 1,broken rotor bar,C:\Project Work\Denoised\Motor-2\50\stator short 1\Electric_Motor-2_50_time-stator short 1-ch1.csv,3,0,50
+911,stator short 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\50\stator short 1\Electric_Motor-2_50_time-stator short 1-ch1.csv,3,56,50
+912,stator short 1,broken rotor bar,C:\Project Work\Denoised\Motor-2\75\stator short 1\Electric_Motor-2_75_time-stator short 1-ch1.csv,4,0,75
+926,stator short 1,broken rotor bar,C:\Project Work\Denoised\Motor-2\75\stator short 1\Electric_Motor-2_75_time-stator short 1-ch1.csv,4,14,75
+960,stator short 1,broken rotor bar,C:\Project Work\Denoised\Motor-2\75\stator short 1\Electric_Motor-2_75_time-stator short 1-ch1.csv,4,48,75
+968,stator short 1,broken rotor bar,C:\Project Work\Denoised\Motor-2\75\stator short 1\Electric_Motor-2_75_time-stator short 1-ch1.csv,4,56,75
+1006,stator short 1,broken rotor bar,C:\Project Work\Denoised\Motor-2\100\stator short 1\Electric_Motor-2_100_time-stator short 1-ch1.csv,2,37,100
+1016,stator short 1,broken rotor bar,C:\Project Work\Denoised\Motor-2\100\stator short 1\Electric_Motor-2_100_time-stator short 1-ch1.csv,2,47,100
+1017,stator short 1,broken rotor bar,C:\Project Work\Denoised\Motor-2\100\stator short 1\Electric_Motor-2_100_time-stator short 1-ch1.csv,2,48,100
+1025,stator short 1,healthy 1,C:\Project Work\Denoised\Motor-2\100\stator short 1\Electric_Motor-2_100_time-stator short 1-ch1.csv,2,56,100
+1026,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,0,50
+1028,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,2,50
+1030,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,4,50
+1040,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,14,50
+1041,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,15,50
+1048,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,22,50
+1051,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,25,50
+1052,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,26,50
+1053,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,27,50
+1082,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,56,50
+1083,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,0,75
+1084,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,1,75
+1085,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,2,75
+1086,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,3,75
+1087,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,4,75
+1088,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,5,75
+1089,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,6,75
+1090,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,7,75
+1091,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,8,75
+1092,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,9,75
+1093,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,10,75
+1094,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,11,75
+1095,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,12,75
+1099,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,16,75
+1103,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,20,75
+1110,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,27,75
+1113,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,30,75
+1114,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,31,75
+1115,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,32,75
+1116,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,33,75
+1117,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,34,75
+1127,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,44,75
+1128,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,45,75
+1129,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,46,75
+1130,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,47,75
+1131,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,48,75
+1132,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,49,75
+1133,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,50,75
+1137,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,54,75
+1139,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,56,75
+1140,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,0,100
+1141,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,1,100
+1142,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,2,100
+1143,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,3,100
+1144,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,4,100
+1145,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,5,100
+1146,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,6,100
+1147,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,7,100
+1148,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,8,100
+1152,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,12,100
+1153,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,13,100
+1154,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,14,100
+1155,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,15,100
+1156,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,16,100
+1157,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,17,100
+1158,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,18,100
+1160,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,20,100
+1161,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,21,100
+1162,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,22,100
+1168,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,28,100
+1169,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,29,100
+1170,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,30,100
+1171,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,31,100
+1172,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,32,100
+1173,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,33,100
+1174,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,34,100
+1175,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,35,100
+1176,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,36,100
+1177,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,37,100
+1178,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,38,100
+1182,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,42,100
+1183,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,43,100
+1184,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,44,100
+1186,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,46,100
+1187,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,47,100
+1188,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,48,100
+1189,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,49,100
+1190,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,50,100
+1193,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,53,100
+1194,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\100\bearing bpfo 3\Electric_Motor-2_100_time-bearing bpfo 3-ch1.csv,5,54,100
+1253,broken rotor bar,healthy 1,C:\Project Work\Denoised\Motor-2\50\broken rotor bar\Electric_Motor-2_50_time-broken rotor bar-ch1.csv,3,56,50
+1311,broken rotor bar,healthy 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,0,100
+1312,broken rotor bar,stator short 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,1,100
+1313,broken rotor bar,stator short 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,2,100
+1314,broken rotor bar,stator short 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,3,100
+1317,broken rotor bar,stator short 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,6,100
+1318,broken rotor bar,healthy 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,7,100
+1319,broken rotor bar,healthy 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,8,100
+1320,broken rotor bar,healthy 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,9,100
+1321,broken rotor bar,healthy 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,10,100
+1322,broken rotor bar,stator short 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,11,100
+1323,broken rotor bar,stator short 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,12,100
+1324,broken rotor bar,stator short 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,13,100
+1325,broken rotor bar,stator short 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,14,100
+1364,broken rotor bar,stator short 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,53,100
+1367,broken rotor bar,healthy 1,C:\Project Work\Denoised\Motor-2\100\broken rotor bar\Electric_Motor-2_100_time-broken rotor bar-ch1.csv,0,56,100

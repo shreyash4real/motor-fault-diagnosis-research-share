@@ -1,0 +1,166 @@
+import json
+from pathlib import Path
+
+def generate_mermaid_html(output_path="data_pipeline_graph.html"):
+    mermaid_code = """
+graph TD
+    %% Styling
+    classDef raw_data fill:#f9d0c4,stroke:#333,stroke-width:2px;
+    classDef processed_data fill:#d4e157,stroke:#333,stroke-width:2px;
+    classDef script fill:#b3e5fc,stroke:#333,stroke-width:2px;
+    classDef output fill:#ce93d8,stroke:#333,stroke-width:2px;
+    classDef manifest fill:#ffcc80,stroke:#333,stroke-width:2px;
+
+    %% Nodes
+    Dataset[("📁 Dataset/Electric/Motor-2\n(Read-Only Raw CSVs)")]:::raw_data
+    Denoised[("📁 Denoised/Motor-2\n(Filtered CSV Hub)")]:::processed_data
+    
+    Manifest["📄 Outputs/main/manifest.csv"]:::manifest
+    ValManifest["📄 Outputs/main/validated_manifest.csv"]:::manifest
+    SplitsCSV["📄 Outputs/4class/v2_speed_strat/splits.csv"]:::manifest
+
+    Setup[("⚙️ Scripts/setup_pc.py")]:::script
+    Validate[("⚙️ Scripts/validate_dataset.py")]:::script
+    DenoiseAll[("⚙️ Scripts/denoise_all.py")]:::script
+    GenSplits[("⚙️ Scripts_4/generate_splits_v2.py")]:::script
+    
+    PreSTFT[("⚙️ Scripts_4/precompute_stft_v2.py")]:::script
+    PreMel[("⚙️ Scripts_4/precompute_mel_stft_v2.py")]:::script
+    PreClarke[("⚙️ Scripts_4/precompute_clarke_v2.py")]:::script
+    PreDWT[("⚙️ Scripts_4/precompute_dwt_v1.py")]:::script
+
+    TrainSTFT[("⚙️ Scripts_4/train_stft_cnn_*.py")]:::script
+    TrainDWT[("⚙️ Scripts_4/train_dwt_cnn.py")]:::script
+
+    OutFeatures[("📦 Outputs/4class/v2_speed_strat/features/*.pt")]:::output
+    OutImages[("🖼️ Outputs/4class/v2_speed_strat/stft_images/*.png")]:::output
+    OutMel[("📦 Outputs/4class/v2_speed_strat/mel_v1/*.pt")]:::output
+    OutClarke[("📦 Outputs/4class/v2_speed_strat/clarke_features/*.pt")]:::output
+    OutDWT[("📦 Outputs/4class/v2_speed_strat/dwt/features/*.pt")]:::output
+    
+    Models[("🧠 Outputs/4class/training/.../best_model.pt")]:::output
+
+    %% Relationships
+    Dataset -->|Step 0| Setup
+    Setup -->|writes| Manifest
+    
+    Dataset -->|Step 1| Validate
+    Validate -->|writes| ValManifest
+    
+    Dataset -->|Step 2: Bandpass Filter| DenoiseAll
+    DenoiseAll -->|mirrors to| Denoised
+    
+    ValManifest -->|Step 3: Col-level splits| GenSplits
+    GenSplits -->|writes| SplitsCSV
+
+    %% The Precompute Bridge (Using Denoised Hub)
+    SplitsCSV -.->|reads split info| PreSTFT
+    Denoised -->|reads filtered signals| PreSTFT
+    PreSTFT -->|z-scored tensors| OutFeatures
+    PreSTFT -->|dB visualization| OutImages
+
+    SplitsCSV -.-> PreMel
+    Denoised --> PreMel
+    PreMel --> OutMel
+
+    SplitsCSV -.-> PreClarke
+    Denoised --> PreClarke
+    PreClarke --> OutClarke
+
+    SplitsCSV -.-> PreDWT
+    Denoised --> PreDWT
+    PreDWT --> OutDWT
+
+    %% Training Stage
+    OutFeatures --> TrainSTFT
+    SplitsCSV -.-> TrainSTFT
+    TrainSTFT --> Models
+    
+    OutDWT --> TrainDWT
+    SplitsCSV -.-> TrainDWT
+    TrainDWT --> Models
+    """
+
+    html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physical Data Pipeline Lineage</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body {{
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }}
+        .container {{
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }}
+        h1 {{
+            color: #2c3e50;
+            text-align: center;
+        }}
+        .mermaid {{
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }}
+        .legend {{
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f3f5;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }}
+        .legend-item {{ display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; }}
+        .box {{ width: 16px; height: 16px; border: 2px solid #333; border-radius: 4px; }}
+        .c-raw {{ background: #f9d0c4; }}
+        .c-proc {{ background: #d4e157; }}
+        .c-script {{ background: #b3e5fc; }}
+        .c-out {{ background: #ce93d8; }}
+        .c-man {{ background: #ffcc80; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Filesystem Data Pipeline Lineage</h1>
+        <p style="text-align: center; color: #555;">This graph maps the physical flow of data across the filesystem, bypassing AST-level import graphs to show the true operational flow from raw Dataset to final Models.</p>
+        
+        <div class="legend">
+            <div class="legend-item"><div class="box c-raw"></div> Raw Data</div>
+            <div class="legend-item"><div class="box c-proc"></div> Processed Hub</div>
+            <div class="legend-item"><div class="box c-script"></div> Script/Executable</div>
+            <div class="legend-item"><div class="box c-out"></div> Artifact/Output</div>
+            <div class="legend-item"><div class="box c-man"></div> Manifests</div>
+        </div>
+
+        <div class="mermaid">
+            {mermaid_code}
+        </div>
+    </div>
+    <script>
+        mermaid.initialize({{ 
+            startOnLoad: true, 
+            theme: 'default',
+            securityLevel: 'loose'
+        }});
+    </script>
+</body>
+</html>"""
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html_content)
+    
+    print(f"Data pipeline visualization created at: {Path(output_path).absolute()}")
+
+if __name__ == "__main__":
+    generate_mermaid_html()

@@ -1,0 +1,25 @@
+/Dataset/
+/Denoised/
+/.code-review-graph/
+/.rtk/
+
+# Keep only split metadata under the canonical v2 output folder.
+/Outputs/4class/v2_speed_strat/features/
+/Outputs/4class/v2_speed_strat/clarke_features/
+/Outputs/4class/v2_speed_strat/stft_images/
+/Outputs/4class/v2_speed_strat/clarke_images/
+/Outputs/4class/v2_speed_strat/dwt/
+/Outputs/4class/v2_speed_strat/envelope/
+/Outputs/4class/v2_speed_strat/mel/
+
+# Graph internals are local tooling artifacts.
+/graphify-out/cache/
+/graphify-out/converted/
+*.sqlite
+*.db
+
+# Local Python/runtime noise.
+__pycache__/
+*.pyc
+.venv/
+venv/

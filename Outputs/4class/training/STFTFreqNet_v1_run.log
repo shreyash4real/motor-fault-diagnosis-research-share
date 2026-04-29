@@ -1,0 +1,1165 @@
+======================================================================
+STFT CNN TRAINING — RUN: STFTFreqNet_v1
+Started: 2026-04-24 13:58:12
+======================================================================
+Device             : cuda  (NVIDIA GeForce RTX 3060 Laptop GPU)
+Mixed precision    : True
+Model              : STFTFreqNet  channels=(16, 32, 48, 64, 96)  pool_freq=4  head_hidden=128
+Features dir       : C:\Project Work\Outputs\4class\v2_speed_strat\features
+Healthy subsample  : None
+Class weighting    : False
+Dropout            : 0.3
+Weight decay       : 0.0001
+Label smoothing    : 0.05
+Batch size         : 64
+Max epochs         : 40  (patience=8, min=12)
+
+Loading precomputed features:
+  Loading train.pt ... 5757 samples, 1512 MB, mmap (0.0s)
+  Loading val.pt ... 1254 samples, 329 MB, mmap (0.0s)
+  Loading test.pt ... C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:527: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = GradScaler(enabled=use_amp_effective)
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+1368 samples, 359 MB, mmap (0.0s)
+
+4 classes: ['healthy 1', 'stator short 1', 'bearing bpfo 3', 'broken rotor bar']
+Train: 5757   Val: 1254   Test: 1368
+
+Train class distribution:
+  healthy 1               3876  ( 67.3%)
+  stator short 1           513  (  8.9%)
+  bearing bpfo 3           855  ( 14.9%)
+  broken rotor bar         513  (  8.9%)
+
+Model: STFTFreqNet
+  total parameters     : 317,332
+  trainable parameters : 317,332
+  params per train smpl: 55.1
+  parameters per stage :
+    stem         80
+    block1   20,096
+    block2   43,968
+    block3   64,768
+    block4  138,624
+    head     49,796
+
+────────────────────────────────────────────────────────────────────────────────
+epoch  tr_loss tr_acc tr_f1  |  va_loss va_acc va_f1           lr    time
+────────────────────────────────────────────────────────────────────────────────
+  >> Epoch 1/40 — training
+     batch    9/90  loss=0.763  (5.3 batch/s, ETA 15s)
+     batch   18/90  loss=0.667  (6.7 batch/s, ETA 11s)
+     batch   27/90  loss=0.714  (7.4 batch/s, ETA 8s)
+     batch   36/90  loss=0.745  (7.8 batch/s, ETA 7s)
+     batch   45/90  loss=0.607  (8.0 batch/s, ETA 6s)
+     batch   54/90  loss=0.623  (8.1 batch/s, ETA 4s)
+     batch   63/90  loss=0.625  (8.3 batch/s, ETA 3s)
+     batch   72/90  loss=0.596  (8.4 batch/s, ETA 2s)
+     batch   81/90  loss=0.640  (8.5 batch/s, ETA 1s)
+     batch   90/90  loss=0.710  (8.6 batch/s, ETA 0s)
+  >> Epoch 1/40 — validating
+     batch    2/20  loss=0.374  (16.3 batch/s, ETA 1s)
+     batch    4/20  loss=0.387  (16.8 batch/s, ETA 1s)
+     batch    6/20  loss=0.405  (16.8 batch/s, ETA 1s)
+     batch    8/20  loss=0.372  (16.9 batch/s, ETA 1s)
+     batch   10/20  loss=0.364  (17.0 batch/s, ETA 1s)
+     batch   12/20  loss=0.594  (17.1 batch/s, ETA 0s)
+     batch   14/20  loss=0.819  (17.1 batch/s, ETA 0s)
+     batch   16/20  loss=1.570  (17.1 batch/s, ETA 0s)
+     batch   18/20  loss=0.745  (17.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.784  (17.0 batch/s, ETA 0s)
+    1   0.7156  0.742 0.441  |   0.6699  0.773 0.537     0.000998     12s *
+  >> Epoch 2/40 — training
+     batch    9/90  loss=0.608  (13.4 batch/s, ETA 6s)
+     batch   18/90  loss=0.627  (13.4 batch/s, ETA 5s)
+     batch   27/90  loss=0.639  (13.3 batch/s, ETA 5s)
+     batch   36/90  loss=0.644  (13.4 batch/s, ETA 4s)
+     batch   45/90  loss=0.640  (13.5 batch/s, ETA 3s)
+     batch   54/90  loss=0.647  (13.5 batch/s, ETA 3s)
+     batch   63/90  loss=0.652  (13.5 batch/s, ETA 2s)
+     batch   72/90  loss=0.628  (13.5 batch/s, ETA 1s)
+     batch   81/90  loss=0.726  (13.5 batch/s, ETA 1s)
+     batch   90/90  loss=0.553  (13.5 batch/s, ETA 0s)
+  >> Epoch 2/40 — validating
+     batch    2/20  loss=0.340  (45.0 batch/s, ETA 0s)
+     batch    4/20  loss=0.364  (45.9 batch/s, ETA 0s)
+     batch    6/20  loss=0.396  (46.3 batch/s, ETA 0s)
+     batch    8/20  loss=0.347  (46.6 batch/s, ETA 0s)
+     batch   10/20  loss=0.312  (46.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.574  (47.0 batch/s, ETA 0s)
+     batch   14/20  loss=0.562  (47.2 batch/s, ETA 0s)
+     batch   16/20  loss=1.704  (47.3 batch/s, ETA 0s)
+     batch   18/20  loss=0.881  (47.3 batch/s, ETA 0s)
+     batch   20/20  loss=0.870  (48.0 batch/s, ETA 0s)
+    2   0.6443  0.768 0.495  |   0.6726  0.729 0.434     0.000994      7s
+  >> Epoch 3/40 — training
+     batch    9/90  loss=0.673  (13.9 batch/s, ETA 6s)
+     batch   18/90  loss=0.534  (13.5 batch/s, ETA 5s)
+     batch   27/90  loss=0.563  (13.6 batch/s, ETA 5s)
+     batch   36/90  loss=0.656  (13.6 batch/s, ETA 4s)
+     batch   45/90  loss=0.607  (13.5 batch/s, ETA 3s)
+     batch   54/90  loss=0.518  (13.5 batch/s, ETA 3s)
+     batch   63/90  loss=0.517  (13.5 batch/s, ETA 2s)
+     batch   72/90  loss=0.692  (13.5 batch/s, ETA 1s)
+     batch   81/90  loss=0.450  (13.6 batch/s, ETA 1s)
+     batch   90/90  loss=0.603  (13.6 batch/s, ETA 0s)
+  >> Epoch 3/40 — validating
+     batch    2/20  loss=1.023  (46.8 batch/s, ETA 0s)
+     batch    4/20  loss=0.917  (46.7 batch/s, ETA 0s)
+     batch    6/20  loss=0.786  (47.0 batch/s, ETA 0s)
+     batch    8/20  loss=0.942  (47.1 batch/s, ETA 0s)
+     batch   10/20  loss=0.969  (47.0 batch/s, ETA 0s)
+     batch   12/20  loss=1.639  (47.1 batch/s, ETA 0s)
+     batch   14/20  loss=1.710  (47.1 batch/s, ETA 0s)
+     batch   16/20  loss=0.896  (46.9 batch/s, ETA 0s)
+     batch   18/20  loss=3.713  (46.9 batch/s, ETA 0s)
+     batch   20/20  loss=3.221  (47.7 batch/s, ETA 0s)
+    3   0.5896  0.826 0.669  |   1.4048  0.309 0.180     0.000986      7s
+  >> Epoch 4/40 — training
+     batch    9/90  loss=0.527  (13.9 batch/s, ETA 6s)
+     batch   18/90  loss=0.577  (13.9 batch/s, ETA 5s)
+     batch   27/90  loss=0.606  (13.8 batch/s, ETA 5s)
+     batch   36/90  loss=0.548  (13.9 batch/s, ETA 4s)
+     batch   45/90  loss=0.576  (13.9 batch/s, ETA 3s)
+     batch   54/90  loss=0.580  (13.9 batch/s, ETA 3s)
+     batch   63/90  loss=0.444  (13.9 batch/s, ETA 2s)
+     batch   72/90  loss=0.488  (13.9 batch/s, ETA 1s)
+     batch   81/90  loss=0.501  (13.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.542  (13.9 batch/s, ETA 0s)
+  >> Epoch 4/40 — validating
+     batch    2/20  loss=0.319  (47.9 batch/s, ETA 0s)
+     batch    4/20  loss=0.321  (47.7 batch/s, ETA 0s)
+     batch    6/20  loss=0.327  (47.7 batch/s, ETA 0s)
+     batch    8/20  loss=0.267  (47.3 batch/s, ETA 0s)
+     batch   10/20  loss=0.246  (47.3 batch/s, ETA 0s)
+     batch   12/20  loss=0.314  (47.4 batch/s, ETA 0s)
+     batch   14/20  loss=0.211  (47.3 batch/s, ETA 0s)
+     batch   16/20  loss=1.945  (47.3 batch/s, ETA 0s)
+     batch   18/20  loss=0.223  (47.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.234  (48.0 batch/s, ETA 0s)
+    4   0.5371  0.853 0.750  |   0.5322  0.863 0.724     0.000976      7s *
+  >> Epoch 5/40 — training
+     batch    9/90  loss=0.391  (13.4 batch/s, ETA 6s)
+     batch   18/90  loss=0.563  (13.4 batch/s, ETA 5s)
+     batch   27/90  loss=0.585  (13.5 batch/s, ETA 5s)
+     batch   36/90  loss=0.465  (13.6 batch/s, ETA 4s)
+     batch   45/90  loss=0.426  (13.7 batch/s, ETA 3s)
+     batch   54/90  loss=0.528  (13.7 batch/s, ETA 3s)
+     batch   63/90  loss=0.486  (13.7 batch/s, ETA 2s)
+     batch   72/90  loss=0.521  (13.8 batch/s, ETA 1s)
+     batch   81/90  loss=0.487  (13.8 batch/s, ETA 1s)
+     batch   90/90  loss=0.486  (13.8 batch/s, ETA 0s)
+  >> Epoch 5/40 — validating
+     batch    2/20  loss=0.656  (45.3 batch/s, ETA 0s)
+     batch    4/20  loss=0.594  (46.2 batch/s, ETA 0s)
+     batch    6/20  loss=0.466  (46.6 batch/s, ETA 0s)
+     batch    8/20  loss=0.403  (46.9 batch/s, ETA 0s)
+     batch   10/20  loss=0.330  (46.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.463  (47.0 batch/s, ETA 0s)
+     batch   14/20  loss=0.205  (47.0 batch/s, ETA 0s)
+     batch   16/20  loss=1.092  (47.1 batch/s, ETA 0s)
+     batch   18/20  loss=0.299  (47.1 batch/s, ETA 0s)
+     batch   20/20  loss=0.219  (47.9 batch/s, ETA 0s)
+    5   0.5155  0.860 0.768  |   0.5470  0.844 0.743     0.000962      7s *
+  >> Epoch 6/40 — training
+     batch    9/90  loss=0.450  (13.9 batch/s, ETA 6s)
+     batch   18/90  loss=0.559  (13.9 batch/s, ETA 5s)
+     batch   27/90  loss=0.431  (13.9 batch/s, ETA 5s)
+     batch   36/90  loss=0.565  (13.9 batch/s, ETA 4s)
+     batch   45/90  loss=0.638  (13.9 batch/s, ETA 3s)
+     batch   54/90  loss=0.474  (13.9 batch/s, ETA 3s)
+     batch   63/90  loss=0.481  (13.9 batch/s, ETA 2s)
+     batch   72/90  loss=0.452  (13.9 batch/s, ETA 1s)
+     batch   81/90  loss=0.499  (13.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.437  (13.9 batch/s, ETA 0s)
+  >> Epoch 6/40 — validating
+     batch    2/20  loss=0.349  (47.1 batch/s, ETA 0s)
+     batch    4/20  loss=0.380  (47.1 batch/s, ETA 0s)C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+
+     batch    6/20  loss=0.371  (47.2 batch/s, ETA 0s)
+     batch    8/20  loss=0.262  (46.5 batch/s, ETA 0s)
+     batch   10/20  loss=0.228  (46.6 batch/s, ETA 0s)
+     batch   12/20  loss=0.269  (46.7 batch/s, ETA 0s)
+     batch   14/20  loss=0.211  (46.7 batch/s, ETA 0s)
+     batch   16/20  loss=1.347  (46.7 batch/s, ETA 0s)
+     batch   18/20  loss=0.217  (46.7 batch/s, ETA 0s)
+     batch   20/20  loss=0.205  (47.6 batch/s, ETA 0s)
+    6   0.5105  0.861 0.777  |   0.5097  0.856 0.738     0.000946      7s
+  >> Epoch 7/40 — training
+     batch    9/90  loss=0.404  (13.9 batch/s, ETA 6s)
+     batch   18/90  loss=0.427  (13.9 batch/s, ETA 5s)
+     batch   27/90  loss=0.531  (13.9 batch/s, ETA 5s)
+     batch   36/90  loss=0.583  (13.9 batch/s, ETA 4s)
+     batch   45/90  loss=0.574  (13.9 batch/s, ETA 3s)
+     batch   54/90  loss=0.486  (13.9 batch/s, ETA 3s)
+     batch   63/90  loss=0.588  (13.9 batch/s, ETA 2s)
+     batch   72/90  loss=0.511  (13.9 batch/s, ETA 1s)
+     batch   81/90  loss=0.397  (13.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.423  (13.9 batch/s, ETA 0s)
+  >> Epoch 7/40 — validating
+     batch    2/20  loss=0.381  (47.2 batch/s, ETA 0s)
+     batch    4/20  loss=0.335  (47.2 batch/s, ETA 0s)
+     batch    6/20  loss=0.275  (47.4 batch/s, ETA 0s)
+     batch    8/20  loss=0.232  (47.5 batch/s, ETA 0s)
+     batch   10/20  loss=0.227  (47.3 batch/s, ETA 0s)
+     batch   12/20  loss=0.225  (47.3 batch/s, ETA 0s)
+     batch   14/20  loss=0.204  (46.9 batch/s, ETA 0s)
+     batch   16/20  loss=1.993  (47.0 batch/s, ETA 0s)
+     batch   18/20  loss=0.252  (47.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.214  (47.8 batch/s, ETA 0s)
+    7   0.5004  0.865 0.789  |   0.5107  0.864 0.724     0.000926      7s
+  >> Epoch 8/40 — training
+     batch    9/90  loss=0.482  (13.7 batch/s, ETA 6s)
+     batch   18/90  loss=0.442  (13.7 batch/s, ETA 5s)
+     batch   27/90  loss=0.590  (13.7 batch/s, ETA 5s)
+     batch   36/90  loss=0.439  (13.7 batch/s, ETA 4s)
+     batch   45/90  loss=0.408  (13.7 batch/s, ETA 3s)
+     batch   54/90  loss=0.592  (13.7 batch/s, ETA 3s)
+     batch   63/90  loss=0.579  (13.7 batch/s, ETA 2s)
+     batch   72/90  loss=0.445  (13.7 batch/s, ETA 1s)
+     batch   81/90  loss=0.505  (13.7 batch/s, ETA 1s)
+     batch   90/90  loss=0.405  (13.7 batch/s, ETA 0s)
+  >> Epoch 8/40 — validating
+     batch    2/20  loss=0.292  (47.2 batch/s, ETA 0s)
+     batch    4/20  loss=0.269  (47.2 batch/s, ETA 0s)
+     batch    6/20  loss=0.213  (47.0 batch/s, ETA 0s)
+     batch    8/20  loss=0.217  (47.0 batch/s, ETA 0s)
+     batch   10/20  loss=0.215  (47.0 batch/s, ETA 0s)
+     batch   12/20  loss=0.222  (47.0 batch/s, ETA 0s)
+     batch   14/20  loss=0.210  (46.6 batch/s, ETA 0s)
+     batch   16/20  loss=2.791  (46.6 batch/s, ETA 0s)
+     batch   18/20  loss=0.207  (46.6 batch/s, ETA 0s)
+     batch   20/20  loss=0.210  (47.4 batch/s, ETA 0s)
+    8   0.4898  0.868 0.799  |   0.5634  0.863 0.724     0.000905      7s
+  >> Epoch 9/40 — training
+     batch    9/90  loss=0.422  (13.1 batch/s, ETA 6s)
+     batch   18/90  loss=0.451  (13.3 batch/s, ETA 5s)
+     batch   27/90  loss=0.483  (13.4 batch/s, ETA 5s)
+     batch   36/90  loss=0.521  (13.5 batch/s, ETA 4s)
+     batch   45/90  loss=0.468  (13.5 batch/s, ETA 3s)
+     batch   54/90  loss=0.506  (13.4 batch/s, ETA 3s)
+     batch   63/90  loss=0.465  (13.4 batch/s, ETA 2s)
+     batch   72/90  loss=0.437  (13.4 batch/s, ETA 1s)
+     batch   81/90  loss=0.440  (13.4 batch/s, ETA 1s)
+     batch   90/90  loss=0.409  (13.5 batch/s, ETA 0s)
+  >> Epoch 9/40 — validating
+     batch    2/20  loss=0.438  (46.2 batch/s, ETA 0s)
+     batch    4/20  loss=0.397  (46.4 batch/s, ETA 0s)
+     batch    6/20  loss=0.263  (46.4 batch/s, ETA 0s)
+     batch    8/20  loss=0.308  (46.5 batch/s, ETA 0s)
+     batch   10/20  loss=0.332  (46.4 batch/s, ETA 0s)
+     batch   12/20  loss=0.305  (45.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.212  (46.0 batch/s, ETA 0s)
+     batch   16/20  loss=1.286  (45.9 batch/s, ETA 0s)
+     batch   18/20  loss=0.208  (46.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.206  (46.8 batch/s, ETA 0s)
+    9   0.4658  0.880 0.831  |   0.4499  0.867 0.749     0.000880      7s *
+  >> Epoch 10/40 — training
+     batch    9/90  loss=0.448  (13.5 batch/s, ETA 6s)
+     batch   18/90  loss=0.410  (13.5 batch/s, ETA 5s)
+     batch   27/90  loss=0.552  (13.5 batch/s, ETA 5s)
+     batch   36/90  loss=0.531  (13.4 batch/s, ETA 4s)
+     batch   45/90  loss=0.390  (13.4 batch/s, ETA 3s)
+     batch   54/90  loss=0.362  (13.4 batch/s, ETA 3s)
+     batch   63/90  loss=0.458  (13.4 batch/s, ETA 2s)
+     batch   72/90  loss=0.433  (13.4 batch/s, ETA 1s)
+     batch   81/90  loss=0.343  (13.4 batch/s, ETA 1s)
+     batch   90/90  loss=0.388  (13.4 batch/s, ETA 0s)
+  >> Epoch 10/40 — validating
+     batch    2/20  loss=0.632  (45.3 batch/s, ETA 0s)
+     batch    4/20  loss=0.547  (45.5 batch/s, ETA 0s)
+     batch    6/20  loss=0.276  (44.8 batch/s, ETA 0s)
+     batch    8/20  loss=0.416  (44.7 batch/s, ETA 0s)
+     batch   10/20  loss=0.261  (45.1 batch/s, ETA 0s)
+     batch   12/20  loss=0.530  (45.1 batch/s, ETA 0s)
+     batch   14/20  loss=0.210  (45.2 batch/s, ETA 0s)
+     batch   16/20  loss=0.760  (45.2 batch/s, ETA 0s)
+     batch   18/20  loss=0.211  (45.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.230  (46.0 batch/s, ETA 0s)
+   10   0.4429  0.889 0.853  |   0.5179  0.820 0.803     0.000854      7s *
+  >> Epoch 11/40 — training
+     batch    9/90  loss=0.388  (13.3 batch/s, ETA 6s)
+     batch   18/90  loss=0.443  (13.3 batch/s, ETA 5s)
+     batch   27/90  loss=0.446  (13.3 batch/s, ETA 5s)
+     batch   36/90  loss=0.418  (13.3 batch/s, ETA 4s)
+     batch   45/90  loss=0.377  (13.3 batch/s, ETA 3s)
+     batch   54/90  loss=0.410  (13.3 batch/s, ETA 3s)
+     batch   63/90  loss=0.383  (13.3 batch/s, ETA 2s)
+     batch   72/90  loss=0.503  (13.3 batch/s, ETA 1s)
+     batch   81/90  loss=0.456  (13.3 batch/s, ETA 1s)
+     batch   90/90  loss=0.418  (13.3 batch/s, ETA 0s)
+  >> Epoch 11/40 — validating
+     batch    2/20  loss=0.436  (45.4 batch/s, ETA 0s)
+     batch    4/20  loss=0.361  (45.0 batch/s, ETA 0s)
+     batch    6/20  loss=0.206  (45.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.306  (45.1 batch/s, ETA 0s)
+     batch   10/20  loss=0.392  (45.2 batch/s, ETA 0s)
+     batch   12/20  loss=0.449  (45.3 batch/s, ETA 0s)
+     batch   14/20  loss=0.237  (45.3 batch/s, ETA 0s)
+     batch   16/20  loss=1.103  (45.3 batch/s, ETA 0s)
+     batch   18/20  loss=0.548  (45.3 batch/s, ETA 0s)
+     batch   20/20  loss=0.421  (46.1 batch/s, ETA 0s)
+   11   0.4262  0.895 0.864  |   0.4699  0.864 0.807     0.000825      7s *
+  >> Epoch 12/40 — training
+     batch    9/90  loss=0.500  (13.1 batch/s, ETA 6s)
+     batch   18/90  loss=0.345  (13.2 batch/s, ETA 5s)
+     batch   27/90  loss=0.410  (13.1 batch/s, ETA 5s)
+     batch   36/90  loss=0.382  (13.1 batch/s, ETA 4s)
+     batch   45/90  loss=0.332  (13.1 batch/s, ETA 3s)
+     batch   54/90  loss=0.383  (13.2 batch/s, ETA 3s)
+     batch   63/90  loss=0.479  (13.2 batch/s, ETA 2s)
+     batch   72/90  loss=0.451  (13.2 batch/s, ETA 1s)
+     batch   81/90  loss=0.503  (13.2 batch/s, ETA 1s)
+     batch   90/90  loss=0.449  (13.2 batch/s, ETA 0s)
+  >> Epoch 12/40 — validating
+     batch    2/20  loss=0.408  (44.9 batch/s, ETA 0s)
+     batch    4/20  loss=0.351  (45.2 batch/s, ETA 0s)
+     batch    6/20  loss=0.207  (45.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.301  (44.9 batch/s, ETA 0s)
+     batch   10/20  loss=0.209  (45.0 batch/s, ETA 0s)
+     batch   12/20  loss=0.274  (45.0 batch/s, ETA 0s)
+     batch   14/20  loss=0.209  (45.0 batch/s, ETA 0s)
+     batch   16/20  loss=0.598  (45.0 batch/s, ETA 0s)
+     batch   18/20  loss=0.209  (44.9 batch/s, ETA 0s)
+     batch   20/20  loss=0.232  (45.6 batch/s, ETA 0s)
+   12   0.4045  0.908 0.888  |   0.4924  0.878 0.827     0.000794      7s *
+  >> Epoch 13/40 — training
+     batch    9/90  loss=0.518  (13.0 batch/s, ETA 6s)
+     batch   18/90  loss=0.371  (12.9 batch/s, ETA 6s)C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+
+     batch   27/90  loss=0.371  (13.0 batch/s, ETA 5s)
+     batch   36/90  loss=0.316  (12.9 batch/s, ETA 4s)
+     batch   45/90  loss=0.322  (13.0 batch/s, ETA 3s)
+     batch   54/90  loss=0.394  (13.0 batch/s, ETA 3s)
+     batch   63/90  loss=0.370  (13.0 batch/s, ETA 2s)
+     batch   72/90  loss=0.361  (13.0 batch/s, ETA 1s)
+     batch   81/90  loss=0.397  (13.0 batch/s, ETA 1s)
+     batch   90/90  loss=0.402  (13.0 batch/s, ETA 0s)
+  >> Epoch 13/40 — validating
+     batch    2/20  loss=0.243  (44.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.233  (45.1 batch/s, ETA 0s)
+     batch    6/20  loss=0.208  (45.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.204  (44.8 batch/s, ETA 0s)
+     batch   10/20  loss=0.204  (44.8 batch/s, ETA 0s)
+     batch   12/20  loss=0.215  (44.3 batch/s, ETA 0s)
+     batch   14/20  loss=0.204  (44.3 batch/s, ETA 0s)
+     batch   16/20  loss=2.653  (44.3 batch/s, ETA 0s)
+     batch   18/20  loss=0.219  (44.4 batch/s, ETA 0s)
+     batch   20/20  loss=0.294  (45.2 batch/s, ETA 0s)
+   13   0.3742  0.921 0.906  |   0.6109  0.864 0.738     0.000761      7s
+  >> Epoch 14/40 — training
+     batch    9/90  loss=0.421  (13.0 batch/s, ETA 6s)
+     batch   18/90  loss=0.323  (12.9 batch/s, ETA 6s)
+     batch   27/90  loss=0.468  (12.9 batch/s, ETA 5s)
+     batch   36/90  loss=0.280  (12.9 batch/s, ETA 4s)
+     batch   45/90  loss=0.390  (12.9 batch/s, ETA 3s)
+     batch   54/90  loss=0.297  (12.9 batch/s, ETA 3s)
+     batch   63/90  loss=0.312  (12.9 batch/s, ETA 2s)
+     batch   72/90  loss=0.417  (12.9 batch/s, ETA 1s)
+     batch   81/90  loss=0.335  (12.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.270  (13.0 batch/s, ETA 0s)
+  >> Epoch 14/40 — validating
+     batch    2/20  loss=0.262  (45.0 batch/s, ETA 0s)
+     batch    4/20  loss=0.245  (44.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.211  (44.8 batch/s, ETA 0s)
+     batch    8/20  loss=0.234  (44.7 batch/s, ETA 0s)
+     batch   10/20  loss=0.213  (44.5 batch/s, ETA 0s)
+     batch   12/20  loss=0.224  (44.6 batch/s, ETA 0s)
+     batch   14/20  loss=0.206  (44.7 batch/s, ETA 0s)
+     batch   16/20  loss=0.987  (44.7 batch/s, ETA 0s)
+     batch   18/20  loss=0.205  (44.7 batch/s, ETA 0s)
+     batch   20/20  loss=0.217  (45.4 batch/s, ETA 0s)
+   14   0.3585  0.926 0.915  |   0.5061  0.888 0.819     0.000727      7s
+  >> Epoch 15/40 — training
+     batch    9/90  loss=0.306  (12.9 batch/s, ETA 6s)
+     batch   18/90  loss=0.472  (12.9 batch/s, ETA 6s)
+     batch   27/90  loss=0.398  (12.9 batch/s, ETA 5s)
+     batch   36/90  loss=0.290  (12.9 batch/s, ETA 4s)
+     batch   45/90  loss=0.306  (12.9 batch/s, ETA 3s)
+     batch   54/90  loss=0.287  (12.9 batch/s, ETA 3s)
+     batch   63/90  loss=0.332  (12.9 batch/s, ETA 2s)
+     batch   72/90  loss=0.353  (12.9 batch/s, ETA 1s)
+     batch   81/90  loss=0.364  (12.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.344  (13.0 batch/s, ETA 0s)
+  >> Epoch 15/40 — validating
+     batch    2/20  loss=3.551  (45.1 batch/s, ETA 0s)
+     batch    4/20  loss=2.417  (45.1 batch/s, ETA 0s)
+     batch    6/20  loss=0.699  (44.8 batch/s, ETA 0s)
+     batch    8/20  loss=1.341  (44.8 batch/s, ETA 0s)
+     batch   10/20  loss=1.137  (44.7 batch/s, ETA 0s)
+     batch   12/20  loss=2.132  (44.8 batch/s, ETA 0s)
+     batch   14/20  loss=0.211  (44.5 batch/s, ETA 0s)
+     batch   16/20  loss=0.243  (44.2 batch/s, ETA 0s)
+     batch   18/20  loss=0.236  (44.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.236  (45.0 batch/s, ETA 0s)
+   15   0.3105  0.953 0.949  |   1.4815  0.622 0.735     0.000691      7s
+  >> Epoch 16/40 — training
+     batch    9/90  loss=0.296  (12.9 batch/s, ETA 6s)
+     batch   18/90  loss=0.266  (13.0 batch/s, ETA 6s)
+     batch   27/90  loss=0.259  (13.0 batch/s, ETA 5s)
+     batch   36/90  loss=0.239  (13.0 batch/s, ETA 4s)
+     batch   45/90  loss=0.233  (13.0 batch/s, ETA 3s)
+     batch   54/90  loss=0.279  (13.0 batch/s, ETA 3s)
+     batch   63/90  loss=0.267  (12.9 batch/s, ETA 2s)
+     batch   72/90  loss=0.264  (12.9 batch/s, ETA 1s)
+     batch   81/90  loss=0.260  (12.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.219  (13.0 batch/s, ETA 0s)
+  >> Epoch 16/40 — validating
+     batch    2/20  loss=0.207  (45.1 batch/s, ETA 0s)
+     batch    4/20  loss=0.220  (44.0 batch/s, ETA 0s)
+     batch    6/20  loss=0.208  (44.2 batch/s, ETA 0s)
+     batch    8/20  loss=0.215  (44.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.301  (44.0 batch/s, ETA 0s)
+     batch   12/20  loss=0.350  (43.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.213  (44.1 batch/s, ETA 0s)
+     batch   16/20  loss=0.944  (44.2 batch/s, ETA 0s)
+     batch   18/20  loss=0.211  (44.3 batch/s, ETA 0s)
+     batch   20/20  loss=0.216  (45.0 batch/s, ETA 0s)
+   16   0.2706  0.973 0.971  |   0.4604  0.895 0.857     0.000655      7s *
+  >> Epoch 17/40 — training
+     batch    9/90  loss=0.233  (12.9 batch/s, ETA 6s)
+     batch   18/90  loss=0.299  (12.9 batch/s, ETA 6s)
+     batch   27/90  loss=0.277  (12.9 batch/s, ETA 5s)
+     batch   36/90  loss=0.289  (12.9 batch/s, ETA 4s)
+     batch   45/90  loss=0.354  (12.9 batch/s, ETA 3s)
+     batch   54/90  loss=0.238  (12.9 batch/s, ETA 3s)
+     batch   63/90  loss=0.224  (12.7 batch/s, ETA 2s)
+     batch   72/90  loss=0.226  (12.7 batch/s, ETA 1s)
+     batch   81/90  loss=0.300  (12.7 batch/s, ETA 1s)
+     batch   90/90  loss=0.225  (12.7 batch/s, ETA 0s)
+  >> Epoch 17/40 — validating
+     batch    2/20  loss=0.218  (44.1 batch/s, ETA 0s)
+     batch    4/20  loss=0.222  (44.4 batch/s, ETA 0s)
+     batch    6/20  loss=0.206  (44.2 batch/s, ETA 0s)
+     batch    8/20  loss=0.216  (44.1 batch/s, ETA 0s)
+     batch   10/20  loss=0.214  (44.1 batch/s, ETA 0s)
+     batch   12/20  loss=0.215  (44.0 batch/s, ETA 0s)
+     batch   14/20  loss=0.205  (44.1 batch/s, ETA 0s)
+     batch   16/20  loss=1.296  (44.1 batch/s, ETA 0s)
+     batch   18/20  loss=0.212  (44.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.218  (44.8 batch/s, ETA 0s)
+   17   0.2709  0.969 0.967  |   0.4563  0.906 0.858     0.000617      8s *
+  >> Epoch 18/40 — training
+     batch    9/90  loss=0.234  (12.7 batch/s, ETA 6s)
+     batch   18/90  loss=0.225  (12.7 batch/s, ETA 6s)
+     batch   27/90  loss=0.214  (12.7 batch/s, ETA 5s)
+     batch   36/90  loss=0.218  (12.7 batch/s, ETA 4s)
+     batch   45/90  loss=0.234  (12.7 batch/s, ETA 4s)
+     batch   54/90  loss=0.219  (12.7 batch/s, ETA 3s)
+     batch   63/90  loss=0.328  (12.7 batch/s, ETA 2s)
+     batch   72/90  loss=0.230  (12.7 batch/s, ETA 1s)
+     batch   81/90  loss=0.252  (12.7 batch/s, ETA 1s)
+     batch   90/90  loss=0.233  (12.7 batch/s, ETA 0s)
+  >> Epoch 18/40 — validating
+     batch    2/20  loss=0.446  (44.4 batch/s, ETA 0s)
+     batch    4/20  loss=0.475  (44.0 batch/s, ETA 0s)
+     batch    6/20  loss=0.205  (43.9 batch/s, ETA 0s)
+     batch    8/20  loss=0.831  (43.5 batch/s, ETA 0s)
+     batch   10/20  loss=0.727  (43.2 batch/s, ETA 0s)
+     batch   12/20  loss=0.693  (43.2 batch/s, ETA 0s)
+     batch   14/20  loss=0.205  (43.1 batch/s, ETA 0s)
+     batch   16/20  loss=0.235  (43.1 batch/s, ETA 0s)
+     batch   18/20  loss=0.212  (43.1 batch/s, ETA 0s)
+     batch   20/20  loss=0.215  (43.8 batch/s, ETA 0s)
+   18   0.2362  0.991 0.990  |   0.5179  0.877 0.886     0.000578      8s *
+  >> Epoch 19/40 — training
+     batch    9/90  loss=0.222  (12.7 batch/s, ETA 6s)
+     batch   18/90  loss=0.213  (12.7 batch/s, ETA 6s)
+     batch   27/90  loss=0.219  (12.7 batch/s, ETA 5s)
+     batch   36/90  loss=0.222  (12.7 batch/s, ETA 4s)
+     batch   45/90  loss=0.244  (12.7 batch/s, ETA 4s)
+     batch   54/90  loss=0.232  (12.7 batch/s, ETA 3s)
+     batch   63/90  loss=0.214  (12.7 batch/s, ETA 2s)
+     batch   72/90  loss=0.234  (12.7 batch/s, ETA 1s)
+     batch   81/90  loss=0.217  (12.7 batch/s, ETA 1s)
+     batch   90/90  loss=0.222  (12.7 batch/s, ETA 0s)
+  >> Epoch 19/40 — validating
+     batch    2/20  loss=0.204  (44.0 batch/s, ETA 0s)
+     batch    4/20  loss=0.203  (44.3 batch/s, ETA 0s)
+     batch    6/20  loss=0.205  (44.0 batch/s, ETA 0s)C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+
+     batch    8/20  loss=0.208  (44.1 batch/s, ETA 0s)
+     batch   10/20  loss=0.276  (44.1 batch/s, ETA 0s)
+     batch   12/20  loss=0.216  (44.1 batch/s, ETA 0s)
+     batch   14/20  loss=0.211  (44.1 batch/s, ETA 0s)
+     batch   16/20  loss=1.707  (44.2 batch/s, ETA 0s)
+     batch   18/20  loss=0.205  (44.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.239  (44.8 batch/s, ETA 0s)
+   19   0.2224  0.996 0.996  |   0.4431  0.915 0.876     0.000539      8s
+  >> Epoch 20/40 — training
+     batch    9/90  loss=0.213  (12.7 batch/s, ETA 6s)
+     batch   18/90  loss=0.215  (12.7 batch/s, ETA 6s)
+     batch   27/90  loss=0.212  (12.7 batch/s, ETA 5s)
+     batch   36/90  loss=0.211  (12.7 batch/s, ETA 4s)
+     batch   45/90  loss=0.211  (12.7 batch/s, ETA 4s)
+     batch   54/90  loss=0.214  (12.7 batch/s, ETA 3s)
+     batch   63/90  loss=0.242  (12.7 batch/s, ETA 2s)
+     batch   72/90  loss=0.214  (12.7 batch/s, ETA 1s)
+     batch   81/90  loss=0.222  (12.7 batch/s, ETA 1s)
+     batch   90/90  loss=0.214  (12.7 batch/s, ETA 0s)
+  >> Epoch 20/40 — validating
+     batch    2/20  loss=0.203  (43.5 batch/s, ETA 0s)
+     batch    4/20  loss=0.203  (43.5 batch/s, ETA 0s)
+     batch    6/20  loss=0.204  (43.6 batch/s, ETA 0s)
+     batch    8/20  loss=0.206  (43.6 batch/s, ETA 0s)
+     batch   10/20  loss=0.355  (43.8 batch/s, ETA 0s)
+     batch   12/20  loss=0.261  (43.7 batch/s, ETA 0s)
+     batch   14/20  loss=0.205  (43.8 batch/s, ETA 0s)
+     batch   16/20  loss=1.645  (43.8 batch/s, ETA 0s)
+     batch   18/20  loss=0.206  (43.8 batch/s, ETA 0s)
+     batch   20/20  loss=0.233  (44.5 batch/s, ETA 0s)
+   20   0.2135  0.999 0.999  |   0.4550  0.909 0.868     0.000500      8s
+  >> Epoch 21/40 — training
+     batch    9/90  loss=0.212  (12.7 batch/s, ETA 6s)
+     batch   18/90  loss=0.216  (12.6 batch/s, ETA 6s)
+     batch   27/90  loss=0.218  (12.6 batch/s, ETA 5s)
+     batch   36/90  loss=0.209  (12.5 batch/s, ETA 4s)
+     batch   45/90  loss=0.209  (12.5 batch/s, ETA 4s)
+     batch   54/90  loss=0.211  (12.5 batch/s, ETA 3s)
+     batch   63/90  loss=0.209  (12.5 batch/s, ETA 2s)
+     batch   72/90  loss=0.210  (12.5 batch/s, ETA 1s)
+     batch   81/90  loss=0.210  (12.5 batch/s, ETA 1s)
+     batch   90/90  loss=0.211  (12.5 batch/s, ETA 0s)
+  >> Epoch 21/40 — validating
+     batch    2/20  loss=0.204  (43.8 batch/s, ETA 0s)
+     batch    4/20  loss=0.203  (43.2 batch/s, ETA 0s)
+     batch    6/20  loss=0.203  (43.3 batch/s, ETA 0s)
+     batch    8/20  loss=0.225  (43.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.307  (43.4 batch/s, ETA 0s)
+     batch   12/20  loss=0.295  (43.2 batch/s, ETA 0s)
+     batch   14/20  loss=0.204  (42.9 batch/s, ETA 0s)
+     batch   16/20  loss=0.742  (43.0 batch/s, ETA 0s)
+     batch   18/20  loss=0.206  (43.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.226  (43.8 batch/s, ETA 0s)
+   21   0.2126  0.999 0.999  |   0.4199  0.912 0.886     0.000461      8s
+  >> Epoch 22/40 — training
+     batch    9/90  loss=0.213  (12.5 batch/s, ETA 7s)
+     batch   18/90  loss=0.212  (12.5 batch/s, ETA 6s)
+     batch   27/90  loss=0.206  (12.5 batch/s, ETA 5s)
+     batch   36/90  loss=0.208  (12.5 batch/s, ETA 4s)
+     batch   45/90  loss=0.210  (12.5 batch/s, ETA 4s)
+     batch   54/90  loss=0.209  (12.5 batch/s, ETA 3s)
+     batch   63/90  loss=0.212  (12.5 batch/s, ETA 2s)
+     batch   72/90  loss=0.210  (12.5 batch/s, ETA 1s)
+     batch   81/90  loss=0.210  (12.5 batch/s, ETA 1s)
+     batch   90/90  loss=0.209  (12.4 batch/s, ETA 0s)
+  >> Epoch 22/40 — validating
+     batch    2/20  loss=0.204  (42.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.204  (41.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.203  (41.5 batch/s, ETA 0s)
+     batch    8/20  loss=0.210  (41.0 batch/s, ETA 0s)
+     batch   10/20  loss=0.359  (40.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.339  (41.2 batch/s, ETA 0s)
+     batch   14/20  loss=0.206  (41.5 batch/s, ETA 0s)
+     batch   16/20  loss=1.152  (41.7 batch/s, ETA 0s)
+     batch   18/20  loss=0.204  (42.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.237  (42.8 batch/s, ETA 0s)
+   22   0.2102  1.000 1.000  |   0.4118  0.915 0.887     0.000422      8s *
+  >> Epoch 23/40 — training
+     batch    9/90  loss=0.211  (11.9 batch/s, ETA 7s)
+     batch   18/90  loss=0.208  (12.1 batch/s, ETA 6s)
+     batch   27/90  loss=0.208  (12.0 batch/s, ETA 5s)
+     batch   36/90  loss=0.208  (11.8 batch/s, ETA 5s)
+     batch   45/90  loss=0.208  (11.8 batch/s, ETA 4s)
+     batch   54/90  loss=0.209  (11.8 batch/s, ETA 3s)
+     batch   63/90  loss=0.208  (11.8 batch/s, ETA 2s)
+     batch   72/90  loss=0.208  (11.9 batch/s, ETA 2s)
+     batch   81/90  loss=0.210  (11.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.209  (11.9 batch/s, ETA 0s)
+  >> Epoch 23/40 — validating
+     batch    2/20  loss=0.203  (41.0 batch/s, ETA 0s)
+     batch    4/20  loss=0.203  (41.3 batch/s, ETA 0s)
+     batch    6/20  loss=0.203  (41.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.212  (41.2 batch/s, ETA 0s)
+     batch   10/20  loss=0.358  (40.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.314  (40.6 batch/s, ETA 0s)
+     batch   14/20  loss=0.205  (40.2 batch/s, ETA 0s)
+     batch   16/20  loss=0.881  (40.0 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (39.8 batch/s, ETA 0s)
+     batch   20/20  loss=0.222  (40.5 batch/s, ETA 0s)
+   23   0.2093  1.000 1.000  |   0.4065  0.915 0.889     0.000383      8s *
+  >> Epoch 24/40 — training
+     batch    9/90  loss=0.208  (12.2 batch/s, ETA 7s)
+     batch   18/90  loss=0.209  (12.3 batch/s, ETA 6s)
+     batch   27/90  loss=0.210  (12.3 batch/s, ETA 5s)
+     batch   36/90  loss=0.207  (12.1 batch/s, ETA 4s)
+     batch   45/90  loss=0.207  (12.0 batch/s, ETA 4s)
+     batch   54/90  loss=0.210  (11.8 batch/s, ETA 3s)
+     batch   63/90  loss=0.207  (11.7 batch/s, ETA 2s)
+     batch   72/90  loss=0.209  (11.7 batch/s, ETA 2s)
+     batch   81/90  loss=0.211  (11.8 batch/s, ETA 1s)
+     batch   90/90  loss=0.207  (11.8 batch/s, ETA 0s)
+  >> Epoch 24/40 — validating
+     batch    2/20  loss=0.202  (41.9 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (42.9 batch/s, ETA 0s)
+     batch    6/20  loss=0.203  (42.7 batch/s, ETA 0s)
+     batch    8/20  loss=0.209  (42.7 batch/s, ETA 0s)
+     batch   10/20  loss=0.366  (43.0 batch/s, ETA 0s)
+     batch   12/20  loss=0.283  (42.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.204  (42.8 batch/s, ETA 0s)
+     batch   16/20  loss=0.906  (42.7 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (42.7 batch/s, ETA 0s)
+     batch   20/20  loss=0.218  (43.4 batch/s, ETA 0s)
+   24   0.2088  1.000 1.000  |   0.3941  0.919 0.891     0.000345      8s *
+  >> Epoch 25/40 — training
+     batch    9/90  loss=0.207  (12.4 batch/s, ETA 7s)
+     batch   18/90  loss=0.208  (12.3 batch/s, ETA 6s)
+     batch   27/90  loss=0.209  (12.1 batch/s, ETA 5s)
+     batch   36/90  loss=0.208  (12.2 batch/s, ETA 4s)
+     batch   45/90  loss=0.208  (12.1 batch/s, ETA 4s)
+     batch   54/90  loss=0.208  (12.1 batch/s, ETA 3s)
+     batch   63/90  loss=0.207  (12.1 batch/s, ETA 2s)
+     batch   72/90  loss=0.206  (12.1 batch/s, ETA 1s)
+     batch   81/90  loss=0.208  (12.1 batch/s, ETA 1s)
+     batch   90/90  loss=0.207  (12.1 batch/s, ETA 0s)
+  >> Epoch 25/40 — validating
+     batch    2/20  loss=0.203  (40.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (39.9 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (39.9 batch/s, ETA 0s)
+     batch    8/20  loss=0.213  (39.6 batch/s, ETA 0s)
+     batch   10/20  loss=0.372  (40.2 batch/s, ETA 0s)
+     batch   12/20  loss=0.307  (40.6 batch/s, ETA 0s)
+     batch   14/20  loss=0.203  (40.8 batch/s, ETA 0s)
+     batch   16/20  loss=0.848  (41.1 batch/s, ETA 0s)
+     batch   18/20  loss=0.204  (41.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.217  (42.0 batch/s, ETA 0s)
+   25   0.2082  1.000 1.000  |   0.3956  0.919 0.893     0.000309      8s *
+  >> Epoch 26/40 — training
+     batch    9/90  loss=0.207  (12.5 batch/s, ETA 7s)
+     batch   18/90  loss=0.208  (11.9 batch/s, ETA 6s)
+     batch   27/90  loss=0.207  (12.1 batch/s, ETA 5s)C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+
+     batch   36/90  loss=0.207  (12.1 batch/s, ETA 4s)
+     batch   45/90  loss=0.211  (12.0 batch/s, ETA 4s)
+     batch   54/90  loss=0.209  (12.0 batch/s, ETA 3s)
+     batch   63/90  loss=0.208  (12.0 batch/s, ETA 2s)
+     batch   72/90  loss=0.209  (12.1 batch/s, ETA 1s)
+     batch   81/90  loss=0.210  (12.1 batch/s, ETA 1s)
+     batch   90/90  loss=0.209  (12.1 batch/s, ETA 0s)
+  >> Epoch 26/40 — validating
+     batch    2/20  loss=0.203  (41.4 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (41.8 batch/s, ETA 0s)
+     batch    6/20  loss=0.203  (41.7 batch/s, ETA 0s)
+     batch    8/20  loss=0.217  (41.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.394  (41.5 batch/s, ETA 0s)
+     batch   12/20  loss=0.310  (41.6 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (41.9 batch/s, ETA 0s)
+     batch   16/20  loss=0.733  (42.0 batch/s, ETA 0s)
+     batch   18/20  loss=0.205  (41.8 batch/s, ETA 0s)
+     batch   20/20  loss=0.211  (42.6 batch/s, ETA 0s)
+   26   0.2082  1.000 1.000  |   0.3982  0.919 0.896     0.000273      8s *
+  >> Epoch 27/40 — training
+     batch    9/90  loss=0.208  (12.2 batch/s, ETA 7s)
+     batch   18/90  loss=0.207  (11.9 batch/s, ETA 6s)
+     batch   27/90  loss=0.209  (12.0 batch/s, ETA 5s)
+     batch   36/90  loss=0.208  (11.8 batch/s, ETA 5s)
+     batch   45/90  loss=0.208  (11.8 batch/s, ETA 4s)
+     batch   54/90  loss=0.208  (11.8 batch/s, ETA 3s)
+     batch   63/90  loss=0.209  (11.8 batch/s, ETA 2s)
+     batch   72/90  loss=0.209  (11.7 batch/s, ETA 2s)
+     batch   81/90  loss=0.209  (11.8 batch/s, ETA 1s)
+     batch   90/90  loss=0.208  (11.8 batch/s, ETA 0s)
+  >> Epoch 27/40 — validating
+     batch    2/20  loss=0.202  (41.3 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (41.7 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (41.8 batch/s, ETA 0s)
+     batch    8/20  loss=0.216  (41.6 batch/s, ETA 0s)
+     batch   10/20  loss=0.360  (41.5 batch/s, ETA 0s)
+     batch   12/20  loss=0.288  (40.7 batch/s, ETA 0s)
+     batch   14/20  loss=0.204  (40.5 batch/s, ETA 0s)
+     batch   16/20  loss=0.795  (39.6 batch/s, ETA 0s)
+     batch   18/20  loss=0.205  (39.6 batch/s, ETA 0s)
+     batch   20/20  loss=0.213  (40.3 batch/s, ETA 0s)
+   27   0.2081  1.000 1.000  |   0.4070  0.917 0.890     0.000239      8s
+  >> Epoch 28/40 — training
+     batch    9/90  loss=0.209  (12.2 batch/s, ETA 7s)
+     batch   18/90  loss=0.208  (12.4 batch/s, ETA 6s)
+     batch   27/90  loss=0.208  (12.4 batch/s, ETA 5s)
+     batch   36/90  loss=0.210  (12.4 batch/s, ETA 4s)
+     batch   45/90  loss=0.205  (12.4 batch/s, ETA 4s)
+     batch   54/90  loss=0.208  (12.2 batch/s, ETA 3s)
+     batch   63/90  loss=0.209  (12.2 batch/s, ETA 2s)
+     batch   72/90  loss=0.208  (12.1 batch/s, ETA 1s)
+     batch   81/90  loss=0.211  (12.1 batch/s, ETA 1s)
+     batch   90/90  loss=0.209  (12.2 batch/s, ETA 0s)
+  >> Epoch 28/40 — validating
+     batch    2/20  loss=0.203  (40.2 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (40.3 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (40.4 batch/s, ETA 0s)
+     batch    8/20  loss=0.233  (40.5 batch/s, ETA 0s)
+     batch   10/20  loss=0.386  (40.5 batch/s, ETA 0s)
+     batch   12/20  loss=0.306  (40.6 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (40.8 batch/s, ETA 0s)
+     batch   16/20  loss=0.614  (40.8 batch/s, ETA 0s)
+     batch   18/20  loss=0.204  (40.8 batch/s, ETA 0s)
+     batch   20/20  loss=0.210  (41.4 batch/s, ETA 0s)
+   28   0.2081  1.000 1.000  |   0.3897  0.921 0.900     0.000206      8s *
+  >> Epoch 29/40 — training
+     batch    9/90  loss=0.207  (11.2 batch/s, ETA 7s)
+     batch   18/90  loss=0.208  (11.7 batch/s, ETA 6s)
+     batch   27/90  loss=0.209  (11.9 batch/s, ETA 5s)
+     batch   36/90  loss=0.207  (12.1 batch/s, ETA 4s)
+     batch   45/90  loss=0.210  (12.2 batch/s, ETA 4s)
+     batch   54/90  loss=0.208  (12.2 batch/s, ETA 3s)
+     batch   63/90  loss=0.208  (12.2 batch/s, ETA 2s)
+     batch   72/90  loss=0.207  (12.1 batch/s, ETA 1s)
+     batch   81/90  loss=0.212  (12.0 batch/s, ETA 1s)
+     batch   90/90  loss=0.211  (12.0 batch/s, ETA 0s)
+  >> Epoch 29/40 — validating
+     batch    2/20  loss=0.204  (42.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.203  (41.4 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (40.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.208  (39.5 batch/s, ETA 0s)
+     batch   10/20  loss=0.340  (39.4 batch/s, ETA 0s)
+     batch   12/20  loss=0.281  (39.1 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (39.0 batch/s, ETA 0s)
+     batch   16/20  loss=1.017  (39.0 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (38.9 batch/s, ETA 0s)
+     batch   20/20  loss=0.217  (39.6 batch/s, ETA 0s)
+   29   0.2079  1.000 1.000  |   0.4071  0.919 0.892     0.000175      8s
+  >> Epoch 30/40 — training
+     batch    9/90  loss=0.206  (11.5 batch/s, ETA 7s)
+     batch   18/90  loss=0.206  (11.9 batch/s, ETA 6s)
+     batch   27/90  loss=0.207  (11.8 batch/s, ETA 5s)
+     batch   36/90  loss=0.207  (11.7 batch/s, ETA 5s)
+     batch   45/90  loss=0.207  (11.7 batch/s, ETA 4s)
+     batch   54/90  loss=0.208  (11.7 batch/s, ETA 3s)
+     batch   63/90  loss=0.207  (11.8 batch/s, ETA 2s)
+     batch   72/90  loss=0.207  (11.8 batch/s, ETA 2s)
+     batch   81/90  loss=0.207  (11.8 batch/s, ETA 1s)
+     batch   90/90  loss=0.206  (11.9 batch/s, ETA 0s)
+  >> Epoch 30/40 — validating
+     batch    2/20  loss=0.203  (43.2 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (43.4 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (43.3 batch/s, ETA 0s)
+     batch    8/20  loss=0.208  (43.2 batch/s, ETA 0s)
+     batch   10/20  loss=0.329  (43.0 batch/s, ETA 0s)
+     batch   12/20  loss=0.268  (42.1 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (41.6 batch/s, ETA 0s)
+     batch   16/20  loss=0.898  (41.3 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (41.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.215  (41.5 batch/s, ETA 0s)
+   30   0.2074  1.000 1.000  |   0.4074  0.919 0.891     0.000146      8s
+  >> Epoch 31/40 — training
+     batch    9/90  loss=0.207  (12.0 batch/s, ETA 7s)
+     batch   18/90  loss=0.206  (12.1 batch/s, ETA 6s)
+     batch   27/90  loss=0.205  (12.2 batch/s, ETA 5s)
+     batch   36/90  loss=0.208  (12.0 batch/s, ETA 4s)
+     batch   45/90  loss=0.207  (12.1 batch/s, ETA 4s)
+     batch   54/90  loss=0.210  (12.1 batch/s, ETA 3s)
+     batch   63/90  loss=0.206  (12.1 batch/s, ETA 2s)
+     batch   72/90  loss=0.206  (12.1 batch/s, ETA 1s)
+     batch   81/90  loss=0.205  (12.1 batch/s, ETA 1s)
+     batch   90/90  loss=0.206  (12.1 batch/s, ETA 0s)
+  >> Epoch 31/40 — validating
+     batch    2/20  loss=0.203  (42.9 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (43.3 batch/s, ETA 0s)
+     batch    6/20  loss=0.203  (43.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.214  (42.9 batch/s, ETA 0s)
+     batch   10/20  loss=0.360  (42.8 batch/s, ETA 0s)
+     batch   12/20  loss=0.284  (42.7 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (42.7 batch/s, ETA 0s)
+     batch   16/20  loss=0.783  (42.8 batch/s, ETA 0s)
+     batch   18/20  loss=0.202  (42.7 batch/s, ETA 0s)
+     batch   20/20  loss=0.214  (43.4 batch/s, ETA 0s)
+   31   0.2080  1.000 1.000  |   0.3959  0.923 0.900     0.000120      8s *
+  >> Epoch 32/40 — training
+     batch    9/90  loss=0.207  (12.1 batch/s, ETA 7s)
+     batch   18/90  loss=0.210  (12.0 batch/s, ETA 6s)
+     batch   27/90  loss=0.207  (12.1 batch/s, ETA 5s)
+     batch   36/90  loss=0.206  (12.1 batch/s, ETA 4s)
+     batch   45/90  loss=0.206  (12.0 batch/s, ETA 4s)
+     batch   54/90  loss=0.210  (12.1 batch/s, ETA 3s)
+     batch   63/90  loss=0.207  (12.0 batch/s, ETA 2s)
+     batch   72/90  loss=0.208  (12.0 batch/s, ETA 2s)
+     batch   81/90  loss=0.208  (12.0 batch/s, ETA 1s)
+     batch   90/90  loss=0.207  (11.9 batch/s, ETA 0s)
+  >> Epoch 32/40 — validating
+     batch    2/20  loss=0.204  (41.8 batch/s, ETA 0s)
+     batch    4/20  loss=0.204  (42.4 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (42.4 batch/s, ETA 0s)
+     batch    8/20  loss=0.209  (42.6 batch/s, ETA 0s)C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+
+     batch   10/20  loss=0.343  (42.3 batch/s, ETA 0s)
+     batch   12/20  loss=0.269  (42.3 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (42.4 batch/s, ETA 0s)
+     batch   16/20  loss=0.860  (42.3 batch/s, ETA 0s)
+     batch   18/20  loss=0.204  (42.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.210  (42.9 batch/s, ETA 0s)
+   32   0.2076  1.000 1.000  |   0.3940  0.925 0.901     0.000095      8s *
+  >> Epoch 33/40 — training
+     batch    9/90  loss=0.208  (12.2 batch/s, ETA 7s)
+     batch   18/90  loss=0.211  (11.8 batch/s, ETA 6s)
+     batch   27/90  loss=0.208  (11.9 batch/s, ETA 5s)
+     batch   36/90  loss=0.206  (12.0 batch/s, ETA 5s)
+     batch   45/90  loss=0.207  (12.0 batch/s, ETA 4s)
+     batch   54/90  loss=0.207  (12.0 batch/s, ETA 3s)
+     batch   63/90  loss=0.207  (12.0 batch/s, ETA 2s)
+     batch   72/90  loss=0.208  (11.9 batch/s, ETA 2s)
+     batch   81/90  loss=0.206  (11.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.207  (12.0 batch/s, ETA 0s)
+  >> Epoch 33/40 — validating
+     batch    2/20  loss=0.203  (40.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (39.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (39.4 batch/s, ETA 0s)
+     batch    8/20  loss=0.210  (39.3 batch/s, ETA 0s)
+     batch   10/20  loss=0.370  (39.3 batch/s, ETA 0s)
+     batch   12/20  loss=0.301  (39.1 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (39.2 batch/s, ETA 0s)
+     batch   16/20  loss=0.900  (39.2 batch/s, ETA 0s)
+     batch   18/20  loss=0.204  (39.1 batch/s, ETA 0s)
+     batch   20/20  loss=0.209  (39.9 batch/s, ETA 0s)
+   33   0.2075  1.000 1.000  |   0.3990  0.920 0.895     0.000074      8s
+  >> Epoch 34/40 — training
+     batch    9/90  loss=0.206  (12.1 batch/s, ETA 7s)
+     batch   18/90  loss=0.206  (12.1 batch/s, ETA 6s)
+     batch   27/90  loss=0.207  (12.1 batch/s, ETA 5s)
+     batch   36/90  loss=0.207  (12.1 batch/s, ETA 4s)
+     batch   45/90  loss=0.207  (12.0 batch/s, ETA 4s)
+     batch   54/90  loss=0.209  (12.0 batch/s, ETA 3s)
+     batch   63/90  loss=0.209  (12.0 batch/s, ETA 2s)
+     batch   72/90  loss=0.207  (12.0 batch/s, ETA 2s)
+     batch   81/90  loss=0.206  (11.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.207  (12.0 batch/s, ETA 0s)
+  >> Epoch 34/40 — validating
+     batch    2/20  loss=0.203  (42.9 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (43.0 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (42.6 batch/s, ETA 0s)
+     batch    8/20  loss=0.214  (42.3 batch/s, ETA 0s)
+     batch   10/20  loss=0.384  (42.2 batch/s, ETA 0s)
+     batch   12/20  loss=0.312  (42.3 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (42.3 batch/s, ETA 0s)
+     batch   16/20  loss=0.800  (42.3 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (42.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.214  (42.4 batch/s, ETA 0s)
+   34   0.2075  1.000 1.000  |   0.3939  0.923 0.900     0.000054      8s
+  >> Epoch 35/40 — training
+     batch    9/90  loss=0.206  (11.7 batch/s, ETA 7s)
+     batch   18/90  loss=0.206  (11.9 batch/s, ETA 6s)
+     batch   27/90  loss=0.207  (12.0 batch/s, ETA 5s)
+     batch   36/90  loss=0.207  (11.9 batch/s, ETA 5s)
+     batch   45/90  loss=0.208  (11.9 batch/s, ETA 4s)
+     batch   54/90  loss=0.206  (11.9 batch/s, ETA 3s)
+     batch   63/90  loss=0.207  (11.9 batch/s, ETA 2s)
+     batch   72/90  loss=0.208  (11.9 batch/s, ETA 2s)
+     batch   81/90  loss=0.206  (11.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.209  (11.9 batch/s, ETA 0s)
+  >> Epoch 35/40 — validating
+     batch    2/20  loss=0.202  (42.7 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (42.7 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (42.5 batch/s, ETA 0s)
+     batch    8/20  loss=0.206  (42.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.334  (42.4 batch/s, ETA 0s)
+     batch   12/20  loss=0.268  (42.4 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (42.6 batch/s, ETA 0s)
+     batch   16/20  loss=0.977  (42.5 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (42.5 batch/s, ETA 0s)
+     batch   20/20  loss=0.213  (43.1 batch/s, ETA 0s)
+   35   0.2074  1.000 1.000  |   0.4100  0.915 0.884     0.000038      8s
+  >> Epoch 36/40 — training
+     batch    9/90  loss=0.206  (12.1 batch/s, ETA 7s)
+     batch   18/90  loss=0.207  (11.8 batch/s, ETA 6s)
+     batch   27/90  loss=0.208  (11.9 batch/s, ETA 5s)
+     batch   36/90  loss=0.210  (12.0 batch/s, ETA 5s)
+     batch   45/90  loss=0.207  (11.9 batch/s, ETA 4s)
+     batch   54/90  loss=0.207  (11.9 batch/s, ETA 3s)
+     batch   63/90  loss=0.210  (11.9 batch/s, ETA 2s)
+     batch   72/90  loss=0.207  (11.9 batch/s, ETA 2s)
+     batch   81/90  loss=0.206  (11.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.208  (11.9 batch/s, ETA 0s)
+  >> Epoch 36/40 — validating
+     batch    2/20  loss=0.203  (42.3 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (42.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (42.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.209  (41.9 batch/s, ETA 0s)
+     batch   10/20  loss=0.357  (41.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.295  (41.7 batch/s, ETA 0s)
+     batch   14/20  loss=0.203  (41.7 batch/s, ETA 0s)
+     batch   16/20  loss=0.839  (41.6 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (41.7 batch/s, ETA 0s)
+     batch   20/20  loss=0.214  (42.3 batch/s, ETA 0s)
+   36   0.2072  1.000 1.000  |   0.4013  0.921 0.896     0.000024      8s
+  >> Epoch 37/40 — training
+     batch    9/90  loss=0.206  (12.1 batch/s, ETA 7s)
+     batch   18/90  loss=0.207  (11.8 batch/s, ETA 6s)
+     batch   27/90  loss=0.207  (11.9 batch/s, ETA 5s)
+     batch   36/90  loss=0.205  (12.0 batch/s, ETA 5s)
+     batch   45/90  loss=0.207  (11.9 batch/s, ETA 4s)
+     batch   54/90  loss=0.206  (11.9 batch/s, ETA 3s)
+     batch   63/90  loss=0.206  (11.9 batch/s, ETA 2s)
+     batch   72/90  loss=0.206  (11.9 batch/s, ETA 2s)
+     batch   81/90  loss=0.207  (11.9 batch/s, ETA 1s)
+     batch   90/90  loss=0.209  (11.9 batch/s, ETA 0s)
+  >> Epoch 37/40 — validating
+     batch    2/20  loss=0.203  (42.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (42.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (42.2 batch/s, ETA 0s)
+     batch    8/20  loss=0.208  (42.0 batch/s, ETA 0s)
+     batch   10/20  loss=0.352  (41.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.286  (41.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.203  (41.9 batch/s, ETA 0s)
+     batch   16/20  loss=0.874  (41.9 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (42.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.215  (42.6 batch/s, ETA 0s)
+   37   0.2074  1.000 1.000  |   0.4018  0.920 0.895     0.000014      8s
+  >> Epoch 38/40 — training
+     batch    9/90  loss=0.211  (12.0 batch/s, ETA 7s)
+     batch   18/90  loss=0.206  (11.6 batch/s, ETA 6s)
+     batch   27/90  loss=0.207  (11.5 batch/s, ETA 5s)
+     batch   36/90  loss=0.206  (11.6 batch/s, ETA 5s)
+     batch   45/90  loss=0.206  (11.7 batch/s, ETA 4s)
+     batch   54/90  loss=0.207  (11.7 batch/s, ETA 3s)
+     batch   63/90  loss=0.208  (11.7 batch/s, ETA 2s)
+     batch   72/90  loss=0.208  (11.7 batch/s, ETA 2s)
+     batch   81/90  loss=0.206  (11.8 batch/s, ETA 1s)
+     batch   90/90  loss=0.206  (11.8 batch/s, ETA 0s)
+  >> Epoch 38/40 — validating
+     batch    2/20  loss=0.203  (42.8 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (42.9 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (43.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.208  (43.1 batch/s, ETA 0s)
+     batch   10/20  loss=0.344  (42.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.279  (42.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.202  (42.9 batch/s, ETA 0s)
+     batch   16/20  loss=0.914  (42.9 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (42.9 batch/s, ETA 0s)
+     batch   20/20  loss=0.212  (43.5 batch/s, ETA 0s)
+   38   0.2071  1.000 1.000  |   0.4032  0.919 0.891     0.000006      8s
+  >> Epoch 39/40 — training
+     batch    9/90  loss=0.207  (12.2 batch/s, ETA 7s)
+     batch   18/90  loss=0.209  (11.8 batch/s, ETA 6s)
+     batch   27/90  loss=0.207  (11.6 batch/s, ETA 5s)
+     batch   36/90  loss=0.206  (11.7 batch/s, ETA 5s)C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+C:\Project Work\Scripts_4\train_stft_freqnet_v1.py:354: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+
+     batch   45/90  loss=0.207  (11.7 batch/s, ETA 4s)
+     batch   54/90  loss=0.207  (11.7 batch/s, ETA 3s)
+     batch   63/90  loss=0.206  (11.8 batch/s, ETA 2s)
+     batch   72/90  loss=0.208  (11.8 batch/s, ETA 2s)
+     batch   81/90  loss=0.206  (11.8 batch/s, ETA 1s)
+     batch   90/90  loss=0.207  (11.9 batch/s, ETA 0s)
+  >> Epoch 39/40 — validating
+     batch    2/20  loss=0.203  (42.3 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (42.5 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (42.3 batch/s, ETA 0s)
+     batch    8/20  loss=0.210  (42.1 batch/s, ETA 0s)
+     batch   10/20  loss=0.365  (41.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.296  (41.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.203  (41.9 batch/s, ETA 0s)
+     batch   16/20  loss=0.820  (41.9 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (41.9 batch/s, ETA 0s)
+     batch   20/20  loss=0.214  (42.6 batch/s, ETA 0s)
+   39   0.2070  1.000 1.000  |   0.3972  0.923 0.899     0.000002      8s
+  >> Epoch 40/40 — training
+     batch    9/90  loss=0.206  (12.1 batch/s, ETA 7s)
+     batch   18/90  loss=0.208  (12.1 batch/s, ETA 6s)
+     batch   27/90  loss=0.208  (12.0 batch/s, ETA 5s)
+     batch   36/90  loss=0.210  (12.0 batch/s, ETA 4s)
+     batch   45/90  loss=0.208  (12.0 batch/s, ETA 4s)
+     batch   54/90  loss=0.206  (12.0 batch/s, ETA 3s)
+     batch   63/90  loss=0.205  (12.0 batch/s, ETA 2s)
+     batch   72/90  loss=0.207  (12.0 batch/s, ETA 2s)
+     batch   81/90  loss=0.206  (12.0 batch/s, ETA 1s)
+     batch   90/90  loss=0.209  (12.0 batch/s, ETA 0s)
+  >> Epoch 40/40 — validating
+     batch    2/20  loss=0.203  (38.9 batch/s, ETA 0s)
+     batch    4/20  loss=0.202  (38.7 batch/s, ETA 0s)
+     batch    6/20  loss=0.202  (38.4 batch/s, ETA 0s)
+     batch    8/20  loss=0.208  (38.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.351  (38.3 batch/s, ETA 0s)
+     batch   12/20  loss=0.283  (38.3 batch/s, ETA 0s)
+     batch   14/20  loss=0.203  (38.4 batch/s, ETA 0s)
+     batch   16/20  loss=0.887  (38.6 batch/s, ETA 0s)
+     batch   18/20  loss=0.203  (39.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.214  (39.8 batch/s, ETA 0s)
+   40   0.2073  1.000 1.000  |   0.4017  0.921 0.895     0.000000      8s
+
+Early stop: val F1 hasn't improved in 8 epochs.
+────────────────────────────────────────────────────────────────────────────────
+Training done in 5.1m.  Best val F1 = 0.9014
+
+Loading best model for test evaluation...
+  >> TEST evaluation
+     batch    2/22  loss=0.210  (17.1 batch/s, ETA 1s)
+     batch    4/22  loss=0.207  (16.9 batch/s, ETA 1s)
+     batch    6/22  loss=0.226  (17.0 batch/s, ETA 1s)
+     batch    8/22  loss=0.246  (17.0 batch/s, ETA 1s)
+     batch   10/22  loss=0.206  (17.0 batch/s, ETA 1s)
+     batch   12/22  loss=0.233  (17.1 batch/s, ETA 1s)
+     batch   14/22  loss=0.221  (17.1 batch/s, ETA 0s)
+     batch   16/22  loss=0.202  (17.1 batch/s, ETA 0s)
+     batch   18/22  loss=1.302  (17.0 batch/s, ETA 0s)
+     batch   20/22  loss=0.203  (17.0 batch/s, ETA 0s)
+     batch   22/22  loss=0.206  (16.8 batch/s, ETA 0s)
+
+TEST RESULTS
+  loss     = 0.3829
+  accuracy = 0.9386
+  macro-F1 = 0.9160
+
+Per-class test metrics:
+           class  precision  recall     f1  support
+       healthy 1     0.9260  0.9801 0.9523      855
+  stator short 1     1.0000  1.0000 1.0000      171
+  bearing bpfo 3     0.8667  0.6082 0.7148      171
+broken rotor bar     0.9942  1.0000 0.9971      171
+
+Misclassified test samples: 84 / 1368 (6.1%)
+
+======================================================================
+DONE — outputs in: C:\Project Work\Outputs\4class\training\STFTFreqNet_v1
+======================================================================

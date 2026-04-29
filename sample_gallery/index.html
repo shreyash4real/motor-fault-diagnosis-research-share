@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sample Gallery</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5d6875;
+      --line: #d9e0e8;
+      --paper: #f7f9fb;
+      --panel: #ffffff;
+      --blue: #245a9c;
+      --green: #21745b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      letter-spacing: 0;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1.05;
+    }
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 860px;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    nav a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 0.9rem;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .metric {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .metric strong {
+      display: block;
+      color: var(--green);
+      font-size: 1.55rem;
+      line-height: 1.1;
+    }
+    .metric span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      line-height: 1.35;
+      font-size: 0.9rem;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    figure {
+      margin: 0;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background: #111820;
+    }
+    figcaption {
+      padding: 9px 10px 11px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.35;
+      min-height: 55px;
+    }
+    @media (max-width: 900px) {
+      .metrics, .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 18px; }
+      .metrics, .gallery { grid-template-columns: 1fr; }
+      h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Sample Gallery</h1>
+      <p>Representative test-split images selected deterministically: first sorted sample in each representation, class, and speed folder. STFT is channel 1 only.</p>
+      <nav aria-label="Navigation">
+        <a href="../index.html">Dashboard</a>
+        <a href="manifest.csv">manifest.csv</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <div class="metrics">
+      <div class="metric"><strong>4</strong><span>Representations</span></div>
+      <div class="metric"><strong>4</strong><span>Classes</span></div>
+      <div class="metric"><strong>3</strong><span>Speeds</span></div>
+      <div class="metric"><strong>48</strong><span>Total PNG samples</span></div>
+    </div>
+    <div class="gallery" id="galleryGrid"></div>
+  </main>
+  <script>
+    const reps = [
+      ['stft', 'STFT ch1'],
+      ['dwt', 'DWT'],
+      ['envelope', 'Envelope'],
+      ['clarke', 'Clarke']
+    ];
+    const classes = [
+      ['healthy_1', 'healthy 1'],
+      ['stator_short_1', 'stator short 1'],
+      ['bearing_bpfo_3', 'bearing bpfo 3'],
+      ['broken_rotor_bar', 'broken rotor bar']
+    ];
+    const speeds = [50, 75, 100];
+    const grid = document.getElementById('galleryGrid');
+
+    for (const [repKey, repLabel] of reps) {
+      for (const [classKey, classLabel] of classes) {
+        for (const speed of speeds) {
+          const fig = document.createElement('figure');
+          const img = document.createElement('img');
+          img.src = `${repKey}/${classKey}_speed_${speed}.png`;
+          img.alt = `${repLabel} sample for ${classLabel} at ${speed} percent speed`;
+          const cap = document.createElement('figcaption');
+          cap.textContent = `${repLabel} - ${classLabel} - ${speed}% speed`;
+          fig.appendChild(img);
+          fig.appendChild(cap);
+          grid.appendChild(fig);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

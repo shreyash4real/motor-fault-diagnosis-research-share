@@ -1,0 +1,12 @@
+# PyTorch CUDA 12.6 wheel is hosted on the PyTorch index, not PyPI.
+# The `--extra-index-url` below lets `pip install -r requirements.txt` find it.
+--extra-index-url https://download.pytorch.org/whl/cu126
+
+librosa==0.11.0
+matplotlib==3.10.9
+numpy==2.4.4
+pandas==3.0.2
+scikit_learn==1.8.0
+scipy==1.17.1
+torch==2.11.0+cu126
+pywavelets==1.8.0

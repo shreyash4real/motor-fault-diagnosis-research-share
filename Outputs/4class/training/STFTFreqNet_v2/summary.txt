@@ -1,0 +1,13 @@
+Run: STFTFreqNet_v2
+Model: STFTFreqNet
+Channels: (24, 48, 72, 96, 128)
+Total params: 679,836
+Test accuracy: 0.9269
+Test macro-F1: 0.9028
+Best val F1:   0.9211
+
+Per-class F1:
+  healthy 1              P=0.921  R=0.966  F1=0.943  (n=855)
+  stator short 1         P=1.000  R=1.000  F1=1.000  (n=171)
+  bearing bpfo 3         P=0.777  R=0.591  F1=0.671  (n=171)
+  broken rotor bar       P=1.000  R=0.994  F1=0.997  (n=171)
