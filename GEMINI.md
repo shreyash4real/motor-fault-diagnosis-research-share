@@ -298,7 +298,9 @@ Remaining errors are still dominated by `bearing bpfo 3`, especially the 100% sp
 - `Scripts\`, `Scripts_4\`, `requirements.txt`, and project guidance docs for reproducibility.
 - `Outputs\4class\training\` for configs, checkpoints, logs, metrics, plots, leaderboards, and misclassification CSVs.
 - `Outputs\4class\diagnostics\` and `Outputs\4class\v2_speed_strat\{splits.csv,split_report.txt}` for the canonical split and BPFO-3 diagnostic evidence.
-- `sample_gallery\` for exactly 48 representative images: 4 representations × 4 classes × 3 speeds.
+- `sample_gallery\` for exactly 48 representative images: 4 representations x 4 classes x 3 speeds.
+
+Current state: `ProjectShare\` was created on 2026-04-30 as a clean local Git repo with a committed export. The remote private GitHub repo `motor-fault-diagnosis-research-share` still needs to be created/pushed from that folder when GitHub CLI or credentials are available.
 
 Intentionally excluded from `ProjectShare\`: `Dataset\`, `Denoised\`, full feature `.pt` tensors from `Outputs\4class\v2_speed_strat\`, full STFT/DWT/envelope/Clarke image forests, and `.code-review-graph\` internal databases. `.rtk\filters.toml` is only a local Claude/RTK terminal-output filter stub, not a research artifact.
 
