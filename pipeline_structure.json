@@ -1,0 +1,85 @@
+{
+  "project": "Motor Fault Detection Research",
+  "architecture_logic": "The pipeline is manifest-driven. validated_manifest.csv acts as the central gatekeeper, ensuring only verified high-quality raw data enters the processing stages.",
+  "pipeline_steps": [
+    {
+      "step": 1,
+      "name": "Validation",
+      "script": "Scripts/validate_dataset.py",
+      "input": "Dataset/Electric/Motor-2/*.csv (Raw)",
+      "output": "Outputs/main/validated_manifest.csv",
+      "description": "Gatekeeping step. Filters raw files based on NaN checks, clipping (>98% saturation), and RMS (0.001-50A)."
+    },
+    {
+      "step": 2,
+      "name": "Denoising",
+      "script": "Scripts/denoise_all.py",
+      "dependencies": ["validated_manifest.csv", "Dataset/Electric/Motor-2/*.csv"],
+      "output": "Denoised/Motor-2/*.csv",
+      "description": "Applies 4th-order Butterworth bandpass (5-5000 Hz). ONLY processes files marked PASS or WARN in the manifest."
+    },
+    {
+      "step": 3,
+      "name": "Split Generation",
+      "script": "Scripts_4/generate_splits_v2.py",
+      "dependencies": ["validated_manifest.csv"],
+      "output": "Outputs/4class/v2_speed_strat/splits.csv",
+      "description": "Canonical column-level stratified splits. Guarantees every (class, speed) pair is represented in train, val, and test."
+    },
+    {
+      "step": 4,
+      "name": "Feature Precomputation Hub",
+      "variants": [
+        {
+          "id": "4a",
+          "name": "STFT",
+          "script": "precompute_stft_v2.py",
+          "output": "Features (.pt), Spectrograms (.png)"
+        },
+        {
+          "id": "4b",
+          "name": "Envelope",
+          "script": "precompute_envelope_v1.py",
+          "output": "Time-domain envelope features (.pt)"
+        },
+        {
+          "id": "4c",
+          "name": "DWT",
+          "script": "precompute_dwt_v1.py",
+          "output": "Multi-level coefficients (.pt), Scalograms (.png)"
+        }
+      ],
+      "dependencies": ["Denoised Hub", "splits.csv"]
+    },
+    {
+      "step": 5,
+      "name": "Individual Model Training",
+      "tasks": [
+        {
+          "id": "5a",
+          "name": "Train STFT CNN",
+          "script": "train_stft_cnn_v2_A.py (or mod_alexnet)",
+          "input": "STFT Features"
+        },
+        {
+          "id": "5b",
+          "name": "Train Envelope CNN",
+          "script": "train_envelope_cnn_v1.py",
+          "input": "Envelope Features"
+        },
+        {
+          "id": "5c",
+          "name": "Train DWT CNN",
+          "script": "train_dwt_cnn.py",
+          "input": "DWT Multi-level Features"
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "name": "Final Deliverables",
+      "output": "best_model.pt, Confusion Matrices, Per-class Metrics, Misclassification CSVs",
+      "description": "Final diagnostic evidence for the research paper, focusing on the BPFO-3 difficulty."
+    }
+  ]
+}

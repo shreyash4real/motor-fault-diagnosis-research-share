@@ -9,11 +9,12 @@ Reads the locked v2_speed_strat splits and produces two parallel artefacts:
         envelope/features/val.pt
         envelope/features/test.pt
 
-  2. PER-SEGMENT PNG TREE for inspection:
+  2. PER-PHASE PNG TREE for inspection:
         envelope/images/<split>/<class>/<speed>/colXX_segYYY.png
-        One compact panel per segment with 3 line plots (one per phase).
+        Three compact PNGs per segment, one per phase:
+        colXX_segYYY_ch1.png, colXX_segYYY_ch2.png, colXX_segYYY_ch3.png.
         No labels, no axes, no title — matches the minimalist convention
-        of the STFT / DWT / Clarke PNGs.
+        and channel suffix naming of the STFT PNGs.
 
 REPRESENTATION — WHY ENVELOPE SPECTRUM
 --------------------------------------
@@ -169,29 +170,28 @@ def zscore_normalize(spec_log: np.ndarray) -> np.ndarray:
     return (spec_log - mean) / std
 
 
-def save_envelope_panel_png(spec_log: np.ndarray,
+def save_envelope_phase_pngs(spec_log: np.ndarray,
                              out_dir: Path,
                              col_idx: int,
                              seg_idx: int) -> None:
     """
-    One panel PNG per segment. Three overlaid line plots — one per phase
-    channel — of the log1p envelope spectrum (raw, pre-z-score). No axes,
-    no title, no labels. Minimalist, matches STFT / DWT / Clarke PNGs.
+    Save 3 PNGs per segment, one per phase channel, using the same
+    colXX_segYYY_chN.png naming convention as the STFT branch.
     """
     out_dir.mkdir(parents=True, exist_ok=True)
-    fig, ax = plt.subplots(figsize=(4, 1.6))
     freqs = np.arange(N_FREQ_BINS)
     phase_colors = ("#c0392b", "#27ae60", "#2980b9")   # ch1 / ch2 / ch3
     for ch_i in range(3):
+        fig, ax = plt.subplots(figsize=(4, 1.2))
         ax.plot(freqs, spec_log[ch_i],
                 linewidth=0.55, color=phase_colors[ch_i])
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.margins(x=0, y=0.05)
-    plt.subplots_adjust(left=0.02, right=0.98, top=0.98, bottom=0.02)
-    fname = f"col{col_idx:02d}_seg{seg_idx:03d}.png"
-    plt.savefig(out_dir / fname, dpi=100, facecolor="white")
-    plt.close(fig)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.margins(x=0, y=0.05)
+        plt.subplots_adjust(left=0.02, right=0.98, top=0.98, bottom=0.02)
+        fname = f"col{col_idx:02d}_seg{seg_idx:03d}_ch{ch_i + 1}.png"
+        plt.savefig(out_dir / fname, dpi=100, facecolor="white")
+        plt.close(fig)
 
 
 def fmt_time(seconds: float) -> str:
@@ -253,7 +253,7 @@ def process_split(splits_df: pd.DataFrame, split: str,
     print(f"Pre-allocated      : {fmt_size(features_buf.nbytes)}")
     if save_png_flag:
         print(f"PNGs will be written under: {images_dir / split}")
-        print(f"  1 panel PNG per segment -> {n_samples:,} files total")
+        print(f"  3 phase PNGs per segment -> {n_samples * 3:,} files total")
     print()
 
     sample_i = 0
@@ -299,8 +299,8 @@ def process_split(splits_df: pd.DataFrame, split: str,
                 cls_folder   = sanitize(entry["class_label"])
                 speed_folder = f"speed_{entry['speed_pct']}"
                 out_dir = images_dir / split / cls_folder / speed_folder
-                save_envelope_panel_png(spec_log, out_dir,
-                                         col_idx, entry["seg_idx"])
+                save_envelope_phase_pngs(spec_log, out_dir,
+                                          col_idx, entry["seg_idx"])
 
             sample_i += 1
 
@@ -361,7 +361,7 @@ def main():
     print(f"denoised root:  {DENOISED_ROOT}")
     print(f"features dir:   {FEATURES_DIR}")
     print(f"images dir:     {IMAGES_DIR}")
-    print(f"save PNGs:      {SAVE_PNGS}  (1 panel per segment, no labeling)")
+    print(f"save PNGs:      {SAVE_PNGS}  (3 phase PNGs per segment, no labeling)")
     print(f"torch threads:  {torch.get_num_threads()}")
     print()
     print("LOCKED ENVELOPE PARAMETERS:")
@@ -376,9 +376,9 @@ def main():
     print(f"  expected sample shape: (3, {N_FREQ_BINS}) float32")
     print()
     print("PNG CONVENTIONS:")
-    print(f"  filename : colXX_segYYY.png  (no labels)")
-    print(f"  content  : 3 overlaid line plots (one per phase)")
-    print(f"  size     : ~400 x 160 px")
+    print(f"  filename : colXX_segYYY_chN.png  (N=1..3, no labels)")
+    print(f"  content  : one envelope spectrum line plot per phase")
+    print(f"  size     : ~400 x 120 px")
 
     if not os.path.exists(SPLITS_CSV):
         print(f"\nERROR: splits.csv not found at {SPLITS_CSV}")
