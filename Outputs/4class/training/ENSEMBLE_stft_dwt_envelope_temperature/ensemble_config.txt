@@ -1,17 +1,17 @@
 RUN NAME         : ENSEMBLE_stft_dwt_envelope_temperature
-Created          : 2026-04-27T02:07:56
+Created          : 2026-05-01T23:08:01
 Strategy         : soft voting (equal-weight mean of temperature-calibrated softmaxes)
 Members          : ['stft', 'dwt', 'envelope']
 
 Per-member temperature (fit on val NLL, LBFGS):
   stft        T = 2.3996
   dwt         T = 0.7431
-  envelope    T = 1.1725
+  envelope    T = 0.5182
 
 Member sources:
   stft        run=E4_mod_alexnet_227
              ckpt=C:\Project Work\Outputs\4class\training\E4_mod_alexnet_227\best_model.pt
   dwt         run=DWT_multibranch_plain_v1
              ckpt=C:\Project Work\Outputs\4class\training\DWT_multibranch_plain_v1\best_model.pt
-  envelope    run=ENVELOPE_dilated1d_v1
-             ckpt=C:\Project Work\Outputs\4class\training\ENVELOPE_dilated1d_v1\best_model.pt
+  envelope    run=ENVELOPE_resnet_v3_reg
+             ckpt=C:\Project Work\Outputs\4class\training\ENVELOPE_resnet_v3_reg\best_model.pt
