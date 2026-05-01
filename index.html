@@ -267,7 +267,7 @@
         <div class="metric"><strong>96.49%</strong><span>Best test accuracy from STFT + DWT + envelope temperature ensemble</span></div>
         <div class="metric"><strong>0.9524</strong><span>Best macro-F1 on the canonical v2 speed-stratified split</span></div>
         <div class="metric"><strong>0.837</strong><span>Best BPFO-3 F1, still the dominant remaining error source</span></div>
-        <div class="metric"><strong>48</strong><span>Representative gallery images: 4 reps x 4 classes x 3 speeds</span></div>
+        <div class="metric"><strong>36</strong><span>Representative gallery images: 3 reps x 4 classes x 3 speeds</span></div>
       </div>
 
       <section id="leaderboard">
@@ -328,19 +328,27 @@
               </tr>
               <tr>
                 <td>6</td>
+                <td><a href="Outputs/4class/training/ENVELOPE_resnet_v3_reg/summary.txt">(solo, T=0.650) ENVELOPE_resnet_v3_reg</a></td>
+                <td>0.9415</td>
+                <td>0.9262</td>
+                <td class="good">0.8232</td>
+                <td>Best solo BPFO-3 across all branches; class-weighted regularized envelope.</td>
+              </tr>
+              <tr>
+                <td>7</td>
                 <td><a href="Outputs/4class/training/ENVELOPE_dilated1d_v1/summary.txt">(solo, T=1.172) ENVELOPE_dilated1d_v1</a></td>
                 <td>0.9327</td>
                 <td>0.9132</td>
                 <td>0.7922</td>
-                <td>Weaker solo, useful in the best ensemble.</td>
+                <td>Original envelope solo; component of the current best ensemble.</td>
               </tr>
               <tr>
-                <td>7</td>
+                <td>8</td>
                 <td><a href="Outputs/4class/training/CLARKE_mod_alexnet_v1/summary.txt">(solo, T=2.849) CLARKE_mod_alexnet_v1</a></td>
                 <td>0.8121</td>
                 <td>0.7903</td>
                 <td class="risk">0.4390</td>
-                <td>Not useful in the best ensemble.</td>
+                <td>Deprecated branch — kept for the comparison table only.</td>
               </tr>
             </tbody>
           </table>
@@ -349,6 +357,7 @@
 
       <section id="representations">
         <h2>Representation Comparison</h2>
+        <p>The tool is scoped to three live branches: STFT, DWT, and Envelope. Mel and Clarke were evaluated and dropped — they appear in the leaderboard for honesty, not as candidates.</p>
         <div class="grid-2">
           <div class="card">
             <h3>STFT</h3>
@@ -357,18 +366,13 @@
           </div>
           <div class="card">
             <h3>DWT</h3>
-            <p>Plain multi-branch CNN reaches 95.03% accuracy and 0.9347 macro-F1. It complements STFT well and is part of every top ensemble.</p>
+            <p>Plain multi-branch CNN reaches 95.10% accuracy and 0.9358 macro-F1. Native-length sub-band branches; complements STFT well and is part of every top ensemble.</p>
             <span class="tag">ensemble core</span>
           </div>
           <div class="card">
             <h3>Envelope</h3>
-            <p>Solo result is lower at 93.27% accuracy and 0.9132 macro-F1, but temperature-calibrated envelope logits produce the best ensemble.</p>
-            <span class="tag">useful complement</span>
-          </div>
-          <div class="card">
-            <h3>Clarke</h3>
-            <p>Solo performance is much weaker at 81.21% accuracy and 0.7903 macro-F1. Adding Clarke to STFT + DWT does not beat STFT + DWT + envelope.</p>
-            <span class="tag">not in best ensemble</span>
+            <p>Strips the 50 Hz line carrier to expose low-frequency BPFO modulations. Regularized ResNet variant (<code>ENVELOPE_resnet_v3_reg</code>) hits 94.15% accuracy and the highest solo BPFO-3 F1 of any branch (0.823).</p>
+            <span class="tag">bpfo-3 ceiling-breaker</span>
           </div>
         </div>
       </section>
@@ -411,7 +415,6 @@
           <span class="pill">STFT ch1</span>
           <span class="pill">DWT</span>
           <span class="pill">Envelope</span>
-          <span class="pill">Clarke</span>
           <a class="pill" href="sample_gallery/index.html">gallery page</a>
           <a class="pill" href="sample_gallery/manifest.csv">manifest.csv</a>
         </div>
@@ -458,7 +461,7 @@
 
   <footer>
     <div class="wrap">
-      Export prepared on 2026-04-30. Private repo target: <code>motor-fault-diagnosis-research-share</code>.
+      Export prepared on 2026-04-30; pushed to <a href="https://github.com/shreyash4real/motor-fault-diagnosis-research-share">github.com/shreyash4real/motor-fault-diagnosis-research-share</a>.
     </div>
   </footer>
 
@@ -466,8 +469,7 @@
     const reps = [
       ['stft', 'STFT ch1'],
       ['dwt', 'DWT'],
-      ['envelope', 'Envelope'],
-      ['clarke', 'Clarke']
+      ['envelope', 'Envelope']
     ];
     const classes = [
       ['healthy_1', 'healthy 1'],

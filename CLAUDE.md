@@ -2,9 +2,23 @@
 
 ## What This Project Is
 
-A machine-learning research pipeline for **motor fault diagnosis using 3-phase electric current signals** from a centrifugal pump testbench. Goal: a research paper comparing signal representations (STFT, DWT, Mel, Clarke) for 4-class fault classification. The pipeline is fully operational and producing results; current focus is deeper analysis of the two leading representations (STFT and DWT, both ~95% test accuracy) for the paper.
+A machine-learning research pipeline for **motor fault diagnosis using 3-phase electric current signals** from a centrifugal pump testbench. Goal: a research paper presenting a **multi-method tool** that fuses three complementary signal representations for 4-class fault classification.
 
 Dataset: *Motor Current and Vibration Monitoring Dataset for Fault Detection in E-motor-driven Centrifugal Pump*, S. Bruinsma et al. — CC0.
+
+### Active branches (the three live methods)
+
+The paper and the tool are now scoped to **STFT + DWT + Envelope**. Each is a standing branch with its own precompute + training script and contributes to the headline ensemble.
+
+| Branch | Captures | Best solo run |
+|---|---|---|
+| **STFT** | full 0–3000 Hz time-frequency picture | `E4_mod_alexnet_227` — 95.39% |
+| **DWT** | dyadic sub-bands at native length, frequency-localized | `DWT_multibranch_plain_v1` — 95.10% |
+| **Envelope** | low-frequency BPFO modulations after 50 Hz carrier strip | `ENVELOPE_resnet_v3_reg` — 94.15%, bpfo-3 F1 = 0.823 |
+
+**Deprecated branches** (kept only for the comparison table; do not extend):
+- **Mel STFT** (`mel_v1\`) — beaten by linear STFT, no unique signal contribution.
+- **Clarke** (`clarke_features\`) — 81% solo, hurts the best ensemble.
 
 ---
 
@@ -113,18 +127,18 @@ Two representations diverge intentionally from the same STFT data:
 
 PNG tree: `stft_images/<split>/<class>/<speed>/colXX_segYYY_ch{1,2,3}.png` — 3 PNGs per segment.
 
-#### 4b. Mel STFT (`precompute_mel_stft_v2.py`)
+#### 4b. Mel STFT — DEPRECATED (`precompute_mel_stft_v2.py`)
 
-Same STFT base, then librosa Slaney-norm mel filterbank over 0–3000 Hz → 96 mel bins. Output shape: (3, 96, 149). Features in `mel_v1\features\`.
+Same STFT base, then librosa Slaney-norm mel filterbank over 0–3000 Hz → 96 mel bins. Output shape: (3, 96, 149). Features in `mel_v1\features\`. Kept for the comparison table only.
 
-#### 4c. Clarke Transform (`precompute_clarke_v2.py`)
+#### 4c. Clarke Transform — DEPRECATED (`precompute_clarke_v2.py`)
 
 Amplitude-invariant α/β transform:
 ```
 i_α = (2/3)(i_a − 0.5·i_b − 0.5·i_c)
 i_β = (2/3)((√3/2)·i_b − (√3/2)·i_c)
 ```
-128 × 128 log1p density histogram, per-sample symmetric max extent (scale-invariant). Output shape: (1, 128, 128). Features in `clarke_features\`.
+128 × 128 log1p density histogram, per-sample symmetric max extent (scale-invariant). Output shape: (1, 128, 128). Features in `clarke_features\`. Kept for the comparison table only.
 
 #### 4d. DWT (`precompute_dwt_v1.py`)
 
@@ -177,7 +191,12 @@ Output shape depends on STFT padding/cropping. Features in `envelope_stft\featur
 
 #### Envelope CNNs (`train_envelope_cnn_*.py`, `train_envelope_stft_cnn_v1.py`)
 
-Models processing the 1D envelope spectrum or 2D envelope STFT representations. The 1D envelope model (`ENVELOPE_dilated1d_v1`) provides strong solo performance (93.27% accuracy) and is a critical component of the best ensemble.
+Three flavors on the 1D envelope spectrum, plus one on the 2D envelope STFT:
+
+- **`ENVELOPE_dilated1d_v1`** — original 1D dilated CNN, 93.27% solo, key ensemble component.
+- **`ENVELOPE_resnet_v2`** — wider ResNet (940k params), 91.68% F1.
+- **`ENVELOPE_resnet_v3_reg`** — same backbone with class weights `[0.37, 2.81, 1.68, 2.81]`, label smoothing 0.1, dropout 0.5, wd=1e-3, lr=2e-3. **94.15% test acc / 0.9262 macro-F1 / bpfo-3 F1 = 0.823** — current best solo bpfo-3 across all branches. Calibration T=0.650.
+- **`ENV_STFT_custom_cnn_v1`** — small 2D CNN on envelope STFT (98k params). 92.76% / 0.9036.
 
 #### STFT / Mel / Clarke CNNs (`train_stft_cnn_*.py`, `train_clarke_cnn_*.py`)
 
@@ -240,14 +259,20 @@ Every run writes to `Outputs\4class\training\<RUN_NAME>\`:
 | `E4_mod_alexnet_227` | STFT → AlexNet 227×227 | **95.39%** | 0.9393 | 3.75 M | 0.793 |
 | `E4_mod_alexnet_mel96` | Mel → AlexNet | 95.18% | 0.9383 | 3.75 M | 0.791 |
 | `DWT_multibranch_plain_v1` | DWT plain | 95.10% | 0.9358 | 174 k | 0.782 |
+| `ENVELOPE_resnet_v3_reg` | Envelope 1D → ResNet (regularized) | 94.15% | 0.9262 | 940 k | **0.823** |
+| `ENVELOPE_dilated1d_v1` | Envelope 1D → dilated CNN | 93.27% | 0.9132 | — | 0.792 |
 | `A_v2_baseline` | STFT → VGG-style | 92.84% | 0.9033 | 337 k | 0.669 |
 | `DWT_multibranch_resnet_v1` | DWT ResNet | 92.91% | 0.9001 | 222 k | 0.683 |
+| `ENV_STFT_custom_cnn_v1` | Envelope STFT → custom 2D CNN | 92.76% | 0.9036 | 98 k | 0.733 |
+| `ENVELOPE_resnet_v2` | Envelope 1D → ResNet (no reg) | — | 0.9168 | 940 k | 0.799 |
 | `B_v2_healthy_sub` | STFT (subsampled) | 87.79% | 0.8660 | 337 k | 0.564 |
 | `E5_mod_resnet` | STFT → ResNet | 85.31% | 0.8247 | 2.80 M | 0.422 |
 | `CLARKE_mod_alexnet_v1` | Clarke → AlexNet | 81.14% | 0.7904 | 250 k | 0.441 |
 | `C_v1_healthy_sub` | STFT v1-split sub | 83.55% | 0.8257 | 337 k | 0.439 |
 
-**Focus for the paper**: STFT and DWT — both ~95%. Clarke is a clear third; healthy subsampling consistently hurts.
+**Focus for the paper**: the three live branches — STFT (~95%), DWT (~95%), Envelope (~94%). Mel is in the table for completeness; Clarke for honesty. Healthy subsampling consistently hurts.
+
+**bpfo-3 ceiling broken.** `ENVELOPE_resnet_v3_reg` hits **0.823** solo bpfo-3 F1, exceeding the prior solo ceiling (0.793 from `E4_mod_alexnet_227`). The regularized envelope branch is now the strongest solo recourse for the col5@100% problem.
 
 **Consistent weakness**: `bearing bpfo 3` — low recall (56–73%) across all models. All other classes hit F1 ≥ 0.93. This is the hardest class and likely a key finding for the paper.
 
@@ -280,9 +305,9 @@ Remaining errors are still dominated by `bearing bpfo 3`, especially the 100% sp
 - `Scripts\`, `Scripts_4\`, `requirements.txt`, and project guidance docs for reproducibility.
 - `Outputs\4class\training\` for configs, checkpoints, logs, metrics, plots, leaderboards, and misclassification CSVs.
 - `Outputs\4class\diagnostics\` and `Outputs\4class\v2_speed_strat\{splits.csv,split_report.txt}` for the canonical split and BPFO-3 diagnostic evidence.
-- `sample_gallery\` for exactly 48 representative images: 4 representations x 4 classes x 3 speeds.
+- `sample_gallery\` for representative images of the three live branches: 3 representations x 4 classes x 3 speeds = 36 PNGs (Clarke files remain on disk for archival but are no longer rendered).
 
-Current state: `ProjectShare\` was created on 2026-04-30 as a clean local Git repo with a committed export. The remote private GitHub repo `motor-fault-diagnosis-research-share` still needs to be created/pushed from that folder when GitHub CLI or credentials are available.
+Current state: `ProjectShare\` was created on 2026-04-30 as a clean local Git repo and pushed to `https://github.com/shreyash4real/motor-fault-diagnosis-research-share.git` on 2026-04-30. The pushed export includes the latest scripts, the `ENV_STFT_custom_cnn_v1` training results, and the updated pipeline diagrams. The newer envelope runs (`ENVELOPE_resnet_v2`, `ENVELOPE_resnet_v3_reg`) have not been re-exported yet.
 
 Intentionally excluded from `ProjectShare\`: `Dataset\`, `Denoised\`, full feature `.pt` tensors from `Outputs\4class\v2_speed_strat\`, full STFT/DWT/envelope/Clarke image forests, and `.code-review-graph\` internal databases. `.rtk\filters.toml` is only a local Claude/RTK terminal-output filter stub, not a research artifact.
 

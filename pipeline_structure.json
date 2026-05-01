@@ -1,7 +1,16 @@
 {
   "project": "Motor Fault Detection Research",
+  "scope": "Multi-method tool fusing three live signal-representation branches: STFT, DWT, and Envelope. Mel and Clarke are deprecated comparison baselines.",
   "architecture_logic": "The pipeline is manifest-driven. validated_manifest.csv acts as the central gatekeeper, ensuring only verified high-quality raw data enters the processing stages.",
   "pipeline_steps": [
+    {
+      "step": 0,
+      "name": "PC Setup",
+      "script": "Scripts/setup_pc.py",
+      "input": "Dataset/Electric/Motor-2/*.csv",
+      "output": "Outputs/main/manifest.csv, Outputs/main/folder_tree.txt, Outputs/main/setup_summary.txt",
+      "description": "Walks the dataset and builds the initial manifest. Run first on a new machine."
+    },
     {
       "step": 1,
       "name": "Validation",
@@ -33,20 +42,44 @@
         {
           "id": "4a",
           "name": "STFT",
-          "script": "precompute_stft_v2.py",
+          "branch": "live",
+          "script": "Scripts_4/precompute_stft_v2.py",
           "output": "Features (.pt), Spectrograms (.png)"
         },
         {
-          "id": "4b",
-          "name": "Envelope",
-          "script": "precompute_envelope_v1.py",
-          "output": "Time-domain envelope features (.pt)"
+          "id": "4b_deprecated",
+          "name": "Mel STFT",
+          "branch": "deprecated",
+          "script": "Scripts_4/precompute_mel_stft_v2.py",
+          "output": "Mel-band features (.pt). Kept for the comparison table only."
         },
         {
-          "id": "4c",
+          "id": "4c_deprecated",
+          "name": "Clarke",
+          "branch": "deprecated",
+          "script": "Scripts_4/precompute_clarke_v2.py",
+          "output": "alpha/beta density histogram (.pt). Kept for the comparison table only."
+        },
+        {
+          "id": "4d",
           "name": "DWT",
-          "script": "precompute_dwt_v1.py",
+          "branch": "live",
+          "script": "Scripts_4/precompute_dwt_v1.py",
           "output": "Multi-level coefficients (.pt), Scalograms (.png)"
+        },
+        {
+          "id": "4e",
+          "name": "Envelope (1D spectrum)",
+          "branch": "live",
+          "script": "Scripts_4/precompute_envelope_v1.py",
+          "output": "Envelope spectrum features (.pt, shape (3, 501)), per-channel PNGs"
+        },
+        {
+          "id": "4f",
+          "name": "Envelope STFT",
+          "branch": "live",
+          "script": "Scripts_4/precompute_envelope_stft_v1.py",
+          "output": "Envelope-of-signal STFT features (.pt), spectrograms (.png)"
         }
       ],
       "dependencies": ["Denoised Hub", "splits.csv"]
@@ -57,29 +90,51 @@
       "tasks": [
         {
           "id": "5a",
-          "name": "Train STFT CNN",
-          "script": "train_stft_cnn_v2_A.py (or mod_alexnet)",
-          "input": "STFT Features"
+          "name": "Train STFT CNN (leader)",
+          "branch": "live",
+          "script": "Scripts_4/train_stft_cnn_e4_modalex_227.py",
+          "input": "STFT Features",
+          "best_run": "E4_mod_alexnet_227 (95.39% test acc)"
         },
         {
           "id": "5b",
-          "name": "Train Envelope CNN",
-          "script": "train_envelope_cnn_v1.py",
-          "input": "Envelope Features"
+          "name": "Train DWT multi-branch CNN",
+          "branch": "live",
+          "script": "Scripts_4/train_dwt_cnn.py",
+          "input": "DWT multi-level features",
+          "best_run": "DWT_multibranch_plain_v1 (95.10% test acc)"
         },
         {
           "id": "5c",
-          "name": "Train DWT CNN",
-          "script": "train_dwt_cnn.py",
-          "input": "DWT Multi-level Features"
+          "name": "Train Envelope 1D CNN (leader)",
+          "branch": "live",
+          "script": "Scripts_4/train_envelope_cnn_v3_regularized.py",
+          "input": "Envelope spectrum features",
+          "best_run": "ENVELOPE_resnet_v3_reg (94.15% test acc, bpfo-3 F1 0.823)"
+        },
+        {
+          "id": "5d",
+          "name": "Train Envelope STFT CNN",
+          "branch": "live",
+          "script": "Scripts_4/train_envelope_stft_cnn_v1.py",
+          "input": "Envelope STFT features",
+          "best_run": "ENV_STFT_custom_cnn_v1 (92.76% test acc)"
+        },
+        {
+          "id": "5e_deprecated",
+          "name": "Train Clarke CNN",
+          "branch": "deprecated",
+          "script": "Scripts_4/train_clarke_cnn_e4_modalex_227.py",
+          "input": "Clarke histogram features",
+          "best_run": "CLARKE_mod_alexnet_v1 (81.14% test acc; not used in best ensemble)"
         }
       ]
     },
     {
       "step": 6,
       "name": "Final Deliverables",
-      "output": "best_model.pt, Confusion Matrices, Per-class Metrics, Misclassification CSVs",
-      "description": "Final diagnostic evidence for the research paper, focusing on the BPFO-3 difficulty."
+      "output": "best_model.pt, Confusion Matrices, Per-class Metrics, Misclassification CSVs, Temperature-calibrated ensemble logits",
+      "description": "Final diagnostic evidence for the research paper. Headline ensemble: ENSEMBLE_stft_dwt_envelope_temperature (96.49% test acc, 0.9524 macro-F1). Remaining errors concentrate on bearing bpfo 3 col5@100%."
     }
   ]
 }
