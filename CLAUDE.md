@@ -156,7 +156,28 @@ Dropped:         cD1 — covers 5–10 kHz, above the 5 kHz denoise cutoff
 
 PNG: one diagnostic panel per segment (10 rows × abs envelope of phase-1 cD_j), `dwt\images\<split>\<class>\<speed>\colXX_segYYY.png`.
 
+#### 4e. Envelope Time Domain (`precompute_envelope_v1.py`)
+
+Strips the 50 Hz line carrier to reveal low-frequency BPFO modulations.
+```
+detrend -> hilbert -> abs -> detrend -> hann window -> rfft -> abs -> crop 0..500 Hz -> log1p
+```
+Output shape: (3, 501) float32. Training tensors are per-image z-scored. Features in `envelope\features\`. PNG tree: `envelope\images\<split>\<class>\<speed>\colXX_segYYY_chN.png` (3 per segment).
+
+#### 4f. Envelope STFT (`precompute_envelope_stft_v1.py`)
+
+Applies STFT to the envelope signal to capture time-varying modulations.
+```
+detrend -> hilbert -> abs -> detrend -> STFT
+STFT params: nperseg=8192, noverlap=8000, cutoff=500 Hz
+```
+Output shape depends on STFT padding/cropping. Features in `envelope_stft\features\`. PNG tree matches main STFT aesthetic (jet colormap, raw dB) in `envelope_stft\images\`.
+
 ### Step 5 — Training
+
+#### Envelope CNNs (`train_envelope_cnn_*.py`, `train_envelope_stft_cnn_v1.py`)
+
+Models processing the 1D envelope spectrum or 2D envelope STFT representations. The 1D envelope model (`ENVELOPE_dilated1d_v1`) provides strong solo performance (93.27% accuracy) and is a critical component of the best ensemble.
 
 #### STFT / Mel / Clarke CNNs (`train_stft_cnn_*.py`, `train_clarke_cnn_*.py`)
 
