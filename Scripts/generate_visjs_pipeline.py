@@ -39,12 +39,6 @@ def generate_visjs_html(output_path="pipeline_visjs_graph.html"):
         {"id": "precompute_stft", "label": "precompute_stft_v2.py", "c": 2, "file": "Scripts_4/precompute_stft_v2.py", "type": "Python Script"},
         {"id": "stft_features", "label": "STFT Features/Images", "c": 4, "file": "Outputs/4class/v2_speed_strat/features", "type": "Tensors & PNGs"},
         
-        {"id": "precompute_mel", "label": "precompute_mel_stft_v2.py", "c": 2, "file": "Scripts_4/precompute_mel_stft_v2.py", "type": "Python Script"},
-        {"id": "mel_features", "label": "Mel Features", "c": 4, "file": "Outputs/4class/v2_speed_strat/mel_v1", "type": "Tensors"},
-        
-        {"id": "precompute_clarke", "label": "precompute_clarke_v2.py", "c": 2, "file": "Scripts_4/precompute_clarke_v2.py", "type": "Python Script"},
-        {"id": "clarke_features", "label": "Clarke Features", "c": 4, "file": "Outputs/4class/v2_speed_strat/clarke_features", "type": "Tensors"},
-        
         {"id": "precompute_dwt", "label": "precompute_dwt_v1.py", "c": 2, "file": "Scripts_4/precompute_dwt_v1.py", "type": "Python Script"},
         {"id": "dwt_features", "label": "DWT Features/Images", "c": 4, "file": "Outputs/4class/v2_speed_strat/dwt", "type": "Tensors & PNGs"},
         
@@ -57,7 +51,6 @@ def generate_visjs_html(output_path="pipeline_visjs_graph.html"):
         # Training
         {"id": "train_stft", "label": "train_stft_cnn_*.py", "c": 2, "file": "Scripts_4/train_stft_cnn_...", "type": "Python Script"},
         {"id": "train_dwt", "label": "train_dwt_cnn.py", "c": 2, "file": "Scripts_4/train_dwt_cnn.py", "type": "Python Script"},
-        {"id": "train_clarke", "label": "train_clarke_cnn_*.py", "c": 2, "file": "Scripts_4/train_clarke_cnn_...", "type": "Python Script"},
         {"id": "train_env", "label": "train_envelope_cnn_*.py", "c": 2, "file": "Scripts_4/train_envelope_cnn_...", "type": "Python Script"},
         {"id": "best_models", "label": "best_model.pt (All)", "c": 4, "file": "Outputs/4class/training/.../best_model.pt", "type": "PyTorch Checkpoints"},
         
@@ -90,14 +83,6 @@ def generate_visjs_html(output_path="pipeline_visjs_graph.html"):
         ("splits", "precompute_stft", "stratifies via"),
         ("precompute_stft", "stft_features", "writes"),
         
-        ("denoised", "precompute_mel", "reads"),
-        ("splits", "precompute_mel", "stratifies via"),
-        ("precompute_mel", "mel_features", "writes"),
-        
-        ("denoised", "precompute_clarke", "reads"),
-        ("splits", "precompute_clarke", "stratifies via"),
-        ("precompute_clarke", "clarke_features", "writes"),
-        
         ("denoised", "precompute_dwt", "reads"),
         ("splits", "precompute_dwt", "stratifies via"),
         ("precompute_dwt", "dwt_features", "writes"),
@@ -113,16 +98,11 @@ def generate_visjs_html(output_path="pipeline_visjs_graph.html"):
         # Training
         ("splits", "train_stft", "reads splits"),
         ("stft_features", "train_stft", "reads features"),
-        ("mel_features", "train_stft", "reads features"),
         ("train_stft", "best_models", "writes"),
         
         ("splits", "train_dwt", "reads splits"),
         ("dwt_features", "train_dwt", "reads features"),
         ("train_dwt", "best_models", "writes"),
-        
-        ("splits", "train_clarke", "reads splits"),
-        ("clarke_features", "train_clarke", "reads features"),
-        ("train_clarke", "best_models", "writes"),
         
         ("splits", "train_env", "reads splits"),
         ("env_features", "train_env", "reads features"),
