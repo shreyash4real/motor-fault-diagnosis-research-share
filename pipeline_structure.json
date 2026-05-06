@@ -134,7 +134,7 @@
       "step": 6,
       "name": "Final Deliverables",
       "output": "best_model.pt, Confusion Matrices, Per-class Metrics, Misclassification CSVs, Temperature-calibrated ensemble logits",
-      "description": "Final diagnostic evidence for the research paper. Headline ensemble: ENSEMBLE_stft_dwt_envelope_temperature (96.49% test acc, 0.9524 macro-F1). Remaining errors concentrate on bearing bpfo 3 col5@100%."
+      "description": "Final diagnostic evidence for the research paper. Headline ensemble: ENSEMBLE_stft_dwt_envelope_v3_temperature (96.71% test acc, 0.9560 macro-F1). Remaining errors concentrate on bearing bpfo 3 at 100% speed."
     }
   ]
 }

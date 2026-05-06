@@ -296,11 +296,12 @@ Every run writes to `Outputs\4class\training\<RUN_NAME>\`:
 
 ## Ensemble Leaderboard Perspective
 
-Best current result: `ENSEMBLE_stft_dwt_envelope_temperature` with **96.49% test accuracy** and **0.9524 macro-F1** on the canonical v2 speed-stratified split.
+Best current result: `ENSEMBLE_stft_dwt_envelope_v3_temperature` with **96.71% test accuracy** and **0.9560 macro-F1** on the canonical v2 speed-stratified split.
 
 | Run | Test Acc | Macro-F1 | bpfo-3 F1 | Notes |
 |-----|----------|----------|-----------|-------|
-| `ENSEMBLE_stft_dwt_envelope_temperature` | **96.49%** | **0.9524** | 0.837 | Best overall; STFT + DWT + envelope, temperature calibrated |
+| `ENSEMBLE_stft_dwt_envelope_v3_temperature` | **96.71%** | **0.9560** | 0.849 | Best overall; STFT + DWT + regularized envelope (v3), temperature calibrated |
+| `ENSEMBLE_stft_dwt_envelope_temperature` | 96.49% | 0.9524 | 0.837 | Older ensemble with dilated1d envelope |
 | `ENSEMBLE_stft_dwt_temperature` | 96.05% | 0.9470 | 0.819 | Strong two-representation ensemble |
 | `ENSEMBLE_stft_dwt_clarke_temperature` | 95.98% | 0.9449 | 0.811 | Clarke does not improve the best ensemble |
 | `(solo, T=2.400) E4_mod_alexnet_227` | 95.39% | 0.9393 | 0.793 | Best solo STFT model |
@@ -308,7 +309,7 @@ Best current result: `ENSEMBLE_stft_dwt_envelope_temperature` with **96.49% test
 | `(solo, T=1.172) ENVELOPE_dilated1d_v1` | 93.27% | 0.9132 | 0.792 | Weaker solo, useful in the best ensemble |
 | `(solo, T=2.849) CLARKE_mod_alexnet_v1` | 81.21% | 0.7903 | 0.439 | Not useful in the best ensemble |
 
-Remaining errors are still dominated by `bearing bpfo 3`, especially the 100% speed test column with `col_index=5`. Diagnostic summary: for BPFO-3 errors, `col5@100%` accounts for 48/50 E4 STFT errors, 40/51 DWT plain errors, and 43/48 envelope errors. The test split contains only `col_index=5` for `bearing bpfo 3` at 100% speed.
+Remaining errors are still dominated by `bearing bpfo 3`, especially at 100% speed. Diagnostic summary: for BPFO-3 errors, the 100% speed test column accounts for 48/50 E4 STFT errors, 40/51 DWT plain errors, and 43/48 envelope errors. The test split contains only a single column for `bearing bpfo 3` at 100% speed.
 
 ## Share Package
 

@@ -288,10 +288,10 @@
             <tbody>
               <tr>
                 <td>1</td>
-                <td><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/summary.txt">ENSEMBLE_stft_dwt_envelope_temperature</a></td>
-                <td class="good">0.9649</td>
-                <td class="good">0.9524</td>
-                <td class="good">0.8367</td>
+                <td><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/summary.txt">ENSEMBLE_stft_dwt_envelope_v3_temperature</a></td>
+                <td class="good">0.9671</td>
+                <td class="good">0.9560</td>
+                <td class="good">0.8490</td>
                 <td>Best overall. Envelope is weaker solo but adds useful signal in the ensemble.</td>
               </tr>
               <tr>
@@ -378,13 +378,13 @@
       </section>
 
       <section id="diagnostics">
-        <h2>BPFO-3 col5@100 Diagnostic</h2>
-        <p>The remaining failures concentrate in <code>bearing bpfo 3</code> at 100% speed, <code>col_index=5</code>. The canonical test split contains only that column for BPFO-3 at 100% speed, so the leaderboard is sensitive to that single test column.</p>
+        <h2>BPFO-3 Diagnostic</h2>
+        <p>The remaining failures concentrate in <code>bearing bpfo 3</code> at 100% speed. The canonical test split contains only a single column for BPFO-3 at 100% speed, so the leaderboard is sensitive to that test column.</p>
         <div class="grid-2">
           <div class="table-scroll">
             <table>
               <thead>
-                <tr><th>Run</th><th>col5@100 share of BPFO-3 errors</th></tr>
+                <tr><th>Run</th><th>Share of BPFO-3 errors</th></tr>
               </thead>
               <tbody>
                 <tr><td>E4_mod_alexnet_227</td><td class="risk">48/50 (96.0%)</td></tr>
@@ -397,12 +397,11 @@
           </div>
           <div class="card">
             <h3>Diagnostic Files</h3>
-            <p>The diagnostic CSVs show BPFO-3 col5@100 is consistently closer to healthy@100 than to other BPFO-3 samples for several feature spaces.</p>
+            <p>The diagnostic CSVs show BPFO-3 test samples are consistently closer to healthy@100 than to other BPFO-3 samples for several feature spaces.</p>
             <ul>
               <li><a href="Outputs/4class/diagnostics/bpfo3_error_share.txt">bpfo3_error_share.txt</a></li>
               <li><a href="Outputs/4class/diagnostics/bpfo3_error_counts_by_column.csv">bpfo3_error_counts_by_column.csv</a></li>
               <li><a href="Outputs/4class/diagnostics/bpfo3_cross_representation_similarity.csv">bpfo3_cross_representation_similarity.csv</a></li>
-              <li><a href="Outputs/4class/diagnostics/bpfo3_col5_vs_others.png">bpfo3_col5_vs_others.png</a></li>
             </ul>
           </div>
         </div>
@@ -438,10 +437,10 @@
             <h3>Configs, Metrics, Plots</h3>
             <ul>
               <li><a href="Outputs/4class/training/ensemble_leaderboard_temperature.csv">temperature leaderboard</a></li>
-              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/ensemble_config.txt">best ensemble config</a></li>
-              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/per_class_metrics.csv">best per-class metrics</a></li>
-              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/confusion_matrix.png">best confusion matrix</a></li>
-              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_temperature/misclassified_samples.csv">best misclassifications</a></li>
+              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/ensemble_config.txt">best ensemble config</a></li>
+              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/per_class_metrics.csv">best per-class metrics</a></li>
+              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/confusion_matrix.png">best confusion matrix</a></li>
+              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/misclassified_samples.csv">best misclassifications</a></li>
             </ul>
           </div>
           <div class="card">
