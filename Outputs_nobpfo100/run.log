@@ -1,0 +1,2808 @@
+
+======================================================================
+>>> RUNNING generate_splits_nobpfo100.py
+======================================================================
+======================================================================
+GENERATE SPLITS — nobpfo100 (exclude bpfo-3 @ 100% from test)
+Started: 2026-05-10 14:31:24
+======================================================================
+
+Moved 3 rows (cols [5]) of bpfo-3 @ 100% from test → train
+
+Wrote C:\Project Work\Outputs_nobpfo100\splits.csv  (441 rows)
+Wrote C:\Project Work\Outputs_nobpfo100\split_report.txt
+
+======================================================================
+>>> RUNNING precompute_stft_nobpfo100.py
+======================================================================
+======================================================================
+PRECOMPUTE STFT FEATURES + PER-CHANNEL PNGS — 4 classes
+======================================================================
+Started:        2026-05-10 14:31:27
+splits.csv:     C:\Project Work\Outputs_nobpfo100\splits.csv
+denoised root:  C:\Project Work\Denoised\Motor-2
+features dir:   C:\Project Work\Outputs_nobpfo100\features\stft
+images dir:     C:\Project Work\outputs\4class\v2_speed_strat\stft_images
+save PNGs:      False  (3 per segment, no labeling)
+torch threads:  8
+
+LOCKED STFT PARAMETERS:
+  nperseg=1024, noverlap=896 (87.5% overlap)
+  boundary=None, padded=False
+  freq_cutoff=3000 Hz → 154 freq bins
+  expected sample shape: (3, 154, 149) float32
+  .pt normalization: per-image z-score (across 3 channels)
+
+PNG CONVENTIONS:
+  filename : colXX_segYYY_ch{1,2,3}.png  (no labels)
+  colormap : jet
+  range    : [-50.0, 10.0] dB  (raw log-magnitude)
+  size     : native (154 × 149 pixels)
+
+Loaded splits.csv: 441 rows
+Splits present : ['test', 'train', 'val']
+Speeds present : [np.int64(50), np.int64(75), np.int64(100)]
+Classes present: ['bearing bpfo 3', 'broken rotor bar', 'healthy 1', 'stator short 1']
+
+──────────────────────────────────────────────────────────────────────
+Processing: TRAIN
+──────────────────────────────────────────────────────────────────────
+Per-sample shape   : (3, 154, 149)
+Samples to process : 5,814
+Unique columns     : 102
+Pre-allocated      : 1.49 GB
+
+  col   1/102  Electric_Motor-2_50_time-healthy 1-ch1.csv       57/5814 (  1.0%)  elapsed=   3s  ETA= 4.4m   21.9 smp/s
+  col   2/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      114/5814 (  2.0%)  elapsed=   5s  ETA= 4.3m   22.1 smp/s
+  col   3/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      171/5814 (  2.9%)  elapsed=   8s  ETA= 4.2m   22.3 smp/s
+  col   4/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      228/5814 (  3.9%)  elapsed=  10s  ETA= 4.2m   22.3 smp/s
+  col   5/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      285/5814 (  4.9%)  elapsed=  13s  ETA= 4.1m   22.3 smp/s
+  col   6/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      342/5814 (  5.9%)  elapsed=  15s  ETA= 4.1m   22.2 smp/s
+  col   7/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      399/5814 (  6.9%)  elapsed=  18s  ETA= 4.1m   22.2 smp/s
+  col   8/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      456/5814 (  7.8%)  elapsed=  21s  ETA= 4.0m   22.2 smp/s
+  col   9/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      513/5814 (  8.8%)  elapsed=  23s  ETA= 4.0m   22.2 smp/s
+  col  10/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      570/5814 (  9.8%)  elapsed=  26s  ETA= 3.9m   22.2 smp/s
+  col  11/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      627/5814 ( 10.8%)  elapsed=  28s  ETA= 3.9m   22.2 smp/s
+  col  12/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      684/5814 ( 11.8%)  elapsed=  31s  ETA= 3.9m   21.9 smp/s
+  col  13/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      741/5814 ( 12.7%)  elapsed=  34s  ETA= 3.9m   21.8 smp/s
+  col  14/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      798/5814 ( 13.7%)  elapsed=  37s  ETA= 3.8m   21.7 smp/s
+  col  15/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      855/5814 ( 14.7%)  elapsed=  39s  ETA= 3.8m   21.7 smp/s
+  col  16/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      912/5814 ( 15.7%)  elapsed=  42s  ETA= 3.7m   21.8 smp/s
+  col  17/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      969/5814 ( 16.7%)  elapsed=  44s  ETA= 3.7m   21.9 smp/s
+  col  18/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1026/5814 ( 17.6%)  elapsed=  47s  ETA= 3.6m   22.0 smp/s
+  col  19/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1083/5814 ( 18.6%)  elapsed=  49s  ETA= 3.6m   22.0 smp/s
+  col  20/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1140/5814 ( 19.6%)  elapsed=  52s  ETA= 3.5m   22.1 smp/s
+  col  21/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1197/5814 ( 20.6%)  elapsed=  54s  ETA= 3.5m   22.2 smp/s
+  col  22/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1254/5814 ( 21.6%)  elapsed=  56s  ETA= 3.4m   22.2 smp/s
+  col  23/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1311/5814 ( 22.5%)  elapsed=  59s  ETA= 3.4m   22.2 smp/s
+  col  24/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1368/5814 ( 23.5%)  elapsed= 1.0m  ETA= 3.3m   22.2 smp/s
+  col  25/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1425/5814 ( 24.5%)  elapsed= 1.1m  ETA= 3.3m   22.1 smp/s
+  col  26/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1482/5814 ( 25.5%)  elapsed= 1.1m  ETA= 3.3m   22.1 smp/s
+  col  27/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1539/5814 ( 26.5%)  elapsed= 1.2m  ETA= 3.2m   22.1 smp/s
+  col  28/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1596/5814 ( 27.5%)  elapsed= 1.2m  ETA= 3.2m   22.1 smp/s
+  col  29/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1653/5814 ( 28.4%)  elapsed= 1.2m  ETA= 3.1m   22.2 smp/s
+  col  30/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1710/5814 ( 29.4%)  elapsed= 1.3m  ETA= 3.1m   22.2 smp/s
+  col  31/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1767/5814 ( 30.4%)  elapsed= 1.3m  ETA= 3.0m   22.2 smp/s
+  col  32/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1824/5814 ( 31.4%)  elapsed= 1.4m  ETA= 3.0m   22.2 smp/s
+  col  33/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1881/5814 ( 32.4%)  elapsed= 1.4m  ETA= 3.0m   22.2 smp/s
+  col  34/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1938/5814 ( 33.3%)  elapsed= 1.5m  ETA= 2.9m   22.2 smp/s
+  col  35/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1995/5814 ( 34.3%)  elapsed= 1.5m  ETA= 2.9m   22.1 smp/s
+  col  36/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2052/5814 ( 35.3%)  elapsed= 1.5m  ETA= 2.8m   22.1 smp/s
+  col  37/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2109/5814 ( 36.3%)  elapsed= 1.6m  ETA= 2.8m   22.1 smp/s
+  col  38/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2166/5814 ( 37.3%)  elapsed= 1.6m  ETA= 2.7m   22.1 smp/s
+  col  39/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2223/5814 ( 38.2%)  elapsed= 1.7m  ETA= 2.7m   22.1 smp/s
+  col  40/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2280/5814 ( 39.2%)  elapsed= 1.7m  ETA= 2.7m   22.1 smp/s
+  col  41/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2337/5814 ( 40.2%)  elapsed= 1.8m  ETA= 2.6m   22.0 smp/s
+  col  42/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2394/5814 ( 41.2%)  elapsed= 1.8m  ETA= 2.6m   22.0 smp/s
+  col  43/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2451/5814 ( 42.2%)  elapsed= 1.9m  ETA= 2.6m   22.0 smp/s
+  col  44/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2508/5814 ( 43.1%)  elapsed= 1.9m  ETA= 2.5m   21.9 smp/s
+  col  45/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2565/5814 ( 44.1%)  elapsed= 2.0m  ETA= 2.5m   21.7 smp/s
+  col  46/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2622/5814 ( 45.1%)  elapsed= 2.0m  ETA= 2.5m   21.6 smp/s
+  col  47/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2679/5814 ( 46.1%)  elapsed= 2.1m  ETA= 2.4m   21.5 smp/s
+  col  48/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2736/5814 ( 47.1%)  elapsed= 2.1m  ETA= 2.4m   21.4 smp/s
+  col  49/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2793/5814 ( 48.0%)  elapsed= 2.2m  ETA= 2.4m   21.3 smp/s
+  col  50/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2850/5814 ( 49.0%)  elapsed= 2.2m  ETA= 2.3m   21.2 smp/s
+  col  51/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2907/5814 ( 50.0%)  elapsed= 2.3m  ETA= 2.3m   21.1 smp/s
+  col  52/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2964/5814 ( 51.0%)  elapsed= 2.3m  ETA= 2.3m   21.1 smp/s
+  col  53/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3021/5814 ( 52.0%)  elapsed= 2.4m  ETA= 2.2m   21.0 smp/s
+  col  54/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3078/5814 ( 52.9%)  elapsed= 2.5m  ETA= 2.2m   20.9 smp/s
+  col  55/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3135/5814 ( 53.9%)  elapsed= 2.5m  ETA= 2.1m   20.8 smp/s
+  col  56/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3192/5814 ( 54.9%)  elapsed= 2.6m  ETA= 2.1m   20.7 smp/s
+  col  57/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3249/5814 ( 55.9%)  elapsed= 2.6m  ETA= 2.1m   20.6 smp/s
+  col  58/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3306/5814 ( 56.9%)  elapsed= 2.7m  ETA= 2.0m   20.5 smp/s
+  col  59/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3363/5814 ( 57.8%)  elapsed= 2.7m  ETA= 2.0m   20.5 smp/s
+  col  60/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3420/5814 ( 58.8%)  elapsed= 2.8m  ETA= 2.0m   20.4 smp/s
+  col  61/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3477/5814 ( 59.8%)  elapsed= 2.8m  ETA= 1.9m   20.4 smp/s
+  col  62/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3534/5814 ( 60.8%)  elapsed= 2.9m  ETA= 1.9m   20.4 smp/s
+  col  63/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3591/5814 ( 61.8%)  elapsed= 2.9m  ETA= 1.8m   20.4 smp/s
+  col  64/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3648/5814 ( 62.7%)  elapsed= 3.0m  ETA= 1.8m   20.4 smp/s
+  col  65/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3705/5814 ( 63.7%)  elapsed= 3.0m  ETA= 1.7m   20.4 smp/s
+  col  66/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3762/5814 ( 64.7%)  elapsed= 3.1m  ETA= 1.7m   20.3 smp/s
+  col  67/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3819/5814 ( 65.7%)  elapsed= 3.1m  ETA= 1.6m   20.3 smp/s
+  col  68/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3876/5814 ( 66.7%)  elapsed= 3.2m  ETA= 1.6m   20.3 smp/s
+  col  69/102  Electric_Motor-2_50_time-stator short 1-ch     3933/5814 ( 67.6%)  elapsed= 3.2m  ETA= 1.5m   20.5 smp/s
+  col  70/102  Electric_Motor-2_50_time-stator short 1-ch     3990/5814 ( 68.6%)  elapsed= 3.2m  ETA= 1.5m   20.7 smp/s
+  col  71/102  Electric_Motor-2_50_time-stator short 1-ch     4047/5814 ( 69.6%)  elapsed= 3.2m  ETA= 1.4m   21.0 smp/s
+  col  72/102  Electric_Motor-2_75_time-stator short 1-ch     4104/5814 ( 70.6%)  elapsed= 3.2m  ETA= 1.3m   21.2 smp/s
+  col  73/102  Electric_Motor-2_75_time-stator short 1-ch     4161/5814 ( 71.6%)  elapsed= 3.2m  ETA= 1.3m   21.4 smp/s
+  col  74/102  Electric_Motor-2_75_time-stator short 1-ch     4218/5814 ( 72.5%)  elapsed= 3.2m  ETA= 1.2m   21.6 smp/s
+  col  75/102  Electric_Motor-2_100_time-stator short 1-c     4275/5814 ( 73.5%)  elapsed= 3.3m  ETA= 1.2m   21.9 smp/s
+  col  76/102  Electric_Motor-2_100_time-stator short 1-c     4332/5814 ( 74.5%)  elapsed= 3.3m  ETA= 1.1m   22.1 smp/s
+  col  77/102  Electric_Motor-2_100_time-stator short 1-c     4389/5814 ( 75.5%)  elapsed= 3.3m  ETA= 1.1m   22.3 smp/s
+  col  78/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4446/5814 ( 76.5%)  elapsed= 3.3m  ETA= 1.0m   22.5 smp/s
+  col  79/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4503/5814 ( 77.5%)  elapsed= 3.3m  ETA=  58s   22.7 smp/s
+  col  80/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4560/5814 ( 78.4%)  elapsed= 3.3m  ETA=  55s   22.9 smp/s
+  col  81/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4617/5814 ( 79.4%)  elapsed= 3.3m  ETA=  52s   23.1 smp/s
+  col  82/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4674/5814 ( 80.4%)  elapsed= 3.3m  ETA=  49s   23.3 smp/s
+  col  83/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4731/5814 ( 81.4%)  elapsed= 3.4m  ETA=  46s   23.5 smp/s
+  col  84/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4788/5814 ( 82.4%)  elapsed= 3.4m  ETA=  43s   23.7 smp/s
+  col  85/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4845/5814 ( 83.3%)  elapsed= 3.4m  ETA=  41s   23.9 smp/s
+  col  86/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4902/5814 ( 84.3%)  elapsed= 3.4m  ETA=  38s   24.1 smp/s
+  col  87/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4959/5814 ( 85.3%)  elapsed= 3.4m  ETA=  35s   24.3 smp/s
+  col  88/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5016/5814 ( 86.3%)  elapsed= 3.4m  ETA=  33s   24.4 smp/s
+  col  89/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5073/5814 ( 87.3%)  elapsed= 3.4m  ETA=  30s   24.6 smp/s
+  col  90/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5130/5814 ( 88.2%)  elapsed= 3.4m  ETA=  28s   24.8 smp/s
+  col  91/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5187/5814 ( 89.2%)  elapsed= 3.5m  ETA=  25s   25.0 smp/s
+  col  92/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5244/5814 ( 90.2%)  elapsed= 3.5m  ETA=  23s   25.2 smp/s
+  col  93/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5301/5814 ( 91.2%)  elapsed= 3.5m  ETA=  20s   25.3 smp/s
+  col  94/102  Electric_Motor-2_50_time-broken rotor bar-     5358/5814 ( 92.2%)  elapsed= 3.5m  ETA=  18s   25.5 smp/s
+  col  95/102  Electric_Motor-2_50_time-broken rotor bar-     5415/5814 ( 93.1%)  elapsed= 3.5m  ETA=  16s   25.7 smp/s
+  col  96/102  Electric_Motor-2_50_time-broken rotor bar-     5472/5814 ( 94.1%)  elapsed= 3.5m  ETA=  13s   25.9 smp/s
+  col  97/102  Electric_Motor-2_75_time-broken rotor bar-     5529/5814 ( 95.1%)  elapsed= 3.5m  ETA=  11s   26.1 smp/s
+  col  98/102  Electric_Motor-2_75_time-broken rotor bar-     5586/5814 ( 96.1%)  elapsed= 3.5m  ETA=   9s   26.3 smp/s
+  col  99/102  Electric_Motor-2_75_time-broken rotor bar-     5643/5814 ( 97.1%)  elapsed= 3.6m  ETA=   6s   26.5 smp/s
+  col 100/102  Electric_Motor-2_100_time-broken rotor bar     5700/5814 ( 98.0%)  elapsed= 3.6m  ETA=   4s   26.6 smp/s
+  col 101/102  Electric_Motor-2_100_time-broken rotor bar     5757/5814 ( 99.0%)  elapsed= 3.6m  ETA=   2s   26.8 smp/s
+  col 102/102  Electric_Motor-2_100_time-broken rotor bar     5814/5814 (100.0%)  elapsed= 3.6m  ETA=   0s   27.0 smp/s
+
+Spectrogram computation done in 3.6m
+Saving train.pt ... done in 4s  (1.49 GB)
+Per-class counts in saved file:
+  healthy 1               3876
+  stator short 1           513
+  bearing bpfo 3           912
+  broken rotor bar         513
+
+──────────────────────────────────────────────────────────────────────
+Processing: VAL
+──────────────────────────────────────────────────────────────────────
+Per-sample shape   : (3, 154, 149)
+Samples to process : 1,254
+Unique columns     : 22
+Pre-allocated      : 329 MB
+
+  col   1/22  Electric_Motor-2_50_time-healthy 1-ch1.csv       57/1254 (  4.5%)  elapsed=   3s  ETA= 1.0m   19.7 smp/s
+  col   2/22  Electric_Motor-2_50_time-healthy 1-ch1.csv      114/1254 (  9.1%)  elapsed=   6s  ETA=  57s   19.8 smp/s
+  col   3/22  Electric_Motor-2_50_time-healthy 1-ch1.csv      171/1254 ( 13.6%)  elapsed=   9s  ETA=  55s   19.8 smp/s
+  col   4/22  Electric_Motor-2_50_time-healthy 1-ch1.csv      228/1254 ( 18.2%)  elapsed=  11s  ETA=  51s   20.0 smp/s
+  col   5/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      285/1254 ( 22.7%)  elapsed=  14s  ETA=  48s   20.0 smp/s
+  col   6/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      342/1254 ( 27.3%)  elapsed=  17s  ETA=  45s   20.1 smp/s
+  col   7/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      399/1254 ( 31.8%)  elapsed=  20s  ETA=  43s   20.1 smp/s
+  col   8/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      456/1254 ( 36.4%)  elapsed=  23s  ETA=  40s   20.0 smp/s
+  col   9/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      513/1254 ( 40.9%)  elapsed=  26s  ETA=  37s   19.8 smp/s
+  col  10/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      570/1254 ( 45.5%)  elapsed=  29s  ETA=  35s   19.6 smp/s
+  col  11/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      627/1254 ( 50.0%)  elapsed=  32s  ETA=  32s   19.4 smp/s
+  col  12/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      684/1254 ( 54.5%)  elapsed=  36s  ETA=  30s   19.2 smp/s
+  col  13/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      741/1254 ( 59.1%)  elapsed=  39s  ETA=  27s   19.1 smp/s
+  col  14/22  Electric_Motor-2_50_time-stator short 1-ch      798/1254 ( 63.6%)  elapsed=  40s  ETA=  23s   20.2 smp/s
+  col  15/22  Electric_Motor-2_75_time-stator short 1-ch      855/1254 ( 68.2%)  elapsed=  40s  ETA=  19s   21.3 smp/s
+  col  16/22  Electric_Motor-2_100_time-stator short 1-c      912/1254 ( 72.7%)  elapsed=  41s  ETA=  15s   22.3 smp/s
+  col  17/22  Electric_Motor-2_50_time-bearing bpfo 3-ch      969/1254 ( 77.3%)  elapsed=  42s  ETA=  12s   23.3 smp/s
+  col  18/22  Electric_Motor-2_75_time-bearing bpfo 3-ch     1026/1254 ( 81.8%)  elapsed=  42s  ETA=   9s   24.2 smp/s
+  col  19/22  Electric_Motor-2_100_time-bearing bpfo 3-c     1083/1254 ( 86.4%)  elapsed=  43s  ETA=   7s   25.1 smp/s
+  col  20/22  Electric_Motor-2_50_time-broken rotor bar-     1140/1254 ( 90.9%)  elapsed=  44s  ETA=   4s   26.0 smp/s
+  col  21/22  Electric_Motor-2_75_time-broken rotor bar-     1197/1254 ( 95.5%)  elapsed=  45s  ETA=   2s   26.9 smp/s
+  col  22/22  Electric_Motor-2_100_time-broken rotor bar     1254/1254 (100.0%)  elapsed=  45s  ETA=   0s   27.8 smp/s
+
+Spectrogram computation done in 45s
+Saving val.pt ... done in 1s  (329 MB)
+Per-class counts in saved file:
+  healthy 1                741
+  stator short 1           171
+  bearing bpfo 3           171
+  broken rotor bar         171
+
+──────────────────────────────────────────────────────────────────────
+Processing: TEST
+──────────────────────────────────────────────────────────────────────
+Per-sample shape   : (3, 154, 149)
+Samples to process : 1,311
+Unique columns     : 23
+Pre-allocated      : 344 MB
+
+  col   1/23  Electric_Motor-2_50_time-healthy 1-ch1.csv       57/1311 (  4.3%)  elapsed=   3s  ETA= 1.0m   20.0 smp/s
+  col   2/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      114/1311 (  8.7%)  elapsed=   6s  ETA=  60s   20.1 smp/s
+  col   3/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      171/1311 ( 13.0%)  elapsed=   8s  ETA=  56s   20.2 smp/s
+  col   4/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      228/1311 ( 17.4%)  elapsed=  11s  ETA=  54s   20.2 smp/s
+  col   5/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      285/1311 ( 21.7%)  elapsed=  14s  ETA=  51s   20.3 smp/s
+  col   6/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      342/1311 ( 26.1%)  elapsed=  17s  ETA=  48s   20.1 smp/s
+  col   7/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      399/1311 ( 30.4%)  elapsed=  20s  ETA=  45s   20.1 smp/s
+  col   8/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      456/1311 ( 34.8%)  elapsed=  23s  ETA=  43s   20.1 smp/s
+  col   9/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      513/1311 ( 39.1%)  elapsed=  26s  ETA=  40s   20.0 smp/s
+  col  10/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      570/1311 ( 43.5%)  elapsed=  29s  ETA=  37s   19.8 smp/s
+  col  11/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      627/1311 ( 47.8%)  elapsed=  32s  ETA=  34s   19.8 smp/s
+  col  12/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      684/1311 ( 52.2%)  elapsed=  35s  ETA=  32s   19.8 smp/s
+  col  13/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      741/1311 ( 56.5%)  elapsed=  38s  ETA=  29s   19.7 smp/s
+  col  14/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      798/1311 ( 60.9%)  elapsed=  40s  ETA=  26s   19.7 smp/s
+  col  15/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      855/1311 ( 65.2%)  elapsed=  44s  ETA=  23s   19.6 smp/s
+  col  16/23  Electric_Motor-2_50_time-stator short 1-ch      912/1311 ( 69.6%)  elapsed=  44s  ETA=  19s   20.7 smp/s
+  col  17/23  Electric_Motor-2_75_time-stator short 1-ch      969/1311 ( 73.9%)  elapsed=  45s  ETA=  16s   21.6 smp/s
+  col  18/23  Electric_Motor-2_100_time-stator short 1-c     1026/1311 ( 78.3%)  elapsed=  45s  ETA=  13s   22.6 smp/s
+  col  19/23  Electric_Motor-2_50_time-bearing bpfo 3-ch     1083/1311 ( 82.6%)  elapsed=  46s  ETA=  10s   23.4 smp/s
+  col  20/23  Electric_Motor-2_75_time-bearing bpfo 3-ch     1140/1311 ( 87.0%)  elapsed=  47s  ETA=   7s   24.2 smp/s
+  col  21/23  Electric_Motor-2_50_time-broken rotor bar-     1197/1311 ( 91.3%)  elapsed=  48s  ETA=   5s   25.1 smp/s
+  col  22/23  Electric_Motor-2_75_time-broken rotor bar-     1254/1311 ( 95.7%)  elapsed=  48s  ETA=   2s   25.9 smp/s
+  col  23/23  Electric_Motor-2_100_time-broken rotor bar     1311/1311 (100.0%)  elapsed=  49s  ETA=   0s   26.8 smp/s
+
+Spectrogram computation done in 49s
+Saving test.pt ... done in 1s  (344 MB)
+Per-class counts in saved file:
+  healthy 1                855
+  stator short 1           171
+  bearing bpfo 3           114
+  broken rotor bar         171
+
+======================================================================
+ALL DONE
+======================================================================
+Total elapsed : 5.3m
+
+Files written:
+  train.pt             5814 samples    1.49 GB  (3.7m)
+  val.pt               1254 samples     329 MB  (46s)
+  test.pt              1311 samples     344 MB  (50s)
+  TOTAL                8379 samples    2.15 GB
+
+Sanity check:
+  import torch
+  d = torch.load(r'C:\Project Work\Outputs_nobpfo100\features\stft\train.pt',
+                 weights_only=False, mmap=True)
+  print(d['features'].shape, d['labels'].shape)
+  print(d['metadata'][0])
+
+Next: run train_stft_cnn.py
+
+======================================================================
+>>> RUNNING precompute_dwt_nobpfo100.py
+======================================================================
+======================================================================
+PRECOMPUTE DWT FEATURES + PER-SEGMENT PANELS - 4 classes
+======================================================================
+Started:        2026-05-10 14:36:47
+splits.csv:     C:\Project Work\Outputs_nobpfo100\splits.csv
+denoised root:  C:\Project Work\Denoised\Motor-2
+features dir:   C:\Project Work\Outputs_nobpfo100\features\dwt
+images dir:     C:\Project Work\outputs\4class\v2_speed_strat\dwt\images
+save PNGs:      False
+torch threads:  8
+
+LOCKED DWT PARAMETERS:
+  wavelet         = db8
+  decomp level    = 10
+  boundary mode   = symmetric
+  dropped details = [1] (above 5 kHz denoise cut-off)
+
+KEPT SUB-BANDS:
+  name   length   band (Hz)           
+  cD2    5011      2500.00 - 5000.00   
+  cD3    2513      1250.00 - 2500.00   
+  cD4    1264       625.00 - 1250.00   
+  cD5    639        312.50 - 625.00    
+  cD6    327        156.25 - 312.50    
+  cD7    171         78.12 - 156.25    
+  cD8    93          39.06 - 78.12     
+  cD9    54          19.53 - 39.06     
+  cD10   34           9.77 - 19.53     
+  cA10   34           0.00 - 9.77      
+  TOTAL coefs/channel/segment: 10140
+  per segment (3 channels): 119 KB
+
+Loaded splits.csv: 441 rows
+Splits present: ['test', 'train', 'val']
+Speeds present: [np.int64(50), np.int64(75), np.int64(100)]
+Classes present: 4
+
+----------------------------------------------------------------------
+Processing: TRAIN
+----------------------------------------------------------------------
+Samples to process : 5,814
+Unique columns     : 102
+Sub-bands stored   : 10
+Per-sample shape   : list of 10 tensors, lengths [5011, 2513, 1264, 639, 327, 171, 93, 54, 34, 34]
+Pre-allocated      : 675 MB
+
+  col   1/102  Electric_Motor-2_50_time-healthy 1-ch1.csv       57/5814 (  1.0%)  elapsed=   3s  ETA= 4.4m   21.7 smp/s
+  col   2/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      114/5814 (  2.0%)  elapsed=   5s  ETA= 4.3m   22.3 smp/s
+  col   3/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      171/5814 (  2.9%)  elapsed=   8s  ETA= 4.2m   22.5 smp/s
+  col   4/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      228/5814 (  3.9%)  elapsed=  10s  ETA= 4.2m   22.4 smp/s
+  col   5/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      285/5814 (  4.9%)  elapsed=  13s  ETA= 4.1m   22.3 smp/s
+  col   6/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      342/5814 (  5.9%)  elapsed=  16s  ETA= 4.2m   21.7 smp/s
+  col   7/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      399/5814 (  6.9%)  elapsed=  19s  ETA= 4.2m   21.6 smp/s
+  col   8/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      456/5814 (  7.8%)  elapsed=  21s  ETA= 4.2m   21.4 smp/s
+  col   9/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      513/5814 (  8.8%)  elapsed=  24s  ETA= 4.1m   21.3 smp/s
+  col  10/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      570/5814 (  9.8%)  elapsed=  27s  ETA= 4.1m   21.2 smp/s
+  col  11/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      627/5814 ( 10.8%)  elapsed=  30s  ETA= 4.1m   21.1 smp/s
+  col  12/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      684/5814 ( 11.8%)  elapsed=  33s  ETA= 4.1m   21.0 smp/s
+  col  13/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      741/5814 ( 12.7%)  elapsed=  35s  ETA= 4.0m   21.0 smp/s
+  col  14/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      798/5814 ( 13.7%)  elapsed=  38s  ETA= 4.0m   21.0 smp/s
+  col  15/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      855/5814 ( 14.7%)  elapsed=  41s  ETA= 3.9m   21.0 smp/s
+  col  16/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      912/5814 ( 15.7%)  elapsed=  44s  ETA= 3.9m   20.9 smp/s
+  col  17/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      969/5814 ( 16.7%)  elapsed=  46s  ETA= 3.8m   21.0 smp/s
+  col  18/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1026/5814 ( 17.6%)  elapsed=  49s  ETA= 3.8m   21.1 smp/s
+  col  19/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1083/5814 ( 18.6%)  elapsed=  51s  ETA= 3.7m   21.1 smp/s
+  col  20/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1140/5814 ( 19.6%)  elapsed=  54s  ETA= 3.7m   21.3 smp/s
+  col  21/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1197/5814 ( 20.6%)  elapsed=  56s  ETA= 3.6m   21.4 smp/s
+  col  22/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1254/5814 ( 21.6%)  elapsed=  58s  ETA= 3.5m   21.5 smp/s
+  col  23/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1311/5814 ( 22.5%)  elapsed= 1.0m  ETA= 3.5m   21.6 smp/s
+  col  24/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1368/5814 ( 23.5%)  elapsed= 1.1m  ETA= 3.4m   21.6 smp/s
+  col  25/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1425/5814 ( 24.5%)  elapsed= 1.1m  ETA= 3.4m   21.7 smp/s
+  col  26/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1482/5814 ( 25.5%)  elapsed= 1.1m  ETA= 3.3m   21.6 smp/s
+  col  27/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1539/5814 ( 26.5%)  elapsed= 1.2m  ETA= 3.3m   21.6 smp/s
+  col  28/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1596/5814 ( 27.5%)  elapsed= 1.2m  ETA= 3.2m   21.7 smp/s
+  col  29/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1653/5814 ( 28.4%)  elapsed= 1.3m  ETA= 3.2m   21.7 smp/s
+  col  30/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1710/5814 ( 29.4%)  elapsed= 1.3m  ETA= 3.1m   21.8 smp/s
+  col  31/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1767/5814 ( 30.4%)  elapsed= 1.3m  ETA= 3.1m   21.8 smp/s
+  col  32/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1824/5814 ( 31.4%)  elapsed= 1.4m  ETA= 3.0m   21.8 smp/s
+  col  33/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1881/5814 ( 32.4%)  elapsed= 1.4m  ETA= 3.0m   21.8 smp/s
+  col  34/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1938/5814 ( 33.3%)  elapsed= 1.5m  ETA= 3.0m   21.9 smp/s
+  col  35/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1995/5814 ( 34.3%)  elapsed= 1.5m  ETA= 2.9m   21.9 smp/s
+  col  36/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2052/5814 ( 35.3%)  elapsed= 1.6m  ETA= 2.9m   21.9 smp/s
+  col  37/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2109/5814 ( 36.3%)  elapsed= 1.6m  ETA= 2.8m   22.0 smp/s
+  col  38/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2166/5814 ( 37.3%)  elapsed= 1.6m  ETA= 2.8m   22.0 smp/s
+  col  39/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2223/5814 ( 38.2%)  elapsed= 1.7m  ETA= 2.7m   22.0 smp/s
+  col  40/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2280/5814 ( 39.2%)  elapsed= 1.7m  ETA= 2.7m   21.9 smp/s
+  col  41/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2337/5814 ( 40.2%)  elapsed= 1.8m  ETA= 2.6m   21.9 smp/s
+  col  42/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2394/5814 ( 41.2%)  elapsed= 1.8m  ETA= 2.6m   21.9 smp/s
+  col  43/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2451/5814 ( 42.2%)  elapsed= 1.9m  ETA= 2.6m   21.8 smp/s
+  col  44/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2508/5814 ( 43.1%)  elapsed= 1.9m  ETA= 2.5m   21.8 smp/s
+  col  45/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2565/5814 ( 44.1%)  elapsed= 2.0m  ETA= 2.5m   21.7 smp/s
+  col  46/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2622/5814 ( 45.1%)  elapsed= 2.0m  ETA= 2.5m   21.7 smp/s
+  col  47/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2679/5814 ( 46.1%)  elapsed= 2.1m  ETA= 2.4m   21.7 smp/s
+  col  48/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2736/5814 ( 47.1%)  elapsed= 2.1m  ETA= 2.4m   21.7 smp/s
+  col  49/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2793/5814 ( 48.0%)  elapsed= 2.1m  ETA= 2.3m   21.7 smp/s
+  col  50/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2850/5814 ( 49.0%)  elapsed= 2.2m  ETA= 2.3m   21.6 smp/s
+  col  51/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2907/5814 ( 50.0%)  elapsed= 2.2m  ETA= 2.2m   21.6 smp/s
+  col  52/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2964/5814 ( 51.0%)  elapsed= 2.3m  ETA= 2.2m   21.6 smp/s
+  col  53/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3021/5814 ( 52.0%)  elapsed= 2.3m  ETA= 2.2m   21.6 smp/s
+  col  54/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3078/5814 ( 52.9%)  elapsed= 2.4m  ETA= 2.1m   21.6 smp/s
+  col  55/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3135/5814 ( 53.9%)  elapsed= 2.4m  ETA= 2.1m   21.6 smp/s
+  col  56/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3192/5814 ( 54.9%)  elapsed= 2.5m  ETA= 2.0m   21.6 smp/s
+  col  57/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3249/5814 ( 55.9%)  elapsed= 2.5m  ETA= 2.0m   21.6 smp/s
+  col  58/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3306/5814 ( 56.9%)  elapsed= 2.6m  ETA= 1.9m   21.5 smp/s
+  col  59/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3363/5814 ( 57.8%)  elapsed= 2.6m  ETA= 1.9m   21.5 smp/s
+  col  60/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3420/5814 ( 58.8%)  elapsed= 2.6m  ETA= 1.9m   21.5 smp/s
+  col  61/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3477/5814 ( 59.8%)  elapsed= 2.7m  ETA= 1.8m   21.5 smp/s
+  col  62/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3534/5814 ( 60.8%)  elapsed= 2.7m  ETA= 1.8m   21.5 smp/s
+  col  63/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3591/5814 ( 61.8%)  elapsed= 2.8m  ETA= 1.7m   21.5 smp/s
+  col  64/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3648/5814 ( 62.7%)  elapsed= 2.8m  ETA= 1.7m   21.5 smp/s
+  col  65/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3705/5814 ( 63.7%)  elapsed= 2.9m  ETA= 1.6m   21.5 smp/s
+  col  66/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3762/5814 ( 64.7%)  elapsed= 2.9m  ETA= 1.6m   21.5 smp/s
+  col  67/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3819/5814 ( 65.7%)  elapsed= 3.0m  ETA= 1.6m   21.4 smp/s
+  col  68/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3876/5814 ( 66.7%)  elapsed= 3.0m  ETA= 1.5m   21.4 smp/s
+  col  69/102  Electric_Motor-2_50_time-stator short 1-ch     3933/5814 ( 67.6%)  elapsed= 3.0m  ETA= 1.4m   21.7 smp/s
+  col  70/102  Electric_Motor-2_50_time-stator short 1-ch     3990/5814 ( 68.6%)  elapsed= 3.0m  ETA= 1.4m   22.0 smp/s
+  col  71/102  Electric_Motor-2_50_time-stator short 1-ch     4047/5814 ( 69.6%)  elapsed= 3.0m  ETA= 1.3m   22.2 smp/s
+  col  72/102  Electric_Motor-2_75_time-stator short 1-ch     4104/5814 ( 70.6%)  elapsed= 3.0m  ETA= 1.3m   22.5 smp/s
+  col  73/102  Electric_Motor-2_75_time-stator short 1-ch     4161/5814 ( 71.6%)  elapsed= 3.1m  ETA= 1.2m   22.7 smp/s
+  col  74/102  Electric_Motor-2_75_time-stator short 1-ch     4218/5814 ( 72.5%)  elapsed= 3.1m  ETA= 1.2m   23.0 smp/s
+  col  75/102  Electric_Motor-2_100_time-stator short 1-c     4275/5814 ( 73.5%)  elapsed= 3.1m  ETA= 1.1m   23.2 smp/s
+  col  76/102  Electric_Motor-2_100_time-stator short 1-c     4332/5814 ( 74.5%)  elapsed= 3.1m  ETA= 1.1m   23.5 smp/s
+  col  77/102  Electric_Motor-2_100_time-stator short 1-c     4389/5814 ( 75.5%)  elapsed= 3.1m  ETA= 1.0m   23.7 smp/s
+  col  78/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4446/5814 ( 76.5%)  elapsed= 3.1m  ETA=  57s   23.9 smp/s
+  col  79/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4503/5814 ( 77.5%)  elapsed= 3.1m  ETA=  54s   24.2 smp/s
+  col  80/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4560/5814 ( 78.4%)  elapsed= 3.1m  ETA=  51s   24.4 smp/s
+  col  81/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4617/5814 ( 79.4%)  elapsed= 3.1m  ETA=  49s   24.6 smp/s
+  col  82/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4674/5814 ( 80.4%)  elapsed= 3.1m  ETA=  46s   24.9 smp/s
+  col  83/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4731/5814 ( 81.4%)  elapsed= 3.1m  ETA=  43s   25.1 smp/s
+  col  84/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4788/5814 ( 82.4%)  elapsed= 3.2m  ETA=  41s   25.3 smp/s
+  col  85/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4845/5814 ( 83.3%)  elapsed= 3.2m  ETA=  38s   25.5 smp/s
+  col  86/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4902/5814 ( 84.3%)  elapsed= 3.2m  ETA=  35s   25.7 smp/s
+  col  87/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4959/5814 ( 85.3%)  elapsed= 3.2m  ETA=  33s   25.9 smp/s
+  col  88/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5016/5814 ( 86.3%)  elapsed= 3.2m  ETA=  31s   26.2 smp/s
+  col  89/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5073/5814 ( 87.3%)  elapsed= 3.2m  ETA=  28s   26.4 smp/s
+  col  90/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5130/5814 ( 88.2%)  elapsed= 3.2m  ETA=  26s   26.6 smp/s
+  col  91/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5187/5814 ( 89.2%)  elapsed= 3.2m  ETA=  23s   26.8 smp/s
+  col  92/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5244/5814 ( 90.2%)  elapsed= 3.2m  ETA=  21s   27.0 smp/s
+  col  93/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5301/5814 ( 91.2%)  elapsed= 3.2m  ETA=  19s   27.2 smp/s
+  col  94/102  Electric_Motor-2_50_time-broken rotor bar-     5358/5814 ( 92.2%)  elapsed= 3.3m  ETA=  17s   27.4 smp/s
+  col  95/102  Electric_Motor-2_50_time-broken rotor bar-     5415/5814 ( 93.1%)  elapsed= 3.3m  ETA=  14s   27.7 smp/s
+  col  96/102  Electric_Motor-2_50_time-broken rotor bar-     5472/5814 ( 94.1%)  elapsed= 3.3m  ETA=  12s   27.9 smp/s
+  col  97/102  Electric_Motor-2_75_time-broken rotor bar-     5529/5814 ( 95.1%)  elapsed= 3.3m  ETA=  10s   28.1 smp/s
+  col  98/102  Electric_Motor-2_75_time-broken rotor bar-     5586/5814 ( 96.1%)  elapsed= 3.3m  ETA=   8s   28.3 smp/s
+  col  99/102  Electric_Motor-2_75_time-broken rotor bar-     5643/5814 ( 97.1%)  elapsed= 3.3m  ETA=   6s   28.5 smp/s
+  col 100/102  Electric_Motor-2_100_time-broken rotor bar     5700/5814 ( 98.0%)  elapsed= 3.3m  ETA=   4s   28.7 smp/s
+  col 101/102  Electric_Motor-2_100_time-broken rotor bar     5757/5814 ( 99.0%)  elapsed= 3.3m  ETA=   2s   28.9 smp/s
+  col 102/102  Electric_Motor-2_100_time-broken rotor bar     5814/5814 (100.0%)  elapsed= 3.3m  ETA=   0s   29.1 smp/s
+
+DWT computation done in 3.3m
+Saving train.pt ... done in 1s  (675 MB)
+Per-class counts in saved file:
+  healthy 1               3876
+  stator short 1           513
+  bearing bpfo 3           912
+  broken rotor bar         513
+
+----------------------------------------------------------------------
+Processing: VAL
+----------------------------------------------------------------------
+Samples to process : 1,254
+Unique columns     : 22
+Sub-bands stored   : 10
+Per-sample shape   : list of 10 tensors, lengths [5011, 2513, 1264, 639, 327, 171, 93, 54, 34, 34]
+Pre-allocated      : 146 MB
+
+  col   1/22  Electric_Motor-2_50_time-healthy 1-ch1.csv       57/1254 (  4.5%)  elapsed=   3s  ETA=  54s   22.4 smp/s
+  col   2/22  Electric_Motor-2_50_time-healthy 1-ch1.csv      114/1254 (  9.1%)  elapsed=   5s  ETA=  50s   22.8 smp/s
+  col   3/22  Electric_Motor-2_50_time-healthy 1-ch1.csv      171/1254 ( 13.6%)  elapsed=   7s  ETA=  47s   23.0 smp/s
+  col   4/22  Electric_Motor-2_50_time-healthy 1-ch1.csv      228/1254 ( 18.2%)  elapsed=  10s  ETA=  44s   23.1 smp/s
+  col   5/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      285/1254 ( 22.7%)  elapsed=  12s  ETA=  42s   22.9 smp/s
+  col   6/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      342/1254 ( 27.3%)  elapsed=  15s  ETA=  40s   22.9 smp/s
+  col   7/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      399/1254 ( 31.8%)  elapsed=  17s  ETA=  37s   23.0 smp/s
+  col   8/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      456/1254 ( 36.4%)  elapsed=  20s  ETA=  35s   23.0 smp/s
+  col   9/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      513/1254 ( 40.9%)  elapsed=  23s  ETA=  33s   22.7 smp/s
+  col  10/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      570/1254 ( 45.5%)  elapsed=  25s  ETA=  30s   22.6 smp/s
+  col  11/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      627/1254 ( 50.0%)  elapsed=  28s  ETA=  28s   22.4 smp/s
+  col  12/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      684/1254 ( 54.5%)  elapsed=  31s  ETA=  26s   22.3 smp/s
+  col  13/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      741/1254 ( 59.1%)  elapsed=  33s  ETA=  23s   22.2 smp/s
+  col  14/22  Electric_Motor-2_50_time-stator short 1-ch      798/1254 ( 63.6%)  elapsed=  34s  ETA=  19s   23.5 smp/s
+  col  15/22  Electric_Motor-2_75_time-stator short 1-ch      855/1254 ( 68.2%)  elapsed=  34s  ETA=  16s   24.8 smp/s
+  col  16/22  Electric_Motor-2_100_time-stator short 1-c      912/1254 ( 72.7%)  elapsed=  35s  ETA=  13s   26.1 smp/s
+  col  17/22  Electric_Motor-2_50_time-bearing bpfo 3-ch      969/1254 ( 77.3%)  elapsed=  36s  ETA=  10s   27.3 smp/s
+  col  18/22  Electric_Motor-2_75_time-bearing bpfo 3-ch     1026/1254 ( 81.8%)  elapsed=  36s  ETA=   8s   28.4 smp/s
+  col  19/22  Electric_Motor-2_100_time-bearing bpfo 3-c     1083/1254 ( 86.4%)  elapsed=  37s  ETA=   6s   29.5 smp/s
+  col  20/22  Electric_Motor-2_50_time-broken rotor bar-     1140/1254 ( 90.9%)  elapsed=  37s  ETA=   4s   30.6 smp/s
+  col  21/22  Electric_Motor-2_75_time-broken rotor bar-     1197/1254 ( 95.5%)  elapsed=  38s  ETA=   2s   31.8 smp/s
+  col  22/22  Electric_Motor-2_100_time-broken rotor bar     1254/1254 (100.0%)  elapsed=  38s  ETA=   0s   32.9 smp/s
+
+DWT computation done in 38s
+Saving val.pt ... done in 0s  (146 MB)
+Per-class counts in saved file:
+  healthy 1                741
+  stator short 1           171
+  bearing bpfo 3           171
+  broken rotor bar         171
+
+----------------------------------------------------------------------
+Processing: TEST
+----------------------------------------------------------------------
+Samples to process : 1,311
+Unique columns     : 23
+Sub-bands stored   : 10
+Per-sample shape   : list of 10 tensors, lengths [5011, 2513, 1264, 639, 327, 171, 93, 54, 34, 34]
+Pre-allocated      : 152 MB
+
+  col   1/23  Electric_Motor-2_50_time-healthy 1-ch1.csv       57/1311 (  4.3%)  elapsed=   3s  ETA=  55s   22.6 smp/s
+  col   2/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      114/1311 (  8.7%)  elapsed=   5s  ETA=  51s   23.4 smp/s
+  col   3/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      171/1311 ( 13.0%)  elapsed=   7s  ETA=  49s   23.4 smp/s
+  col   4/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      228/1311 ( 17.4%)  elapsed=  10s  ETA=  46s   23.6 smp/s
+  col   5/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      285/1311 ( 21.7%)  elapsed=  12s  ETA=  43s   23.7 smp/s
+  col   6/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      342/1311 ( 26.1%)  elapsed=  15s  ETA=  41s   23.4 smp/s
+  col   7/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      399/1311 ( 30.4%)  elapsed=  17s  ETA=  39s   23.4 smp/s
+  col   8/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      456/1311 ( 34.8%)  elapsed=  20s  ETA=  37s   23.4 smp/s
+  col   9/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      513/1311 ( 39.1%)  elapsed=  22s  ETA=  34s   23.2 smp/s
+  col  10/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      570/1311 ( 43.5%)  elapsed=  25s  ETA=  32s   23.2 smp/s
+  col  11/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      627/1311 ( 47.8%)  elapsed=  27s  ETA=  30s   23.0 smp/s
+  col  12/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      684/1311 ( 52.2%)  elapsed=  30s  ETA=  28s   22.8 smp/s
+  col  13/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      741/1311 ( 56.5%)  elapsed=  33s  ETA=  25s   22.6 smp/s
+  col  14/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      798/1311 ( 60.9%)  elapsed=  35s  ETA=  23s   22.5 smp/s
+  col  15/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      855/1311 ( 65.2%)  elapsed=  38s  ETA=  20s   22.4 smp/s
+  col  16/23  Electric_Motor-2_50_time-stator short 1-ch      912/1311 ( 69.6%)  elapsed=  39s  ETA=  17s   23.6 smp/s
+  col  17/23  Electric_Motor-2_75_time-stator short 1-ch      969/1311 ( 73.9%)  elapsed=  39s  ETA=  14s   24.8 smp/s
+  col  18/23  Electric_Motor-2_100_time-stator short 1-c     1026/1311 ( 78.3%)  elapsed=  40s  ETA=  11s   25.9 smp/s
+  col  19/23  Electric_Motor-2_50_time-bearing bpfo 3-ch     1083/1311 ( 82.6%)  elapsed=  40s  ETA=   8s   26.9 smp/s
+  col  20/23  Electric_Motor-2_75_time-bearing bpfo 3-ch     1140/1311 ( 87.0%)  elapsed=  41s  ETA=   6s   28.0 smp/s
+  col  21/23  Electric_Motor-2_50_time-broken rotor bar-     1197/1311 ( 91.3%)  elapsed=  41s  ETA=   4s   29.0 smp/s
+  col  22/23  Electric_Motor-2_75_time-broken rotor bar-     1254/1311 ( 95.7%)  elapsed=  42s  ETA=   2s   30.0 smp/s
+  col  23/23  Electric_Motor-2_100_time-broken rotor bar     1311/1311 (100.0%)  elapsed=  42s  ETA=   0s   31.1 smp/s
+
+DWT computation done in 42s
+Saving test.pt ... done in 0s  (152 MB)
+Per-class counts in saved file:
+  healthy 1                855
+  stator short 1           171
+  bearing bpfo 3           114
+  broken rotor bar         171
+
+======================================================================
+ALL DONE
+======================================================================
+Total elapsed: 4.7m
+
+Files written:
+  train.pt             5814 samples     675 MB  (3.3m)
+  val.pt               1254 samples     146 MB  (38s)
+  test.pt              1311 samples     152 MB  (42s)
+  TOTAL                8379 samples     973 MB
+
+Sanity check:
+  import torch
+  d = torch.load(r'C:\Project Work\Outputs_nobpfo100\features\dwt\train.pt', weights_only=False, mmap=True)
+  print(len(d['features_per_level']), 'sub-bands')
+  for name, t in zip(d['level_names'], d['features_per_level']):
+      print(f'  {name:<5} {tuple(t.shape)}')
+  print(d['labels'].shape)
+  print(d['metadata'][0])
+
+Next: run train_dwt_cnn.py to train the multi-branch 1D CNN.
+
+======================================================================
+>>> RUNNING precompute_envelope_nobpfo100.py
+======================================================================
+======================================================================
+PRECOMPUTE ENVELOPE-SPECTRUM FEATURES + PER-SEGMENT PANELS - 4 classes
+======================================================================
+Started:        2026-05-10 14:41:32
+splits.csv:     C:\Project Work\Outputs_nobpfo100\splits.csv
+denoised root:  C:\Project Work\Denoised\Motor-2
+features dir:   C:\Project Work\Outputs_nobpfo100\features\envelope
+images dir:     C:\Project Work\outputs\4class\v2_speed_strat\envelope\images
+save PNGs:      False  (3 phase PNGs per segment, no labeling)
+torch threads:  8
+
+LOCKED ENVELOPE PARAMETERS:
+  fs                = 20000
+  window_samples    = 20000 (1.0 s)
+  analytic          = scipy.signal.hilbert
+  fft_window        = hann (applied to envelope)
+  fft_length        = 20000 -> 1 Hz resolution
+  freq_cap_hz       = 500  -> 501 bins
+  magnitude_form    = log1p(|rfft|)
+  normalization     = per-image z-score (across 3 phases)
+  expected sample shape: (3, 501) float32
+
+PNG CONVENTIONS:
+  filename : colXX_segYYY_chN.png  (N=1..3, no labels)
+  content  : one envelope spectrum line plot per phase
+  size     : ~400 x 120 px
+
+Loaded splits.csv: 441 rows
+Splits present : ['test', 'train', 'val']
+Speeds present : [np.int64(50), np.int64(75), np.int64(100)]
+Classes present: ['bearing bpfo 3', 'broken rotor bar', 'healthy 1', 'stator short 1']
+
+----------------------------------------------------------------------
+Processing: TRAIN
+----------------------------------------------------------------------
+Per-sample shape   : (3, 501)
+Samples to process : 5,814
+Unique columns     : 102
+Pre-allocated      : 33 MB
+
+  col   1/102  Electric_Motor-2_50_time-healthy 1-ch1.csv       57/5814 (  1.0%)  elapsed=   3s  ETA= 4.2m   22.6 smp/s
+  col   2/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      114/5814 (  2.0%)  elapsed=   5s  ETA= 4.2m   22.5 smp/s
+  col   3/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      171/5814 (  2.9%)  elapsed=   8s  ETA= 4.2m   22.5 smp/s
+  col   4/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      228/5814 (  3.9%)  elapsed=  10s  ETA= 4.1m   22.5 smp/s
+  col   5/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      285/5814 (  4.9%)  elapsed=  13s  ETA= 4.1m   22.6 smp/s
+  col   6/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      342/5814 (  5.9%)  elapsed=  15s  ETA= 4.0m   22.7 smp/s
+  col   7/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      399/5814 (  6.9%)  elapsed=  18s  ETA= 4.0m   22.7 smp/s
+  col   8/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      456/5814 (  7.8%)  elapsed=  20s  ETA= 3.9m   22.7 smp/s
+  col   9/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      513/5814 (  8.8%)  elapsed=  23s  ETA= 3.9m   22.7 smp/s
+  col  10/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      570/5814 (  9.8%)  elapsed=  25s  ETA= 3.8m   22.7 smp/s
+  col  11/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      627/5814 ( 10.8%)  elapsed=  28s  ETA= 3.8m   22.7 smp/s
+  col  12/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      684/5814 ( 11.8%)  elapsed=  30s  ETA= 3.8m   22.7 smp/s
+  col  13/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      741/5814 ( 12.7%)  elapsed=  33s  ETA= 3.7m   22.7 smp/s
+  col  14/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      798/5814 ( 13.7%)  elapsed=  35s  ETA= 3.7m   22.7 smp/s
+  col  15/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      855/5814 ( 14.7%)  elapsed=  38s  ETA= 3.6m   22.7 smp/s
+  col  16/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      912/5814 ( 15.7%)  elapsed=  40s  ETA= 3.6m   22.7 smp/s
+  col  17/102  Electric_Motor-2_50_time-healthy 1-ch1.csv      969/5814 ( 16.7%)  elapsed=  43s  ETA= 3.6m   22.7 smp/s
+  col  18/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1026/5814 ( 17.6%)  elapsed=  45s  ETA= 3.5m   22.6 smp/s
+  col  19/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1083/5814 ( 18.6%)  elapsed=  48s  ETA= 3.5m   22.5 smp/s
+  col  20/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1140/5814 ( 19.6%)  elapsed=  51s  ETA= 3.5m   22.5 smp/s
+  col  21/102  Electric_Motor-2_50_time-healthy 1-ch1.csv     1197/5814 ( 20.6%)  elapsed=  53s  ETA= 3.4m   22.5 smp/s
+  col  22/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1254/5814 ( 21.6%)  elapsed=  56s  ETA= 3.4m   22.6 smp/s
+  col  23/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1311/5814 ( 22.5%)  elapsed=  58s  ETA= 3.3m   22.6 smp/s
+  col  24/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1368/5814 ( 23.5%)  elapsed= 1.0m  ETA= 3.3m   22.6 smp/s
+  col  25/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1425/5814 ( 24.5%)  elapsed= 1.0m  ETA= 3.2m   22.7 smp/s
+  col  26/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1482/5814 ( 25.5%)  elapsed= 1.1m  ETA= 3.2m   22.7 smp/s
+  col  27/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1539/5814 ( 26.5%)  elapsed= 1.1m  ETA= 3.1m   22.7 smp/s
+  col  28/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1596/5814 ( 27.5%)  elapsed= 1.2m  ETA= 3.1m   22.7 smp/s
+  col  29/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1653/5814 ( 28.4%)  elapsed= 1.2m  ETA= 3.1m   22.7 smp/s
+  col  30/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1710/5814 ( 29.4%)  elapsed= 1.3m  ETA= 3.0m   22.7 smp/s
+  col  31/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1767/5814 ( 30.4%)  elapsed= 1.3m  ETA= 3.0m   22.7 smp/s
+  col  32/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1824/5814 ( 31.4%)  elapsed= 1.3m  ETA= 2.9m   22.8 smp/s
+  col  33/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1881/5814 ( 32.4%)  elapsed= 1.4m  ETA= 2.9m   22.8 smp/s
+  col  34/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1938/5814 ( 33.3%)  elapsed= 1.4m  ETA= 2.8m   22.8 smp/s
+  col  35/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     1995/5814 ( 34.3%)  elapsed= 1.5m  ETA= 2.8m   22.8 smp/s
+  col  36/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2052/5814 ( 35.3%)  elapsed= 1.5m  ETA= 2.8m   22.8 smp/s
+  col  37/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2109/5814 ( 36.3%)  elapsed= 1.5m  ETA= 2.7m   22.8 smp/s
+  col  38/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2166/5814 ( 37.3%)  elapsed= 1.6m  ETA= 2.7m   22.8 smp/s
+  col  39/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2223/5814 ( 38.2%)  elapsed= 1.6m  ETA= 2.6m   22.8 smp/s
+  col  40/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2280/5814 ( 39.2%)  elapsed= 1.7m  ETA= 2.6m   22.8 smp/s
+  col  41/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2337/5814 ( 40.2%)  elapsed= 1.7m  ETA= 2.5m   22.8 smp/s
+  col  42/102  Electric_Motor-2_75_time-healthy 1-ch1.csv     2394/5814 ( 41.2%)  elapsed= 1.8m  ETA= 2.5m   22.8 smp/s
+  col  43/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2451/5814 ( 42.2%)  elapsed= 1.8m  ETA= 2.5m   22.7 smp/s
+  col  44/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2508/5814 ( 43.1%)  elapsed= 1.8m  ETA= 2.4m   22.7 smp/s
+  col  45/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2565/5814 ( 44.1%)  elapsed= 1.9m  ETA= 2.4m   22.6 smp/s
+  col  46/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2622/5814 ( 45.1%)  elapsed= 1.9m  ETA= 2.4m   22.6 smp/s
+  col  47/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2679/5814 ( 46.1%)  elapsed= 2.0m  ETA= 2.3m   22.6 smp/s
+  col  48/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2736/5814 ( 47.1%)  elapsed= 2.0m  ETA= 2.3m   22.5 smp/s
+  col  49/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2793/5814 ( 48.0%)  elapsed= 2.1m  ETA= 2.2m   22.5 smp/s
+  col  50/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2850/5814 ( 49.0%)  elapsed= 2.1m  ETA= 2.2m   22.4 smp/s
+  col  51/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2907/5814 ( 50.0%)  elapsed= 2.2m  ETA= 2.2m   22.4 smp/s
+  col  52/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     2964/5814 ( 51.0%)  elapsed= 2.2m  ETA= 2.1m   22.4 smp/s
+  col  53/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3021/5814 ( 52.0%)  elapsed= 2.3m  ETA= 2.1m   22.4 smp/s
+  col  54/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3078/5814 ( 52.9%)  elapsed= 2.3m  ETA= 2.0m   22.3 smp/s
+  col  55/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3135/5814 ( 53.9%)  elapsed= 2.3m  ETA= 2.0m   22.3 smp/s
+  col  56/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3192/5814 ( 54.9%)  elapsed= 2.4m  ETA= 2.0m   22.3 smp/s
+  col  57/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3249/5814 ( 55.9%)  elapsed= 2.4m  ETA= 1.9m   22.3 smp/s
+  col  58/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3306/5814 ( 56.9%)  elapsed= 2.5m  ETA= 1.9m   22.2 smp/s
+  col  59/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3363/5814 ( 57.8%)  elapsed= 2.5m  ETA= 1.8m   22.2 smp/s
+  col  60/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3420/5814 ( 58.8%)  elapsed= 2.6m  ETA= 1.8m   22.2 smp/s
+  col  61/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3477/5814 ( 59.8%)  elapsed= 2.6m  ETA= 1.8m   22.2 smp/s
+  col  62/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3534/5814 ( 60.8%)  elapsed= 2.7m  ETA= 1.7m   22.2 smp/s
+  col  63/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3591/5814 ( 61.8%)  elapsed= 2.7m  ETA= 1.7m   22.2 smp/s
+  col  64/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3648/5814 ( 62.7%)  elapsed= 2.7m  ETA= 1.6m   22.1 smp/s
+  col  65/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3705/5814 ( 63.7%)  elapsed= 2.8m  ETA= 1.6m   22.1 smp/s
+  col  66/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3762/5814 ( 64.7%)  elapsed= 2.8m  ETA= 1.5m   22.1 smp/s
+  col  67/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3819/5814 ( 65.7%)  elapsed= 2.9m  ETA= 1.5m   22.1 smp/s
+  col  68/102  Electric_Motor-2_100_time-healthy 1-ch1.cs     3876/5814 ( 66.7%)  elapsed= 2.9m  ETA= 1.5m   22.1 smp/s
+  col  69/102  Electric_Motor-2_50_time-stator short 1-ch     3933/5814 ( 67.6%)  elapsed= 2.9m  ETA= 1.4m   22.4 smp/s
+  col  70/102  Electric_Motor-2_50_time-stator short 1-ch     3990/5814 ( 68.6%)  elapsed= 2.9m  ETA= 1.3m   22.6 smp/s
+  col  71/102  Electric_Motor-2_50_time-stator short 1-ch     4047/5814 ( 69.6%)  elapsed= 2.9m  ETA= 1.3m   22.9 smp/s
+  col  72/102  Electric_Motor-2_75_time-stator short 1-ch     4104/5814 ( 70.6%)  elapsed= 3.0m  ETA= 1.2m   23.1 smp/s
+  col  73/102  Electric_Motor-2_75_time-stator short 1-ch     4161/5814 ( 71.6%)  elapsed= 3.0m  ETA= 1.2m   23.4 smp/s
+  col  74/102  Electric_Motor-2_75_time-stator short 1-ch     4218/5814 ( 72.5%)  elapsed= 3.0m  ETA= 1.1m   23.6 smp/s
+  col  75/102  Electric_Motor-2_100_time-stator short 1-c     4275/5814 ( 73.5%)  elapsed= 3.0m  ETA= 1.1m   23.9 smp/s
+  col  76/102  Electric_Motor-2_100_time-stator short 1-c     4332/5814 ( 74.5%)  elapsed= 3.0m  ETA= 1.0m   24.1 smp/s
+  col  77/102  Electric_Motor-2_100_time-stator short 1-c     4389/5814 ( 75.5%)  elapsed= 3.0m  ETA=  58s   24.4 smp/s
+  col  78/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4446/5814 ( 76.5%)  elapsed= 3.0m  ETA=  56s   24.6 smp/s
+  col  79/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4503/5814 ( 77.5%)  elapsed= 3.0m  ETA=  53s   24.9 smp/s
+  col  80/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4560/5814 ( 78.4%)  elapsed= 3.0m  ETA=  50s   25.1 smp/s
+  col  81/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4617/5814 ( 79.4%)  elapsed= 3.0m  ETA=  47s   25.3 smp/s
+  col  82/102  Electric_Motor-2_50_time-bearing bpfo 3-ch     4674/5814 ( 80.4%)  elapsed= 3.0m  ETA=  45s   25.5 smp/s
+  col  83/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4731/5814 ( 81.4%)  elapsed= 3.1m  ETA=  42s   25.8 smp/s
+  col  84/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4788/5814 ( 82.4%)  elapsed= 3.1m  ETA=  39s   26.0 smp/s
+  col  85/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4845/5814 ( 83.3%)  elapsed= 3.1m  ETA=  37s   26.2 smp/s
+  col  86/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4902/5814 ( 84.3%)  elapsed= 3.1m  ETA=  35s   26.4 smp/s
+  col  87/102  Electric_Motor-2_75_time-bearing bpfo 3-ch     4959/5814 ( 85.3%)  elapsed= 3.1m  ETA=  32s   26.7 smp/s
+  col  88/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5016/5814 ( 86.3%)  elapsed= 3.1m  ETA=  30s   26.9 smp/s
+  col  89/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5073/5814 ( 87.3%)  elapsed= 3.1m  ETA=  27s   27.1 smp/s
+  col  90/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5130/5814 ( 88.2%)  elapsed= 3.1m  ETA=  25s   27.3 smp/s
+  col  91/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5187/5814 ( 89.2%)  elapsed= 3.1m  ETA=  23s   27.5 smp/s
+  col  92/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5244/5814 ( 90.2%)  elapsed= 3.2m  ETA=  21s   27.7 smp/s
+  col  93/102  Electric_Motor-2_100_time-bearing bpfo 3-c     5301/5814 ( 91.2%)  elapsed= 3.2m  ETA=  18s   27.9 smp/s
+  col  94/102  Electric_Motor-2_50_time-broken rotor bar-     5358/5814 ( 92.2%)  elapsed= 3.2m  ETA=  16s   28.2 smp/s
+  col  95/102  Electric_Motor-2_50_time-broken rotor bar-     5415/5814 ( 93.1%)  elapsed= 3.2m  ETA=  14s   28.4 smp/s
+  col  96/102  Electric_Motor-2_50_time-broken rotor bar-     5472/5814 ( 94.1%)  elapsed= 3.2m  ETA=  12s   28.6 smp/s
+  col  97/102  Electric_Motor-2_75_time-broken rotor bar-     5529/5814 ( 95.1%)  elapsed= 3.2m  ETA=  10s   28.8 smp/s
+  col  98/102  Electric_Motor-2_75_time-broken rotor bar-     5586/5814 ( 96.1%)  elapsed= 3.2m  ETA=   8s   29.1 smp/s
+  col  99/102  Electric_Motor-2_75_time-broken rotor bar-     5643/5814 ( 97.1%)  elapsed= 3.2m  ETA=   6s   29.3 smp/s
+  col 100/102  Electric_Motor-2_100_time-broken rotor bar     5700/5814 ( 98.0%)  elapsed= 3.2m  ETA=   4s   29.5 smp/s
+  col 101/102  Electric_Motor-2_100_time-broken rotor bar     5757/5814 ( 99.0%)  elapsed= 3.2m  ETA=   2s   29.7 smp/s
+  col 102/102  Electric_Motor-2_100_time-broken rotor bar     5814/5814 (100.0%)  elapsed= 3.2m  ETA=   0s   29.9 smp/s
+
+Envelope-spectrum computation done in 3.2m
+Saving train.pt ... done in 0s  (34 MB)
+Per-class counts in saved file:
+  healthy 1               3876
+  stator short 1           513
+  bearing bpfo 3           912
+  broken rotor bar         513
+
+----------------------------------------------------------------------
+Processing: VAL
+----------------------------------------------------------------------
+Per-sample shape   : (3, 501)
+Samples to process : 1,254
+Unique columns     : 22
+Pre-allocated      : 7 MB
+
+  col   1/22  Electric_Motor-2_50_time-healthy 1-ch1.csv       57/1254 (  4.5%)  elapsed=   2s  ETA=  52s   23.1 smp/s
+  col   2/22  Electric_Motor-2_50_time-healthy 1-ch1.csv      114/1254 (  9.1%)  elapsed=   5s  ETA=  49s   23.3 smp/s
+  col   3/22  Electric_Motor-2_50_time-healthy 1-ch1.csv      171/1254 ( 13.6%)  elapsed=   7s  ETA=  47s   23.2 smp/s
+  col   4/22  Electric_Motor-2_50_time-healthy 1-ch1.csv      228/1254 ( 18.2%)  elapsed=  10s  ETA=  44s   23.4 smp/s
+  col   5/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      285/1254 ( 22.7%)  elapsed=  12s  ETA=  42s   23.3 smp/s
+  col   6/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      342/1254 ( 27.3%)  elapsed=  15s  ETA=  39s   23.3 smp/s
+  col   7/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      399/1254 ( 31.8%)  elapsed=  17s  ETA=  37s   23.3 smp/s
+  col   8/22  Electric_Motor-2_75_time-healthy 1-ch1.csv      456/1254 ( 36.4%)  elapsed=  20s  ETA=  34s   23.3 smp/s
+  col   9/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      513/1254 ( 40.9%)  elapsed=  22s  ETA=  32s   23.0 smp/s
+  col  10/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      570/1254 ( 45.5%)  elapsed=  25s  ETA=  30s   22.7 smp/s
+  col  11/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      627/1254 ( 50.0%)  elapsed=  28s  ETA=  28s   22.6 smp/s
+  col  12/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      684/1254 ( 54.5%)  elapsed=  30s  ETA=  25s   22.4 smp/s
+  col  13/22  Electric_Motor-2_100_time-healthy 1-ch1.cs      741/1254 ( 59.1%)  elapsed=  33s  ETA=  23s   22.3 smp/s
+  col  14/22  Electric_Motor-2_50_time-stator short 1-ch      798/1254 ( 63.6%)  elapsed=  34s  ETA=  19s   23.7 smp/s
+  col  15/22  Electric_Motor-2_75_time-stator short 1-ch      855/1254 ( 68.2%)  elapsed=  34s  ETA=  16s   25.0 smp/s
+  col  16/22  Electric_Motor-2_100_time-stator short 1-c      912/1254 ( 72.7%)  elapsed=  35s  ETA=  13s   26.3 smp/s
+  col  17/22  Electric_Motor-2_50_time-bearing bpfo 3-ch      969/1254 ( 77.3%)  elapsed=  35s  ETA=  10s   27.5 smp/s
+  col  18/22  Electric_Motor-2_75_time-bearing bpfo 3-ch     1026/1254 ( 81.8%)  elapsed=  36s  ETA=   8s   28.6 smp/s
+  col  19/22  Electric_Motor-2_100_time-bearing bpfo 3-c     1083/1254 ( 86.4%)  elapsed=  37s  ETA=   6s   29.7 smp/s
+  col  20/22  Electric_Motor-2_50_time-broken rotor bar-     1140/1254 ( 90.9%)  elapsed=  37s  ETA=   4s   30.8 smp/s
+  col  21/22  Electric_Motor-2_75_time-broken rotor bar-     1197/1254 ( 95.5%)  elapsed=  37s  ETA=   2s   31.9 smp/s
+  col  22/22  Electric_Motor-2_100_time-broken rotor bar     1254/1254 (100.0%)  elapsed=  38s  ETA=   0s   33.0 smp/s
+
+Envelope-spectrum computation done in 38s
+Saving val.pt ... done in 0s  (7 MB)
+Per-class counts in saved file:
+  healthy 1                741
+  stator short 1           171
+  bearing bpfo 3           171
+  broken rotor bar         171
+
+----------------------------------------------------------------------
+Processing: TEST
+----------------------------------------------------------------------
+Per-sample shape   : (3, 501)
+Samples to process : 1,311
+Unique columns     : 23
+Pre-allocated      : 8 MB
+
+  col   1/23  Electric_Motor-2_50_time-healthy 1-ch1.csv       57/1311 (  4.3%)  elapsed=   2s  ETA=  53s   23.6 smp/s
+  col   2/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      114/1311 (  8.7%)  elapsed=   5s  ETA=  50s   23.8 smp/s
+  col   3/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      171/1311 ( 13.0%)  elapsed=   7s  ETA=  48s   23.5 smp/s
+  col   4/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      228/1311 ( 17.4%)  elapsed=  10s  ETA=  46s   23.6 smp/s
+  col   5/23  Electric_Motor-2_50_time-healthy 1-ch1.csv      285/1311 ( 21.7%)  elapsed=  12s  ETA=  44s   23.6 smp/s
+  col   6/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      342/1311 ( 26.1%)  elapsed=  15s  ETA=  41s   23.5 smp/s
+  col   7/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      399/1311 ( 30.4%)  elapsed=  17s  ETA=  39s   23.4 smp/s
+  col   8/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      456/1311 ( 34.8%)  elapsed=  19s  ETA=  37s   23.4 smp/s
+  col   9/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      513/1311 ( 39.1%)  elapsed=  22s  ETA=  34s   23.4 smp/s
+  col  10/23  Electric_Motor-2_75_time-healthy 1-ch1.csv      570/1311 ( 43.5%)  elapsed=  24s  ETA=  32s   23.5 smp/s
+  col  11/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      627/1311 ( 47.8%)  elapsed=  27s  ETA=  29s   23.2 smp/s
+  col  12/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      684/1311 ( 52.2%)  elapsed=  30s  ETA=  27s   23.1 smp/s
+  col  13/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      741/1311 ( 56.5%)  elapsed=  32s  ETA=  25s   22.9 smp/s
+  col  14/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      798/1311 ( 60.9%)  elapsed=  35s  ETA=  22s   22.8 smp/s
+  col  15/23  Electric_Motor-2_100_time-healthy 1-ch1.cs      855/1311 ( 65.2%)  elapsed=  38s  ETA=  20s   22.7 smp/s
+  col  16/23  Electric_Motor-2_50_time-stator short 1-ch      912/1311 ( 69.6%)  elapsed=  38s  ETA=  17s   23.9 smp/s
+  col  17/23  Electric_Motor-2_75_time-stator short 1-ch      969/1311 ( 73.9%)  elapsed=  39s  ETA=  14s   25.1 smp/s
+  col  18/23  Electric_Motor-2_100_time-stator short 1-c     1026/1311 ( 78.3%)  elapsed=  39s  ETA=  11s   26.2 smp/s
+  col  19/23  Electric_Motor-2_50_time-bearing bpfo 3-ch     1083/1311 ( 82.6%)  elapsed=  40s  ETA=   8s   27.2 smp/s
+  col  20/23  Electric_Motor-2_75_time-bearing bpfo 3-ch     1140/1311 ( 87.0%)  elapsed=  40s  ETA=   6s   28.2 smp/s
+  col  21/23  Electric_Motor-2_50_time-broken rotor bar-     1197/1311 ( 91.3%)  elapsed=  41s  ETA=   4s   29.3 smp/s
+  col  22/23  Electric_Motor-2_75_time-broken rotor bar-     1254/1311 ( 95.7%)  elapsed=  41s  ETA=   2s   30.3 smp/s
+  col  23/23  Electric_Motor-2_100_time-broken rotor bar     1311/1311 (100.0%)  elapsed=  42s  ETA=   0s   31.3 smp/s
+
+Envelope-spectrum computation done in 42s
+Saving test.pt ... done in 0s  (8 MB)
+Per-class counts in saved file:
+  healthy 1                855
+  stator short 1           171
+  bearing bpfo 3           114
+  broken rotor bar         171
+
+======================================================================
+ALL DONE
+======================================================================
+Total elapsed : 4.6m
+
+Files written:
+  train.pt             5814 samples      34 MB  (3.2m)
+  val.pt               1254 samples       7 MB  (38s)
+  test.pt              1311 samples       8 MB  (42s)
+  TOTAL                8379 samples      48 MB
+
+Sanity check:
+  import torch
+  d = torch.load(r'C:\Project Work\Outputs_nobpfo100\features\envelope\train.pt',
+                 weights_only=False, mmap=True)
+  print(d['features'].shape, d['labels'].shape)
+  print(d['metadata'][0])
+
+Next: run train_envelope_cnn_v1.py
+
+======================================================================
+>>> RUNNING train_stft_cnn_nobpfo100.py
+======================================================================
+======================================================================
+STFT CNN TRAINING — RUN: E4_mod_alexnet_227
+Started: 2026-05-10 14:46:10
+======================================================================
+Device             : cuda  (NVIDIA GeForce RTX 3060 Laptop GPU)
+Mixed precision    : True
+Model type         : modified_alexnet
+Input upsampling   : native (3, 154, 149) -> (3, 227, 227) bilinear
+Features dir       : C:\Project Work\Outputs_nobpfo100\features\stft
+Healthy subsample  : None
+Class weighting    : False
+Dropout            : 0.5 / 0.3
+Weight decay       : 0.0001
+Label smoothing    : 0.0
+Batch size         : 64
+Max epochs         : 40  (patience=8, min=12)
+
+Loading precomputed features:
+  Loading train.pt ... 5814 samples, 1527 MB, mmap (0.0s)
+  Loading val.pt ... 1254 samples, 329 MB, mmap (0.0s)
+  Loading test.pt ... 1311 samples, 344 MB, mmap (0.0s)
+
+4 classes: ['healthy 1', 'stator short 1', 'bearing bpfo 3', 'broken rotor bar']
+Train: 5814   Val: 1254   Test: 1311
+
+Train class distribution:
+  healthy 1               3876  ( 66.7%)
+  stator short 1           513  (  8.8%)
+  bearing bpfo 3           912  ( 15.7%)
+  broken rotor bar         513  (  8.8%)
+
+Model: modified_alexnet
+  total parameters    : 3,750,980
+  trainable parameters: 3,750,980
+  params per train sample: 645.2
+
+────────────────────────────────────────────────────────────────────────────────
+epoch  tr_loss tr_acc tr_f1  |  va_loss va_acc va_f1           lr    time
+────────────────────────────────────────────────────────────────────────────────
+  >> Epoch 1/40 — training
+     batch    9/91  loss=0.942  (5.0 batch/s, ETA 16s)
+     batch   18/91  loss=0.622  (7.3 batch/s, ETA 10s)
+     batch   27/91  loss=0.600  (8.6 batch/s, ETA 7s)
+     batch   36/91  loss=0.585  (9.5 batch/s, ETA 6s)
+     batch   45/91  loss=0.624  (10.1 batch/s, ETA 5s)
+     batch   54/91  loss=0.677  (10.6 batch/s, ETA 4s)
+     batch   63/91  loss=0.533  (10.9 batch/s, ETA 3s)
+     batch   72/91  loss=0.451  (11.2 batch/s, ETA 2s)
+     batch   81/91  loss=0.514  (11.5 batch/s, ETA 1s)
+     batch   90/91  loss=0.499  (11.7 batch/s, ETA 0s)
+     batch   91/91  loss=0.388  (11.7 batch/s, ETA 0s)
+  >> Epoch 1/40 — validating
+     batch    2/20  loss=0.074  (20.0 batch/s, ETA 1s)
+     batch    4/20  loss=0.066  (20.0 batch/s, ETA 1s)
+     batch    6/20  loss=0.058  (19.8 batch/s, ETA 1s)
+     batch    8/20  loss=0.063  (19.8 batch/s, ETA 1s)
+     batch   10/20  loss=0.060  (19.8 batch/s, ETA 1s)
+     batch   12/20  loss=0.380  (19.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.367  (20.0 batch/s, ETA 0s)
+     batch   16/20  loss=2.845  (19.9 batch/s, ETA 0s)
+     batch   18/20  loss=0.540  (20.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.969  (20.2 batch/s, ETA 0s)
+    1   0.5990  0.754 0.496  |   0.5989  0.773 0.557     0.000998      9s *
+  >> Epoch 2/40 — training
+     batch    9/91  loss=0.497  (24.8 batch/s, ETA 3s)
+     batch   18/91  loss=0.491  (24.8 batch/s, ETA 3s)
+     batch   27/91  loss=0.606  (24.8 batch/s, ETA 3s)
+     batch   36/91  loss=0.551  (24.8 batch/s, ETA 2s)
+     batch   45/91  loss=0.459  (24.8 batch/s, ETA 2s)
+     batch   54/91  loss=0.527  (24.8 batch/s, ETA 1s)
+     batch   63/91  loss=0.496  (24.7 batch/s, ETA 1s)
+     batch   72/91  loss=0.439  (24.7 batch/s, ETA 1s)
+     batch   81/91  loss=0.386  (24.8 batch/s, ETA 0s)
+     batch   90/91  loss=0.489  (24.7 batch/s, ETA 0s)
+     batch   91/91  loss=0.462  (24.8 batch/s, ETA 0s)
+  >> Epoch 2/40 — validating
+     batch    2/20  loss=1.530  (63.7 batch/s, ETA 0s)
+     batch    4/20  loss=1.048  (64.1 batch/s, ETA 0s)
+     batch    6/20  loss=0.357  (64.2 batch/s, ETA 0s)
+     batch    8/20  loss=1.683  (64.2 batch/s, ETA 0s)
+     batch   10/20  loss=1.594  (63.8 batch/s, ETA 0s)
+     batch   12/20  loss=0.839  (63.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.000  (64.1 batch/s, ETA 0s)
+     batch   16/20  loss=1.661  (64.1 batch/s, ETA 0s)
+     batch   18/20  loss=4.652  (64.1 batch/s, ETA 0s)
+     batch   20/20  loss=7.141  (64.9 batch/s, ETA 0s)
+    2   0.4975  0.805 0.633  |   1.7649  0.353 0.250     0.000994      4s
+  >> Epoch 3/40 — training
+     batch    9/91  loss=0.400  (24.9 batch/s, ETA 3s)
+     batch   18/91  loss=0.457  (24.9 batch/s, ETA 3s)
+     batch   27/91  loss=0.502  (24.8 batch/s, ETA 3s)
+     batch   36/91  loss=0.442  (24.8 batch/s, ETA 2s)
+     batch   45/91  loss=0.469  (24.7 batch/s, ETA 2s)
+     batch   54/91  loss=0.439  (24.7 batch/s, ETA 1s)
+     batch   63/91  loss=0.366  (24.7 batch/s, ETA 1s)
+     batch   72/91  loss=0.477  (24.7 batch/s, ETA 1s)
+     batch   81/91  loss=0.390  (24.7 batch/s, ETA 0s)
+     batch   90/91  loss=0.303  (24.7 batch/s, ETA 0s)
+     batch   91/91  loss=0.404  (24.7 batch/s, ETA 0s)
+  >> Epoch 3/40 — validating
+     batch    2/20  loss=0.288  (62.7 batch/s, ETA 0s)
+     batch    4/20  loss=0.301  (63.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.328  (63.7 batch/s, ETA 0s)
+     batch    8/20  loss=0.163  (63.6 batch/s, ETA 0s)
+     batch   10/20  loss=0.122  (63.4 batch/s, ETA 0s)
+     batch   12/20  loss=0.142  (63.6 batch/s, ETA 0s)
+     batch   14/20  loss=0.007  (63.3 batch/s, ETA 0s)
+     batch   16/20  loss=1.197  (63.3 batch/s, ETA 0s)
+     batch   18/20  loss=0.387  (63.4 batch/s, ETA 0s)
+     batch   20/20  loss=0.338  (64.2 batch/s, ETA 0s)
+    3   0.4393  0.829 0.708  |   0.4074  0.848 0.698     0.000986      4s *
+  >> Epoch 4/40 — training
+     batch    9/91  loss=0.594  (25.0 batch/s, ETA 3s)
+     batch   18/91  loss=0.344  (24.7 batch/s, ETA 3s)
+     batch   27/91  loss=0.529  (24.7 batch/s, ETA 3s)
+     batch   36/91  loss=0.389  (24.7 batch/s, ETA 2s)
+     batch   45/91  loss=0.469  (24.7 batch/s, ETA 2s)
+     batch   54/91  loss=0.379  (24.7 batch/s, ETA 1s)
+     batch   63/91  loss=0.318  (24.7 batch/s, ETA 1s)
+     batch   72/91  loss=0.315  (24.7 batch/s, ETA 1s)
+     batch   81/91  loss=0.276  (24.7 batch/s, ETA 0s)
+     batch   90/91  loss=0.272  (24.7 batch/s, ETA 0s)
+     batch   91/91  loss=0.333  (24.7 batch/s, ETA 0s)
+  >> Epoch 4/40 — validating
+     batch    2/20  loss=0.181  (62.0 batch/s, ETA 0s)
+     batch    4/20  loss=0.178  (62.7 batch/s, ETA 0s)
+     batch    6/20  loss=0.183  (63.4 batch/s, ETA 0s)
+     batch    8/20  loss=0.126  (63.2 batch/s, ETA 0s)
+     batch   10/20  loss=0.121  (63.5 batch/s, ETA 0s)
+     batch   12/20  loss=0.142  (63.5 batch/s, ETA 0s)
+     batch   14/20  loss=0.000  (63.6 batch/s, ETA 0s)
+     batch   16/20  loss=1.611  (63.4 batch/s, ETA 0s)
+     batch   18/20  loss=0.145  (63.4 batch/s, ETA 0s)
+     batch   20/20  loss=0.054  (64.4 batch/s, ETA 0s)
+    4   0.4120  0.839 0.734  |   0.3655  0.847 0.701     0.000976      4s *
+  >> Epoch 5/40 — training
+     batch    9/91  loss=0.342  (24.7 batch/s, ETA 3s)
+     batch   18/91  loss=0.329  (24.6 batch/s, ETA 3s)
+     batch   27/91  loss=0.322  (24.6 batch/s, ETA 3s)
+     batch   36/91  loss=0.374  (24.6 batch/s, ETA 2s)
+     batch   45/91  loss=0.446  (24.6 batch/s, ETA 2s)
+     batch   54/91  loss=0.466  (24.6 batch/s, ETA 2s)
+     batch   63/91  loss=0.372  (24.6 batch/s, ETA 1s)
+     batch   72/91  loss=0.441  (24.6 batch/s, ETA 1s)
+     batch   81/91  loss=0.464  (24.6 batch/s, ETA 0s)
+     batch   90/91  loss=0.299  (24.6 batch/s, ETA 0s)
+     batch   91/91  loss=0.316  (24.6 batch/s, ETA 0s)
+  >> Epoch 5/40 — validating
+     batch    2/20  loss=0.495  (61.9 batch/s, ETA 0s)
+     batch    4/20  loss=0.405  (63.3 batch/s, ETA 0s)
+     batch    6/20  loss=0.318  (63.2 batch/s, ETA 0s)
+     batch    8/20  loss=0.314  (63.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.257  (63.3 batch/s, ETA 0s)
+     batch   12/20  loss=0.317  (63.3 batch/s, ETA 0s)
+     batch   14/20  loss=0.000  (63.4 batch/s, ETA 0s)
+     batch   16/20  loss=1.004  (63.4 batch/s, ETA 0s)
+     batch   18/20  loss=4.659  (63.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.243  (64.2 batch/s, ETA 0s)
+    5   0.4061  0.840 0.741  |   0.7041  0.759 0.536     0.000962      4s
+  >> Epoch 6/40 — training
+     batch    9/91  loss=0.475  (24.7 batch/s, ETA 3s)
+     batch   18/91  loss=0.322  (24.6 batch/s, ETA 3s)
+     batch   27/91  loss=0.548  (24.5 batch/s, ETA 3s)
+     batch   36/91  loss=0.405  (24.5 batch/s, ETA 2s)
+     batch   45/91  loss=0.443  (24.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.372  (24.5 batch/s, ETA 2s)
+     batch   63/91  loss=0.316  (24.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.307  (24.4 batch/s, ETA 1s)
+     batch   81/91  loss=0.215  (24.4 batch/s, ETA 0s)
+     batch   90/91  loss=0.436  (24.4 batch/s, ETA 0s)
+     batch   91/91  loss=0.518  (24.5 batch/s, ETA 0s)
+  >> Epoch 6/40 — validating
+     batch    2/20  loss=0.024  (62.3 batch/s, ETA 0s)
+     batch    4/20  loss=0.017  (63.0 batch/s, ETA 0s)
+     batch    6/20  loss=0.009  (62.6 batch/s, ETA 0s)
+     batch    8/20  loss=0.009  (62.5 batch/s, ETA 0s)
+     batch   10/20  loss=0.007  (62.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.027  (62.8 batch/s, ETA 0s)
+     batch   14/20  loss=0.004  (63.0 batch/s, ETA 0s)
+     batch   16/20  loss=3.989  (63.1 batch/s, ETA 0s)
+     batch   18/20  loss=0.022  (63.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.017  (64.3 batch/s, ETA 0s)
+    6   0.3751  0.846 0.769  |   0.5695  0.864 0.724     0.000946      4s *
+  >> Epoch 7/40 — training
+     batch    9/91  loss=0.413  (24.6 batch/s, ETA 3s)
+     batch   18/91  loss=0.263  (24.6 batch/s, ETA 3s)
+     batch   27/91  loss=0.517  (24.5 batch/s, ETA 3s)
+     batch   36/91  loss=0.318  (24.5 batch/s, ETA 2s)
+     batch   45/91  loss=0.308  (24.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.332  (24.4 batch/s, ETA 2s)
+     batch   63/91  loss=0.489  (24.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.274  (24.4 batch/s, ETA 1s)
+     batch   81/91  loss=0.230  (24.4 batch/s, ETA 0s)
+     batch   90/91  loss=0.324  (24.4 batch/s, ETA 0s)
+     batch   91/91  loss=0.234  (24.5 batch/s, ETA 0s)
+  >> Epoch 7/40 — validating
+     batch    2/20  loss=0.384  (63.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.322  (63.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.317  (63.2 batch/s, ETA 0s)
+     batch    8/20  loss=0.186  (63.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.089  (63.2 batch/s, ETA 0s)
+     batch   12/20  loss=0.463  (63.1 batch/s, ETA 0s)
+     batch   14/20  loss=0.066  (63.0 batch/s, ETA 0s)
+     batch   16/20  loss=0.468  (63.1 batch/s, ETA 0s)
+     batch   18/20  loss=0.013  (63.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.001  (64.2 batch/s, ETA 0s)
+    7   0.3517  0.853 0.788  |   0.3695  0.852 0.789     0.000926      4s *
+  >> Epoch 8/40 — training
+     batch    9/91  loss=0.205  (24.5 batch/s, ETA 3s)
+     batch   18/91  loss=0.304  (24.5 batch/s, ETA 3s)
+     batch   27/91  loss=0.407  (24.4 batch/s, ETA 3s)
+     batch   36/91  loss=0.240  (24.5 batch/s, ETA 2s)
+     batch   45/91  loss=0.307  (24.5 batch/s, ETA 2s)
+     batch   54/91  loss=0.385  (24.4 batch/s, ETA 2s)
+     batch   63/91  loss=0.299  (24.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.309  (24.4 batch/s, ETA 1s)
+     batch   81/91  loss=0.448  (24.4 batch/s, ETA 0s)
+     batch   90/91  loss=0.283  (24.4 batch/s, ETA 0s)
+     batch   91/91  loss=0.417  (24.4 batch/s, ETA 0s)
+  >> Epoch 8/40 — validating
+     batch    2/20  loss=1.310  (62.1 batch/s, ETA 0s)
+     batch    4/20  loss=0.738  (62.5 batch/s, ETA 0s)
+     batch    6/20  loss=0.135  (61.9 batch/s, ETA 0s)
+     batch    8/20  loss=0.708  (62.5 batch/s, ETA 0s)
+     batch   10/20  loss=0.640  (62.7 batch/s, ETA 0s)
+     batch   12/20  loss=0.831  (62.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.000  (63.0 batch/s, ETA 0s)
+     batch   16/20  loss=0.172  (63.0 batch/s, ETA 0s)
+     batch   18/20  loss=0.039  (63.0 batch/s, ETA 0s)
+     batch   20/20  loss=2.343  (64.0 batch/s, ETA 0s)
+    8   0.3185  0.868 0.825  |   0.6621  0.636 0.698     0.000905      4s
+  >> Epoch 9/40 — training
+     batch    9/91  loss=0.498  (24.3 batch/s, ETA 3s)
+     batch   18/91  loss=0.298  (24.5 batch/s, ETA 3s)
+     batch   27/91  loss=0.368  (24.4 batch/s, ETA 3s)
+     batch   36/91  loss=0.435  (24.4 batch/s, ETA 2s)
+     batch   45/91  loss=0.332  (24.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.291  (24.4 batch/s, ETA 2s)
+     batch   63/91  loss=0.353  (24.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.252  (24.4 batch/s, ETA 1s)
+     batch   81/91  loss=0.224  (24.4 batch/s, ETA 0s)
+     batch   90/91  loss=0.277  (24.4 batch/s, ETA 0s)
+     batch   91/91  loss=0.352  (24.4 batch/s, ETA 0s)
+  >> Epoch 9/40 — validating
+     batch    2/20  loss=2.987  (62.6 batch/s, ETA 0s)
+     batch    4/20  loss=1.643  (62.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.137  (62.9 batch/s, ETA 0s)
+     batch    8/20  loss=1.012  (62.8 batch/s, ETA 0s)
+     batch   10/20  loss=0.776  (62.9 batch/s, ETA 0s)
+     batch   12/20  loss=1.187  (63.0 batch/s, ETA 0s)
+     batch   14/20  loss=0.001  (63.0 batch/s, ETA 0s)
+     batch   16/20  loss=0.017  (63.1 batch/s, ETA 0s)
+     batch   18/20  loss=0.600  (63.1 batch/s, ETA 0s)
+     batch   20/20  loss=0.007  (64.0 batch/s, ETA 0s)
+    9   0.3077  0.875 0.837  |   0.9759  0.616 0.722     0.000880      4s
+  >> Epoch 10/40 — training
+     batch    9/91  loss=0.237  (24.3 batch/s, ETA 3s)
+     batch   18/91  loss=0.231  (24.3 batch/s, ETA 3s)
+     batch   27/91  loss=0.353  (24.3 batch/s, ETA 3s)
+     batch   36/91  loss=0.442  (24.3 batch/s, ETA 2s)
+     batch   45/91  loss=0.384  (24.3 batch/s, ETA 2s)
+     batch   54/91  loss=0.414  (24.3 batch/s, ETA 2s)
+     batch   63/91  loss=0.194  (24.3 batch/s, ETA 1s)
+     batch   72/91  loss=0.212  (24.3 batch/s, ETA 1s)
+     batch   81/91  loss=0.206  (24.3 batch/s, ETA 0s)
+     batch   90/91  loss=0.210  (24.3 batch/s, ETA 0s)
+     batch   91/91  loss=0.153  (24.3 batch/s, ETA 0s)
+  >> Epoch 10/40 — validating
+     batch    2/20  loss=0.024  (62.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.011  (63.1 batch/s, ETA 0s)
+     batch    6/20  loss=0.002  (63.0 batch/s, ETA 0s)
+     batch    8/20  loss=0.122  (63.0 batch/s, ETA 0s)
+     batch   10/20  loss=0.179  (62.9 batch/s, ETA 0s)
+     batch   12/20  loss=0.379  (63.0 batch/s, ETA 0s)
+     batch   14/20  loss=0.005  (63.0 batch/s, ETA 0s)
+     batch   16/20  loss=0.897  (62.9 batch/s, ETA 0s)
+     batch   18/20  loss=0.098  (62.9 batch/s, ETA 0s)
+     batch   20/20  loss=0.001  (63.8 batch/s, ETA 0s)
+   10   0.2795  0.883 0.858  |   0.3183  0.859 0.803     0.000854      4s *
+  >> Epoch 11/40 — training
+     batch    9/91  loss=0.229  (24.4 batch/s, ETA 3s)
+     batch   18/91  loss=0.239  (24.4 batch/s, ETA 3s)
+     batch   27/91  loss=0.182  (24.4 batch/s, ETA 3s)
+     batch   36/91  loss=0.217  (24.4 batch/s, ETA 2s)
+     batch   45/91  loss=0.463  (24.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.143  (24.4 batch/s, ETA 2s)
+     batch   63/91  loss=0.303  (24.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.240  (24.4 batch/s, ETA 1s)
+     batch   81/91  loss=0.479  (24.3 batch/s, ETA 0s)
+     batch   90/91  loss=0.266  (24.4 batch/s, ETA 0s)
+     batch   91/91  loss=0.270  (24.4 batch/s, ETA 0s)
+  >> Epoch 11/40 — validating
+     batch    2/20  loss=0.004  (62.5 batch/s, ETA 0s)
+     batch    4/20  loss=0.002  (62.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.000  (61.9 batch/s, ETA 0s)
+     batch    8/20  loss=0.000  (62.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.000  (62.3 batch/s, ETA 0s)
+     batch   12/20  loss=0.252  (62.2 batch/s, ETA 0s)
+     batch   14/20  loss=0.263  (62.1 batch/s, ETA 0s)
+     batch   16/20  loss=4.348  (62.1 batch/s, ETA 0s)
+     batch   18/20  loss=2.184  (62.3 batch/s, ETA 0s)
+     batch   20/20  loss=2.762  (63.3 batch/s, ETA 0s)
+   11   0.2436  0.896 0.879  |   1.1277  0.711 0.446     0.000825      4s
+  >> Epoch 12/40 — training
+     batch    9/91  loss=0.156  (24.4 batch/s, ETA 3s)
+     batch   18/91  loss=0.222  (24.3 batch/s, ETA 3s)
+     batch   27/91  loss=0.327  (24.3 batch/s, ETA 3s)
+     batch   36/91  loss=0.314  (24.4 batch/s, ETA 2s)
+     batch   45/91  loss=0.140  (24.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.251  (24.4 batch/s, ETA 2s)
+     batch   63/91  loss=0.122  (24.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.248  (24.4 batch/s, ETA 1s)
+     batch   81/91  loss=0.333  (24.4 batch/s, ETA 0s)
+     batch   90/91  loss=0.195  (24.4 batch/s, ETA 0s)
+     batch   91/91  loss=0.207  (24.4 batch/s, ETA 0s)
+  >> Epoch 12/40 — validating
+     batch    2/20  loss=3.444  (61.6 batch/s, ETA 0s)
+     batch    4/20  loss=1.880  (62.7 batch/s, ETA 0s)
+     batch    6/20  loss=0.024  (62.7 batch/s, ETA 0s)
+     batch    8/20  loss=1.296  (62.7 batch/s, ETA 0s)
+     batch   10/20  loss=1.406  (62.9 batch/s, ETA 0s)
+     batch   12/20  loss=1.950  (62.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.007  (62.9 batch/s, ETA 0s)
+     batch   16/20  loss=0.009  (63.0 batch/s, ETA 0s)
+     batch   18/20  loss=1.145  (63.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.076  (63.8 batch/s, ETA 0s)
+   12   0.2315  0.913 0.904  |   1.1899  0.579 0.672     0.000794      4s
+  >> Epoch 13/40 — training
+     batch    9/91  loss=0.200  (24.4 batch/s, ETA 3s)
+     batch   18/91  loss=0.127  (24.4 batch/s, ETA 3s)
+     batch   27/91  loss=0.199  (24.4 batch/s, ETA 3s)
+     batch   36/91  loss=0.172  (24.4 batch/s, ETA 2s)
+     batch   45/91  loss=0.259  (24.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.122  (24.4 batch/s, ETA 2s)
+     batch   63/91  loss=0.122  (24.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.098  (24.4 batch/s, ETA 1s)
+     batch   81/91  loss=0.165  (24.4 batch/s, ETA 0s)
+     batch   90/91  loss=0.077  (24.4 batch/s, ETA 0s)
+     batch   91/91  loss=0.120  (24.4 batch/s, ETA 0s)
+  >> Epoch 13/40 — validating
+     batch    2/20  loss=0.002  (61.7 batch/s, ETA 0s)
+     batch    4/20  loss=0.000  (62.5 batch/s, ETA 0s)
+     batch    6/20  loss=0.000  (62.6 batch/s, ETA 0s)
+     batch    8/20  loss=0.258  (63.0 batch/s, ETA 0s)
+     batch   10/20  loss=0.531  (62.6 batch/s, ETA 0s)
+     batch   12/20  loss=0.419  (62.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.000  (63.0 batch/s, ETA 0s)
+     batch   16/20  loss=1.401  (62.9 batch/s, ETA 0s)
+     batch   18/20  loss=0.026  (62.8 batch/s, ETA 0s)
+     batch   20/20  loss=0.000  (63.8 batch/s, ETA 0s)
+   13   0.1816  0.930 0.926  |   0.3692  0.853 0.834     0.000761      4s *
+  >> Epoch 14/40 — training
+     batch    9/91  loss=0.222  (24.5 batch/s, ETA 3s)
+     batch   18/91  loss=0.109  (24.4 batch/s, ETA 3s)
+     batch   27/91  loss=0.229  (24.4 batch/s, ETA 3s)
+     batch   36/91  loss=0.142  (24.4 batch/s, ETA 2s)
+     batch   45/91  loss=0.212  (24.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.161  (24.4 batch/s, ETA 2s)
+     batch   63/91  loss=0.097  (24.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.273  (24.4 batch/s, ETA 1s)
+     batch   81/91  loss=0.130  (24.4 batch/s, ETA 0s)
+     batch   90/91  loss=0.107  (24.3 batch/s, ETA 0s)
+     batch   91/91  loss=0.193  (24.4 batch/s, ETA 0s)
+  >> Epoch 14/40 — validating
+     batch    2/20  loss=7.540  (63.2 batch/s, ETA 0s)
+     batch    4/20  loss=4.826  (63.4 batch/s, ETA 0s)
+     batch    6/20  loss=2.502  (62.6 batch/s, ETA 0s)
+     batch    8/20  loss=3.561  (62.8 batch/s, ETA 0s)
+     batch   10/20  loss=3.185  (62.9 batch/s, ETA 0s)
+     batch   12/20  loss=2.811  (62.8 batch/s, ETA 0s)
+     batch   14/20  loss=0.000  (63.0 batch/s, ETA 0s)
+     batch   16/20  loss=0.000  (63.0 batch/s, ETA 0s)
+     batch   18/20  loss=0.811  (63.0 batch/s, ETA 0s)
+     batch   20/20  loss=0.064  (63.8 batch/s, ETA 0s)
+   14   0.1793  0.928 0.922  |   2.8006  0.388 0.554     0.000727      4s
+  >> Epoch 15/40 — training
+     batch    9/91  loss=0.111  (24.3 batch/s, ETA 3s)
+     batch   18/91  loss=0.200  (24.3 batch/s, ETA 3s)
+     batch   27/91  loss=0.178  (24.3 batch/s, ETA 3s)
+     batch   36/91  loss=0.177  (24.3 batch/s, ETA 2s)
+     batch   45/91  loss=0.067  (24.2 batch/s, ETA 2s)
+     batch   54/91  loss=0.229  (24.3 batch/s, ETA 2s)
+     batch   63/91  loss=0.180  (24.3 batch/s, ETA 1s)
+     batch   72/91  loss=0.157  (24.3 batch/s, ETA 1s)
+     batch   81/91  loss=0.141  (24.3 batch/s, ETA 0s)
+     batch   90/91  loss=0.173  (24.3 batch/s, ETA 0s)
+     batch   91/91  loss=0.155  (24.3 batch/s, ETA 0s)
+  >> Epoch 15/40 — validating
+     batch    2/20  loss=0.001  (61.8 batch/s, ETA 0s)
+     batch    4/20  loss=0.000  (61.8 batch/s, ETA 0s)
+     batch    6/20  loss=0.000  (61.3 batch/s, ETA 0s)
+     batch    8/20  loss=0.024  (61.7 batch/s, ETA 0s)
+     batch   10/20  loss=0.035  (62.1 batch/s, ETA 0s)
+     batch   12/20  loss=0.376  (62.4 batch/s, ETA 0s)
+     batch   14/20  loss=0.001  (62.6 batch/s, ETA 0s)
+     batch   16/20  loss=2.176  (62.7 batch/s, ETA 0s)
+     batch   18/20  loss=2.142  (62.8 batch/s, ETA 0s)
+     batch   20/20  loss=0.000  (63.8 batch/s, ETA 0s)
+   15   0.1669  0.934 0.933  |   0.6014  0.793 0.659     0.000691      4s
+  >> Epoch 16/40 — training
+     batch    9/91  loss=0.087  (24.4 batch/s, ETA 3s)
+     batch   18/91  loss=0.225  (24.4 batch/s, ETA 3s)
+     batch   27/91  loss=0.146  (24.3 batch/s, ETA 3s)
+     batch   36/91  loss=0.097  (24.3 batch/s, ETA 2s)
+     batch   45/91  loss=0.077  (24.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.172  (24.4 batch/s, ETA 2s)
+     batch   63/91  loss=0.085  (24.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.117  (24.4 batch/s, ETA 1s)
+     batch   81/91  loss=0.120  (24.4 batch/s, ETA 0s)
+     batch   90/91  loss=0.111  (24.3 batch/s, ETA 0s)
+     batch   91/91  loss=0.046  (24.4 batch/s, ETA 0s)
+  >> Epoch 16/40 — validating
+     batch    2/20  loss=2.921  (61.4 batch/s, ETA 0s)
+     batch    4/20  loss=1.311  (61.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.001  (61.9 batch/s, ETA 0s)
+     batch    8/20  loss=0.468  (61.7 batch/s, ETA 0s)
+     batch   10/20  loss=0.647  (62.2 batch/s, ETA 0s)
+     batch   12/20  loss=0.738  (62.3 batch/s, ETA 0s)
+     batch   14/20  loss=0.000  (62.5 batch/s, ETA 0s)
+     batch   16/20  loss=0.023  (62.6 batch/s, ETA 0s)
+     batch   18/20  loss=0.005  (62.6 batch/s, ETA 0s)
+     batch   20/20  loss=0.002  (63.5 batch/s, ETA 0s)
+   16   0.1157  0.953 0.952  |   0.6883  0.752 0.814     0.000655      4s
+  >> Epoch 17/40 — training
+     batch    9/91  loss=0.090  (24.4 batch/s, ETA 3s)
+     batch   18/91  loss=0.116  (24.3 batch/s, ETA 3s)
+     batch   27/91  loss=0.055  (24.3 batch/s, ETA 3s)
+     batch   36/91  loss=0.065  (24.3 batch/s, ETA 2s)
+     batch   45/91  loss=0.046  (24.3 batch/s, ETA 2s)
+     batch   54/91  loss=0.191  (24.3 batch/s, ETA 2s)
+     batch   63/91  loss=0.089  (24.3 batch/s, ETA 1s)
+     batch   72/91  loss=0.117  (24.2 batch/s, ETA 1s)
+     batch   81/91  loss=0.086  (24.1 batch/s, ETA 0s)
+     batch   90/91  loss=0.107  (24.1 batch/s, ETA 0s)
+     batch   91/91  loss=0.128  (24.1 batch/s, ETA 0s)
+  >> Epoch 17/40 — validating
+     batch    2/20  loss=0.000  (62.2 batch/s, ETA 0s)
+     batch    4/20  loss=0.000  (61.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.000  (62.0 batch/s, ETA 0s)
+     batch    8/20  loss=0.001  (61.7 batch/s, ETA 0s)
+     batch   10/20  loss=0.007  (61.7 batch/s, ETA 0s)
+     batch   12/20  loss=0.014  (61.3 batch/s, ETA 0s)
+     batch   14/20  loss=0.002  (61.6 batch/s, ETA 0s)
+     batch   16/20  loss=3.422  (61.7 batch/s, ETA 0s)
+     batch   18/20  loss=0.003  (61.8 batch/s, ETA 0s)
+     batch   20/20  loss=0.002  (62.6 batch/s, ETA 0s)
+   17   0.0889  0.967 0.967  |   0.5327  0.863 0.747     0.000617      4s
+  >> Epoch 18/40 — training
+     batch    9/91  loss=0.111  (22.9 batch/s, ETA 4s)
+     batch   18/91  loss=0.110  (22.4 batch/s, ETA 3s)
+     batch   27/91  loss=0.068  (22.4 batch/s, ETA 3s)
+     batch   36/91  loss=0.041  (22.5 batch/s, ETA 2s)
+     batch   45/91  loss=0.155  (22.7 batch/s, ETA 2s)
+     batch   54/91  loss=0.161  (22.8 batch/s, ETA 2s)
+     batch   63/91  loss=0.038  (22.8 batch/s, ETA 1s)
+     batch   72/91  loss=0.062  (23.0 batch/s, ETA 1s)
+     batch   81/91  loss=0.015  (23.0 batch/s, ETA 0s)
+     batch   90/91  loss=0.045  (23.0 batch/s, ETA 0s)
+     batch   91/91  loss=0.074  (23.1 batch/s, ETA 0s)
+  >> Epoch 18/40 — validating
+     batch    2/20  loss=0.000  (59.0 batch/s, ETA 0s)
+     batch    4/20  loss=0.000  (59.5 batch/s, ETA 0s)
+     batch    6/20  loss=0.000  (60.3 batch/s, ETA 0s)
+     batch    8/20  loss=0.002  (60.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.134  (60.7 batch/s, ETA 0s)
+     batch   12/20  loss=1.782  (60.9 batch/s, ETA 0s)
+     batch   14/20  loss=0.103  (60.8 batch/s, ETA 0s)
+     batch   16/20  loss=5.211  (61.1 batch/s, ETA 0s)
+     batch   18/20  loss=2.825  (61.1 batch/s, ETA 0s)
+     batch   20/20  loss=0.000  (61.8 batch/s, ETA 0s)
+   18   0.0819  0.970 0.970  |   1.4744  0.777 0.630     0.000578      4s
+  >> Epoch 19/40 — training
+     batch    9/91  loss=0.164  (23.3 batch/s, ETA 4s)
+     batch   18/91  loss=0.039  (22.9 batch/s, ETA 3s)
+     batch   27/91  loss=0.064  (23.0 batch/s, ETA 3s)
+     batch   36/91  loss=0.128  (23.1 batch/s, ETA 2s)
+     batch   45/91  loss=0.060  (23.2 batch/s, ETA 2s)
+     batch   54/91  loss=0.111  (23.1 batch/s, ETA 2s)
+     batch   63/91  loss=0.049  (23.0 batch/s, ETA 1s)
+     batch   72/91  loss=0.117  (23.0 batch/s, ETA 1s)
+     batch   81/91  loss=0.144  (23.1 batch/s, ETA 0s)
+     batch   90/91  loss=0.246  (23.2 batch/s, ETA 0s)
+     batch   91/91  loss=0.051  (23.2 batch/s, ETA 0s)
+  >> Epoch 19/40 — validating
+     batch    2/20  loss=0.000  (57.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.000  (59.6 batch/s, ETA 0s)
+     batch    6/20  loss=0.000  (60.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.005  (60.4 batch/s, ETA 0s)
+     batch   10/20  loss=0.004  (60.4 batch/s, ETA 0s)
+     batch   12/20  loss=0.022  (60.6 batch/s, ETA 0s)
+     batch   14/20  loss=0.000  (60.4 batch/s, ETA 0s)
+     batch   16/20  loss=3.712  (60.6 batch/s, ETA 0s)
+     batch   18/20  loss=0.000  (60.3 batch/s, ETA 0s)
+     batch   20/20  loss=0.000  (61.4 batch/s, ETA 0s)
+   19   0.0836  0.969 0.969  |   0.5337  0.864 0.738     0.000539      4s
+  >> Epoch 20/40 — training
+     batch    9/91  loss=0.101  (23.4 batch/s, ETA 3s)
+     batch   18/91  loss=0.032  (23.0 batch/s, ETA 3s)
+     batch   27/91  loss=0.013  (23.0 batch/s, ETA 3s)
+     batch   36/91  loss=0.046  (23.2 batch/s, ETA 2s)
+     batch   45/91  loss=0.028  (23.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.081  (23.0 batch/s, ETA 2s)
+     batch   63/91  loss=0.058  (23.0 batch/s, ETA 1s)
+     batch   72/91  loss=0.160  (23.1 batch/s, ETA 1s)
+     batch   81/91  loss=0.044  (23.2 batch/s, ETA 0s)
+     batch   90/91  loss=0.109  (23.2 batch/s, ETA 0s)
+     batch   91/91  loss=0.089  (23.2 batch/s, ETA 0s)
+  >> Epoch 20/40 — validating
+     batch    2/20  loss=1.451  (61.6 batch/s, ETA 0s)
+     batch    4/20  loss=0.546  (60.9 batch/s, ETA 0s)
+     batch    6/20  loss=0.000  (60.5 batch/s, ETA 0s)
+     batch    8/20  loss=0.000  (60.3 batch/s, ETA 0s)
+     batch   10/20  loss=0.000  (60.4 batch/s, ETA 0s)
+     batch   12/20  loss=0.003  (60.0 batch/s, ETA 0s)
+     batch   14/20  loss=0.015  (60.2 batch/s, ETA 0s)
+     batch   16/20  loss=1.593  (60.1 batch/s, ETA 0s)
+     batch   18/20  loss=0.036  (60.2 batch/s, ETA 0s)
+     batch   20/20  loss=0.038  (60.9 batch/s, ETA 0s)
+   20   0.0582  0.977 0.976  |   0.7511  0.812 0.800     0.000500      4s
+  >> Epoch 21/40 — training
+     batch    9/91  loss=0.038  (23.2 batch/s, ETA 4s)
+     batch   18/91  loss=0.038  (23.3 batch/s, ETA 3s)
+     batch   27/91  loss=0.011  (23.3 batch/s, ETA 3s)
+     batch   36/91  loss=0.048  (23.3 batch/s, ETA 2s)
+     batch   45/91  loss=0.046  (23.4 batch/s, ETA 2s)
+     batch   54/91  loss=0.024  (23.4 batch/s, ETA 2s)
+     batch   63/91  loss=0.044  (23.4 batch/s, ETA 1s)
+     batch   72/91  loss=0.044  (23.3 batch/s, ETA 1s)
+     batch   81/91  loss=0.012  (23.4 batch/s, ETA 0s)
+     batch   90/91  loss=0.040  (23.4 batch/s, ETA 0s)
+     batch   91/91  loss=0.023  (23.4 batch/s, ETA 0s)
+  >> Epoch 21/40 — validating
+     batch    2/20  loss=0.000  (59.0 batch/s, ETA 0s)
+     batch    4/20  loss=0.000  (59.9 batch/s, ETA 0s)
+     batch    6/20  loss=0.000  (60.1 batch/s, ETA 0s)
+     batch    8/20  loss=0.000  (60.6 batch/s, ETA 0s)
+     batch   10/20  loss=0.000  (60.6 batch/s, ETA 0s)
+     batch   12/20  loss=0.000  (60.8 batch/s, ETA 0s)
+     batch   14/20  loss=0.002  (60.6 batch/s, ETA 0s)
+     batch   16/20  loss=2.283  (60.8 batch/s, ETA 0s)
+     batch   18/20  loss=0.000  (60.7 batch/s, ETA 0s)
+     batch   20/20  loss=0.000  (61.8 batch/s, ETA 0s)
+   21   0.0393  0.985 0.986  |   0.7306  0.881 0.784     0.000461      4s
+
+Early stop: val F1 hasn't improved in 8 epochs.
+────────────────────────────────────────────────────────────────────────────────
+Training done in 1.5m.  Best val F1 = 0.8337
+
+Loading best model for test evaluation...
+  >> TEST evaluation
+     batch    2/21  loss=0.002  (19.6 batch/s, ETA 1s)
+     batch    4/21  loss=0.002  (19.4 batch/s, ETA 1s)
+     batch    6/21  loss=0.000  (19.4 batch/s, ETA 1s)
+     batch    8/21  loss=0.003  (19.4 batch/s, ETA 1s)
+     batch   10/21  loss=0.056  (19.4 batch/s, ETA 1s)
+     batch   12/21  loss=1.421  (19.4 batch/s, ETA 0s)
+     batch   14/21  loss=0.131  (19.5 batch/s, ETA 0s)
+     batch   16/21  loss=0.001  (19.5 batch/s, ETA 0s)
+     batch   18/21  loss=0.279  (19.5 batch/s, ETA 0s)
+     batch   20/21  loss=0.000  (19.4 batch/s, ETA 0s)
+     batch   21/21  loss=0.004  (19.7 batch/s, ETA 0s)
+
+TEST RESULTS
+  loss     = 0.3090
+  accuracy = 0.8886
+  macro-F1 = 0.8252
+
+Per-class test metrics:
+           class  precision  recall     f1  support
+       healthy 1     0.9195  0.9088 0.9141      855
+  stator short 1     1.0000  1.0000 1.0000      171
+  bearing bpfo 3     0.3710  0.4035 0.3866      114
+broken rotor bar     1.0000  1.0000 1.0000      171
+
+Misclassified test samples: 146 / 1311 (11.1%)
+
+======================================================================
+DONE — outputs in: C:\Project Work\Outputs_nobpfo100\training\E4_mod_alexnet_227
+======================================================================
+
+======================================================================
+>>> RUNNING train_dwt_cnn_nobpfo100.py
+======================================================================
+======================================================================
+DWT CNN TRAINING — RUN: DWT_multibranch_plain_v1
+Started: 2026-05-10 14:47:47
+======================================================================
+Device             : cuda  (NVIDIA GeForce RTX 3060 Laptop GPU)
+VRAM               : 6.0 GB
+Mixed precision    : True
+Model type         : multibranch_plain
+Branch channels    : stem=24  mid=48
+Features dir       : C:\Project Work\Outputs_nobpfo100\features\dwt
+Healthy subsample  : None
+Class weighting    : False
+Head dropout       : 0.4
+Weight decay       : 0.0001
+Label smoothing    : 0.0
+Batch size         : 128
+Num workers        : 4
+Max epochs         : 40  (patience=8, min=12)
+
+Loading precomputed features:
+  Loading train.pt ... 5814 samples, 675 MB, mmap (0.0s)
+  Loading val.pt ... 1254 samples, 146 MB, mmap (0.0s)
+  Loading test.pt ... 1311 samples, 152 MB, mmap (0.0s)
+
+4 classes: ['healthy 1', 'stator short 1', 'bearing bpfo 3', 'broken rotor bar']
+Sub-bands: 10  (['cD2', 'cD3', 'cD4', 'cD5', 'cD6', 'cD7', 'cD8', 'cD9', 'cD10', 'cA10'])
+Per-branch stem config (derived from native length):
+  band   length     k   s  band (Hz)
+  cD2    5011      15   4  2500.00 - 5000.00 
+  cD3    2513      15   4  1250.00 - 2500.00 
+  cD4    1264      11   3   625.00 - 1250.00 
+  cD5    639       11   3   312.50 - 625.00  
+  cD6    327        7   2   156.25 - 312.50  
+  cD7    171        7   2    78.12 - 156.25  
+  cD8    93         3   1    39.06 - 78.12   
+  cD9    54         3   1    19.53 - 39.06   
+  cD10   34         3   1     9.77 - 19.53   
+  cA10   34         3   1     0.00 - 9.77    
+
+Train: 5814   Val: 1254   Test: 1311
+
+Train class distribution:
+  healthy 1               3876  ( 66.7%)
+  stator short 1           513  (  8.8%)
+  bearing bpfo 3           912  ( 15.7%)
+  broken rotor bar         513  (  8.8%)
+
+Model: multibranch_plain
+  total parameters      : 173,780
+  trainable parameters  : 173,780
+  params per train smpl : 29.9
+  parameters per branch :
+    cD2      11,688
+    cD3      11,688
+    cD4      11,400
+    cD5      11,400
+    cD6      11,112
+    cD7      11,112
+    cD8      10,824
+    cD9      10,824
+    cD10     10,824
+    cA10     10,824
+    HEAD     62,084
+
+--------------------------------------------------------------------------------
+epoch  tr_loss tr_acc tr_f1  |  va_loss va_acc va_f1           lr    time
+--------------------------------------------------------------------------------
+  >> Epoch 1/40 — training
+     batch    4/46  loss=1.110  (0.3 batch/s, ETA 134s)
+     batch    8/46  loss=0.921  (0.6 batch/s, ETA 61s)
+     batch   12/46  loss=1.061  (0.9 batch/s, ETA 37s)
+     batch   16/46  loss=0.909  (1.2 batch/s, ETA 24s)
+     batch   20/46  loss=0.974  (1.5 batch/s, ETA 17s)
+     batch   24/46  loss=0.904  (1.8 batch/s, ETA 12s)
+     batch   28/46  loss=0.932  (2.1 batch/s, ETA 9s)
+     batch   32/46  loss=0.842  (2.4 batch/s, ETA 6s)
+     batch   36/46  loss=0.618  (2.6 batch/s, ETA 4s)
+     batch   40/46  loss=0.652  (2.9 batch/s, ETA 2s)
+     batch   44/46  loss=0.638  (3.2 batch/s, ETA 1s)
+     batch   46/46  loss=0.656  (3.3 batch/s, ETA 0s)
+  >> Epoch 1/40 — validating
+     batch    1/10  loss=0.234  (0.1 batch/s, ETA 106s)
+     batch    2/10  loss=0.212  (0.2 batch/s, ETA 47s)
+     batch    3/10  loss=0.214  (0.3 batch/s, ETA 28s)
+     batch    4/10  loss=0.204  (0.3 batch/s, ETA 18s)
+     batch    5/10  loss=0.185  (0.4 batch/s, ETA 12s)
+     batch    6/10  loss=0.347  (0.5 batch/s, ETA 8s)
+     batch    7/10  loss=0.781  (0.6 batch/s, ETA 5s)
+     batch    8/10  loss=1.625  (0.7 batch/s, ETA 3s)
+     batch    9/10  loss=1.721  (0.8 batch/s, ETA 1s)
+     batch   10/10  loss=1.455  (0.8 batch/s, ETA 0s)
+    1   0.9011  0.666 0.260  |   0.6824  0.727 0.400     0.000998     26s *
+  >> Epoch 2/40 — training
+     batch    4/46  loss=0.666  (25.0 batch/s, ETA 2s)
+     batch    8/46  loss=0.625  (28.6 batch/s, ETA 1s)
+     batch   12/46  loss=0.514  (31.6 batch/s, ETA 1s)
+     batch   16/46  loss=0.548  (33.1 batch/s, ETA 1s)
+     batch   20/46  loss=0.511  (34.1 batch/s, ETA 1s)
+     batch   24/46  loss=0.514  (34.8 batch/s, ETA 1s)
+     batch   28/46  loss=0.484  (34.7 batch/s, ETA 1s)
+     batch   32/46  loss=0.489  (35.1 batch/s, ETA 0s)
+     batch   36/46  loss=0.507  (35.5 batch/s, ETA 0s)
+     batch   40/46  loss=0.509  (35.8 batch/s, ETA 0s)
+     batch   44/46  loss=0.520  (36.0 batch/s, ETA 0s)
+     batch   46/46  loss=0.501  (36.3 batch/s, ETA 0s)
+  >> Epoch 2/40 — validating
+     batch    1/10  loss=0.155  (17.1 batch/s, ETA 1s)
+     batch    2/10  loss=0.159  (29.5 batch/s, ETA 0s)
+     batch    3/10  loss=0.169  (39.0 batch/s, ETA 0s)
+     batch    4/10  loss=0.156  (46.2 batch/s, ETA 0s)
+     batch    5/10  loss=0.117  (52.2 batch/s, ETA 0s)
+     batch    6/10  loss=0.238  (56.0 batch/s, ETA 0s)
+     batch    7/10  loss=0.518  (61.1 batch/s, ETA 0s)
+     batch    8/10  loss=1.749  (66.0 batch/s, ETA 0s)
+     batch    9/10  loss=1.483  (70.5 batch/s, ETA 0s)
+     batch   10/10  loss=0.515  (74.4 batch/s, ETA 0s)
+    2   0.5489  0.774 0.519  |   0.5261  0.847 0.693     0.000994      1s *
+  >> Epoch 3/40 — training
+     batch    4/46  loss=0.465  (25.9 batch/s, ETA 2s)
+     batch    8/46  loss=0.475  (31.3 batch/s, ETA 1s)
+     batch   12/46  loss=0.418  (32.3 batch/s, ETA 1s)
+     batch   16/46  loss=0.532  (33.5 batch/s, ETA 1s)
+     batch   20/46  loss=0.457  (34.2 batch/s, ETA 1s)
+     batch   24/46  loss=0.384  (34.7 batch/s, ETA 1s)
+     batch   28/46  loss=0.427  (35.3 batch/s, ETA 1s)
+     batch   32/46  loss=0.547  (35.4 batch/s, ETA 0s)
+     batch   36/46  loss=0.490  (35.6 batch/s, ETA 0s)
+     batch   40/46  loss=0.495  (36.0 batch/s, ETA 0s)
+     batch   44/46  loss=0.438  (36.4 batch/s, ETA 0s)
+     batch   46/46  loss=0.593  (36.7 batch/s, ETA 0s)
+  >> Epoch 3/40 — validating
+     batch    1/10  loss=0.215  (17.1 batch/s, ETA 1s)
+     batch    2/10  loss=0.226  (29.5 batch/s, ETA 0s)
+     batch    3/10  loss=0.222  (38.8 batch/s, ETA 0s)
+     batch    4/10  loss=0.169  (46.1 batch/s, ETA 0s)
+     batch    5/10  loss=0.074  (51.2 batch/s, ETA 0s)
+     batch    6/10  loss=0.186  (54.8 batch/s, ETA 0s)
+     batch    7/10  loss=0.264  (60.1 batch/s, ETA 0s)
+     batch    8/10  loss=1.496  (65.0 batch/s, ETA 0s)
+     batch    9/10  loss=1.563  (69.5 batch/s, ETA 0s)
+     batch   10/10  loss=0.179  (73.5 batch/s, ETA 0s)
+    3   0.4830  0.810 0.629  |   0.4654  0.856 0.711     0.000986      1s *
+  >> Epoch 4/40 — training
+     batch    4/46  loss=0.514  (26.8 batch/s, ETA 2s)
+     batch    8/46  loss=0.510  (30.9 batch/s, ETA 1s)
+     batch   12/46  loss=0.467  (32.8 batch/s, ETA 1s)
+     batch   16/46  loss=0.430  (34.0 batch/s, ETA 1s)
+     batch   20/46  loss=0.348  (34.8 batch/s, ETA 1s)
+     batch   24/46  loss=0.433  (35.1 batch/s, ETA 1s)
+     batch   28/46  loss=0.451  (35.2 batch/s, ETA 1s)
+     batch   32/46  loss=0.485  (35.6 batch/s, ETA 0s)
+     batch   36/46  loss=0.439  (35.8 batch/s, ETA 0s)
+     batch   40/46  loss=0.448  (36.2 batch/s, ETA 0s)
+     batch   44/46  loss=0.332  (36.6 batch/s, ETA 0s)
+     batch   46/46  loss=0.469  (36.9 batch/s, ETA 0s)
+  >> Epoch 4/40 — validating
+     batch    1/10  loss=0.216  (27.5 batch/s, ETA 0s)
+     batch    2/10  loss=0.227  (33.9 batch/s, ETA 0s)
+     batch    3/10  loss=0.206  (43.2 batch/s, ETA 0s)
+     batch    4/10  loss=0.160  (50.5 batch/s, ETA 0s)
+     batch    5/10  loss=0.074  (55.8 batch/s, ETA 0s)
+     batch    6/10  loss=0.151  (56.7 batch/s, ETA 0s)
+     batch    7/10  loss=0.054  (61.6 batch/s, ETA 0s)
+     batch    8/10  loss=1.460  (66.5 batch/s, ETA 0s)
+     batch    9/10  loss=1.650  (67.8 batch/s, ETA 0s)
+     batch   10/10  loss=0.071  (69.2 batch/s, ETA 0s)
+    4   0.4466  0.823 0.670  |   0.4344  0.841 0.681     0.000976      1s
+  >> Epoch 5/40 — training
+     batch    4/46  loss=0.354  (24.0 batch/s, ETA 2s)
+     batch    8/46  loss=0.416  (29.4 batch/s, ETA 1s)
+     batch   12/46  loss=0.330  (31.5 batch/s, ETA 1s)
+     batch   16/46  loss=0.427  (32.5 batch/s, ETA 1s)
+     batch   20/46  loss=0.368  (33.4 batch/s, ETA 1s)
+     batch   24/46  loss=0.343  (34.1 batch/s, ETA 1s)
+     batch   28/46  loss=0.391  (34.6 batch/s, ETA 1s)
+     batch   32/46  loss=0.354  (35.0 batch/s, ETA 0s)
+     batch   36/46  loss=0.438  (35.3 batch/s, ETA 0s)
+     batch   40/46  loss=0.424  (35.6 batch/s, ETA 0s)
+     batch   44/46  loss=0.420  (36.1 batch/s, ETA 0s)
+     batch   46/46  loss=0.530  (36.5 batch/s, ETA 0s)
+  >> Epoch 5/40 — validating
+     batch    1/10  loss=0.159  (17.1 batch/s, ETA 1s)
+     batch    2/10  loss=0.204  (29.3 batch/s, ETA 0s)
+     batch    3/10  loss=0.252  (38.3 batch/s, ETA 0s)
+     batch    4/10  loss=0.181  (45.8 batch/s, ETA 0s)
+     batch    5/10  loss=0.044  (51.7 batch/s, ETA 0s)
+     batch    6/10  loss=0.124  (56.0 batch/s, ETA 0s)
+     batch    7/10  loss=0.043  (61.5 batch/s, ETA 0s)
+     batch    8/10  loss=1.426  (66.4 batch/s, ETA 0s)
+     batch    9/10  loss=1.561  (70.8 batch/s, ETA 0s)
+     batch   10/10  loss=0.047  (74.3 batch/s, ETA 0s)
+    5   0.4014  0.839 0.722  |   0.4115  0.864 0.724     0.000962      1s *
+  >> Epoch 6/40 — training
+     batch    4/46  loss=0.504  (25.5 batch/s, ETA 2s)
+     batch    8/46  loss=0.329  (29.3 batch/s, ETA 1s)
+     batch   12/46  loss=0.281  (32.2 batch/s, ETA 1s)
+     batch   16/46  loss=0.387  (33.2 batch/s, ETA 1s)
+     batch   20/46  loss=0.433  (34.1 batch/s, ETA 1s)
+     batch   24/46  loss=0.472  (34.7 batch/s, ETA 1s)
+     batch   28/46  loss=0.443  (35.2 batch/s, ETA 1s)
+     batch   32/46  loss=0.296  (35.5 batch/s, ETA 0s)
+     batch   36/46  loss=0.355  (35.6 batch/s, ETA 0s)
+     batch   40/46  loss=0.429  (36.1 batch/s, ETA 0s)
+     batch   44/46  loss=0.367  (36.5 batch/s, ETA 0s)
+     batch   46/46  loss=0.280  (36.7 batch/s, ETA 0s)
+  >> Epoch 6/40 — validating
+     batch    1/10  loss=0.264  (18.6 batch/s, ETA 0s)
+     batch    2/10  loss=0.286  (31.3 batch/s, ETA 0s)
+     batch    3/10  loss=0.204  (41.3 batch/s, ETA 0s)
+     batch    4/10  loss=0.183  (47.5 batch/s, ETA 0s)
+     batch    5/10  loss=0.113  (53.7 batch/s, ETA 0s)
+     batch    6/10  loss=0.265  (58.2 batch/s, ETA 0s)
+     batch    7/10  loss=0.035  (60.5 batch/s, ETA 0s)
+     batch    8/10  loss=1.085  (65.5 batch/s, ETA 0s)
+     batch    9/10  loss=1.031  (70.2 batch/s, ETA 0s)
+     batch   10/10  loss=0.034  (74.5 batch/s, ETA 0s)
+    6   0.3673  0.854 0.772  |   0.3566  0.861 0.773     0.000946      1s *
+  >> Epoch 7/40 — training
+     batch    4/46  loss=0.372  (27.2 batch/s, ETA 2s)
+     batch    8/46  loss=0.356  (31.6 batch/s, ETA 1s)
+     batch   12/46  loss=0.253  (33.5 batch/s, ETA 1s)
+     batch   16/46  loss=0.234  (34.0 batch/s, ETA 1s)
+     batch   20/46  loss=0.326  (34.6 batch/s, ETA 1s)
+     batch   24/46  loss=0.268  (35.0 batch/s, ETA 1s)
+     batch   28/46  loss=0.400  (35.5 batch/s, ETA 1s)
+     batch   32/46  loss=0.299  (35.8 batch/s, ETA 0s)
+     batch   36/46  loss=0.277  (36.0 batch/s, ETA 0s)
+     batch   40/46  loss=0.239  (36.3 batch/s, ETA 0s)
+     batch   44/46  loss=0.386  (36.9 batch/s, ETA 0s)
+     batch   46/46  loss=0.267  (37.0 batch/s, ETA 0s)
+  >> Epoch 7/40 — validating
+     batch    1/10  loss=0.197  (16.5 batch/s, ETA 1s)
+     batch    2/10  loss=0.218  (28.1 batch/s, ETA 0s)
+     batch    3/10  loss=0.202  (37.2 batch/s, ETA 0s)
+     batch    4/10  loss=0.174  (44.2 batch/s, ETA 0s)
+     batch    5/10  loss=0.111  (50.4 batch/s, ETA 0s)
+     batch    6/10  loss=0.263  (54.8 batch/s, ETA 0s)
+     batch    7/10  loss=0.055  (60.3 batch/s, ETA 0s)
+     batch    8/10  loss=0.817  (65.5 batch/s, ETA 0s)
+     batch    9/10  loss=1.054  (70.1 batch/s, ETA 0s)
+     batch   10/10  loss=0.015  (74.5 batch/s, ETA 0s)
+    7   0.3194  0.878 0.831  |   0.3168  0.880 0.826     0.000926      1s *
+  >> Epoch 8/40 — training
+     batch    4/46  loss=0.289  (28.1 batch/s, ETA 1s)
+     batch    8/46  loss=0.288  (31.1 batch/s, ETA 1s)
+     batch   12/46  loss=0.287  (33.1 batch/s, ETA 1s)
+     batch   16/46  loss=0.418  (34.1 batch/s, ETA 1s)
+     batch   20/46  loss=0.346  (35.0 batch/s, ETA 1s)
+     batch   24/46  loss=0.318  (35.2 batch/s, ETA 1s)
+     batch   28/46  loss=0.283  (35.5 batch/s, ETA 1s)
+     batch   32/46  loss=0.212  (35.7 batch/s, ETA 0s)
+     batch   36/46  loss=0.254  (35.9 batch/s, ETA 0s)
+     batch   40/46  loss=0.283  (36.4 batch/s, ETA 0s)
+     batch   44/46  loss=0.248  (36.9 batch/s, ETA 0s)
+     batch   46/46  loss=0.224  (37.0 batch/s, ETA 0s)
+  >> Epoch 8/40 — validating
+     batch    1/10  loss=0.001  (15.2 batch/s, ETA 1s)
+     batch    2/10  loss=0.042  (25.8 batch/s, ETA 0s)
+     batch    3/10  loss=0.183  (34.7 batch/s, ETA 0s)
+     batch    4/10  loss=0.152  (41.8 batch/s, ETA 0s)
+     batch    5/10  loss=0.090  (47.9 batch/s, ETA 0s)
+     batch    6/10  loss=0.207  (53.0 batch/s, ETA 0s)
+     batch    7/10  loss=0.038  (58.3 batch/s, ETA 0s)
+     batch    8/10  loss=2.059  (63.1 batch/s, ETA 0s)
+     batch    9/10  loss=1.112  (67.5 batch/s, ETA 0s)
+     batch   10/10  loss=0.010  (71.4 batch/s, ETA 0s)
+    8   0.2964  0.890 0.856  |   0.3974  0.865 0.743     0.000905      1s
+  >> Epoch 9/40 — training
+     batch    4/46  loss=0.282  (26.4 batch/s, ETA 2s)
+     batch    8/46  loss=0.294  (29.1 batch/s, ETA 1s)
+     batch   12/46  loss=0.231  (31.3 batch/s, ETA 1s)
+     batch   16/46  loss=0.228  (32.1 batch/s, ETA 1s)
+     batch   20/46  loss=0.266  (33.2 batch/s, ETA 1s)
+     batch   24/46  loss=0.285  (33.9 batch/s, ETA 1s)
+     batch   28/46  loss=0.264  (34.2 batch/s, ETA 1s)
+     batch   32/46  loss=0.203  (34.4 batch/s, ETA 0s)
+     batch   36/46  loss=0.265  (34.8 batch/s, ETA 0s)
+     batch   40/46  loss=0.263  (35.3 batch/s, ETA 0s)
+     batch   44/46  loss=0.253  (35.9 batch/s, ETA 0s)
+     batch   46/46  loss=0.193  (36.1 batch/s, ETA 0s)
+  >> Epoch 9/40 — validating
+     batch    1/10  loss=0.017  (21.3 batch/s, ETA 0s)
+     batch    2/10  loss=0.034  (34.6 batch/s, ETA 0s)
+     batch    3/10  loss=0.107  (44.9 batch/s, ETA 0s)
+     batch    4/10  loss=0.120  (52.8 batch/s, ETA 0s)
+     batch    5/10  loss=0.092  (58.8 batch/s, ETA 0s)
+     batch    6/10  loss=0.257  (60.6 batch/s, ETA 0s)
+     batch    7/10  loss=0.003  (65.4 batch/s, ETA 0s)
+     batch    8/10  loss=1.034  (70.4 batch/s, ETA 0s)
+     batch    9/10  loss=1.127  (74.6 batch/s, ETA 0s)
+     batch   10/10  loss=0.023  (78.5 batch/s, ETA 0s)
+    9   0.2666  0.897 0.867  |   0.2867  0.890 0.828     0.000880      1s *
+  >> Epoch 10/40 — training
+     batch    4/46  loss=0.321  (24.4 batch/s, ETA 2s)
+     batch    8/46  loss=0.209  (30.1 batch/s, ETA 1s)
+     batch   12/46  loss=0.178  (32.1 batch/s, ETA 1s)
+     batch   16/46  loss=0.292  (33.5 batch/s, ETA 1s)
+     batch   20/46  loss=0.272  (34.3 batch/s, ETA 1s)
+     batch   24/46  loss=0.261  (34.8 batch/s, ETA 1s)
+     batch   28/46  loss=0.274  (35.2 batch/s, ETA 1s)
+     batch   32/46  loss=0.275  (35.4 batch/s, ETA 0s)
+     batch   36/46  loss=0.251  (35.6 batch/s, ETA 0s)
+     batch   40/46  loss=0.212  (36.0 batch/s, ETA 0s)
+     batch   44/46  loss=0.286  (36.4 batch/s, ETA 0s)
+     batch   46/46  loss=0.386  (36.7 batch/s, ETA 0s)
+  >> Epoch 10/40 — validating
+     batch    1/10  loss=0.022  (14.0 batch/s, ETA 1s)
+     batch    2/10  loss=0.062  (24.6 batch/s, ETA 0s)
+     batch    3/10  loss=0.124  (33.2 batch/s, ETA 0s)
+     batch    4/10  loss=0.140  (40.2 batch/s, ETA 0s)
+     batch    5/10  loss=0.139  (46.1 batch/s, ETA 0s)
+     batch    6/10  loss=0.278  (51.9 batch/s, ETA 0s)
+     batch    7/10  loss=0.004  (54.9 batch/s, ETA 0s)
+     batch    8/10  loss=0.888  (57.2 batch/s, ETA 0s)
+     batch    9/10  loss=0.875  (60.9 batch/s, ETA 0s)
+     batch   10/10  loss=0.008  (64.9 batch/s, ETA 0s)
+   10   0.2634  0.897 0.873  |   0.2594  0.895 0.838     0.000854      1s *
+  >> Epoch 11/40 — training
+     batch    4/46  loss=0.208  (26.0 batch/s, ETA 2s)
+     batch    8/46  loss=0.202  (31.2 batch/s, ETA 1s)
+     batch   12/46  loss=0.338  (32.9 batch/s, ETA 1s)
+     batch   16/46  loss=0.253  (34.1 batch/s, ETA 1s)
+     batch   20/46  loss=0.292  (34.7 batch/s, ETA 1s)
+     batch   24/46  loss=0.289  (35.0 batch/s, ETA 1s)
+     batch   28/46  loss=0.288  (35.4 batch/s, ETA 1s)
+     batch   32/46  loss=0.206  (35.6 batch/s, ETA 0s)
+     batch   36/46  loss=0.253  (35.8 batch/s, ETA 0s)
+     batch   40/46  loss=0.264  (36.1 batch/s, ETA 0s)
+     batch   44/46  loss=0.266  (36.6 batch/s, ETA 0s)
+     batch   46/46  loss=0.235  (36.8 batch/s, ETA 0s)
+  >> Epoch 11/40 — validating
+     batch    1/10  loss=0.082  (14.5 batch/s, ETA 1s)
+     batch    2/10  loss=0.076  (25.6 batch/s, ETA 0s)
+     batch    3/10  loss=0.198  (34.1 batch/s, ETA 0s)
+     batch    4/10  loss=0.148  (41.5 batch/s, ETA 0s)
+     batch    5/10  loss=0.091  (47.4 batch/s, ETA 0s)
+     batch    6/10  loss=0.235  (52.6 batch/s, ETA 0s)
+     batch    7/10  loss=0.001  (57.9 batch/s, ETA 0s)
+     batch    8/10  loss=0.607  (62.6 batch/s, ETA 0s)
+     batch    9/10  loss=1.094  (67.1 batch/s, ETA 0s)
+     batch   10/10  loss=0.005  (71.3 batch/s, ETA 0s)
+   11   0.2523  0.900 0.872  |   0.2587  0.894 0.840     0.000825      1s *
+  >> Epoch 12/40 — training
+     batch    4/46  loss=0.242  (26.2 batch/s, ETA 2s)
+     batch    8/46  loss=0.230  (31.3 batch/s, ETA 1s)
+     batch   12/46  loss=0.293  (33.5 batch/s, ETA 1s)
+     batch   16/46  loss=0.219  (34.2 batch/s, ETA 1s)
+     batch   20/46  loss=0.297  (34.5 batch/s, ETA 1s)
+     batch   24/46  loss=0.197  (34.8 batch/s, ETA 1s)
+     batch   28/46  loss=0.341  (35.5 batch/s, ETA 1s)
+     batch   32/46  loss=0.289  (35.6 batch/s, ETA 0s)
+     batch   36/46  loss=0.265  (35.8 batch/s, ETA 0s)
+     batch   40/46  loss=0.246  (36.2 batch/s, ETA 0s)
+     batch   44/46  loss=0.288  (36.7 batch/s, ETA 0s)
+     batch   46/46  loss=0.220  (36.9 batch/s, ETA 0s)
+  >> Epoch 12/40 — validating
+     batch    1/10  loss=0.005  (26.2 batch/s, ETA 0s)
+     batch    2/10  loss=0.029  (39.8 batch/s, ETA 0s)
+     batch    3/10  loss=0.102  (49.7 batch/s, ETA 0s)
+     batch    4/10  loss=0.101  (57.1 batch/s, ETA 0s)
+     batch    5/10  loss=0.089  (52.7 batch/s, ETA 0s)
+     batch    6/10  loss=0.221  (56.9 batch/s, ETA 0s)
+     batch    7/10  loss=0.003  (60.9 batch/s, ETA 0s)
+     batch    8/10  loss=0.871  (65.3 batch/s, ETA 0s)
+     batch    9/10  loss=1.320  (69.6 batch/s, ETA 0s)
+     batch   10/10  loss=1.122  (73.4 batch/s, ETA 0s)
+   12   0.2499  0.897 0.872  |   0.3710  0.853 0.755     0.000794      1s
+  >> Epoch 13/40 — training
+     batch    4/46  loss=0.196  (25.9 batch/s, ETA 2s)
+     batch    8/46  loss=0.273  (30.6 batch/s, ETA 1s)
+     batch   12/46  loss=0.211  (32.5 batch/s, ETA 1s)
+     batch   16/46  loss=0.209  (33.6 batch/s, ETA 1s)
+     batch   20/46  loss=0.175  (34.3 batch/s, ETA 1s)
+     batch   24/46  loss=0.168  (34.9 batch/s, ETA 1s)
+     batch   28/46  loss=0.293  (35.3 batch/s, ETA 1s)
+     batch   32/46  loss=0.229  (35.7 batch/s, ETA 0s)
+     batch   36/46  loss=0.297  (35.9 batch/s, ETA 0s)
+     batch   40/46  loss=0.254  (36.1 batch/s, ETA 0s)
+     batch   44/46  loss=0.198  (36.3 batch/s, ETA 0s)
+     batch   46/46  loss=0.217  (36.3 batch/s, ETA 0s)
+  >> Epoch 13/40 — validating
+     batch    1/10  loss=0.005  (20.1 batch/s, ETA 0s)
+     batch    2/10  loss=0.114  (28.6 batch/s, ETA 0s)
+     batch    3/10  loss=0.388  (37.7 batch/s, ETA 0s)
+     batch    4/10  loss=0.243  (45.2 batch/s, ETA 0s)
+     batch    5/10  loss=0.050  (47.5 batch/s, ETA 0s)
+     batch    6/10  loss=0.159  (53.0 batch/s, ETA 0s)
+     batch    7/10  loss=0.004  (58.5 batch/s, ETA 0s)
+     batch    8/10  loss=0.294  (63.5 batch/s, ETA 0s)
+     batch    9/10  loss=1.370  (67.7 batch/s, ETA 0s)
+     batch   10/10  loss=0.004  (71.9 batch/s, ETA 0s)
+   13   0.2371  0.904 0.879  |   0.2685  0.905 0.886     0.000761      1s *
+  >> Epoch 14/40 — training
+     batch    4/46  loss=0.182  (24.6 batch/s, ETA 2s)
+     batch    8/46  loss=0.172  (29.8 batch/s, ETA 1s)
+     batch   12/46  loss=0.181  (32.0 batch/s, ETA 1s)
+     batch   16/46  loss=0.236  (33.2 batch/s, ETA 1s)
+     batch   20/46  loss=0.140  (33.9 batch/s, ETA 1s)
+     batch   24/46  loss=0.181  (34.5 batch/s, ETA 1s)
+     batch   28/46  loss=0.204  (34.9 batch/s, ETA 1s)
+     batch   32/46  loss=0.225  (35.1 batch/s, ETA 0s)
+     batch   36/46  loss=0.163  (35.5 batch/s, ETA 0s)
+     batch   40/46  loss=0.299  (35.9 batch/s, ETA 0s)
+     batch   44/46  loss=0.149  (36.3 batch/s, ETA 0s)
+     batch   46/46  loss=0.315  (36.2 batch/s, ETA 0s)
+  >> Epoch 14/40 — validating
+     batch    1/10  loss=0.162  (14.3 batch/s, ETA 1s)
+     batch    2/10  loss=0.121  (25.1 batch/s, ETA 0s)
+     batch    3/10  loss=0.086  (33.7 batch/s, ETA 0s)
+     batch    4/10  loss=0.053  (40.8 batch/s, ETA 0s)
+     batch    5/10  loss=0.043  (46.5 batch/s, ETA 0s)
+     batch    6/10  loss=0.151  (51.5 batch/s, ETA 0s)
+     batch    7/10  loss=0.002  (56.8 batch/s, ETA 0s)
+     batch    8/10  loss=0.485  (61.4 batch/s, ETA 0s)
+     batch    9/10  loss=1.391  (65.4 batch/s, ETA 0s)
+     batch   10/10  loss=0.002  (69.1 batch/s, ETA 0s)
+   14   0.2155  0.913 0.900  |   0.2547  0.904 0.865     0.000727      1s
+  >> Epoch 15/40 — training
+     batch    4/46  loss=0.178  (22.9 batch/s, ETA 2s)
+     batch    8/46  loss=0.129  (28.4 batch/s, ETA 1s)
+     batch   12/46  loss=0.169  (30.7 batch/s, ETA 1s)
+     batch   16/46  loss=0.266  (32.1 batch/s, ETA 1s)
+     batch   20/46  loss=0.191  (32.5 batch/s, ETA 1s)
+     batch   24/46  loss=0.188  (33.2 batch/s, ETA 1s)
+     batch   28/46  loss=0.263  (33.7 batch/s, ETA 1s)
+     batch   32/46  loss=0.195  (34.0 batch/s, ETA 0s)
+     batch   36/46  loss=0.193  (34.4 batch/s, ETA 0s)
+     batch   40/46  loss=0.226  (34.7 batch/s, ETA 0s)
+     batch   44/46  loss=0.244  (35.2 batch/s, ETA 0s)
+     batch   46/46  loss=0.213  (35.6 batch/s, ETA 0s)
+  >> Epoch 15/40 — validating
+     batch    1/10  loss=0.007  (15.5 batch/s, ETA 1s)
+     batch    2/10  loss=0.014  (26.8 batch/s, ETA 0s)
+     batch    3/10  loss=0.035  (33.6 batch/s, ETA 0s)
+     batch    4/10  loss=0.113  (39.6 batch/s, ETA 0s)
+     batch    5/10  loss=0.198  (44.7 batch/s, ETA 0s)
+     batch    6/10  loss=0.502  (48.7 batch/s, ETA 0s)
+     batch    7/10  loss=0.002  (51.7 batch/s, ETA 0s)
+     batch    8/10  loss=0.666  (56.3 batch/s, ETA 0s)
+     batch    9/10  loss=0.696  (60.7 batch/s, ETA 0s)
+     batch   10/10  loss=0.003  (64.8 batch/s, ETA 0s)
+   15   0.1976  0.918 0.907  |   0.2282  0.897 0.855     0.000691      1s
+  >> Epoch 16/40 — training
+     batch    4/46  loss=0.166  (25.8 batch/s, ETA 2s)
+     batch    8/46  loss=0.104  (31.1 batch/s, ETA 1s)
+     batch   12/46  loss=0.204  (32.6 batch/s, ETA 1s)
+     batch   16/46  loss=0.263  (33.8 batch/s, ETA 1s)
+     batch   20/46  loss=0.282  (34.5 batch/s, ETA 1s)
+     batch   24/46  loss=0.248  (34.5 batch/s, ETA 1s)
+     batch   28/46  loss=0.125  (35.0 batch/s, ETA 1s)
+     batch   32/46  loss=0.261  (35.2 batch/s, ETA 0s)
+     batch   36/46  loss=0.212  (35.5 batch/s, ETA 0s)
+     batch   40/46  loss=0.231  (35.8 batch/s, ETA 0s)
+     batch   44/46  loss=0.293  (36.2 batch/s, ETA 0s)
+     batch   46/46  loss=0.205  (36.6 batch/s, ETA 0s)
+  >> Epoch 16/40 — validating
+     batch    1/10  loss=0.150  (15.7 batch/s, ETA 1s)
+     batch    2/10  loss=0.108  (25.8 batch/s, ETA 0s)
+     batch    3/10  loss=0.159  (33.0 batch/s, ETA 0s)
+     batch    4/10  loss=0.102  (37.7 batch/s, ETA 0s)
+     batch    5/10  loss=0.096  (41.7 batch/s, ETA 0s)
+     batch    6/10  loss=0.229  (46.3 batch/s, ETA 0s)
+     batch    7/10  loss=0.001  (50.2 batch/s, ETA 0s)
+     batch    8/10  loss=0.242  (53.6 batch/s, ETA 0s)
+     batch    9/10  loss=0.998  (57.6 batch/s, ETA 0s)
+     batch   10/10  loss=0.002  (61.5 batch/s, ETA 0s)
+   16   0.2079  0.915 0.902  |   0.2131  0.919 0.896     0.000655      1s *
+  >> Epoch 17/40 — training
+     batch    4/46  loss=0.266  (25.2 batch/s, ETA 2s)
+     batch    8/46  loss=0.228  (30.0 batch/s, ETA 1s)
+     batch   12/46  loss=0.165  (31.9 batch/s, ETA 1s)
+     batch   16/46  loss=0.134  (32.9 batch/s, ETA 1s)
+     batch   20/46  loss=0.146  (33.6 batch/s, ETA 1s)
+     batch   24/46  loss=0.169  (34.0 batch/s, ETA 1s)
+     batch   28/46  loss=0.193  (34.3 batch/s, ETA 1s)
+     batch   32/46  loss=0.180  (34.7 batch/s, ETA 0s)
+     batch   36/46  loss=0.147  (35.0 batch/s, ETA 0s)
+     batch   40/46  loss=0.237  (35.3 batch/s, ETA 0s)
+     batch   44/46  loss=0.244  (35.8 batch/s, ETA 0s)
+     batch   46/46  loss=0.184  (36.1 batch/s, ETA 0s)
+  >> Epoch 17/40 — validating
+     batch    1/10  loss=0.041  (17.3 batch/s, ETA 1s)
+     batch    2/10  loss=0.056  (29.4 batch/s, ETA 0s)
+     batch    3/10  loss=0.107  (37.6 batch/s, ETA 0s)
+     batch    4/10  loss=0.051  (44.7 batch/s, ETA 0s)
+     batch    5/10  loss=0.044  (48.2 batch/s, ETA 0s)
+     batch    6/10  loss=0.124  (53.2 batch/s, ETA 0s)
+     batch    7/10  loss=0.001  (58.1 batch/s, ETA 0s)
+     batch    8/10  loss=0.275  (62.8 batch/s, ETA 0s)
+     batch    9/10  loss=1.325  (67.1 batch/s, ETA 0s)
+     batch   10/10  loss=0.004  (71.0 batch/s, ETA 0s)
+   17   0.1918  0.925 0.914  |   0.2068  0.932 0.911     0.000617      1s *
+  >> Epoch 18/40 — training
+     batch    4/46  loss=0.230  (22.2 batch/s, ETA 2s)
+     batch    8/46  loss=0.178  (27.8 batch/s, ETA 1s)
+     batch   12/46  loss=0.088  (29.8 batch/s, ETA 1s)
+     batch   16/46  loss=0.205  (31.2 batch/s, ETA 1s)
+     batch   20/46  loss=0.178  (32.3 batch/s, ETA 1s)
+     batch   24/46  loss=0.116  (33.0 batch/s, ETA 1s)
+     batch   28/46  loss=0.201  (33.5 batch/s, ETA 1s)
+     batch   32/46  loss=0.230  (34.0 batch/s, ETA 0s)
+     batch   36/46  loss=0.184  (34.2 batch/s, ETA 0s)
+     batch   40/46  loss=0.222  (34.6 batch/s, ETA 0s)
+     batch   44/46  loss=0.211  (35.1 batch/s, ETA 0s)
+     batch   46/46  loss=0.272  (35.3 batch/s, ETA 0s)
+  >> Epoch 18/40 — validating
+     batch    1/10  loss=0.033  (18.8 batch/s, ETA 0s)
+     batch    2/10  loss=0.077  (30.9 batch/s, ETA 0s)
+     batch    3/10  loss=0.193  (40.4 batch/s, ETA 0s)
+     batch    4/10  loss=0.075  (48.3 batch/s, ETA 0s)
+     batch    5/10  loss=0.073  (49.9 batch/s, ETA 0s)
+     batch    6/10  loss=0.172  (55.2 batch/s, ETA 0s)
+     batch    7/10  loss=0.001  (60.7 batch/s, ETA 0s)
+     batch    8/10  loss=0.140  (65.7 batch/s, ETA 0s)
+     batch    9/10  loss=1.027  (70.3 batch/s, ETA 0s)
+     batch   10/10  loss=0.002  (74.4 batch/s, ETA 0s)
+   18   0.1770  0.927 0.919  |   0.1828  0.931 0.913     0.000578      1s *
+  >> Epoch 19/40 — training
+     batch    4/46  loss=0.139  (23.2 batch/s, ETA 2s)
+     batch    8/46  loss=0.138  (28.3 batch/s, ETA 1s)
+     batch   12/46  loss=0.161  (30.6 batch/s, ETA 1s)
+     batch   16/46  loss=0.108  (32.1 batch/s, ETA 1s)
+     batch   20/46  loss=0.199  (33.0 batch/s, ETA 1s)
+     batch   24/46  loss=0.159  (33.5 batch/s, ETA 1s)
+     batch   28/46  loss=0.105  (34.0 batch/s, ETA 1s)
+     batch   32/46  loss=0.213  (34.4 batch/s, ETA 0s)
+     batch   36/46  loss=0.131  (34.7 batch/s, ETA 0s)
+     batch   40/46  loss=0.129  (34.9 batch/s, ETA 0s)
+     batch   44/46  loss=0.204  (35.4 batch/s, ETA 0s)
+     batch   46/46  loss=0.154  (35.5 batch/s, ETA 0s)
+  >> Epoch 19/40 — validating
+     batch    1/10  loss=0.007  (13.2 batch/s, ETA 1s)
+     batch    2/10  loss=0.015  (23.7 batch/s, ETA 0s)
+     batch    3/10  loss=0.037  (32.1 batch/s, ETA 0s)
+     batch    4/10  loss=0.084  (39.1 batch/s, ETA 0s)
+     batch    5/10  loss=0.124  (44.1 batch/s, ETA 0s)
+     batch    6/10  loss=0.482  (49.7 batch/s, ETA 0s)
+     batch    7/10  loss=0.001  (54.7 batch/s, ETA 0s)
+     batch    8/10  loss=0.523  (59.3 batch/s, ETA 0s)
+     batch    9/10  loss=0.863  (62.0 batch/s, ETA 0s)
+     batch   10/10  loss=0.001  (65.7 batch/s, ETA 0s)
+   19   0.1611  0.934 0.929  |   0.2181  0.907 0.878     0.000539      1s
+  >> Epoch 20/40 — training
+     batch    4/46  loss=0.206  (22.6 batch/s, ETA 2s)
+     batch    8/46  loss=0.168  (28.5 batch/s, ETA 1s)
+     batch   12/46  loss=0.224  (30.1 batch/s, ETA 1s)
+     batch   16/46  loss=0.140  (31.3 batch/s, ETA 1s)
+     batch   20/46  loss=0.168  (32.1 batch/s, ETA 1s)
+     batch   24/46  loss=0.169  (32.9 batch/s, ETA 1s)
+     batch   28/46  loss=0.116  (33.2 batch/s, ETA 1s)
+     batch   32/46  loss=0.213  (33.6 batch/s, ETA 0s)
+     batch   36/46  loss=0.274  (34.1 batch/s, ETA 0s)
+     batch   40/46  loss=0.179  (34.3 batch/s, ETA 0s)
+     batch   44/46  loss=0.308  (34.9 batch/s, ETA 0s)
+     batch   46/46  loss=0.158  (35.0 batch/s, ETA 0s)
+  >> Epoch 20/40 — validating
+     batch    1/10  loss=0.024  (17.2 batch/s, ETA 1s)
+     batch    2/10  loss=0.142  (29.3 batch/s, ETA 0s)
+     batch    3/10  loss=0.366  (38.5 batch/s, ETA 0s)
+     batch    4/10  loss=0.298  (45.8 batch/s, ETA 0s)
+     batch    5/10  loss=0.219  (48.1 batch/s, ETA 0s)
+     batch    6/10  loss=0.507  (53.4 batch/s, ETA 0s)
+     batch    7/10  loss=0.001  (58.4 batch/s, ETA 0s)
+     batch    8/10  loss=0.136  (63.0 batch/s, ETA 0s)
+     batch    9/10  loss=0.533  (67.3 batch/s, ETA 0s)
+     batch   10/10  loss=0.002  (71.5 batch/s, ETA 0s)
+   20   0.1976  0.918 0.910  |   0.2273  0.902 0.893     0.000500      1s
+  >> Epoch 21/40 — training
+     batch    4/46  loss=0.171  (23.6 batch/s, ETA 2s)
+     batch    8/46  loss=0.168  (28.4 batch/s, ETA 1s)
+     batch   12/46  loss=0.158  (31.1 batch/s, ETA 1s)
+     batch   16/46  loss=0.164  (32.8 batch/s, ETA 1s)
+     batch   20/46  loss=0.126  (33.5 batch/s, ETA 1s)
+     batch   24/46  loss=0.157  (33.8 batch/s, ETA 1s)
+     batch   28/46  loss=0.201  (34.2 batch/s, ETA 1s)
+     batch   32/46  loss=0.146  (34.5 batch/s, ETA 0s)
+     batch   36/46  loss=0.231  (34.9 batch/s, ETA 0s)
+     batch   40/46  loss=0.163  (34.9 batch/s, ETA 0s)
+     batch   44/46  loss=0.152  (35.6 batch/s, ETA 0s)
+     batch   46/46  loss=0.082  (35.9 batch/s, ETA 0s)
+  >> Epoch 21/40 — validating
+     batch    1/10  loss=0.014  (14.0 batch/s, ETA 1s)
+     batch    2/10  loss=0.101  (24.6 batch/s, ETA 0s)
+     batch    3/10  loss=0.278  (33.0 batch/s, ETA 0s)
+     batch    4/10  loss=0.171  (39.8 batch/s, ETA 0s)
+     batch    5/10  loss=0.119  (45.0 batch/s, ETA 0s)
+     batch    6/10  loss=0.312  (51.0 batch/s, ETA 0s)
+     batch    7/10  loss=0.001  (56.5 batch/s, ETA 0s)
+     batch    8/10  loss=0.152  (61.5 batch/s, ETA 0s)
+     batch    9/10  loss=0.736  (65.9 batch/s, ETA 0s)
+     batch   10/10  loss=0.002  (67.5 batch/s, ETA 0s)
+   21   0.1756  0.929 0.922  |   0.1924  0.919 0.906     0.000461      1s
+  >> Epoch 22/40 — training
+     batch    4/46  loss=0.158  (25.1 batch/s, ETA 2s)
+     batch    8/46  loss=0.191  (29.5 batch/s, ETA 1s)
+     batch   12/46  loss=0.172  (31.7 batch/s, ETA 1s)
+     batch   16/46  loss=0.171  (32.9 batch/s, ETA 1s)
+     batch   20/46  loss=0.224  (33.3 batch/s, ETA 1s)
+     batch   24/46  loss=0.117  (33.9 batch/s, ETA 1s)
+     batch   28/46  loss=0.153  (34.5 batch/s, ETA 1s)
+     batch   32/46  loss=0.160  (34.9 batch/s, ETA 0s)
+     batch   36/46  loss=0.180  (35.0 batch/s, ETA 0s)
+     batch   40/46  loss=0.109  (35.3 batch/s, ETA 0s)
+     batch   44/46  loss=0.117  (35.9 batch/s, ETA 0s)
+     batch   46/46  loss=0.203  (36.3 batch/s, ETA 0s)
+  >> Epoch 22/40 — validating
+     batch    1/10  loss=0.011  (17.5 batch/s, ETA 1s)
+     batch    2/10  loss=0.018  (30.3 batch/s, ETA 0s)
+     batch    3/10  loss=0.052  (39.8 batch/s, ETA 0s)
+     batch    4/10  loss=0.118  (47.3 batch/s, ETA 0s)
+     batch    5/10  loss=0.197  (53.1 batch/s, ETA 0s)
+     batch    6/10  loss=0.610  (58.4 batch/s, ETA 0s)
+     batch    7/10  loss=0.000  (61.7 batch/s, ETA 0s)
+     batch    8/10  loss=0.395  (65.8 batch/s, ETA 0s)
+     batch    9/10  loss=0.635  (69.4 batch/s, ETA 0s)
+     batch   10/10  loss=0.001  (72.6 batch/s, ETA 0s)
+   22   0.1571  0.936 0.930  |   0.2080  0.902 0.883     0.000422      1s
+  >> Epoch 23/40 — training
+     batch    4/46  loss=0.126  (23.4 batch/s, ETA 2s)
+     batch    8/46  loss=0.101  (29.0 batch/s, ETA 1s)
+     batch   12/46  loss=0.127  (30.8 batch/s, ETA 1s)
+     batch   16/46  loss=0.146  (31.8 batch/s, ETA 1s)
+     batch   20/46  loss=0.095  (33.1 batch/s, ETA 1s)
+     batch   24/46  loss=0.166  (33.9 batch/s, ETA 1s)
+     batch   28/46  loss=0.141  (34.0 batch/s, ETA 1s)
+     batch   32/46  loss=0.142  (34.6 batch/s, ETA 0s)
+     batch   36/46  loss=0.148  (34.8 batch/s, ETA 0s)
+     batch   40/46  loss=0.170  (35.1 batch/s, ETA 0s)
+     batch   44/46  loss=0.214  (35.6 batch/s, ETA 0s)
+     batch   46/46  loss=0.123  (35.8 batch/s, ETA 0s)
+  >> Epoch 23/40 — validating
+     batch    1/10  loss=0.036  (25.7 batch/s, ETA 0s)
+     batch    2/10  loss=0.114  (33.5 batch/s, ETA 0s)
+     batch    3/10  loss=0.273  (42.2 batch/s, ETA 0s)
+     batch    4/10  loss=0.100  (49.7 batch/s, ETA 0s)
+     batch    5/10  loss=0.084  (48.8 batch/s, ETA 0s)
+     batch    6/10  loss=0.254  (54.4 batch/s, ETA 0s)
+     batch    7/10  loss=0.000  (59.8 batch/s, ETA 0s)
+     batch    8/10  loss=0.074  (64.6 batch/s, ETA 0s)
+     batch    9/10  loss=0.805  (68.9 batch/s, ETA 0s)
+     batch   10/10  loss=0.002  (72.9 batch/s, ETA 0s)
+   23   0.1468  0.941 0.936  |   0.1778  0.923 0.908     0.000383      1s
+  >> Epoch 24/40 — training
+     batch    4/46  loss=0.143  (26.0 batch/s, ETA 2s)
+     batch    8/46  loss=0.213  (30.6 batch/s, ETA 1s)
+     batch   12/46  loss=0.149  (32.8 batch/s, ETA 1s)
+     batch   16/46  loss=0.092  (33.3 batch/s, ETA 1s)
+     batch   20/46  loss=0.170  (33.6 batch/s, ETA 1s)
+     batch   24/46  loss=0.194  (34.2 batch/s, ETA 1s)
+     batch   28/46  loss=0.219  (34.6 batch/s, ETA 1s)
+     batch   32/46  loss=0.151  (34.9 batch/s, ETA 0s)
+     batch   36/46  loss=0.155  (35.3 batch/s, ETA 0s)
+     batch   40/46  loss=0.119  (35.6 batch/s, ETA 0s)
+     batch   44/46  loss=0.094  (35.7 batch/s, ETA 0s)
+     batch   46/46  loss=0.169  (36.0 batch/s, ETA 0s)
+  >> Epoch 24/40 — validating
+     batch    1/10  loss=0.007  (14.4 batch/s, ETA 1s)
+     batch    2/10  loss=0.021  (23.4 batch/s, ETA 0s)
+     batch    3/10  loss=0.055  (31.2 batch/s, ETA 0s)
+     batch    4/10  loss=0.021  (37.7 batch/s, ETA 0s)
+     batch    5/10  loss=0.025  (42.5 batch/s, ETA 0s)
+     batch    6/10  loss=0.130  (47.8 batch/s, ETA 0s)
+     batch    7/10  loss=0.001  (52.9 batch/s, ETA 0s)
+     batch    8/10  loss=0.339  (57.6 batch/s, ETA 0s)
+     batch    9/10  loss=1.415  (61.9 batch/s, ETA 0s)
+     batch   10/10  loss=0.001  (65.5 batch/s, ETA 0s)
+   24   0.1479  0.939 0.935  |   0.2056  0.927 0.902     0.000345      1s
+  >> Epoch 25/40 — training
+     batch    4/46  loss=0.167  (23.7 batch/s, ETA 2s)
+     batch    8/46  loss=0.155  (29.2 batch/s, ETA 1s)
+     batch   12/46  loss=0.087  (31.5 batch/s, ETA 1s)
+     batch   16/46  loss=0.090  (32.8 batch/s, ETA 1s)
+     batch   20/46  loss=0.101  (33.6 batch/s, ETA 1s)
+     batch   24/46  loss=0.144  (34.1 batch/s, ETA 1s)
+     batch   28/46  loss=0.148  (34.7 batch/s, ETA 1s)
+     batch   32/46  loss=0.108  (34.8 batch/s, ETA 0s)
+     batch   36/46  loss=0.168  (35.1 batch/s, ETA 0s)
+     batch   40/46  loss=0.100  (35.5 batch/s, ETA 0s)
+     batch   44/46  loss=0.131  (35.8 batch/s, ETA 0s)
+     batch   46/46  loss=0.176  (36.1 batch/s, ETA 0s)
+  >> Epoch 25/40 — validating
+     batch    1/10  loss=0.071  (16.9 batch/s, ETA 1s)
+     batch    2/10  loss=0.156  (28.7 batch/s, ETA 0s)
+     batch    3/10  loss=0.357  (38.1 batch/s, ETA 0s)
+     batch    4/10  loss=0.140  (45.5 batch/s, ETA 0s)
+     batch    5/10  loss=0.100  (47.5 batch/s, ETA 0s)
+     batch    6/10  loss=0.376  (52.7 batch/s, ETA 0s)
+     batch    7/10  loss=0.000  (57.9 batch/s, ETA 0s)
+     batch    8/10  loss=0.047  (62.7 batch/s, ETA 0s)
+     batch    9/10  loss=0.753  (67.1 batch/s, ETA 0s)
+     batch   10/10  loss=0.001  (71.3 batch/s, ETA 0s)
+   25   0.1305  0.946 0.943  |   0.2042  0.911 0.899     0.000309      1s
+  >> Epoch 26/40 — training
+     batch    4/46  loss=0.111  (23.7 batch/s, ETA 2s)
+     batch    8/46  loss=0.090  (28.0 batch/s, ETA 1s)
+     batch   12/46  loss=0.127  (31.0 batch/s, ETA 1s)
+     batch   16/46  loss=0.121  (32.6 batch/s, ETA 1s)
+     batch   20/46  loss=0.104  (33.1 batch/s, ETA 1s)
+     batch   24/46  loss=0.084  (33.9 batch/s, ETA 1s)
+     batch   28/46  loss=0.167  (34.5 batch/s, ETA 1s)
+     batch   32/46  loss=0.103  (34.8 batch/s, ETA 0s)
+     batch   36/46  loss=0.111  (35.0 batch/s, ETA 0s)
+     batch   40/46  loss=0.121  (35.4 batch/s, ETA 0s)
+     batch   44/46  loss=0.123  (35.8 batch/s, ETA 0s)
+     batch   46/46  loss=0.138  (36.1 batch/s, ETA 0s)
+  >> Epoch 26/40 — validating
+     batch    1/10  loss=0.033  (15.5 batch/s, ETA 1s)
+     batch    2/10  loss=0.020  (26.7 batch/s, ETA 0s)
+     batch    3/10  loss=0.018  (35.8 batch/s, ETA 0s)
+     batch    4/10  loss=0.032  (43.1 batch/s, ETA 0s)
+     batch    5/10  loss=0.061  (48.4 batch/s, ETA 0s)
+     batch    6/10  loss=0.253  (53.2 batch/s, ETA 0s)
+     batch    7/10  loss=0.000  (58.4 batch/s, ETA 0s)
+     batch    8/10  loss=0.536  (63.1 batch/s, ETA 0s)
+     batch    9/10  loss=0.889  (67.6 batch/s, ETA 0s)
+     batch   10/10  loss=0.001  (71.7 batch/s, ETA 0s)
+   26   0.1276  0.950 0.947  |   0.1880  0.918 0.888     0.000273      1s
+
+Early stop: val F1 hasn't improved in 8 epochs.
+--------------------------------------------------------------------------------
+Training done in 1.0m.  Best val F1 = 0.9125
+
+Loading best model for test evaluation...
+  >> TEST evaluation
+     batch    1/11  loss=0.020  (0.1 batch/s, ETA 124s)
+     batch    2/11  loss=0.018  (0.2 batch/s, ETA 56s)
+     batch    3/11  loss=0.074  (0.2 batch/s, ETA 34s)
+     batch    4/11  loss=0.130  (0.3 batch/s, ETA 22s)
+     batch    5/11  loss=0.216  (0.4 batch/s, ETA 15s)
+     batch    6/11  loss=0.112  (0.5 batch/s, ETA 11s)
+     batch    7/11  loss=0.082  (0.6 batch/s, ETA 7s)
+     batch    8/11  loss=0.001  (0.6 batch/s, ETA 5s)
+     batch    9/11  loss=0.149  (0.7 batch/s, ETA 3s)
+     batch   10/11  loss=0.003  (0.8 batch/s, ETA 1s)
+     batch   11/11  loss=0.002  (0.9 batch/s, ETA 0s)
+
+TEST RESULTS
+  loss     = 0.0787
+  accuracy = 0.9832
+  macro-F1 = 0.9737
+
+Per-class test metrics:
+           class  precision  recall     f1  support
+       healthy 1     0.9929  0.9813 0.9871      855
+  stator short 1     1.0000  1.0000 1.0000      171
+  bearing bpfo 3     0.8710  0.9474 0.9076      114
+broken rotor bar     1.0000  1.0000 1.0000      171
+
+Misclassified test samples: 22 / 1311 (1.7%)
+
+======================================================================
+DONE — outputs in: C:\Project Work\Outputs_nobpfo100\training\DWT_multibranch_plain_v1
+======================================================================
+
+======================================================================
+>>> RUNNING train_envelope_cnn_reg_nobpfo100.py
+======================================================================
+ENVELOPE v3 FINAL - RUN: ENVELOPE_resnet_v3_reg
+
+Epoch |  Tr F1 | Val F1
+------------------------------
+    1 |  0.334 |  0.612 *
+    2 |  0.712 |  0.809 *
+    3 |  0.843 |  0.916 *
+    4 |  0.880 |  0.856 
+    5 |  0.907 |  0.864 
+    6 |  0.931 |  0.923 *
+    7 |  0.948 |  0.920 
+    8 |  0.959 |  0.914 
+    9 |  0.973 |  0.912 
+   10 |  0.974 |  0.901 
+   11 |  0.979 |  0.900 
+   12 |  0.988 |  0.911 
+   13 |  0.994 |  0.873 
+   14 |  0.997 |  0.902 
+   15 |  0.997 |  0.895 
+   16 |  0.997 |  0.882 
+   17 |  0.999 |  0.880 
+   18 |  0.991 |  0.897 
+  Optimizing temperature... done (T=0.679)
+All Done. Artifacts saved in C:\Project Work\Outputs_nobpfo100\training\ENVELOPE_resnet_v3_reg
+
+======================================================================
+>>> RUNNING train_envelope_cnn_dilated_nobpfo100.py
+======================================================================
+======================================================================
+ENVELOPE 1D-CNN TRAINING - RUN: ENVELOPE_dilated1d_v1
+Started: 2026-05-10 14:49:43
+======================================================================
+Device             : cuda  (NVIDIA GeForce RTX 3060 Laptop GPU)
+Mixed precision    : True
+Features dir       : C:\Project Work\Outputs_nobpfo100\features\envelope
+Conv channels      : (32, 32, 64, 64, 128)
+Conv kernel        : 7   (last layer hardcoded to k=3)
+Conv dilations     : (1, 2, 4, 8, 1)
+Head dropout       : 0.4
+Healthy subsample  : None
+Class weighting    : False
+Weight decay       : 0.0001
+Label smoothing    : 0.0
+Batch size         : 128
+Max epochs         : 40  (patience=8, min=12)
+
+Loading precomputed features:
+  Loading train.pt ... 5814 samples, 34 MB, mmap (0.0s)
+  Loading val.pt ... 1254 samples, 7 MB, mmap (0.0s)
+  Loading test.pt ... 1311 samples, 8 MB, mmap (0.0s)
+
+4 classes: ['healthy 1', 'stator short 1', 'bearing bpfo 3', 'broken rotor bar']
+Train: 5814   Val: 1254   Test: 1311
+
+Train class distribution:
+  healthy 1               3876  ( 66.7%)
+  stator short 1           513  (  8.8%)
+  bearing bpfo 3           912  ( 15.7%)
+  broken rotor bar         513  (  8.8%)
+
+Model: EnvelopeDilated1D
+  total parameters     : 77,092
+  trainable parameters : 77,092
+  params per train sample: 13.3
+
+--------------------------------------------------------------------------------
+epoch  tr_loss tr_acc tr_f1  |  va_loss va_acc va_f1           lr    time
+--------------------------------------------------------------------------------
+  >> Epoch 1/40 - training
+     batch    4/46  loss=1.067  (8.8 batch/s, ETA 5s)
+     batch    8/46  loss=1.071  (16.0 batch/s, ETA 2s)
+     batch   12/46  loss=1.095  (22.0 batch/s, ETA 2s)
+     batch   16/46  loss=1.358  (26.9 batch/s, ETA 1s)
+     batch   20/46  loss=1.147  (31.3 batch/s, ETA 1s)
+     batch   24/46  loss=0.956  (35.1 batch/s, ETA 1s)
+     batch   28/46  loss=0.947  (38.5 batch/s, ETA 0s)
+     batch   32/46  loss=1.045  (41.7 batch/s, ETA 0s)
+     batch   36/46  loss=1.050  (44.6 batch/s, ETA 0s)
+     batch   40/46  loss=0.868  (47.2 batch/s, ETA 0s)
+     batch   44/46  loss=0.860  (49.4 batch/s, ETA 0s)
+     batch   46/46  loss=0.803  (48.6 batch/s, ETA 0s)
+  >> Epoch 1/40 - validating
+     batch    1/10  loss=0.167  (131.3 batch/s, ETA 0s)
+     batch    2/10  loss=0.149  (159.1 batch/s, ETA 0s)
+     batch    3/10  loss=0.113  (172.0 batch/s, ETA 0s)
+     batch    4/10  loss=0.200  (173.0 batch/s, ETA 0s)
+     batch    5/10  loss=0.295  (174.8 batch/s, ETA 0s)
+     batch    6/10  loss=0.379  (176.6 batch/s, ETA 0s)
+     batch    7/10  loss=2.219  (180.3 batch/s, ETA 0s)
+     batch    8/10  loss=1.630  (183.8 batch/s, ETA 0s)
+     batch    9/10  loss=0.924  (186.7 batch/s, ETA 0s)
+     batch   10/10  loss=1.494  (164.2 batch/s, ETA 0s)
+    1   1.0797  0.623 0.344  |   0.7417  0.717 0.512     0.000998      1s *
+  >> Epoch 2/40 - training
+     batch    4/46  loss=0.681  (105.6 batch/s, ETA 0s)
+     batch    8/46  loss=0.786  (102.1 batch/s, ETA 0s)
+     batch   12/46  loss=0.645  (98.6 batch/s, ETA 0s)
+     batch   16/46  loss=0.668  (99.0 batch/s, ETA 0s)
+     batch   20/46  loss=0.820  (99.1 batch/s, ETA 0s)
+     batch   24/46  loss=0.558  (99.5 batch/s, ETA 0s)
+     batch   28/46  loss=0.662  (99.4 batch/s, ETA 0s)
+     batch   32/46  loss=0.667  (98.2 batch/s, ETA 0s)
+     batch   36/46  loss=0.489  (97.3 batch/s, ETA 0s)
+     batch   40/46  loss=0.583  (97.9 batch/s, ETA 0s)
+     batch   44/46  loss=0.651  (97.9 batch/s, ETA 0s)
+     batch   46/46  loss=0.447  (98.5 batch/s, ETA 0s)
+  >> Epoch 2/40 - validating
+     batch    1/10  loss=0.183  (191.0 batch/s, ETA 0s)
+     batch    2/10  loss=0.134  (188.2 batch/s, ETA 0s)
+     batch    3/10  loss=0.021  (186.7 batch/s, ETA 0s)
+     batch    4/10  loss=0.115  (187.2 batch/s, ETA 0s)
+     batch    5/10  loss=0.222  (188.0 batch/s, ETA 0s)
+     batch    6/10  loss=0.204  (189.8 batch/s, ETA 0s)
+     batch    7/10  loss=1.029  (191.4 batch/s, ETA 0s)
+     batch    8/10  loss=0.807  (192.2 batch/s, ETA 0s)
+     batch    9/10  loss=0.866  (192.9 batch/s, ETA 0s)
+     batch   10/10  loss=0.364  (197.2 batch/s, ETA 0s)
+    2   0.6342  0.765 0.631  |   0.3951  0.887 0.849     0.000994      1s *
+  >> Epoch 3/40 - training
+     batch    4/46  loss=0.452  (96.7 batch/s, ETA 0s)
+     batch    8/46  loss=0.505  (99.0 batch/s, ETA 0s)
+     batch   12/46  loss=0.440  (99.0 batch/s, ETA 0s)
+     batch   16/46  loss=0.381  (99.7 batch/s, ETA 0s)
+     batch   20/46  loss=0.497  (99.5 batch/s, ETA 0s)
+     batch   24/46  loss=0.462  (98.5 batch/s, ETA 0s)
+     batch   28/46  loss=0.476  (95.9 batch/s, ETA 0s)
+     batch   32/46  loss=0.419  (94.9 batch/s, ETA 0s)
+     batch   36/46  loss=0.280  (94.4 batch/s, ETA 0s)
+     batch   40/46  loss=0.448  (94.9 batch/s, ETA 0s)
+     batch   44/46  loss=0.375  (95.3 batch/s, ETA 0s)
+     batch   46/46  loss=0.414  (95.8 batch/s, ETA 0s)
+  >> Epoch 3/40 - validating
+     batch    1/10  loss=0.114  (172.5 batch/s, ETA 0s)
+     batch    2/10  loss=0.076  (173.4 batch/s, ETA 0s)
+     batch    3/10  loss=0.006  (176.1 batch/s, ETA 0s)
+     batch    4/10  loss=0.098  (179.4 batch/s, ETA 0s)
+     batch    5/10  loss=0.190  (184.5 batch/s, ETA 0s)
+     batch    6/10  loss=0.247  (187.9 batch/s, ETA 0s)
+     batch    7/10  loss=1.385  (188.5 batch/s, ETA 0s)
+     batch    8/10  loss=0.699  (189.0 batch/s, ETA 0s)
+     batch    9/10  loss=0.637  (188.3 batch/s, ETA 0s)
+     batch   10/10  loss=0.489  (190.9 batch/s, ETA 0s)
+    3   0.4345  0.831 0.760  |   0.3922  0.889 0.854     0.000986      1s *
+  >> Epoch 4/40 - training
+     batch    4/46  loss=0.475  (92.1 batch/s, ETA 0s)
+     batch    8/46  loss=0.384  (94.4 batch/s, ETA 0s)
+     batch   12/46  loss=0.321  (95.6 batch/s, ETA 0s)
+     batch   16/46  loss=0.282  (95.8 batch/s, ETA 0s)
+     batch   20/46  loss=0.328  (96.6 batch/s, ETA 0s)
+     batch   24/46  loss=0.350  (95.2 batch/s, ETA 0s)
+     batch   28/46  loss=0.296  (94.3 batch/s, ETA 0s)
+     batch   32/46  loss=0.304  (93.2 batch/s, ETA 0s)
+     batch   36/46  loss=0.316  (93.8 batch/s, ETA 0s)
+     batch   40/46  loss=0.380  (93.6 batch/s, ETA 0s)
+     batch   44/46  loss=0.359  (94.0 batch/s, ETA 0s)
+     batch   46/46  loss=0.273  (95.1 batch/s, ETA 0s)
+  >> Epoch 4/40 - validating
+     batch    1/10  loss=0.003  (204.6 batch/s, ETA 0s)
+     batch    2/10  loss=0.002  (204.8 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (203.8 batch/s, ETA 0s)
+     batch    4/10  loss=0.057  (197.3 batch/s, ETA 0s)
+     batch    5/10  loss=0.139  (195.1 batch/s, ETA 0s)
+     batch    6/10  loss=0.154  (193.8 batch/s, ETA 0s)
+     batch    7/10  loss=0.609  (196.7 batch/s, ETA 0s)
+     batch    8/10  loss=0.663  (199.8 batch/s, ETA 0s)
+     batch    9/10  loss=0.954  (200.4 batch/s, ETA 0s)
+     batch   10/10  loss=0.148  (203.3 batch/s, ETA 0s)
+    4   0.3415  0.871 0.827  |   0.2755  0.896 0.861     0.000976      1s *
+  >> Epoch 5/40 - training
+     batch    4/46  loss=0.227  (103.6 batch/s, ETA 0s)
+     batch    8/46  loss=0.302  (102.7 batch/s, ETA 0s)
+     batch   12/46  loss=0.292  (101.8 batch/s, ETA 0s)
+     batch   16/46  loss=0.464  (100.7 batch/s, ETA 0s)
+     batch   20/46  loss=0.337  (100.1 batch/s, ETA 0s)
+     batch   24/46  loss=0.212  (100.1 batch/s, ETA 0s)
+     batch   28/46  loss=0.361  (100.3 batch/s, ETA 0s)
+     batch   32/46  loss=0.254  (100.2 batch/s, ETA 0s)
+     batch   36/46  loss=0.231  (100.3 batch/s, ETA 0s)
+     batch   40/46  loss=0.210  (100.3 batch/s, ETA 0s)
+     batch   44/46  loss=0.320  (100.5 batch/s, ETA 0s)
+     batch   46/46  loss=0.192  (101.2 batch/s, ETA 0s)
+  >> Epoch 5/40 - validating
+     batch    1/10  loss=0.001  (189.2 batch/s, ETA 0s)
+     batch    2/10  loss=0.001  (194.6 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (196.3 batch/s, ETA 0s)
+     batch    4/10  loss=0.052  (198.1 batch/s, ETA 0s)
+     batch    5/10  loss=0.119  (196.5 batch/s, ETA 0s)
+     batch    6/10  loss=0.232  (196.4 batch/s, ETA 0s)
+     batch    7/10  loss=1.083  (195.4 batch/s, ETA 0s)
+     batch    8/10  loss=0.633  (194.9 batch/s, ETA 0s)
+     batch    9/10  loss=0.578  (194.6 batch/s, ETA 0s)
+     batch   10/10  loss=0.189  (197.3 batch/s, ETA 0s)
+    5   0.2855  0.886 0.849  |   0.2909  0.896 0.862     0.000962      1s *
+  >> Epoch 6/40 - training
+     batch    4/46  loss=0.211  (97.4 batch/s, ETA 0s)
+     batch    8/46  loss=0.191  (95.3 batch/s, ETA 0s)
+     batch   12/46  loss=0.304  (95.4 batch/s, ETA 0s)
+     batch   16/46  loss=0.370  (96.2 batch/s, ETA 0s)
+     batch   20/46  loss=0.290  (96.4 batch/s, ETA 0s)
+     batch   24/46  loss=0.384  (96.8 batch/s, ETA 0s)
+     batch   28/46  loss=0.245  (97.4 batch/s, ETA 0s)
+     batch   32/46  loss=0.225  (97.5 batch/s, ETA 0s)
+     batch   36/46  loss=0.207  (97.7 batch/s, ETA 0s)
+     batch   40/46  loss=0.209  (97.9 batch/s, ETA 0s)
+     batch   44/46  loss=0.203  (97.8 batch/s, ETA 0s)
+     batch   46/46  loss=0.258  (98.3 batch/s, ETA 0s)
+  >> Epoch 6/40 - validating
+     batch    1/10  loss=0.005  (173.8 batch/s, ETA 0s)
+     batch    2/10  loss=0.003  (180.2 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (182.4 batch/s, ETA 0s)
+     batch    4/10  loss=0.056  (186.4 batch/s, ETA 0s)
+     batch    5/10  loss=0.159  (183.9 batch/s, ETA 0s)
+     batch    6/10  loss=0.200  (186.4 batch/s, ETA 0s)
+     batch    7/10  loss=0.497  (190.9 batch/s, ETA 0s)
+     batch    8/10  loss=0.294  (194.6 batch/s, ETA 0s)
+     batch    9/10  loss=0.730  (195.7 batch/s, ETA 0s)
+     batch   10/10  loss=0.055  (199.8 batch/s, ETA 0s)
+    6   0.2547  0.896 0.873  |   0.2029  0.918 0.896     0.000946      1s *
+  >> Epoch 7/40 - training
+     batch    4/46  loss=0.220  (98.4 batch/s, ETA 0s)
+     batch    8/46  loss=0.158  (99.3 batch/s, ETA 0s)
+     batch   12/46  loss=0.192  (98.2 batch/s, ETA 0s)
+     batch   16/46  loss=0.233  (97.7 batch/s, ETA 0s)
+     batch   20/46  loss=0.184  (97.1 batch/s, ETA 0s)
+     batch   24/46  loss=0.228  (98.2 batch/s, ETA 0s)
+     batch   28/46  loss=0.216  (98.3 batch/s, ETA 0s)
+     batch   32/46  loss=0.233  (99.2 batch/s, ETA 0s)
+     batch   36/46  loss=0.208  (99.2 batch/s, ETA 0s)
+     batch   40/46  loss=0.220  (99.5 batch/s, ETA 0s)
+     batch   44/46  loss=0.208  (99.3 batch/s, ETA 0s)
+     batch   46/46  loss=0.202  (100.0 batch/s, ETA 0s)
+  >> Epoch 7/40 - validating
+     batch    1/10  loss=0.002  (183.3 batch/s, ETA 0s)
+     batch    2/10  loss=0.001  (170.5 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (176.5 batch/s, ETA 0s)
+     batch    4/10  loss=0.065  (181.2 batch/s, ETA 0s)
+     batch    5/10  loss=0.159  (187.7 batch/s, ETA 0s)
+     batch    6/10  loss=0.345  (192.6 batch/s, ETA 0s)
+     batch    7/10  loss=0.740  (193.7 batch/s, ETA 0s)
+     batch    8/10  loss=0.372  (194.0 batch/s, ETA 0s)
+     batch    9/10  loss=0.501  (196.4 batch/s, ETA 0s)
+     batch   10/10  loss=0.086  (202.0 batch/s, ETA 0s)
+    7   0.2114  0.915 0.896  |   0.2299  0.906 0.882     0.000926      1s
+  >> Epoch 8/40 - training
+     batch    4/46  loss=0.143  (99.1 batch/s, ETA 0s)
+     batch    8/46  loss=0.156  (98.1 batch/s, ETA 0s)
+     batch   12/46  loss=0.192  (97.5 batch/s, ETA 0s)
+     batch   16/46  loss=0.184  (95.5 batch/s, ETA 0s)
+     batch   20/46  loss=0.157  (95.5 batch/s, ETA 0s)
+     batch   24/46  loss=0.268  (96.2 batch/s, ETA 0s)
+     batch   28/46  loss=0.270  (96.4 batch/s, ETA 0s)
+     batch   32/46  loss=0.181  (97.4 batch/s, ETA 0s)
+     batch   36/46  loss=0.199  (97.2 batch/s, ETA 0s)
+     batch   40/46  loss=0.152  (96.9 batch/s, ETA 0s)
+     batch   44/46  loss=0.253  (96.9 batch/s, ETA 0s)
+     batch   46/46  loss=0.157  (97.4 batch/s, ETA 0s)
+  >> Epoch 8/40 - validating
+     batch    1/10  loss=0.011  (205.2 batch/s, ETA 0s)
+     batch    2/10  loss=0.004  (198.3 batch/s, ETA 0s)
+     batch    3/10  loss=0.001  (198.2 batch/s, ETA 0s)
+     batch    4/10  loss=0.104  (202.4 batch/s, ETA 0s)
+     batch    5/10  loss=0.294  (204.9 batch/s, ETA 0s)
+     batch    6/10  loss=0.344  (202.8 batch/s, ETA 0s)
+     batch    7/10  loss=0.307  (201.3 batch/s, ETA 0s)
+     batch    8/10  loss=0.179  (198.5 batch/s, ETA 0s)
+     batch    9/10  loss=0.553  (194.3 batch/s, ETA 0s)
+     batch   10/10  loss=0.021  (198.3 batch/s, ETA 0s)
+    8   0.2050  0.917 0.900  |   0.1851  0.919 0.902     0.000905      1s *
+  >> Epoch 9/40 - training
+     batch    4/46  loss=0.164  (99.6 batch/s, ETA 0s)
+     batch    8/46  loss=0.249  (98.5 batch/s, ETA 0s)
+     batch   12/46  loss=0.244  (99.6 batch/s, ETA 0s)
+     batch   16/46  loss=0.233  (99.6 batch/s, ETA 0s)
+     batch   20/46  loss=0.201  (98.9 batch/s, ETA 0s)
+     batch   24/46  loss=0.281  (98.8 batch/s, ETA 0s)
+     batch   28/46  loss=0.302  (99.1 batch/s, ETA 0s)
+     batch   32/46  loss=0.185  (99.1 batch/s, ETA 0s)
+     batch   36/46  loss=0.171  (99.5 batch/s, ETA 0s)
+     batch   40/46  loss=0.195  (99.7 batch/s, ETA 0s)
+     batch   44/46  loss=0.108  (99.1 batch/s, ETA 0s)
+     batch   46/46  loss=0.146  (99.9 batch/s, ETA 0s)
+  >> Epoch 9/40 - validating
+     batch    1/10  loss=0.000  (215.6 batch/s, ETA 0s)
+     batch    2/10  loss=0.000  (217.5 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (218.2 batch/s, ETA 0s)
+     batch    4/10  loss=0.060  (208.1 batch/s, ETA 0s)
+     batch    5/10  loss=0.170  (205.8 batch/s, ETA 0s)
+     batch    6/10  loss=0.186  (203.7 batch/s, ETA 0s)
+     batch    7/10  loss=0.470  (206.7 batch/s, ETA 0s)
+     batch    8/10  loss=0.333  (208.8 batch/s, ETA 0s)
+     batch    9/10  loss=0.789  (210.6 batch/s, ETA 0s)
+     batch   10/10  loss=0.060  (214.5 batch/s, ETA 0s)
+    9   0.2093  0.918 0.899  |   0.2099  0.911 0.887     0.000880      1s
+  >> Epoch 10/40 - training
+     batch    4/46  loss=0.198  (98.2 batch/s, ETA 0s)
+     batch    8/46  loss=0.139  (99.2 batch/s, ETA 0s)
+     batch   12/46  loss=0.156  (100.5 batch/s, ETA 0s)
+     batch   16/46  loss=0.168  (99.8 batch/s, ETA 0s)
+     batch   20/46  loss=0.180  (98.2 batch/s, ETA 0s)
+     batch   24/46  loss=0.189  (98.0 batch/s, ETA 0s)
+     batch   28/46  loss=0.121  (97.8 batch/s, ETA 0s)
+     batch   32/46  loss=0.161  (97.7 batch/s, ETA 0s)
+     batch   36/46  loss=0.202  (98.6 batch/s, ETA 0s)
+     batch   40/46  loss=0.198  (98.5 batch/s, ETA 0s)
+     batch   44/46  loss=0.151  (97.8 batch/s, ETA 0s)
+     batch   46/46  loss=0.106  (98.5 batch/s, ETA 0s)
+  >> Epoch 10/40 - validating
+     batch    1/10  loss=0.000  (208.8 batch/s, ETA 0s)
+     batch    2/10  loss=0.000  (212.6 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (209.8 batch/s, ETA 0s)
+     batch    4/10  loss=0.050  (207.7 batch/s, ETA 0s)
+     batch    5/10  loss=0.204  (210.0 batch/s, ETA 0s)
+     batch    6/10  loss=0.127  (211.4 batch/s, ETA 0s)
+     batch    7/10  loss=0.392  (209.5 batch/s, ETA 0s)
+     batch    8/10  loss=0.321  (210.2 batch/s, ETA 0s)
+     batch    9/10  loss=1.153  (211.1 batch/s, ETA 0s)
+     batch   10/10  loss=0.025  (214.8 batch/s, ETA 0s)
+   10   0.1728  0.928 0.914  |   0.2315  0.913 0.889     0.000854      1s
+  >> Epoch 11/40 - training
+     batch    4/46  loss=0.234  (94.2 batch/s, ETA 0s)
+     batch    8/46  loss=0.145  (94.8 batch/s, ETA 0s)
+     batch   12/46  loss=0.179  (95.4 batch/s, ETA 0s)
+     batch   16/46  loss=0.114  (95.1 batch/s, ETA 0s)
+     batch   20/46  loss=0.151  (95.0 batch/s, ETA 0s)
+     batch   24/46  loss=0.101  (95.4 batch/s, ETA 0s)
+     batch   28/46  loss=0.250  (96.0 batch/s, ETA 0s)
+     batch   32/46  loss=0.172  (96.4 batch/s, ETA 0s)
+     batch   36/46  loss=0.269  (95.9 batch/s, ETA 0s)
+     batch   40/46  loss=0.279  (96.0 batch/s, ETA 0s)
+     batch   44/46  loss=0.238  (96.3 batch/s, ETA 0s)
+     batch   46/46  loss=0.171  (97.2 batch/s, ETA 0s)
+  >> Epoch 11/40 - validating
+     batch    1/10  loss=0.000  (200.2 batch/s, ETA 0s)
+     batch    2/10  loss=0.000  (204.1 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (206.3 batch/s, ETA 0s)
+     batch    4/10  loss=0.064  (207.7 batch/s, ETA 0s)
+     batch    5/10  loss=0.169  (209.6 batch/s, ETA 0s)
+     batch    6/10  loss=0.459  (208.4 batch/s, ETA 0s)
+     batch    7/10  loss=0.725  (207.6 batch/s, ETA 0s)
+     batch    8/10  loss=0.380  (205.1 batch/s, ETA 0s)
+     batch    9/10  loss=0.390  (204.4 batch/s, ETA 0s)
+     batch   10/10  loss=0.050  (207.1 batch/s, ETA 0s)
+   11   0.1734  0.926 0.910  |   0.2273  0.901 0.882     0.000825      1s
+  >> Epoch 12/40 - training
+     batch    4/46  loss=0.164  (102.1 batch/s, ETA 0s)
+     batch    8/46  loss=0.184  (103.6 batch/s, ETA 0s)
+     batch   12/46  loss=0.104  (102.3 batch/s, ETA 0s)
+     batch   16/46  loss=0.149  (101.4 batch/s, ETA 0s)
+     batch   20/46  loss=0.135  (101.3 batch/s, ETA 0s)
+     batch   24/46  loss=0.172  (100.3 batch/s, ETA 0s)
+     batch   28/46  loss=0.155  (99.2 batch/s, ETA 0s)
+     batch   32/46  loss=0.072  (99.4 batch/s, ETA 0s)
+     batch   36/46  loss=0.129  (99.4 batch/s, ETA 0s)
+     batch   40/46  loss=0.125  (98.9 batch/s, ETA 0s)
+     batch   44/46  loss=0.129  (99.1 batch/s, ETA 0s)
+     batch   46/46  loss=0.125  (99.8 batch/s, ETA 0s)
+  >> Epoch 12/40 - validating
+     batch    1/10  loss=0.000  (193.0 batch/s, ETA 0s)
+     batch    2/10  loss=0.000  (199.1 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (201.9 batch/s, ETA 0s)
+     batch    4/10  loss=0.058  (197.9 batch/s, ETA 0s)
+     batch    5/10  loss=0.183  (195.4 batch/s, ETA 0s)
+     batch    6/10  loss=0.389  (184.6 batch/s, ETA 0s)
+     batch    7/10  loss=0.582  (187.4 batch/s, ETA 0s)
+     batch    8/10  loss=0.280  (190.4 batch/s, ETA 0s)
+     batch    9/10  loss=0.427  (192.8 batch/s, ETA 0s)
+     batch   10/10  loss=0.025  (197.4 batch/s, ETA 0s)
+   12   0.1431  0.943 0.933  |   0.1980  0.914 0.897     0.000794      1s
+  >> Epoch 13/40 - training
+     batch    4/46  loss=0.135  (99.4 batch/s, ETA 0s)
+     batch    8/46  loss=0.105  (98.8 batch/s, ETA 0s)
+     batch   12/46  loss=0.200  (97.0 batch/s, ETA 0s)
+     batch   16/46  loss=0.105  (96.0 batch/s, ETA 0s)
+     batch   20/46  loss=0.208  (96.2 batch/s, ETA 0s)
+     batch   24/46  loss=0.165  (96.4 batch/s, ETA 0s)
+     batch   28/46  loss=0.112  (97.1 batch/s, ETA 0s)
+     batch   32/46  loss=0.112  (97.0 batch/s, ETA 0s)
+     batch   36/46  loss=0.110  (97.2 batch/s, ETA 0s)
+     batch   40/46  loss=0.157  (97.5 batch/s, ETA 0s)
+     batch   44/46  loss=0.142  (97.2 batch/s, ETA 0s)
+     batch   46/46  loss=0.192  (97.5 batch/s, ETA 0s)
+  >> Epoch 13/40 - validating
+     batch    1/10  loss=0.000  (188.4 batch/s, ETA 0s)
+     batch    2/10  loss=0.000  (191.9 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (192.1 batch/s, ETA 0s)
+     batch    4/10  loss=0.117  (195.9 batch/s, ETA 0s)
+     batch    5/10  loss=0.410  (195.5 batch/s, ETA 0s)
+     batch    6/10  loss=0.424  (195.3 batch/s, ETA 0s)
+     batch    7/10  loss=0.249  (195.4 batch/s, ETA 0s)
+     batch    8/10  loss=0.205  (196.8 batch/s, ETA 0s)
+     batch    9/10  loss=0.510  (197.0 batch/s, ETA 0s)
+     batch   10/10  loss=0.018  (201.2 batch/s, ETA 0s)
+   13   0.1284  0.948 0.941  |   0.1969  0.908 0.892     0.000761      1s
+  >> Epoch 14/40 - training
+     batch    4/46  loss=0.103  (95.6 batch/s, ETA 0s)
+     batch    8/46  loss=0.138  (98.5 batch/s, ETA 0s)
+     batch   12/46  loss=0.079  (97.5 batch/s, ETA 0s)
+     batch   16/46  loss=0.138  (96.8 batch/s, ETA 0s)
+     batch   20/46  loss=0.159  (96.7 batch/s, ETA 0s)
+     batch   24/46  loss=0.112  (97.1 batch/s, ETA 0s)
+     batch   28/46  loss=0.091  (97.8 batch/s, ETA 0s)
+     batch   32/46  loss=0.115  (98.0 batch/s, ETA 0s)
+     batch   36/46  loss=0.106  (97.7 batch/s, ETA 0s)
+     batch   40/46  loss=0.161  (97.3 batch/s, ETA 0s)
+     batch   44/46  loss=0.071  (97.6 batch/s, ETA 0s)
+     batch   46/46  loss=0.088  (98.1 batch/s, ETA 0s)
+  >> Epoch 14/40 - validating
+     batch    1/10  loss=0.000  (173.5 batch/s, ETA 0s)
+     batch    2/10  loss=0.000  (179.7 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (184.7 batch/s, ETA 0s)
+     batch    4/10  loss=0.021  (187.7 batch/s, ETA 0s)
+     batch    5/10  loss=0.074  (189.2 batch/s, ETA 0s)
+     batch    6/10  loss=0.203  (187.7 batch/s, ETA 0s)
+     batch    7/10  loss=0.882  (188.1 batch/s, ETA 0s)
+     batch    8/10  loss=0.350  (190.5 batch/s, ETA 0s)
+     batch    9/10  loss=0.967  (189.6 batch/s, ETA 0s)
+     batch   10/10  loss=0.010  (191.8 batch/s, ETA 0s)
+   14   0.1103  0.958 0.952  |   0.2556  0.916 0.895     0.000727      1s
+  >> Epoch 15/40 - training
+     batch    4/46  loss=0.191  (99.2 batch/s, ETA 0s)
+     batch    8/46  loss=0.142  (98.7 batch/s, ETA 0s)
+     batch   12/46  loss=0.092  (96.9 batch/s, ETA 0s)
+     batch   16/46  loss=0.106  (97.2 batch/s, ETA 0s)
+     batch   20/46  loss=0.128  (96.8 batch/s, ETA 0s)
+     batch   24/46  loss=0.164  (97.5 batch/s, ETA 0s)
+     batch   28/46  loss=0.134  (97.6 batch/s, ETA 0s)
+     batch   32/46  loss=0.111  (98.0 batch/s, ETA 0s)
+     batch   36/46  loss=0.142  (97.9 batch/s, ETA 0s)
+     batch   40/46  loss=0.071  (97.9 batch/s, ETA 0s)
+     batch   44/46  loss=0.105  (97.8 batch/s, ETA 0s)
+     batch   46/46  loss=0.126  (98.8 batch/s, ETA 0s)
+  >> Epoch 15/40 - validating
+     batch    1/10  loss=0.000  (190.1 batch/s, ETA 0s)
+     batch    2/10  loss=0.000  (192.4 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (194.2 batch/s, ETA 0s)
+     batch    4/10  loss=0.089  (193.4 batch/s, ETA 0s)
+     batch    5/10  loss=0.324  (193.4 batch/s, ETA 0s)
+     batch    6/10  loss=0.301  (191.1 batch/s, ETA 0s)
+     batch    7/10  loss=0.336  (194.4 batch/s, ETA 0s)
+     batch    8/10  loss=0.241  (196.5 batch/s, ETA 0s)
+     batch    9/10  loss=0.649  (197.1 batch/s, ETA 0s)
+     batch   10/10  loss=0.006  (200.7 batch/s, ETA 0s)
+   15   0.1122  0.955 0.948  |   0.1984  0.916 0.899     0.000691      1s
+  >> Epoch 16/40 - training
+     batch    4/46  loss=0.097  (97.0 batch/s, ETA 0s)
+     batch    8/46  loss=0.157  (97.7 batch/s, ETA 0s)
+     batch   12/46  loss=0.064  (98.8 batch/s, ETA 0s)
+     batch   16/46  loss=0.156  (97.6 batch/s, ETA 0s)
+     batch   20/46  loss=0.120  (97.9 batch/s, ETA 0s)
+     batch   24/46  loss=0.110  (97.5 batch/s, ETA 0s)
+     batch   28/46  loss=0.077  (97.7 batch/s, ETA 0s)
+     batch   32/46  loss=0.078  (98.6 batch/s, ETA 0s)
+     batch   36/46  loss=0.088  (98.3 batch/s, ETA 0s)
+     batch   40/46  loss=0.137  (98.2 batch/s, ETA 0s)
+     batch   44/46  loss=0.072  (98.4 batch/s, ETA 0s)
+     batch   46/46  loss=0.206  (98.8 batch/s, ETA 0s)
+  >> Epoch 16/40 - validating
+     batch    1/10  loss=0.000  (172.3 batch/s, ETA 0s)
+     batch    2/10  loss=0.000  (160.7 batch/s, ETA 0s)
+     batch    3/10  loss=0.000  (171.2 batch/s, ETA 0s)
+     batch    4/10  loss=0.040  (180.0 batch/s, ETA 0s)
+     batch    5/10  loss=0.099  (185.8 batch/s, ETA 0s)
+     batch    6/10  loss=0.291  (187.5 batch/s, ETA 0s)
+     batch    7/10  loss=0.731  (188.6 batch/s, ETA 0s)
+     batch    8/10  loss=0.468  (191.2 batch/s, ETA 0s)
+     batch    9/10  loss=0.812  (193.0 batch/s, ETA 0s)
+     batch   10/10  loss=0.016  (197.4 batch/s, ETA 0s)
+   16   0.0983  0.963 0.957  |   0.2505  0.909 0.886     0.000655      1s
+
+Early stop: val F1 hasn't improved in 8 epochs.
+--------------------------------------------------------------------------------
+Training done in 9s.  Best val F1 = 0.9020
+
+Loading best model for test evaluation...
+  >> TEST evaluation
+     batch    1/11  loss=1.155  (187.0 batch/s, ETA 0s)
+     batch    2/11  loss=0.302  (192.5 batch/s, ETA 0s)
+     batch    3/11  loss=0.003  (194.4 batch/s, ETA 0s)
+     batch    4/11  loss=0.011  (195.5 batch/s, ETA 0s)
+     batch    5/11  loss=0.200  (199.4 batch/s, ETA 0s)
+     batch    6/11  loss=0.492  (201.0 batch/s, ETA 0s)
+     batch    7/11  loss=0.252  (193.9 batch/s, ETA 0s)
+     batch    8/11  loss=0.260  (192.9 batch/s, ETA 0s)
+     batch    9/11  loss=0.036  (192.1 batch/s, ETA 0s)
+     batch   10/11  loss=0.008  (192.9 batch/s, ETA 0s)
+     batch   11/11  loss=0.046  (163.3 batch/s, ETA 0s)
+
+TEST RESULTS
+  loss     = 0.2666
+  accuracy = 0.8772
+  macro-F1 = 0.8593
+
+Per-class test metrics:
+           class  precision  recall     f1  support
+       healthy 1     0.9847  0.8257 0.8982      855
+  stator short 1     0.9298  0.9298 0.9298      171
+  bearing bpfo 3     0.4770  1.0000 0.6459      114
+broken rotor bar     0.9293  1.0000 0.9634      171
+
+Misclassified test samples: 161 / 1311 (12.3%)
+
+======================================================================
+DONE - outputs in: C:\Project Work\Outputs_nobpfo100\training\ENVELOPE_dilated1d_v1
+======================================================================
+
+======================================================================
+>>> RUNNING compute_logits_nobpfo100.py
+======================================================================
+Device: cuda   AMP: True
+
+-- [stft] run=E4_mod_alexnet_227 kind=stft
+   features : C:\Project Work\Outputs_nobpfo100\features\stft
+   ckpt     : C:\Project Work\Outputs_nobpfo100\training\E4_mod_alexnet_227\best_model.pt
+   [val] wrote (1254, 4) logits   acc=0.8533   (0.9s)
+   [test] wrote (1311, 4) logits   acc=0.8886   (0.6s)
+
+-- [dwt] run=DWT_multibranch_plain_v1 kind=dwt
+   features : C:\Project Work\Outputs_nobpfo100\features\dwt
+   ckpt     : C:\Project Work\Outputs_nobpfo100\training\DWT_multibranch_plain_v1\best_model.pt
+   [val] wrote (1254, 4) logits   acc=0.9306   (0.4s)
+   [test] wrote (1311, 4) logits   acc=0.9832   (0.3s)
+
+-- [envelope] run=ENVELOPE_resnet_v3_reg kind=envelope_v3
+   features : C:\Project Work\Outputs_nobpfo100\features\envelope
+   ckpt     : C:\Project Work\Outputs_nobpfo100\training\ENVELOPE_resnet_v3_reg\best_model.pt
+   SKIP all splits (use --force to overwrite)
+
+-- [envelope_dilated] run=ENVELOPE_dilated1d_v1 kind=envelope
+   features : C:\Project Work\Outputs_nobpfo100\features\envelope
+   ckpt     : C:\Project Work\Outputs_nobpfo100\training\ENVELOPE_dilated1d_v1\best_model.pt
+   [val] wrote (1254, 4) logits   acc=0.9195   (0.1s)
+   [test] wrote (1311, 4) logits   acc=0.8764   (0.1s)
+
+DONE
+
+======================================================================
+>>> RUNNING ensemble_evaluate_nobpfo100.py
+======================================================================
+======================================================================
+ENSEMBLE EVALUATION v3 — PER-CLASS VAL-F1 WEIGHTED SOFT VOTING
+Started: 2026-05-10 14:50:05
+======================================================================
+Members required : ['dwt', 'envelope', 'envelope_dilated', 'stft']
+
+Alignment OK — val=1254 test=1311
+
+Per-class val F1 per member:
+  member      healthy 1           stator short 1      bearing bpfo 3      broken rotor bar  
+  dwt         0.9430              1.0000              0.7071              1.0000               (macro=0.9125)
+  envelope    0.9376              0.9456              0.8108              1.0000               (macro=0.9235)
+  envelope_dilated  0.9353              0.8769              0.7961              1.0000               (macro=0.9020)
+  stft        0.8760              1.0000              0.4588              1.0000               (macro=0.8337)
+
+======================================================================
+ENSEMBLE: ENSEMBLE_stft_dwt_perclass_f1  (members=['stft', 'dwt'])
+======================================================================
+  acc      = 0.9855
+  macro_f1 = 0.9772
+  wrong    = 19 / 1311
+    healthy 1              F1=0.9888
+    stator short 1         F1=1.0000
+    bearing bpfo 3         F1=0.9198
+    broken rotor bar       F1=1.0000
+  outputs -> C:\Project Work\Outputs_nobpfo100\training\ENSEMBLE_stft_dwt_perclass_f1
+
+======================================================================
+ENSEMBLE: ENSEMBLE_stft_dwt_envelope_perclass_f1  (members=['stft', 'dwt', 'envelope_dilated'])
+======================================================================
+  acc      = 0.9977
+  macro_f1 = 0.9963
+  wrong    = 3 / 1311
+    healthy 1              F1=0.9982
+    stator short 1         F1=1.0000
+    bearing bpfo 3         F1=0.9870
+    broken rotor bar       F1=1.0000
+  outputs -> C:\Project Work\Outputs_nobpfo100\training\ENSEMBLE_stft_dwt_envelope_perclass_f1
+
+======================================================================
+ENSEMBLE: ENSEMBLE_stft_dwt_envelope_v3_perclass_f1  (members=['stft', 'dwt', 'envelope'])
+======================================================================
+  acc      = 0.9863
+  macro_f1 = 0.9790
+  wrong    = 18 / 1311
+    healthy 1              F1=0.9894
+    stator short 1         F1=1.0000
+    bearing bpfo 3         F1=0.9268
+    broken rotor bar       F1=1.0000
+  outputs -> C:\Project Work\Outputs_nobpfo100\training\ENSEMBLE_stft_dwt_envelope_v3_perclass_f1
+
+======================================================================
+LEADERBOARD (v3 perclass_f1 only, raw probs)
+======================================================================
+                                     name      acc  macro_f1  F1_healthy 1  F1_stator short 1  F1_bearing bpfo 3  F1_broken rotor bar
+   ENSEMBLE_stft_dwt_envelope_perclass_f1 0.997712  0.996314      0.998243           1.000000           0.987013             1.000000
+ENSEMBLE_stft_dwt_envelope_v3_perclass_f1 0.986270  0.979048      0.989362           1.000000           0.926829             1.000000
+            ENSEMBLE_stft_dwt_perclass_f1 0.985507  0.977165      0.988830           1.000000           0.919831             1.000000
+          (solo) DWT_multibranch_plain_v1 0.983219  0.973655      0.987059           1.000000           0.907563             1.000000
+            (solo) ENVELOPE_resnet_v3_reg 0.934401  0.917482      0.947109           0.988372           0.740260             0.994186
+             (solo) ENVELOPE_dilated1d_v1 0.876430  0.858476      0.897518           0.927114           0.645892             0.963380
+                (solo) E4_mod_alexnet_227 0.888635  0.825168      0.914118           1.000000           0.386555             1.000000
+
+Leaderboard written -> C:\Project Work\Outputs_nobpfo100\training\ensemble_leaderboard_perclass_f1.csv
+
+DONE
+
+======================================================================
+>>> RUNNING ensemble_evaluate_temperature_nobpfo100.py
+======================================================================
+======================================================================
+ENSEMBLE EVALUATION v2 — TEMPERATURE-CALIBRATED EQUAL-WEIGHT VOTING
+Started: 2026-05-10 14:50:09
+======================================================================
+Device : cuda
+
+Members required : ['dwt', 'envelope', 'envelope_dilated', 'stft']
+
+-- [dwt]  val acc=0.9306 f1=0.9125   test acc=0.9832 f1=0.9737  (raw, T=1)
+-- [envelope]  val acc=0.9266 f1=0.9235   test acc=0.9344 f1=0.9175  (raw, T=1)
+-- [envelope_dilated]  val acc=0.9195 f1=0.9020   test acc=0.8764 f1=0.8585  (raw, T=1)
+-- [stft]  val acc=0.8533 f1=0.8337   test acc=0.8886 f1=0.8252  (raw, T=1)
+
+Alignment OK  —  val=1254  test=1311
+
+Fitting per-member temperature (LBFGS on val NLL):
+  dwt         T = 1.1075   val NLL  0.1828 -> 0.1816   (softens (over-confident))   (1.33s)
+  envelope    T = 0.5519   val NLL  0.4736 -> 0.3784   (sharpens (under-confident))   (0.10s)
+  envelope_dilated  T = 0.9312   val NLL  0.1851 -> 0.1845   (sharpens (under-confident))   (0.04s)
+  stft        T = 1.9812   val NLL  0.3692 -> 0.2861   (softens (over-confident))   (0.13s)
+
+  [dwt] solo test post-calibration   acc=0.9832  f1=0.9737   (argmax invariant under T scaling — sanity)
+  [envelope] solo test post-calibration   acc=0.9344  f1=0.9175   (argmax invariant under T scaling — sanity)
+  [envelope_dilated] solo test post-calibration   acc=0.8764  f1=0.8585   (argmax invariant under T scaling — sanity)
+  [stft] solo test post-calibration   acc=0.8886  f1=0.8252   (argmax invariant under T scaling — sanity)
+
+======================================================================
+ENSEMBLE: ENSEMBLE_stft_dwt_temperature  (members=['stft', 'dwt'], strategy=equal-weight on calibrated probs)
+======================================================================
+  acc      = 0.9908
+  macro_f1 = 0.9852
+  wrong    = 12 / 1311
+    healthy 1              F1=0.9930
+    stator short 1         F1=1.0000
+    bearing bpfo 3         F1=0.9478
+    broken rotor bar       F1=1.0000
+  outputs -> C:\Project Work\Outputs_nobpfo100\training\ENSEMBLE_stft_dwt_temperature
+
+======================================================================
+ENSEMBLE: ENSEMBLE_stft_dwt_envelope_temperature  (members=['stft', 'dwt', 'envelope_dilated'], strategy=equal-weight on calibrated probs)
+======================================================================
+  acc      = 0.9985
+  macro_f1 = 0.9975
+  wrong    = 2 / 1311
+    healthy 1              F1=0.9988
+    stator short 1         F1=1.0000
+    bearing bpfo 3         F1=0.9913
+    broken rotor bar       F1=1.0000
+  outputs -> C:\Project Work\Outputs_nobpfo100\training\ENSEMBLE_stft_dwt_envelope_temperature
+
+======================================================================
+ENSEMBLE: ENSEMBLE_stft_dwt_envelope_v3_temperature  (members=['stft', 'dwt', 'envelope'], strategy=equal-weight on calibrated probs)
+======================================================================
+  acc      = 0.9847
+  macro_f1 = 0.9769
+  wrong    = 20 / 1311
+    healthy 1              F1=0.9882
+    stator short 1         F1=1.0000
+    bearing bpfo 3         F1=0.9194
+    broken rotor bar       F1=1.0000
+  outputs -> C:\Project Work\Outputs_nobpfo100\training\ENSEMBLE_stft_dwt_envelope_v3_temperature
+
+======================================================================
+LEADERBOARD  (calibrated solos + temperature-calibrated ensembles)
+======================================================================
+                                     name        T      acc  macro_f1  F1_healthy 1  F1_stator short 1  F1_bearing bpfo 3  F1_broken rotor bar
+   ENSEMBLE_stft_dwt_envelope_temperature      NaN 0.998474  0.997533      0.998829           1.000000           0.991304             1.000000
+            ENSEMBLE_stft_dwt_temperature      NaN 0.990847  0.985200      0.992974           1.000000           0.947826             1.000000
+ENSEMBLE_stft_dwt_envelope_v3_temperature      NaN 0.984744  0.976880      0.988166           1.000000           0.919355             1.000000
+ (solo, T=1.107) DWT_multibranch_plain_v1 1.107459 0.983219  0.973655      0.987059           1.000000           0.907563             1.000000
+   (solo, T=0.552) ENVELOPE_resnet_v3_reg 0.551893 0.934401  0.917482      0.947109           0.988372           0.740260             0.994186
+    (solo, T=0.931) ENVELOPE_dilated1d_v1 0.931166 0.876430  0.858476      0.897518           0.927114           0.645892             0.963380
+       (solo, T=1.981) E4_mod_alexnet_227 1.981242 0.888635  0.825168      0.914118           1.000000           0.386555             1.000000
+
+Leaderboard written -> C:\Project Work\Outputs_nobpfo100\training\ensemble_leaderboard_temperature.csv
+
+DONE

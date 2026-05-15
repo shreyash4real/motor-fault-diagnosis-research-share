@@ -1,0 +1,10 @@
+Run: STFT_robust_resnet
+Params: 1358756
+Test Acc: 0.9542
+Test Macro-F1: 0.9346
+
+Per-Class F1:
+  healthy 1           : P=0.985 R=0.944 F1=0.964
+  stator short 1      : P=0.977 R=1.000 F1=0.988
+  bearing bpfo 3      : P=0.729 R=0.895 F1=0.803
+  broken rotor bar    : P=0.966 R=1.000 F1=0.983

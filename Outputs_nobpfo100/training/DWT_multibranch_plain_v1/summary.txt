@@ -1,0 +1,12 @@
+Run: DWT_multibranch_plain_v1
+Model: multibranch_plain
+Total params: 173,780
+Test accuracy: 0.9832
+Test macro-F1: 0.9737
+Best val F1:   0.9125
+
+Per-class F1:
+  healthy 1              P=0.993  R=0.981  F1=0.987  (n=855)
+  stator short 1         P=1.000  R=1.000  F1=1.000  (n=171)
+  bearing bpfo 3         P=0.871  R=0.947  F1=0.908  (n=114)
+  broken rotor bar       P=1.000  R=1.000  F1=1.000  (n=171)

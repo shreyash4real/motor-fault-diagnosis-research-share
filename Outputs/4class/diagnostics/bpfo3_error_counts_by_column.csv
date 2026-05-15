@@ -1,4 +1,0 @@
-speed_pct,col_index,A_v2_baseline,CLARKE_mod_alexnet_v1,DWT_multibranch_plain_v1,DWT_multibranch_resnet_v1,E4_mod_alexnet_227,E4_mod_alexnet_mel96,E5_mod_resnet,ENVELOPE_dilated1d_v1,STFTFreqNet_v1,STFTFreqNet_v2,total_across_runs
-50,4,2,10,0,0,0,0,57,0,5,9,83
-75,6,16,30,11,19,2,0,9,5,11,13,116
-100,5,54,40,40,57,48,46,32,43,51,48,459

@@ -1,0 +1,12 @@
+Run: ENSEMBLE_stft_dwt_envelope_v3_perclass_f1
+Ensemble members (soft voting (per-class val-F1 weighted, raw probs)): ['stft', 'dwt', 'envelope']
+Test samples: 1311
+Test accuracy: 0.9863
+Test macro-F1: 0.9790
+Misclassified: 18 / 1311  (1.37%)
+
+Per-class F1:
+  healthy 1              P=1.000  R=0.979  F1=0.989  (n=855)
+  stator short 1         P=1.000  R=1.000  F1=1.000  (n=171)
+  bearing bpfo 3         P=0.864  R=1.000  F1=0.927  (n=114)
+  broken rotor bar       P=1.000  R=1.000  F1=1.000  (n=171)

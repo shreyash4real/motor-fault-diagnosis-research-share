@@ -1,0 +1,10 @@
+Run: ENVELOPE_resnet_v3_reg
+Params: 940740
+Test Acc: 0.9344
+Test F1: 0.9175
+
+Per-Class:
+  healthy 1           : P=0.999 R=0.901 F1=0.947
+  stator short 1      : P=0.983 R=0.994 F1=0.988
+  bearing bpfo 3      : P=0.588 R=1.000 F1=0.740
+  broken rotor bar    : P=0.988 R=1.000 F1=0.994

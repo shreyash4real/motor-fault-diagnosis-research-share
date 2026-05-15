@@ -1,0 +1,24 @@
+RUN NAME         : ENSEMBLE_stft_dwt_envelope_perclass_f1
+Created          : 2026-05-10T14:50:05
+Strategy         : soft voting (per-class val-F1 weighted, raw probs)
+Members          : ['stft', 'dwt', 'envelope_dilated']
+
+Member sources:
+  stft        run=E4_mod_alexnet_227
+             ckpt=C:\Project Work\Outputs_nobpfo100\training\E4_mod_alexnet_227\best_model.pt
+  dwt         run=DWT_multibranch_plain_v1
+             ckpt=C:\Project Work\Outputs_nobpfo100\training\DWT_multibranch_plain_v1\best_model.pt
+  envelope_dilated  run=ENVELOPE_dilated1d_v1
+             ckpt=C:\Project Work\Outputs_nobpfo100\training\ENVELOPE_dilated1d_v1\best_model.pt
+
+Per-class val F1 (rows=members, cols=classes):
+  member      healthy 1           stator short 1      bearing bpfo 3      broken rotor bar  
+  stft        0.8760              1.0000              0.4588              1.0000            
+  dwt         0.9430              1.0000              0.7071              1.0000            
+  envelope_dilated  0.9353              0.8769              0.7961              1.0000            
+
+Member weights per class (column-stochastic, sum=1 over members):
+  member      healthy 1           stator short 1      bearing bpfo 3      broken rotor bar  
+  stft        0.3181              0.3476              0.2339              0.3333            
+  dwt         0.3424              0.3476              0.3604              0.3333            
+  envelope_dilated  0.3396              0.3048              0.4057              0.3333            

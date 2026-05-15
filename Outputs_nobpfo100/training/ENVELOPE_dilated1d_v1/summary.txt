@@ -1,0 +1,12 @@
+Run: ENVELOPE_dilated1d_v1
+Model: EnvelopeDilated1D
+Total params: 77,092
+Test accuracy: 0.8772
+Test macro-F1: 0.8593
+Best val F1:   0.9020
+
+Per-class F1:
+  healthy 1              P=0.985  R=0.826  F1=0.898  (n=855)
+  stator short 1         P=0.930  R=0.930  F1=0.930  (n=171)
+  bearing bpfo 3         P=0.477  R=1.000  F1=0.646  (n=114)
+  broken rotor bar       P=0.929  R=1.000  F1=0.963  (n=171)

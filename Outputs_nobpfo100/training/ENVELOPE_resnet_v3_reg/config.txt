@@ -1,0 +1,10 @@
+RUN: ENVELOPE_resnet_v3_reg
+Params: 940,740
+Channels: (64, 128, 256)
+Dropout: 0.5
+Weight Decay: 0.001
+Smoothing: 0.1
+Class Weights: [0.375     2.8333333 1.59375   2.8333333]
+LR: 0.002
+Batch: 64
+Seed: 42

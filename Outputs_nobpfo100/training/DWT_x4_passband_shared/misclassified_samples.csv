@@ -1,0 +1,12 @@
+test_sample_idx,true_class,pred_class,ch1_path,col_index,seg_idx,speed_pct
+398,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,12,56,75
+517,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,4,75
+524,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,11,75
+540,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,27,75
+555,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,42,75
+560,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,47,75
+563,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,50,75
+564,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,51,75
+677,healthy 1,bearing bpfo 3,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,14,50,100
+1070,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,44,50
+1099,bearing bpfo 3,healthy 1,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,16,75

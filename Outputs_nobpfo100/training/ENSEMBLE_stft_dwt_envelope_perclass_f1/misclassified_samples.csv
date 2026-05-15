@@ -1,0 +1,4 @@
+test_sample_idx,true_class,pred_class,pred_prob,true_prob,ch1_path,col_index,seg_idx,speed_pct
+715,healthy 1,bearing bpfo 3,0.5134677909500067,0.4758597276468791,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,31,
+719,healthy 1,bearing bpfo 3,0.5032288829994118,0.4930855604065741,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,35,
+720,healthy 1,bearing bpfo 3,0.53369122486095,0.46363054703687073,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,36,

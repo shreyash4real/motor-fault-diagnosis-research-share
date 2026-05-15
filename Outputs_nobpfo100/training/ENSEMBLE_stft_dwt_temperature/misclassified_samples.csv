@@ -1,0 +1,13 @@
+test_sample_idx,true_class,pred_class,pred_prob,true_prob,ch1_path,col_index,seg_idx,speed_pct
+688,healthy 1,bearing bpfo 3,0.5534677058458328,0.44170598685741425,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,4,
+689,healthy 1,bearing bpfo 3,0.5329054296016693,0.4584985375404358,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,5,
+701,healthy 1,bearing bpfo 3,0.500963106751442,0.4901171624660492,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,17,
+713,healthy 1,bearing bpfo 3,0.49749189615249634,0.49620360881090164,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,29,
+715,healthy 1,bearing bpfo 3,0.4983409494161606,0.4946862608194351,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,31,
+728,healthy 1,bearing bpfo 3,0.5014250352978706,0.49103038012981415,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,44,
+730,healthy 1,bearing bpfo 3,0.5030397325754166,0.4933423697948456,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,16,46,
+1081,bearing bpfo 3,healthy 1,0.5929298102855682,0.40636780858039856,C:\Project Work\Denoised\Motor-2\50\bearing bpfo 3\Electric_Motor-2_50_time-bearing bpfo 3-ch1.csv,4,55,
+1099,bearing bpfo 3,healthy 1,0.5853200554847717,0.4076845645904541,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,16,
+1101,bearing bpfo 3,healthy 1,0.5465465933084488,0.4457414150238037,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,18,
+1118,bearing bpfo 3,healthy 1,0.5224409997463226,0.4673464000225067,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,35,
+1136,bearing bpfo 3,healthy 1,0.5275570750236511,0.47006945312023163,C:\Project Work\Denoised\Motor-2\75\bearing bpfo 3\Electric_Motor-2_75_time-bearing bpfo 3-ch1.csv,6,53,

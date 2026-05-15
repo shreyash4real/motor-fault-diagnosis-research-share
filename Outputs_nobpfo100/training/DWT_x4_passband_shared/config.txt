@@ -1,0 +1,25 @@
+RUN NAME          : DWT_x4_passband_shared
+started           : 2026-05-10T23:17:59
+device            : cuda
+mixed precision   : True
+model type        : multibranch_plain
+branch channels   : stem=24 mid=48
+features dir      : C:\Project Work\Outputs_nobpfo100\features\dwt
+classes           : ['healthy 1', 'stator short 1', 'bearing bpfo 3', 'broken rotor bar']
+sub-bands         : ['cD2', 'cD3', 'cD4', 'cD5', 'cD6', 'cD7', 'cD8', 'cD9', 'cD10']
+sub-band lengths  : [5011, 2513, 1264, 639, 327, 171, 93, 54, 34]
+train / val / test: 5814 / 1254 / 1311
+total params      : 154,652
+params/sample     : 26.6
+healthy subsample : None
+class weights     : False
+head dropout      : 0.4
+weight decay      : 0.0001
+label smoothing   : 0.0
+batch size        : 128
+num workers       : 4
+max epochs        : 40
+early stop        : patience=8, min_epochs=12
+optimizer         : AdamW  lr=0.001
+scheduler         : CosineAnnealingLR
+seed              : 42

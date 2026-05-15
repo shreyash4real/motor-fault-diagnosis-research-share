@@ -1,0 +1,11 @@
+test_sample_idx,true_class,pred_class,pred_prob,true_prob,ch1_path,col_index,seg_idx,speed_pct
+3,healthy 1,bearing bpfo 3,0.5262973189455806,0.44597452754775685,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,2,3,
+170,healthy 1,bearing bpfo 3,0.6982742746671041,0.25237226982911426,C:\Project Work\Denoised\Motor-2\50\healthy 1\Electric_Motor-2_50_time-healthy 1-ch1.csv,5,56,
+516,healthy 1,bearing bpfo 3,0.5404548136672626,0.4530324847231289,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,3,
+517,healthy 1,bearing bpfo 3,0.5600755048605303,0.4135567794243495,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,4,
+524,healthy 1,bearing bpfo 3,0.5905224741436541,0.3873787075281143,C:\Project Work\Denoised\Motor-2\75\healthy 1\Electric_Motor-2_75_time-healthy 1-ch1.csv,25,11,
+675,healthy 1,broken rotor bar,0.5157548815089589,0.4097918584981623,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,14,48,
+676,healthy 1,broken rotor bar,0.6270233693066984,0.3481653995889549,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,14,49,
+677,healthy 1,broken rotor bar,0.5326165778096765,0.41615300610040623,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,14,50,
+678,healthy 1,broken rotor bar,0.4735817201435566,0.4289540797472,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,14,51,
+680,healthy 1,broken rotor bar,0.41126563028209756,0.3773430461684863,C:\Project Work\Denoised\Motor-2\100\healthy 1\Electric_Motor-2_100_time-healthy 1-ch1.csv,14,53,

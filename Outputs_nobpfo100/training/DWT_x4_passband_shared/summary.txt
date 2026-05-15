@@ -1,0 +1,12 @@
+Run: DWT_x4_passband_shared
+Model: multibranch_plain
+Total params: 154,652
+Test accuracy: 0.9916
+Test macro-F1: 0.9867
+Best val F1:   0.9817
+
+Per-class F1:
+  healthy 1              P=0.998  R=0.989  F1=0.994  (n=855)
+  stator short 1         P=1.000  R=1.000  F1=1.000  (n=171)
+  bearing bpfo 3         P=0.926  R=0.982  F1=0.953  (n=114)
+  broken rotor bar       P=1.000  R=1.000  F1=1.000  (n=171)

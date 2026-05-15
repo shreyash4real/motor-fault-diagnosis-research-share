@@ -1,0 +1,14 @@
+RUN NAME         : ENSEMBLE_stft_dwt_temperature
+Created          : 2026-05-10T14:50:11
+Strategy         : soft voting (equal-weight mean of temperature-calibrated softmaxes)
+Members          : ['stft', 'dwt']
+
+Per-member temperature (fit on val NLL, LBFGS):
+  stft        T = 1.9812
+  dwt         T = 1.1075
+
+Member sources:
+  stft        run=E4_mod_alexnet_227
+             ckpt=C:\Project Work\Outputs_nobpfo100\training\E4_mod_alexnet_227\best_model.pt
+  dwt         run=DWT_multibranch_plain_v1
+             ckpt=C:\Project Work\Outputs_nobpfo100\training\DWT_multibranch_plain_v1\best_model.pt

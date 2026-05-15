@@ -1,0 +1,9 @@
+Run: ENVELOPE_resnet_v2
+Params: 940,740
+Test Macro-F1: 0.9310
+
+Per-Class F1:
+  healthy 1           : P=0.969 R=0.952 F1=0.960
+  stator short 1      : P=0.987 R=0.889 F1=0.935
+  bearing bpfo 3      : P=0.783 R=0.982 F1=0.872
+  broken rotor bar    : P=0.948 R=0.965 F1=0.957

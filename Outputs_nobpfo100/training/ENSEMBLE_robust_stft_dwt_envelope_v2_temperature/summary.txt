@@ -1,0 +1,12 @@
+Run: ENSEMBLE_robust_stft_dwt_envelope_v2_temperature
+Ensemble members (soft voting (equal-weight mean of temperature-calibrated softmaxes)): ['stft_robust', 'dwt', 'envelope_v2']
+Test samples: 1311
+Test accuracy: 0.9924
+Test macro-F1: 0.9896
+Misclassified: 10 / 1311  (0.76%)
+
+Per-class F1:
+  healthy 1              P=1.000  R=0.988  F1=0.994  (n=855)
+  stator short 1         P=1.000  R=1.000  F1=1.000  (n=171)
+  bearing bpfo 3         P=0.958  R=1.000  F1=0.979  (n=114)
+  broken rotor bar       P=0.972  R=1.000  F1=0.986  (n=171)
