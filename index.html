@@ -1,500 +1,727 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Motor Fault Diagnosis Research Share</title>
-  <style>
-    :root {
-      --ink: #17202a;
-      --muted: #5d6875;
-      --line: #d9e0e8;
-      --paper: #f7f9fb;
-      --panel: #ffffff;
-      --blue: #245a9c;
-      --green: #21745b;
-      --amber: #a45f11;
-      --red: #a33a31;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--ink);
-      background: var(--paper);
-      letter-spacing: 0;
-    }
-    a { color: var(--blue); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    header {
-      background: #ffffff;
-      border-bottom: 1px solid var(--line);
-    }
-    .wrap {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 24px;
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
-      gap: 28px;
-      align-items: center;
-    }
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(2rem, 4vw, 4.2rem);
-      line-height: 1.02;
-      font-weight: 780;
-      color: #111820;
-    }
-    .lede {
-      margin: 0;
-      max-width: 760px;
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.55;
-    }
-    .hero-image {
-      min-height: 260px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      overflow: hidden;
-      background: #111820;
-    }
-    .hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      aspect-ratio: 4 / 3;
-    }
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
-    }
-    nav a, .pill {
-      display: inline-flex;
-      align-items: center;
-      min-height: 34px;
-      padding: 7px 11px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      color: var(--ink);
-      font-size: 0.9rem;
-    }
-    main .wrap { padding-top: 18px; }
-    section {
-      margin: 28px 0;
-      padding: 24px 0 0;
-      border-top: 1px solid var(--line);
-    }
-    h2 {
-      margin: 0 0 14px;
-      font-size: 1.55rem;
-      line-height: 1.2;
-    }
-    h3 {
-      margin: 0 0 8px;
-      font-size: 1.05rem;
-      line-height: 1.25;
-    }
-    p {
-      margin: 0 0 12px;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-    code {
-      font-family: Consolas, Monaco, monospace;
-      background: #edf2f7;
-      padding: 2px 5px;
-      border-radius: 4px;
-    }
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 20px;
-    }
-    .metric, .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-    }
-    .metric strong {
-      display: block;
-      font-size: 1.65rem;
-      line-height: 1.1;
-      color: var(--green);
-    }
-    .metric span {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.35;
-    }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-    .table-scroll {
-      overflow-x: auto;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 740px;
-    }
-    th, td {
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-      font-size: 0.92rem;
-      line-height: 1.35;
-    }
-    th {
-      color: #263241;
-      background: #edf2f7;
-      font-weight: 700;
-    }
-    tr:last-child td { border-bottom: 0; }
-    .tag {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #edf2f7;
-      color: #263241;
-      font-size: 0.78rem;
-      white-space: nowrap;
-    }
-    .good { color: var(--green); font-weight: 700; }
-    .warn { color: var(--amber); font-weight: 700; }
-    .risk { color: var(--red); font-weight: 700; }
-    .gallery-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 14px 0;
-    }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-    .sample {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .sample img {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      display: block;
-      background: #111820;
-    }
-    .sample figcaption {
-      padding: 9px 10px 11px;
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.35;
-      min-height: 55px;
-    }
-    .links {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-    .links ul {
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    footer {
-      margin-top: 28px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-    @media (max-width: 900px) {
-      .hero, .grid-2, .links { grid-template-columns: 1fr; }
-      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (max-width: 560px) {
-      .wrap { padding: 18px; }
-      .metrics, .gallery { grid-template-columns: 1fr; }
-      h1 { font-size: 2.2rem; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Motor Fault Detection — Cinematic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --paper:    #f1ede4;
+  --paper-2:  #e8e2d4;
+  --ink:      #1a1612;
+  --ink-2:    #3a342c;
+  --ink-3:    #6b6258;
+  --ink-4:    #9a9185;
+  --rule:     rgba(26, 22, 18, 0.18);
+  --rule-soft:rgba(26, 22, 18, 0.10);
+  --surface:  #f8f5ed;
+  --surface2: #ebe6d8;
+  --accent:   #b8431f;
+  --steel:    #2a4a6b;
+  --gold:     #a87f2c;
+
+  /* Dark-glass overrides for cinematic sections */
+  --glass-bg:    rgba(20, 16, 12, 0.72);
+  --glass-bg-2:  rgba(34, 28, 22, 0.78);
+  --glass-rule:  rgba(241, 237, 228, 0.14);
+  --glass-rule-2:rgba(241, 237, 228, 0.22);
+  --glass-text:  #f1ede4;
+  --glass-text-2:rgba(241, 237, 228, 0.78);
+  --glass-text-3:rgba(241, 237, 228, 0.55);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0e0a06;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ───── Reusable form controls (light-on-dark for cinematic sections) ─── */
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-label {
+  font-size: 0.66rem;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--glass-text-3);
+  font-weight: 500;
+}
+.form-input {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.92rem;
+  padding: 0.7rem 0.95rem;
+  background: rgba(241, 237, 228, 0.05);
+  border: 1px solid var(--glass-rule);
+  border-radius: 0;
+  color: var(--glass-text);
+  width: 100%;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.form-input:focus { border-color: var(--accent); background: rgba(184, 67, 31, 0.08); }
+.form-hint {
+  font-size: 0.74rem;
+  color: var(--glass-text-3);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Toggle */
+.toggle-wrap { display: flex; align-items: center; gap: 0.7rem; }
+.toggle {
+  width: 38px; height: 20px;
+  background: rgba(241, 237, 228, 0.12);
+  border: 1px solid var(--glass-rule);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+.toggle.on { background: var(--accent); border-color: var(--accent); }
+.toggle-knob {
+  position: absolute; top: 2px; left: 2px;
+  width: 14px; height: 14px;
+  background: var(--paper);
+  transition: left 0.18s;
+}
+.toggle.on .toggle-knob { left: 20px; }
+.toggle-label { font-size: 0.84rem; color: var(--glass-text-2); font-family: 'Fraunces', serif; font-style: italic; }
+
+/* Tag */
+.tag {
+  display: inline-flex; align-items: center;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid currentColor;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* Card chrome — used inside light scenes */
+.card { background: var(--surface); border: 1px solid var(--rule-soft); border-radius: 2px; }
+.card-header {
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--rule-soft);
+  display: flex; align-items: center; gap: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.card-body { padding: 1.1rem 1.2rem; }
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 0.5rem;
+}
+
+/* ───── Cinematic page chrome ──────────────────────────────────────── */
+
+.bg-stage {
+  position: fixed; inset: 0; z-index: 0;
+}
+
+.scroll-stage {
+  position: relative;
+  z-index: 1;
+}
+
+/* Top fixed bar — minimal */
+.top-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1rem 2rem;
+  pointer-events: none;
+}
+.top-bar > * { pointer-events: auto; }
+.top-bar .brand {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--paper);
+  letter-spacing: 0.02em;
+  mix-blend-mode: difference;
+}
+.top-bar .brand .ampersand { color: var(--accent); font-weight: 500; }
+.top-bar .brand-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: rgba(241, 237, 228, 0.6);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 0.18rem;
+  mix-blend-mode: difference;
+}
+
+/* Right-side step rail */
+.step-rail {
+  position: fixed; right: 1.5rem; top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+  display: flex; flex-direction: column; gap: 1.4rem;
+}
+.step-rail-item {
+  display: flex; align-items: center; gap: 0.75rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgba(241, 237, 228, 0.45);
+  transition: color 0.2s;
+}
+.step-rail-item:hover { color: rgba(241, 237, 228, 0.9); }
+.step-rail-item.active { color: var(--paper); }
+.step-rail.light .step-rail-item { color: var(--ink-4); }
+.step-rail.light .step-rail-item:hover { color: var(--ink-2); }
+.step-rail.light .step-rail-item.active { color: var(--ink); }
+.step-rail-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1rem;
+  width: 1.4rem;
+  text-align: right;
+}
+.step-rail-bar {
+  width: 36px; height: 1px;
+  background: currentColor;
+  transition: width 0.25s;
+}
+.step-rail-item.active .step-rail-bar { width: 64px; background: var(--accent); }
+.step-rail-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Section base */
+section.cinema {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 6rem 0;
+}
+
+/* Hero / Upload */
+.hero-wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(241, 237, 228, 0.6);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.hero-eyebrow::before {
+  content: ''; width: 28px; height: 1px;
+  background: var(--accent);
+  display: inline-block;
+}
+.hero-title {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: '"opsz" 144';
+  font-weight: 300;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  color: var(--paper);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.6rem;
+}
+.hero-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.hero-lede {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(241, 237, 228, 0.78);
+  max-width: 32rem;
+  margin-bottom: 2.4rem;
+}
+.hero-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid rgba(241, 237, 228, 0.18);
+}
+.hero-meta-item .k {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: rgba(241, 237, 228, 0.5);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.hero-meta-item .v {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--paper);
+}
+
+/* Upload panel — glass */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--glass-rule);
+  padding: 2rem;
+}
+.glass-panel-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--glass-rule);
+}
+.glass-panel-header h2 {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: '"opsz" 144';
+  font-weight: 400;
+  font-size: 1.5rem;
+  color: var(--paper);
+  letter-spacing: -0.01em;
+}
+.glass-panel-header .step-roman {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+/* Upload dropzone */
+.dropzone {
+  border: 1px dashed rgba(241, 237, 228, 0.3);
+  background: rgba(241, 237, 228, 0.03);
+  padding: 2.4rem 1.6rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.dropzone:hover, .dropzone.over {
+  background: rgba(184, 67, 31, 0.08);
+  border-color: var(--accent);
+}
+.dropzone-content {
+  text-align: center;
+}
+.dropzone-icon-row {
+  display: flex; justify-content: center; gap: 0.4rem;
+  margin-bottom: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: rgba(241, 237, 228, 0.4);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+}
+.dropzone-title {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--paper);
+  margin-bottom: 0.4rem;
+}
+.dropzone-sub {
+  font-size: 0.78rem;
+  color: rgba(241, 237, 228, 0.5);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.05em;
+}
+
+.file-list {
+  margin-top: 1.4rem;
+  display: flex; flex-direction: column; gap: 0.5rem;
+}
+.file-row {
+  display: grid;
+  grid-template-columns: 16px 1fr auto auto;
+  gap: 0.85rem;
+  align-items: center;
+  padding: 0.7rem 0.9rem;
+  background: rgba(241, 237, 228, 0.04);
+  border-left: 2px solid var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  color: var(--glass-text-2);
+}
+.file-row .fname { color: var(--paper); }
+.file-row .fsize { color: rgba(241, 237, 228, 0.45); }
+.file-row .fclass {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid currentColor;
+}
+
+/* Configure section */
+.cfg-grid {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+.cfg-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 3rem;
+}
+.cfg-title {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: '"opsz" 144';
+  font-weight: 300;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--paper);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+.cfg-title em { font-style: italic; color: var(--accent); }
+.cfg-subtitle {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(241, 237, 228, 0.6);
+  text-align: right;
+  max-width: 24rem;
+}
+
+.cfg-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+.cfg-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--glass-rule);
+  padding: 1.6rem 1.8rem;
+}
+.cfg-panel h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--paper);
+  margin-bottom: 0.3rem;
+}
+.cfg-panel .h3-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+.cfg-panel-divider { height: 1px; background: var(--glass-rule); margin: 1.2rem 0; }
+
+/* Processing section */
+.proc-wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 4rem;
+}
+.proc-title {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: '"opsz" 144';
+  font-weight: 300;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--paper);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+.proc-title em { font-style: italic; color: var(--accent); }
+.proc-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(241, 237, 228, 0.6);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 3rem;
+}
+.proc-status .dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 0.6rem;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.7); }
+}
+.proc-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+.proc-stages {
+  display: flex; flex-direction: column;
+  gap: 1px;
+  background: var(--glass-rule);
+  border: 1px solid var(--glass-rule);
+}
+.proc-stage {
+  background: var(--glass-bg);
+  padding: 1.1rem 1.4rem;
+  display: grid;
+  grid-template-columns: 2.4rem 1fr auto;
+  gap: 1rem;
+  align-items: center;
+}
+.proc-stage-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--glass-text-3);
+}
+.proc-stage.active .proc-stage-num { color: var(--accent); }
+.proc-stage-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  color: var(--paper);
+}
+.proc-stage-desc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--glass-text-3);
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+}
+.proc-stage-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+
+.proc-readout {
+  background: var(--glass-bg-2);
+  border: 1px solid var(--glass-rule);
+  padding: 1.6rem 1.8rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.proc-readout h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--glass-text-3);
+  margin-bottom: 0.4rem;
+}
+.proc-readout .big-num {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: '"opsz" 144';
+  font-weight: 300;
+  font-size: 3rem;
+  color: var(--paper);
+  line-height: 1;
+}
+.proc-readout .big-num span { font-size: 1.5rem; color: var(--glass-text-3); margin-left: 0.3rem; }
+
+/* Results section — light paper */
+section.cinema.results-section {
+  background: transparent;
+  color: var(--ink);
+  padding: 8rem 0 6rem;
+}
+.results-wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  position: relative;
+}
+.results-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--ink-3);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.results-eyebrow::before {
+  content: ''; width: 28px; height: 1px;
+  background: var(--accent);
+}
+.results-title {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: '"opsz" 144';
+  font-weight: 300;
+  font-size: clamp(3rem, 6vw, 5.4rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.6rem;
+  color: var(--ink);
+}
+.results-title em { font-style: italic; color: var(--accent); }
+.results-lede {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--ink-2);
+  max-width: 36rem;
+  margin-bottom: 3rem;
+}
+
+.results-headline-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.results-section-block {
+  margin-bottom: 4rem;
+}
+.results-block-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+.results-block-header h3 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--ink);
+}
+.results-block-header .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.66rem;
+  color: var(--ink-3);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Buttons */
+.btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.6rem;
+  background: var(--accent);
+  color: var(--paper);
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  font-weight: 500;
+}
+.btn:hover { opacity: 0.85; }
+.btn:active { transform: translateY(1px); }
+.btn.ghost {
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid var(--glass-rule-2);
+}
+.btn.ghost:hover { background: rgba(241, 237, 228, 0.06); }
+.btn.dark {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn-row { display: flex; gap: 0.8rem; margin-top: 1.6rem; }
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(241, 237, 228, 0.45);
+  text-align: center;
+}
+.scroll-hint .arrow {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  animation: bounce 1.6s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* Registration marks (corner) */
+.reg-mark {
+  position: fixed;
+  width: 18px; height: 18px;
+  pointer-events: none;
+  z-index: 30;
+}
+.reg-mark::before, .reg-mark::after {
+  content: '';
+  position: absolute;
+  background: rgba(120, 110, 100, 0.4);
+  mix-blend-mode: difference;
+}
+.reg-mark::before { width: 100%; height: 1px; top: 50%; left: 0; }
+.reg-mark::after  { width: 1px; height: 100%; left: 50%; top: 0; }
+.reg-tl { top: 16px; left: 16px; }
+.reg-tr { top: 16px; right: 16px; }
+.reg-bl { bottom: 16px; left: 16px; }
+.reg-br { bottom: 16px; right: 16px; }
+
+@media (max-width: 900px) {
+  .hero-wrap, .cfg-panels, .proc-grid, .results-headline-row { grid-template-columns: 1fr; gap: 2rem; }
+  .step-rail { display: none; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="wrap hero">
-      <div>
-        <h1>Motor Fault Diagnosis Research Share</h1>
-        <p class="lede">Clean private export of the 4-class motor fault diagnosis pipeline: source code, canonical split metadata, training artifacts, diagnostics, and a small representative image gallery. Raw data and regenerated bulk tensors are intentionally excluded.</p>
-        <nav aria-label="Dashboard navigation">
-          <a href="#leaderboard">Leaderboard</a>
-          <a href="#representations">Representations</a>
-          <a href="#diagnostics">BPFO-3 diagnostic</a>
-          <a href="#gallery">Sample gallery</a>
-          <a href="#artifacts">Artifacts</a>
-          <a href="code_graph_explainer.html">Code graph</a>
-        </nav>
-      </div>
-      <div class="hero-image">
-        <img src="sample_gallery/stft/bearing_bpfo_3_speed_100.png" alt="Representative STFT channel 1 sample for bearing BPFO 3 at 100 percent speed">
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <div class="wrap">
-      <div class="metrics" aria-label="Key metrics">
-        <div class="metric"><strong>96.49%</strong><span>Best test accuracy from STFT + DWT + envelope temperature ensemble</span></div>
-        <div class="metric"><strong>0.9524</strong><span>Best macro-F1 on the canonical v2 speed-stratified split</span></div>
-        <div class="metric"><strong>0.837</strong><span>Best BPFO-3 F1, still the dominant remaining error source</span></div>
-        <div class="metric"><strong>36</strong><span>Representative gallery images: 3 reps x 4 classes x 3 speeds</span></div>
-      </div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 
-      <section id="leaderboard">
-        <h2>Current Leaderboard</h2>
-        <p>Values are copied from <code>Outputs/4class/training/ensemble_leaderboard_temperature.csv</code> and the per-class-F1 temperature leaderboard.</p>
-        <div class="table-scroll">
-          <table>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Run</th>
-                <th>Test Acc</th>
-                <th>Macro-F1</th>
-                <th>BPFO-3 F1</th>
-                <th>Interpretation</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/summary.txt">ENSEMBLE_stft_dwt_envelope_v3_temperature</a></td>
-                <td class="good">0.9671</td>
-                <td class="good">0.9560</td>
-                <td class="good">0.8490</td>
-                <td>Best overall. Envelope is weaker solo but adds useful signal in the ensemble.</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_temperature/summary.txt">ENSEMBLE_stft_dwt_temperature</a></td>
-                <td>0.9605</td>
-                <td>0.9470</td>
-                <td>0.8188</td>
-                <td>Strong two-representation ensemble.</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_clarke_temperature/summary.txt">ENSEMBLE_stft_dwt_clarke_temperature</a></td>
-                <td>0.9598</td>
-                <td>0.9449</td>
-                <td>0.8110</td>
-                <td>Clarke does not improve the best ensemble.</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td><a href="Outputs/4class/training/E4_mod_alexnet_227/summary.txt">(solo, T=2.400) E4_mod_alexnet_227</a></td>
-                <td>0.9539</td>
-                <td>0.9393</td>
-                <td>0.7934</td>
-                <td>Best solo STFT model.</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td><a href="Outputs/4class/training/DWT_multibranch_plain_v1/summary.txt">(solo, T=0.743) DWT_multibranch_plain_v1</a></td>
-                <td>0.9503</td>
-                <td>0.9347</td>
-                <td>0.7778</td>
-                <td>Best solo DWT model.</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td><a href="Outputs/4class/training/ENVELOPE_resnet_v3_reg/summary.txt">(solo, T=0.650) ENVELOPE_resnet_v3_reg</a></td>
-                <td>0.9415</td>
-                <td>0.9262</td>
-                <td class="good">0.8232</td>
-                <td>Best solo BPFO-3 across all branches; class-weighted regularized envelope.</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td><a href="Outputs/4class/training/ENVELOPE_dilated1d_v1/summary.txt">(solo, T=1.172) ENVELOPE_dilated1d_v1</a></td>
-                <td>0.9327</td>
-                <td>0.9132</td>
-                <td>0.7922</td>
-                <td>Original envelope solo; component of the current best ensemble.</td>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td><a href="Outputs/4class/training/CLARKE_mod_alexnet_v1/summary.txt">(solo, T=2.849) CLARKE_mod_alexnet_v1</a></td>
-                <td>0.8121</td>
-                <td>0.7903</td>
-                <td class="risk">0.4390</td>
-                <td>Deprecated branch — kept for the comparison table only.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+<div id="root"></div>
 
-      <section id="representations">
-        <h2>Representation Comparison</h2>
-        <p>The tool is scoped to three live branches: STFT, DWT, and Envelope. Mel and Clarke were evaluated and dropped — they appear in the leaderboard for honesty, not as candidates.</p>
-        <div class="grid-2">
-          <div class="card">
-            <h3>STFT</h3>
-            <p>Best solo performer with the modified AlexNet 227 model: 95.39% accuracy and 0.9393 macro-F1. Strong base representation for ensembling.</p>
-            <span class="tag">solo leader</span>
-          </div>
-          <div class="card">
-            <h3>DWT</h3>
-            <p>Plain multi-branch CNN reaches 95.10% accuracy and 0.9358 macro-F1. Native-length sub-band branches; complements STFT well and is part of every top ensemble.</p>
-            <span class="tag">ensemble core</span>
-          </div>
-          <div class="card">
-            <h3>Envelope</h3>
-            <p>Strips the 50 Hz line carrier to expose low-frequency BPFO modulations. Regularized ResNet variant (<code>ENVELOPE_resnet_v3_reg</code>) hits 94.15% accuracy and the highest solo BPFO-3 F1 of any branch (0.823).</p>
-            <span class="tag">bpfo-3 ceiling-breaker</span>
-          </div>
-        </div>
-      </section>
+<script>
+window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "atmosphere": "foundry",
+  "voice": "editorial",
+  "cinematography": "full"
+}/*EDITMODE-END*/;
+</script>
+<script type="text/babel" src="mfds-shared.jsx"></script>
+<script type="text/babel" src="mfds-bg.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="mfds-cinema.jsx"></script>
 
-      <section id="diagnostics">
-        <h2>BPFO-3 Diagnostic</h2>
-        <p>The remaining failures concentrate in <code>bearing bpfo 3</code> at 100% speed. The canonical test split contains only a single column for BPFO-3 at 100% speed, so the leaderboard is sensitive to that test column.</p>
-        <div class="grid-2">
-          <div class="table-scroll">
-            <table>
-              <thead>
-                <tr><th>Run</th><th>Share of BPFO-3 errors</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>E4_mod_alexnet_227</td><td class="risk">48/50 (96.0%)</td></tr>
-                <tr><td>DWT_multibranch_plain_v1</td><td class="risk">40/51 (78.4%)</td></tr>
-                <tr><td>ENVELOPE_dilated1d_v1</td><td class="risk">43/48 (89.6%)</td></tr>
-                <tr><td>CLARKE_mod_alexnet_v1</td><td class="warn">40/80 (50.0%)</td></tr>
-                <tr><td>STFTFreqNet_v2</td><td class="warn">48/70 (68.6%)</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="card">
-            <h3>Diagnostic Files</h3>
-            <p>The diagnostic CSVs show BPFO-3 test samples are consistently closer to healthy@100 than to other BPFO-3 samples for several feature spaces.</p>
-            <ul>
-              <li><a href="Outputs/4class/diagnostics/bpfo3_error_share.txt">bpfo3_error_share.txt</a></li>
-              <li><a href="Outputs/4class/diagnostics/bpfo3_error_counts_by_column.csv">bpfo3_error_counts_by_column.csv</a></li>
-              <li><a href="Outputs/4class/diagnostics/bpfo3_cross_representation_similarity.csv">bpfo3_cross_representation_similarity.csv</a></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="gallery">
-        <h2>Sample Gallery</h2>
-        <p>One deterministic test-split image per representation, class, and speed. Source rule: first sorted sample in the class/speed folder; STFT uses channel 1.</p>
-        <div class="gallery-controls" aria-label="Gallery filters">
-          <span class="pill">STFT ch1</span>
-          <span class="pill">DWT</span>
-          <span class="pill">Envelope</span>
-          <a class="pill" href="sample_gallery/index.html">gallery page</a>
-          <a class="pill" href="sample_gallery/manifest.csv">manifest.csv</a>
-        </div>
-        <div class="gallery" id="galleryGrid"></div>
-      </section>
-
-      <section id="artifacts">
-        <h2>Artifacts To Inspect</h2>
-        <div class="links">
-          <div class="card">
-            <h3>Code</h3>
-            <ul>
-              <li><a href="Scripts_4/train_stft_cnn_e4_modalex_227.py">STFT modified AlexNet</a></li>
-              <li><a href="Scripts_4/train_dwt_cnn.py">DWT multi-branch CNN</a></li>
-              <li><a href="Scripts_4/train_envelope_cnn_v1.py">Envelope CNN</a></li>
-              <li><a href="Scripts_4/ensemble_evaluate_v2_temperature.py">Temperature ensemble</a></li>
-              <li><a href="Scripts_4/diagnose_bpfo3_v1.py">BPFO-3 diagnostic script</a></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Configs, Metrics, Plots</h3>
-            <ul>
-              <li><a href="Outputs/4class/training/ensemble_leaderboard_temperature.csv">temperature leaderboard</a></li>
-              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/ensemble_config.txt">best ensemble config</a></li>
-              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/per_class_metrics.csv">best per-class metrics</a></li>
-              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/confusion_matrix.png">best confusion matrix</a></li>
-              <li><a href="Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/misclassified_samples.csv">best misclassifications</a></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Checkpoints And Splits</h3>
-            <ul>
-              <li><a href="Outputs/4class/training/E4_mod_alexnet_227/best_model.pt">STFT checkpoint</a></li>
-              <li><a href="Outputs/4class/training/DWT_multibranch_plain_v1/best_model.pt">DWT checkpoint</a></li>
-              <li><a href="Outputs/4class/training/ENVELOPE_dilated1d_v1/best_model.pt">Envelope checkpoint</a></li>
-              <li><a href="Outputs/4class/v2_speed_strat/split_report.txt">canonical split report</a></li>
-              <li><a href="Outputs/4class/v2_speed_strat/splits.csv">canonical split CSV</a></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      Export prepared on 2026-04-30; pushed to <a href="https://github.com/shreyash4real/motor-fault-diagnosis-research-share">github.com/shreyash4real/motor-fault-diagnosis-research-share</a>.
-    </div>
-  </footer>
-
-  <script>
-    const reps = [
-      ['stft', 'STFT ch1'],
-      ['dwt', 'DWT'],
-      ['envelope', 'Envelope']
-    ];
-    const classes = [
-      ['healthy_1', 'healthy 1'],
-      ['stator_short_1', 'stator short 1'],
-      ['bearing_bpfo_3', 'bearing bpfo 3'],
-      ['broken_rotor_bar', 'broken rotor bar']
-    ];
-    const speeds = [50, 75, 100];
-    const grid = document.getElementById('galleryGrid');
-
-    for (const [repKey, repLabel] of reps) {
-      for (const [classKey, classLabel] of classes) {
-        for (const speed of speeds) {
-          const fig = document.createElement('figure');
-          fig.className = 'sample';
-          const img = document.createElement('img');
-          img.src = `sample_gallery/${repKey}/${classKey}_speed_${speed}.png`;
-          img.alt = `${repLabel} sample for ${classLabel} at ${speed} percent speed`;
-          const cap = document.createElement('figcaption');
-          cap.textContent = `${repLabel} - ${classLabel} - ${speed}% speed`;
-          fig.appendChild(img);
-          fig.appendChild(cap);
-          grid.appendChild(fig);
-        }
-      }
-    }
-  </script>
 </body>
 </html>
