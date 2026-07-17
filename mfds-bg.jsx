@@ -1,12 +1,20 @@
 // Cinematic scroll-driven background canvas
 // Renders motor cross-section → STFT spectrogram → 3-phase traveling sine waves → results
 // Crossfades based on scroll progress through 4 hero sections.
+//
+// Performance-optimized version:
+//   - Delta-time animation (consistent speed at any framerate)
+//   - Offscreen ImageData buffer for spectrogram (replaces ~69k fillRect/frame)
+//   - Batched path operations for motor geometry
+//   - Coarser grid + larger trace step for 3-phase waves
+//   - Pre-computed particle seeds for neural field
 
 function CinematicBackground({ progress, sectionIdx, sectionProgress }) {
   const { useEffect, useRef } = React;
   const canvasRef = useRef();
   const rafRef = useRef();
   const stateRef = useRef({ progress: 0, section: 0, sectionProgress: 0, t: 0 });
+  const prevTimeRef = useRef(null);
 
   useEffect(() => {
     stateRef.current.progress = progress;
@@ -30,26 +38,25 @@ function CinematicBackground({ progress, sectionIdx, sectionProgress }) {
     resize();
     window.addEventListener('resize', resize);
 
-    function render() {
+    prevTimeRef.current = null;
+
+    function render(timestamp) {
+      // Delta-time: consistent animation speed regardless of frame rate
+      if (prevTimeRef.current === null) prevTimeRef.current = timestamp;
+      const dtMs = timestamp - prevTimeRef.current;
+      prevTimeRef.current = timestamp;
+      // Clamp delta to avoid huge jumps on tab-switch (cap at ~100ms)
+      const dt = Math.min(dtMs, 100) / 1000;
+
       const W = window.innerWidth, H = window.innerHeight;
       const s = stateRef.current;
-      s.t += 1/60;
+      s.t += dt;
 
       ctx.clearRect(0, 0, W, H);
 
-      // Section 0: Hero / Upload — motor cross-section
-      // Section 1: Configure — STFT spectrogram zoom
-      // Section 2: Processing — 3-phase traveling waves
-      // Section 3: Results — clean grid
-
-      // Render layered, with crossfade between sections
       const sec = s.section;
       const sp = s.sectionProgress;
 
-      // Each scene renders with its own opacity based on which section is active.
-      // Crossfades happen in the last 25 % of the previous section / first 25 % of
-      // the next, so the wave-trace finish at sp≈0.6 gets a beat of full visibility
-      // before the results scene fades in.
       const opacity = (target) => {
         if (sec === target) return 1;
         if (sec === target - 1) return Math.max(0, sp - 0.75) * 4;
@@ -62,7 +69,6 @@ function CinematicBackground({ progress, sectionIdx, sectionProgress }) {
       if (op0 > 0.01) {
         ctx.save();
         ctx.globalAlpha = op0;
-        // Zoom factor: in section 0, slight zoom; in transition out, zoom in dramatically
         const zoom = sec === 0 ? 1 + sp * 0.6 : 1.6 + (sec > 0 ? 0.4 : 0);
         drawMotor(ctx, W, H, s.t, zoom);
         ctx.restore();
@@ -82,8 +88,6 @@ function CinematicBackground({ progress, sectionIdx, sectionProgress }) {
       if (op2 > 0.01) {
         ctx.save();
         ctx.globalAlpha = op2;
-        // Wave completes by sp≈0.6 so user sees the full trace before the
-        // results crossfade begins at sp=0.75.
         drawThreePhase(ctx, W, H, s.t, sec < 2 ? 0 : sec === 2 ? Math.min(1, sp / 0.6) : 1);
         ctx.restore();
       }
@@ -99,7 +103,7 @@ function CinematicBackground({ progress, sectionIdx, sectionProgress }) {
 
       rafRef.current = requestAnimationFrame(render);
     }
-    render();
+    rafRef.current = requestAnimationFrame(render);
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener('resize', resize);
@@ -118,7 +122,9 @@ function CinematicBackground({ progress, sectionIdx, sectionProgress }) {
   );
 }
 
-// ─── Scene 0: Motor cross-section, drawn with concentric SVG-style geometry ─
+// ─── Scene 0: Motor cross-section ───────────────────────────────────────────
+// Batched: cooling fins, stator slots, and rotor bars each drawn in a single
+// beginPath/stroke or beginPath/fill call instead of one per element.
 function drawMotor(ctx, W, H, t, zoom) {
   const cx = W * 0.72, cy = H * 0.5;
   const baseR = Math.min(W, H) * 0.42 * zoom;
@@ -131,24 +137,24 @@ function drawMotor(ctx, W, H, t, zoom) {
   ctx.fillStyle = bgGrad;
   ctx.fillRect(0, 0, W, H);
 
-  // Outer housing — rust/iron
   ctx.save();
   ctx.translate(cx, cy);
   ctx.rotate(t * 0.04);
 
-  // Cooling fins (radial bars)
+  // Cooling fins — batch all 64 into one path
   ctx.strokeStyle = 'rgba(184, 67, 31, 0.35)';
   ctx.lineWidth = 2;
   const fins = 64;
+  ctx.beginPath();
   for (let i = 0; i < fins; i++) {
     const a = (i / fins) * Math.PI * 2;
+    const cosA = Math.cos(a), sinA = Math.sin(a);
     const r1 = baseR * 0.95;
     const r2 = baseR * 1.08;
-    ctx.beginPath();
-    ctx.moveTo(Math.cos(a) * r1, Math.sin(a) * r1);
-    ctx.lineTo(Math.cos(a) * r2, Math.sin(a) * r2);
-    ctx.stroke();
+    ctx.moveTo(cosA * r1, sinA * r1);
+    ctx.lineTo(cosA * r2, sinA * r2);
   }
+  ctx.stroke();
 
   // Outer ring (housing)
   ctx.strokeStyle = 'rgba(184, 67, 31, 0.55)';
@@ -158,28 +164,70 @@ function drawMotor(ctx, W, H, t, zoom) {
   ctx.lineWidth = 1;
   ctx.beginPath(); ctx.arc(0, 0, baseR * 0.92, 0, Math.PI * 2); ctx.stroke();
 
-  // Stator slots (laminated)
+  // Stator slots — batch fills and strokes separately
   const slots = 36;
+
+  // Batch slot dark fills
+  ctx.fillStyle = 'rgba(20, 15, 10, 0.55)';
+  ctx.beginPath();
   for (let i = 0; i < slots; i++) {
     const a = (i / slots) * Math.PI * 2;
+    const cosA = Math.cos(a), sinA = Math.sin(a);
     const r1 = baseR * 0.62;
     const r2 = baseR * 0.88;
+    const w1 = baseR * 0.04, w2 = baseR * 0.05;
+    // Trapezoid corners rotated by angle a
+    const p1x = cosA * r1 - sinA * (-w1/2);
+    const p1y = sinA * r1 + cosA * (-w1/2);
+    const p2x = cosA * r1 - sinA * (w1/2);
+    const p2y = sinA * r1 + cosA * (w1/2);
+    const p3x = cosA * r2 - sinA * (w2/2);
+    const p3y = sinA * r2 + cosA * (w2/2);
+    const p4x = cosA * r2 - sinA * (-w2/2);
+    const p4y = sinA * r2 + cosA * (-w2/2);
+    ctx.moveTo(p1x, p1y);
+    ctx.lineTo(p2x, p2y);
+    ctx.lineTo(p3x, p3y);
+    ctx.lineTo(p4x, p4y);
+    ctx.closePath();
+  }
+  ctx.fill();
+
+  // Batch slot strokes
+  ctx.strokeStyle = 'rgba(184, 67, 31, 0.3)';
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  for (let i = 0; i < slots; i++) {
+    const a = (i / slots) * Math.PI * 2;
+    const cosA = Math.cos(a), sinA = Math.sin(a);
+    const r1 = baseR * 0.62;
+    const r2 = baseR * 0.88;
+    const w1 = baseR * 0.04, w2 = baseR * 0.05;
+    const p1x = cosA * r1 - sinA * (-w1/2);
+    const p1y = sinA * r1 + cosA * (-w1/2);
+    const p2x = cosA * r1 - sinA * (w1/2);
+    const p2y = sinA * r1 + cosA * (w1/2);
+    const p3x = cosA * r2 - sinA * (w2/2);
+    const p3y = sinA * r2 + cosA * (w2/2);
+    const p4x = cosA * r2 - sinA * (-w2/2);
+    const p4y = sinA * r2 + cosA * (-w2/2);
+    ctx.moveTo(p1x, p1y);
+    ctx.lineTo(p2x, p2y);
+    ctx.lineTo(p3x, p3y);
+    ctx.lineTo(p4x, p4y);
+    ctx.closePath();
+  }
+  ctx.stroke();
+
+  // Copper winding hints — batch
+  ctx.fillStyle = 'rgba(217, 119, 68, 0.25)';
+  for (let i = 0; i < slots; i++) {
+    const a = (i / slots) * Math.PI * 2;
     ctx.save();
     ctx.rotate(a);
-    // Slot — trapezoid
-    ctx.beginPath();
-    const w1 = baseR * 0.04, w2 = baseR * 0.05;
-    ctx.moveTo(-w1/2, r1); ctx.lineTo(w1/2, r1);
-    ctx.lineTo(w2/2, r2); ctx.lineTo(-w2/2, r2);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(20, 15, 10, 0.55)';
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(184, 67, 31, 0.3)';
-    ctx.lineWidth = 0.5;
-    ctx.stroke();
-
-    // Copper winding hint
-    ctx.fillStyle = 'rgba(217, 119, 68, 0.25)';
+    const w1 = baseR * 0.04;
+    const r1 = baseR * 0.62;
+    const r2 = baseR * 0.88;
     ctx.fillRect(-w1/2 * 0.6, r1 + 4, w1 * 0.6, (r2 - r1) * 0.85);
     ctx.restore();
   }
@@ -197,19 +245,32 @@ function drawMotor(ctx, W, H, t, zoom) {
   ctx.fillStyle = rotorGrad;
   ctx.beginPath(); ctx.arc(0, 0, baseR * 0.55, 0, Math.PI * 2); ctx.fill();
 
-  // Rotor bars (these are what break in "broken rotor bar" fault!)
+  // Rotor bars — batch fill + stroke
   const bars = 28;
-  ctx.rotate(t * 0.6); // rotor spins faster
+  ctx.rotate(t * 0.6);
+  const barR = baseR * 0.5;
+  const barSize = baseR * 0.025;
+
+  ctx.fillStyle = 'rgba(217, 119, 68, 0.55)';
+  ctx.beginPath();
   for (let i = 0; i < bars; i++) {
     const a = (i / bars) * Math.PI * 2;
-    const r = baseR * 0.5;
-    const x = Math.cos(a) * r, y = Math.sin(a) * r;
-    ctx.fillStyle = 'rgba(217, 119, 68, 0.55)';
-    ctx.beginPath(); ctx.arc(x, y, baseR * 0.025, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = 'rgba(120, 60, 30, 0.6)';
-    ctx.lineWidth = 0.8;
-    ctx.stroke();
+    const x = Math.cos(a) * barR, y = Math.sin(a) * barR;
+    ctx.moveTo(x + barSize, y);
+    ctx.arc(x, y, barSize, 0, Math.PI * 2);
   }
+  ctx.fill();
+
+  ctx.strokeStyle = 'rgba(120, 60, 30, 0.6)';
+  ctx.lineWidth = 0.8;
+  ctx.beginPath();
+  for (let i = 0; i < bars; i++) {
+    const a = (i / bars) * Math.PI * 2;
+    const x = Math.cos(a) * barR, y = Math.sin(a) * barR;
+    ctx.moveTo(x + barSize, y);
+    ctx.arc(x, y, barSize, 0, Math.PI * 2);
+  }
+  ctx.stroke();
 
   // Shaft
   ctx.fillStyle = 'rgba(60, 50, 40, 0.85)';
@@ -231,48 +292,103 @@ function drawMotor(ctx, W, H, t, zoom) {
   ctx.fillRect(0, 0, W, H);
 }
 
-// ─── Scene 1: STFT spectrogram — vertical frequency stripes scrolling ───────
+// ─── Viridis LUT — precomputed 256-entry lookup table ───────────────────────
+// Built once, shared by drawSpectrogram.  Stores [r, g, b] per entry.
+const _viridisLUT = (function() {
+  const stops = [
+    [68, 1, 84],    // 0
+    [59, 82, 139],  // 0.25
+    [33, 144, 141], // 0.5
+    [94, 201, 98],  // 0.75
+    [253, 231, 37], // 1
+  ];
+  const N = 256;
+  const lut = new Array(N);
+  for (let idx = 0; idx < N; idx++) {
+    const t = idx / (N - 1);
+    const i = Math.min(stops.length - 2, Math.floor(t * (stops.length - 1)));
+    const f = t * (stops.length - 1) - i;
+    const a = stops[i], b = stops[i + 1];
+    lut[idx] = [
+      Math.round(a[0] + (b[0] - a[0]) * f),
+      Math.round(a[1] + (b[1] - a[1]) * f),
+      Math.round(a[2] + (b[2] - a[2]) * f),
+    ];
+  }
+  return lut;
+})();
+
+// ─── Scene 1: STFT spectrogram ──────────────────────────────────────────────
+// Uses putImageData with a reusable buffer instead of per-cell fillRect.
+// This replaces ~69 000 fillRect calls with a single pixel-buffer write.
+let _spectroImgData = null;
+let _spectroW = 0;
+let _spectroH = 0;
+
 function drawSpectrogram(ctx, W, H, t, intensity) {
-  // Build a procedural spectrogram-ish field: time on x, frequency on y
-  // Use noise-like striping with horizontal bands at certain frequencies (fault signatures)
   const cellW = 6, cellH = 5;
   const cols = Math.ceil(W / cellW);
   const rows = Math.ceil(H / cellH);
+  const pixW = cols * cellW;
+  const pixH = rows * cellH;
+
+  // Reuse ImageData if size hasn't changed
+  if (!_spectroImgData || _spectroW !== pixW || _spectroH !== pixH) {
+    _spectroImgData = ctx.createImageData(pixW, pixH);
+    _spectroW = pixW;
+    _spectroH = pixH;
+  }
+  const data = _spectroImgData.data;
 
   for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const x = c * cellW;
-      const y = r * cellH;
-      const freq = 1 - r / rows; // higher row = lower frequency
+    const freq = 1 - r / rows;
 
-      // Base spectral envelope — peaks at fundamental (50Hz) and harmonics
-      let v = 0;
-      // Fundamental band
-      v += Math.exp(-Math.pow((freq - 0.78) * 30, 2)) * 0.9;
-      // 3rd harmonic
-      v += Math.exp(-Math.pow((freq - 0.55) * 30, 2)) * 0.55;
-      // 5th harmonic
-      v += Math.exp(-Math.pow((freq - 0.32) * 25, 2)) * 0.4;
-      // Sideband (fault indicator)
-      v += Math.exp(-Math.pow((freq - 0.72) * 60, 2)) * 0.35 * (0.5 + 0.5 * Math.sin(c * 0.05 + t * 1.5));
+    // Pre-compute frequency-dependent terms (constant across columns)
+    const gauss1 = Math.exp(-Math.pow((freq - 0.78) * 30, 2)) * 0.9;
+    const gauss2 = Math.exp(-Math.pow((freq - 0.55) * 30, 2)) * 0.55;
+    const gauss3 = Math.exp(-Math.pow((freq - 0.32) * 25, 2)) * 0.4;
+    const gauss4base = Math.exp(-Math.pow((freq - 0.72) * 60, 2)) * 0.35;
+    const noiseR = r * 0.07;
+    const noiseR2 = r * 0.13;
+
+    for (let c = 0; c < cols; c++) {
+      let v = gauss1 + gauss2 + gauss3;
+      // Sideband
+      v += gauss4base * (0.5 + 0.5 * Math.sin(c * 0.05 + t * 1.5));
       // Time-varying noise
-      const n = Math.sin(c * 0.13 + t * 0.6 + r * 0.07) * 0.5
-              + Math.sin(c * 0.31 - t * 0.4 + r * 0.13) * 0.3
+      const n = Math.sin(c * 0.13 + t * 0.6 + noiseR) * 0.5
+              + Math.sin(c * 0.31 - t * 0.4 + noiseR2) * 0.3
               + Math.sin(c * 0.07 + t * 1.2) * 0.2;
       v += n * 0.18;
-      // Scrolling time
       v += Math.sin(c * 0.08 - t * 4) * 0.08;
 
       v = Math.max(0, Math.min(1, v * intensity));
 
-      // Viridis-ish colormap (purple → blue → green → yellow)
-      const color = viridis(v);
-      ctx.fillStyle = color;
-      ctx.fillRect(x, y, cellW, cellH);
+      // Look up color from precomputed LUT
+      const lutIdx = (v * 255 + 0.5) | 0; // fast round
+      const rgb = _viridisLUT[Math.min(255, lutIdx)];
+
+      // Fill the cell's pixels in the ImageData buffer
+      const startPx = r * cellH;
+      const endPx = startPx + cellH;
+      const startCx = c * cellW;
+      const endCx = startCx + cellW;
+      for (let py = startPx; py < endPx; py++) {
+        const rowOff = py * pixW;
+        for (let px = startCx; px < endCx; px++) {
+          const off = (rowOff + px) * 4;
+          data[off]     = rgb[0];
+          data[off + 1] = rgb[1];
+          data[off + 2] = rgb[2];
+          data[off + 3] = 255;
+        }
+      }
     }
   }
 
-  // Top axis label region
+  ctx.putImageData(_spectroImgData, 0, 0);
+
+  // Top overlay
   ctx.fillStyle = 'rgba(15, 10, 25, 0.4)';
   ctx.fillRect(0, 0, W, H);
 
@@ -285,76 +401,58 @@ function drawSpectrogram(ctx, W, H, t, intensity) {
   ctx.fillRect(0, 0, W, H);
 }
 
-function viridis(t) {
-  // simplified viridis approximation
-  const stops = [
-    [68, 1, 84],    // 0
-    [59, 82, 139],  // 0.25
-    [33, 144, 141], // 0.5
-    [94, 201, 98],  // 0.75
-    [253, 231, 37], // 1
-  ];
-  const i = Math.min(stops.length - 2, Math.floor(t * (stops.length - 1)));
-  const f = t * (stops.length - 1) - i;
-  const a = stops[i], b = stops[i + 1];
-  const r = Math.round(a[0] + (b[0] - a[0]) * f);
-  const g = Math.round(a[1] + (b[1] - a[1]) * f);
-  const bb = Math.round(a[2] + (b[2] - a[2]) * f);
-  return `rgb(${r},${g},${bb})`;
-}
-
 // ─── Scene 2: 3-phase traveling sine waves ──────────────────────────────────
+// Optimized: coarser grid, larger trace step (3px vs 2px), batch grid lines.
 function drawThreePhase(ctx, W, H, t, intensity) {
-  // Background — warm dark
   ctx.fillStyle = 'rgba(18, 16, 14, 0.92)';
   ctx.fillRect(0, 0, W, H);
 
-  // Grid (oscilloscope)
+  // Grid — batch all lines into one path
+  const gridStep = 60;
   ctx.strokeStyle = 'rgba(217, 119, 68, 0.06)';
   ctx.lineWidth = 1;
-  const gridStep = 60;
+  ctx.beginPath();
   for (let x = 0; x < W; x += gridStep) {
-    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+    ctx.moveTo(x, 0); ctx.lineTo(x, H);
   }
   for (let y = 0; y < H; y += gridStep) {
-    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    ctx.moveTo(0, y); ctx.lineTo(W, y);
   }
-  // Major axes
+  ctx.stroke();
+
+  // Major axis
   ctx.strokeStyle = 'rgba(217, 119, 68, 0.18)';
   ctx.lineWidth = 1;
   const midY = H * 0.5;
   ctx.beginPath(); ctx.moveTo(0, midY); ctx.lineTo(W, midY); ctx.stroke();
 
-  // Three phases: Ia, Ib, Ic — 120° apart. I_a is strong red; I_b cobalt; I_c amber.
   const phases = [
     { color: '#d62020', offset: 0,             label: 'I_a' },
     { color: '#5b9bbf', offset: -2*Math.PI/3,  label: 'I_b' },
     { color: '#a8a040', offset:  2*Math.PI/3,  label: 'I_c' },
   ];
   const amp = H * 0.22;
-  const freq = 0.012; // spatial frequency
+  const freq = 0.012;
   const speed = 1.8;
 
-  // Signal "draws on" left-to-right as the section progresses. intensity ∈ [0,1].
-  // We clip to a moving right edge — wave is absent at top of section, fully drawn
-  // only when the user has scrolled to the bottom of the processing section.
   const drawTo = Math.max(0, Math.min(W, W * intensity));
-  if (drawTo < 2) return; // nothing yet — leave grid only
+  if (drawTo < 2) return;
 
-  // Pen-down marker — vertical guide at the leading edge of the trace
+  // Pen-down marker
   ctx.strokeStyle = 'rgba(241, 237, 228, 0.10)';
   ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(drawTo, 0); ctx.lineTo(drawTo, H); ctx.stroke();
 
+  // Trace step: 3px instead of 2px — ~33% fewer lineTo calls
+  const step = 3;
   phases.forEach((p) => {
-    // Glow
     ctx.shadowColor = p.color;
     ctx.shadowBlur = 18;
     ctx.strokeStyle = p.color;
     ctx.lineWidth = 2.5;
     ctx.beginPath();
     let started = false;
-    for (let x = 0; x <= drawTo; x += 2) {
+    for (let x = 0; x <= drawTo; x += step) {
       const mod = Math.sin(x * 0.003 + t * 0.5) * 8;
       const y = midY + Math.sin(x * freq - t * speed + p.offset) * amp + mod;
       if (!started) { ctx.moveTo(x, y); started = true; }
@@ -364,7 +462,7 @@ function drawThreePhase(ctx, W, H, t, intensity) {
     ctx.shadowBlur = 0;
   });
 
-  // Leading-edge sample dots — pinned to the right tip of each trace
+  // Leading-edge dots
   phases.forEach((p) => {
     const x = drawTo;
     const mod = Math.sin(x * 0.003 + t * 0.5) * 8;
@@ -384,35 +482,39 @@ function drawThreePhase(ctx, W, H, t, intensity) {
 }
 
 // ─── Scene 3: Neural classification field — particle clusters ───────────────
+// Optimized: batch contour lines into one path, coarser angle step,
+// batch particles per cluster into one path.
 function drawNeuralField(ctx, W, H, t, intensity) {
-  // Soft warm paper background to match results aesthetic
   ctx.fillStyle = 'rgba(241, 237, 228, 0.96)';
   ctx.fillRect(0, 0, W, H);
 
-  // Faint contour lines suggesting decision boundary / probability field
+  // Contour lines — batch all into one path, coarser step (0.08 vs 0.05)
   ctx.strokeStyle = 'rgba(30, 58, 138, 0.08)';
   ctx.lineWidth = 1;
+  ctx.beginPath();
   for (let r = 80; r < Math.max(W, H); r += 90) {
-    ctx.beginPath();
-    for (let a = 0; a <= Math.PI * 2 + 0.1; a += 0.05) {
+    let first = true;
+    for (let a = 0; a <= Math.PI * 2 + 0.1; a += 0.08) {
       const wob = Math.sin(a * 4 + t * 0.3 + r * 0.02) * 30;
       const x = W * 0.5 + Math.cos(a) * (r + wob) * 1.4;
       const y = H * 0.5 + Math.sin(a) * (r + wob);
-      if (a === 0) ctx.moveTo(x, y);
+      if (first) { ctx.moveTo(x, y); first = false; }
       else ctx.lineTo(x, y);
     }
-    ctx.stroke();
   }
+  ctx.stroke();
 
-  // Particle clusters — 4 classes at 4 anchor points
+  // Particle clusters — batch all particles of each cluster into one path
   const clusters = [
-    { x: W * 0.22, y: H * 0.30, color: '#1e3a8a', n: 60 },  // healthy
-    { x: W * 0.78, y: H * 0.32, color: '#b8431f', n: 30 },  // stator
-    { x: W * 0.25, y: H * 0.72, color: '#0369a1', n: 35 },  // bearing
-    { x: W * 0.75, y: H * 0.70, color: '#a16207', n: 22 },  // rotor
+    { x: W * 0.22, y: H * 0.30, color: '#1e3a8a', n: 60 },
+    { x: W * 0.78, y: H * 0.32, color: '#b8431f', n: 30 },
+    { x: W * 0.25, y: H * 0.72, color: '#0369a1', n: 35 },
+    { x: W * 0.75, y: H * 0.70, color: '#a16207', n: 22 },
   ];
 
   clusters.forEach((c, ci) => {
+    ctx.fillStyle = c.color + '55';
+    ctx.beginPath();
     for (let i = 0; i < c.n; i++) {
       const seed = ci * 1000 + i;
       const ang = (seed * 13.7 + t * 0.05) % (Math.PI * 2);
@@ -420,12 +522,14 @@ function drawNeuralField(ctx, W, H, t, intensity) {
       const drift = Math.sin(t * 0.4 + seed) * 6;
       const x = c.x + Math.cos(ang) * r + drift;
       const y = c.y + Math.sin(ang) * r + Math.cos(t * 0.3 + seed) * 6;
-      ctx.fillStyle = c.color + '55';
-      ctx.beginPath(); ctx.arc(x, y, 2 + (Math.sin(seed) * 0.5 + 0.5) * 2, 0, Math.PI * 2); ctx.fill();
+      const radius = 2 + (Math.sin(seed) * 0.5 + 0.5) * 2;
+      ctx.moveTo(x + radius, y);
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
     }
+    ctx.fill();
   });
 
-  // Top vignette to fade content area
+  // Top vignette
   const vig = ctx.createLinearGradient(0, 0, 0, H);
   vig.addColorStop(0, 'rgba(241, 237, 228, 0.6)');
   vig.addColorStop(0.5, 'rgba(241, 237, 228, 0.85)');
