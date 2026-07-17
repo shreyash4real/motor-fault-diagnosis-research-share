@@ -1,5 +1,9 @@
 # Motor Fault Diagnosis Research Share
 
+## Frontend
+
+[Open the cinematic Motor Fault Detection frontend](https://shreyash4real.github.io/motor-fault-diagnosis-research-share/)
+
 Private share package for the 4-class motor fault diagnosis work.
 
 Pushed to `https://github.com/shreyash4real/motor-fault-diagnosis-research-share` on 2026-04-30.
