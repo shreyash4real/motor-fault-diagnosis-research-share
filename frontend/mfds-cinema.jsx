@@ -394,6 +394,27 @@ function SectionConfigure({ goSection, model, setModel }) {
                 );
               })}
             </div>
+            <div style={{ marginTop: '1.5rem', paddingTop: '1.2rem', borderTop: '1px solid var(--glass-rule)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', marginBottom: '0.8rem' }}>
+                <span className="h3-num">Representative feature views</span>
+                <span style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '0.78rem', color: 'var(--glass-text-3)' }}>derived from motor current</span>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.7rem' }}>
+                {[
+                  ['STFT', 'sample_gallery/stft/healthy_1_speed_50.png', 'time–frequency view'],
+                  ['DWT', 'sample_gallery/dwt/healthy_1_speed_50.png', 'wavelet detail view'],
+                  ['Envelope', 'sample_gallery/envelope/healthy_1_speed_50.png', 'demodulated spectrum'],
+                ].map(([label, src, description]) => (
+                  <figure key={label} style={{ margin: 0, background: 'rgba(0, 0, 0, 0.22)', border: '1px solid var(--glass-rule)', overflow: 'hidden' }}>
+                    <img src={src} alt={`${label} representation of a healthy motor-current sample`} loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '1', objectFit: 'cover' }} />
+                    <figcaption style={{ padding: '0.55rem 0.65rem' }}>
+                      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.65rem', color: 'var(--paper)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>{label}</div>
+                      <div style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '0.72rem', color: 'var(--glass-text-3)', marginTop: '0.2rem' }}>{description}</div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
