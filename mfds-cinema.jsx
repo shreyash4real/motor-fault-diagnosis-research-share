@@ -358,11 +358,12 @@ function SectionConfigure({ goSection, model, setModel }) {
               feed identical 4-class softmax heads; numbers shown are held-out test
               accuracy on the v2 speed-stratified split.
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.85rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.85rem' }}>
               {[
-                { k: 'STFT', name: 'Mod-AlexNet · STFT', acc: '95.39 %', desc: 'Linear time-frequency, 0–3 kHz, 227×227 input.' },
-                { k: 'DWT',  name: 'Multi-branch · DWT',  acc: '95.10 %', desc: 'db8 wavelet, 10 sub-bands at native length.' },
-                { k: 'FUSION', name: 'STFT + DWT + Envelope', acc: '96.71 %', desc: 'Temperature-scaled ensemble · recommended.', recommended: true },
+                { k: 'stft-dwt-temperature', name: 'STFT + DWT · temperature', acc: '99.08 %', desc: 'Equal soft vote after validation-set temperature scaling.' },
+                { k: 'stft-dwt-validation-f1', name: 'STFT + DWT · validation-F1', acc: '98.55 %', desc: 'Per-class validation-F1 weighted soft vote.' },
+                { k: 'stft-dwt-envelope-temperature', name: 'STFT + DWT + Envelope · temperature', acc: '99.85 %', desc: 'Three current-derived views with calibrated equal voting.', recommended: true },
+                { k: 'stft-dwt-envelope-validation-f1', name: 'STFT + DWT + Envelope · validation-F1', acc: '99.77 %', desc: 'Three current-derived views with per-class F1 weights.' },
               ].map(m => {
                 const active = model === m.k;
                 return (
@@ -488,7 +489,9 @@ function SectionProcessing({ active, goSection }) {
 }
 
 // ─── Section 3: Results ────────────────────────────────────────────────────
-function SectionResults({ goSection }) {
+// Retained as a historical visual reference; App mounts the artifact-backed
+// SectionResults below instead.
+function SectionResultsLegacy({ goSection }) {
   const fmt = (v) => (v * 100).toFixed(1);
   const maxVal = Math.max(...CONFUSION.flat());
 
@@ -570,6 +573,104 @@ function SectionResults({ goSection }) {
 }
 
 // ─── Root ──────────────────────────────────────────────────────────────────
+function SectionResults({ goSection, data, selectedExperiment, setSelectedExperiment }) {
+  const [selectedSampleIndex, setSelectedSampleIndex] = useState(null);
+
+  if (!data) {
+    return (
+      <section className="cinema results-section" id="sec-results" data-screen-label="04 Results">
+        <div className="results-wrap">
+          <div className="results-eyebrow">Stored evaluation · loading result bundle</div>
+          <h2 className="results-title">Preparing the<br /><em>evidence.</em></h2>
+          <p className="results-lede">The product flow is ready. Loading the committed motor-current ensemble outputs.</p>
+        </div>
+      </section>
+    );
+  }
+
+  const current = data.experiments.find(item => item.id === selectedExperiment) || data.experiments[0];
+  const labelFor = (key) => (data.classes.find(item => item.key === key) || { label: key }).label;
+  const pct = (value, digits = 2) => `${(value * 100).toFixed(digits)} %`;
+  const experimentLabel = (experiment) => experiment.fusion === 'temperature'
+    ? 'Temperature-calibrated equal vote'
+    : 'Validation-F1 weighted vote';
+  const casebook = current.samples.filter(sample => !sample.correct).concat(
+    current.samples.filter(sample => sample.correct).sort((a, b) => a.margin - b.margin)
+  ).slice(0, 24);
+  const activeSampleIndex = casebook.some(sample => sample.index === selectedSampleIndex)
+    ? selectedSampleIndex
+    : casebook[0]?.index ?? 0;
+  const activeSample = current.samples[activeSampleIndex] || current.samples[0];
+  const sampleAt = (experiment, index) => experiment.samples[index] || experiment.samples.find(sample => sample.index === index);
+
+  return (
+    <section className="cinema results-section" id="sec-results" data-screen-label="04 Results">
+      <div className="results-wrap">
+        <div className="results-eyebrow">Precomputed motor-current evaluation · {data.source.testWindows.toLocaleString()} windows · {data.source.split} split</div>
+        <h2 className="results-title">A motor that <em>reveals</em><br />its state in current.</h2>
+        <p className="results-lede">Select an ensemble configuration to inspect the stored evaluation. These results use three-phase electric current signals and are not live inference.</p>
+
+        <div className="results-section-block">
+          <div className="results-block-header"><h3>Ensemble configurations</h3><span className="num">same held-out split · select a run</span></div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.7rem' }}>
+            {data.experiments.map(experiment => (
+              <button key={experiment.id} onClick={() => { setSelectedExperiment(experiment.id); setSelectedSampleIndex(null); }} style={{ textAlign: 'left', padding: '1rem 1.1rem', cursor: 'pointer', color: 'var(--ink)', background: experiment.id === current.id ? 'var(--surface2)' : 'var(--surface)', border: experiment.id === current.id ? '1px solid var(--accent)' : '1px solid var(--rule-soft)' }}>
+                <span style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: experiment.id === current.id ? 'var(--accent)' : 'var(--ink-3)' }}>{experimentLabel(experiment)}</span>
+                <span style={{ display: 'block', fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1rem', marginTop: '0.35rem' }}>{experiment.representations.map(labelFor).join(' + ')}</span>
+                <span style={{ display: 'block', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8rem', marginTop: '0.5rem' }}>{pct(experiment.accuracy)} accuracy · {pct(experiment.macroF1)} macro-F1</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="results-headline-row">
+          <MetricCard label="Accuracy" value={(current.accuracy * 100).toFixed(2)} sub={`${current.samples.length - current.errors} / ${current.samples.length} windows`} color="#1e3a8a" />
+          <MetricCard label="Macro F1" value={(current.macroF1 * 100).toFixed(2)} sub="unweighted mean" color="#0369a1" />
+          <MetricCard label="Errors" value={String(current.errors)} sub={`of ${current.samples.length} windows`} color="#b8431f" />
+        </div>
+
+        <div className="results-section-block">
+          <div className="results-block-header"><h3>Confusion matrix</h3><span className="num">{current.run}</span></div>
+          <ConfusionMatrix cm={current.confusion} classKeys={data.classes.map(item => item.key)} maxVal={Math.max(...current.confusion.flat())} />
+        </div>
+
+        <div className="results-section-block">
+          <div className="results-block-header"><h3>Per-class performance</h3><span className="num">test windows, not independent motors</span></div>
+          <div style={{ background: 'var(--surface)', border: '1px solid var(--rule-soft)', padding: '0.4rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '2.2fr 1fr 1fr 1fr 1fr', gap: '0.5rem', padding: '0.6rem 1rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--ink-3)', borderBottom: '1px solid var(--rule-soft)' }}><div>Class</div><div style={{ textAlign: 'right' }}>Precision</div><div style={{ textAlign: 'right' }}>Recall</div><div style={{ textAlign: 'right' }}>F1</div><div style={{ textAlign: 'right' }}>Support</div></div>
+            {current.perClass.map(item => <div key={item.class} style={{ display: 'grid', gridTemplateColumns: '2.2fr 1fr 1fr 1fr 1fr', gap: '0.5rem', padding: '0.75rem 1rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.78rem', borderBottom: '1px solid var(--rule-soft)' }}><div style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1rem' }}>{labelFor(item.class)}</div><div style={{ textAlign: 'right' }}>{pct(item.precision, 1)}</div><div style={{ textAlign: 'right' }}>{pct(item.recall, 1)}</div><div style={{ textAlign: 'right', color: 'var(--accent)' }}>{pct(item.f1, 1)}</div><div style={{ textAlign: 'right' }}>{item.support}</div></div>)}
+          </div>
+        </div>
+
+        <div className="results-section-block">
+          <div className="results-block-header"><h3>Sample explorer</h3><span className="num">same sample across all four runs</span></div>
+          <select className="form-input" value={activeSampleIndex} onChange={event => setSelectedSampleIndex(Number(event.target.value))}>
+            {casebook.map(sample => <option key={sample.index} value={sample.index}>#{sample.index} · {sample.correct ? 'near-boundary correct' : 'misclassified'} · {labelFor(sample.trueClass)} · {sample.speedPct}% speed</option>)}
+          </select>
+          {activeSample && <div style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <div style={{ padding: '1.2rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)' }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.7rem', color: 'var(--ink-3)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Sample #{activeSample.index}</div>
+              <h4 style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1.35rem', margin: '0.45rem 0' }}>{labelFor(activeSample.trueClass)}</h4>
+              <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.75rem', color: 'var(--ink-3)' }}>{activeSample.speedPct}% speed · column {activeSample.column} · segment {activeSample.segment}</p>
+              <p style={{ marginTop: '1rem', fontFamily: "'Fraunces', serif", lineHeight: 1.5 }}>{activeSample.correct ? 'Correct on this run.' : `Predicted ${labelFor(activeSample.prediction)} at ${pct(activeSample.confidence, 1)} confidence.`}</p>
+              {Object.entries(activeSample.probabilities).map(([key, value]) => <div key={key} style={{ marginTop: '0.7rem' }}><div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.68rem' }}><span>{labelFor(key)}</span><span>{pct(value, 1)}</span></div><div style={{ height: '5px', background: 'var(--surface2)', marginTop: '0.25rem' }}><div style={{ width: `${Math.max(1, value * 100)}%`, height: '100%', background: key === activeSample.prediction ? 'var(--accent)' : 'var(--steel)' }} /></div></div>)}
+            </div>
+            <div style={{ padding: '1.2rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)' }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.7rem', color: 'var(--ink-3)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>Representation gallery</div>
+              {Object.keys(activeSample.gallery || {}).length ? <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', marginTop: '0.8rem' }}>{Object.entries(activeSample.gallery).map(([representation, path]) => <a key={representation} href={path} target="_blank" rel="noreferrer"><img src={path} alt={`${representation} representation`} style={{ width: '100%', aspectRatio: '1', objectFit: 'cover', border: '1px solid var(--rule-soft)' }} /><span style={{ display: 'block', marginTop: '0.25rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.6rem', textTransform: 'uppercase' }}>{representation}</span></a>)}</div> : <p style={{ marginTop: '1rem', fontFamily: "'Fraunces', serif", lineHeight: 1.5 }}>No exact gallery image is bundled for this test window. The metadata and probabilities remain exact.</p>}
+            </div>
+          </div>}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.7rem', marginTop: '1rem' }}>{data.experiments.map(experiment => { const sample = sampleAt(experiment, activeSampleIndex); return <div key={experiment.id} style={{ padding: '0.8rem 1rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.7rem' }}><div style={{ color: 'var(--ink-3)', marginBottom: '0.35rem' }}>{experimentLabel(experiment)}</div><div>{labelFor(sample.prediction)} · {pct(sample.confidence, 1)} · {sample.correct ? 'correct' : 'error'}</div></div>; })}</div>
+        </div>
+
+        <div className="results-section-block"><div className="results-block-header"><h3>Evaluation note</h3><span className="num">{data.source.split}</span></div><p className="results-lede" style={{ color: 'var(--ink-2)', marginBottom: 0 }}>This bundle contains precomputed motor-current predictions. The split excludes BPFO-3 at 100% speed by design; the window count includes overlapping 1-second segments from {data.source.testColumnGroups} held-out column groups.</p></div>
+
+        <div className="btn-row" style={{ justifyContent: 'space-between', borderTop: '1px solid var(--rule)', paddingTop: '1.6rem', marginTop: '2.5rem' }}><button className="btn ghost" style={{ color: 'var(--ink)', borderColor: 'var(--rule)' }} onClick={() => goSection(0)}>↑ Run another</button><div style={{ display: 'flex', gap: '0.8rem' }}><a className="btn dark" href="results-data.json" download>Download data</a><a className="btn" href="motor_fault_diagnosis_report.md">Read report</a></div></div>
+      </div>
+    </section>
+  );
+}
+
 const ATMOSPHERES = {
   foundry: { label: 'Foundry', desc: 'rust · paper · iron', swatch: ['#b8431f', '#1a1612', '#f1ede4'],
     vars: { '--paper': '#f1ede4', '--paper-2': '#e8e2d4', '--ink': '#1a1612', '--ink-2': '#3a342c', '--ink-3': '#6b6258', '--ink-4': '#9a9185', '--rule': 'rgba(26,22,18,0.18)', '--rule-soft': 'rgba(26,22,18,0.10)', '--surface': '#f8f5ed', '--surface2': '#ebe6d8', '--accent': '#b8431f', '--glass-bg': 'rgba(20,16,12,0.72)', '--glass-bg-2': 'rgba(34,28,22,0.78)', '--glass-rule': 'rgba(241,237,228,0.14)', '--glass-rule-2': 'rgba(241,237,228,0.22)', '--glass-text': '#f1ede4', '--glass-text-2': 'rgba(241,237,228,0.78)', '--glass-text-3': 'rgba(241,237,228,0.55)' },
@@ -612,9 +713,17 @@ function AtmosphereStyle({ atmosphere, voice, cinematography }) {
 
 function App() {
   const [files, setFiles] = useState(null);
-  const [model, setModel] = useState('FUSION');
+  const [model, setModel] = useState('stft-dwt-envelope-temperature');
+  const [resultsData, setResultsData] = useState(null);
   const handleUpload = () => setFiles(SAMPLE_DATASET);
   const [t, setTweak] = useTweaks(window.TWEAK_DEFAULTS);
+
+  useEffect(() => {
+    fetch('results-data.json')
+      .then(response => response.ok ? response.json() : Promise.reject(new Error('results-data.json unavailable')))
+      .then(setResultsData)
+      .catch(error => console.warn('Stored results unavailable:', error));
+  }, []);
 
   const { section, sectionProgress } = useScrollNarrative(4);
   const totalProgress = (section + sectionProgress) / 4;
@@ -644,9 +753,9 @@ function App() {
       <StepRail activeSection={section} onClick={goTo} light={lightChrome} />
       <div className="scroll-stage">
         <SectionHero files={files} onUpload={handleUpload} goSection={goTo} />
-        <SectionConfigure goSection={goTo} model={model} setModel={setModel} />
+        <SectionConfigure goSection={goTo} model={model} setModel={setModel} experiments={resultsData?.experiments || []} />
         <SectionProcessing active={section === 2} goSection={goTo} />
-        <SectionResults goSection={goTo} />
+        <SectionResults goSection={goTo} data={resultsData} selectedExperiment={model} setSelectedExperiment={setModel} />
       </div>
 
       <TweaksPanel title="Tweaks">
