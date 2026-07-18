@@ -228,14 +228,15 @@ function ConfusionMatrix({ cm, classKeys, maxVal }) {
                     {CLASS_META[classKeys[i]].label}
                   </div>
                   {row.map((val, j) => {
-                    const intensity = val / maxVal;
-                    const bg = bluesScale(intensity);
+                    const intensity = Math.max(0, Math.min(1, val / Math.max(1, maxVal)));
+                    const opacity = val === 0 ? 0.06 : 0.16 + Math.pow(intensity, 0.55) * 0.84;
+                    const bg = `rgba(8, 48, 107, ${opacity.toFixed(3)})`;
                     const isDiag = i === j;
-                    const textColor = intensity > 0.55 ? '#f7fbff' : '#08306b';
+                    const textColor = opacity > 0.56 ? '#f7fbff' : '#08306b';
                     const rowSum = row.reduce((a,b)=>a+b,0);
                     const pct = rowSum ? ((val/rowSum)*100).toFixed(1) : '0';
                     return (
-                      <div key={j} style={{ background: bg, padding: '0.85rem 0.3rem', textAlign: 'center', border: isDiag ? '2px solid #08306b' : '1px solid rgba(8,48,107,0.15)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70px' }}>
+                      <div key={j} title={`${val} samples · ${Math.round(intensity * 100)}% of matrix maximum`} aria-label={`${val} samples`} style={{ background: bg, padding: '0.85rem 0.3rem', textAlign: 'center', border: isDiag ? '2px solid #08306b' : '1px solid rgba(8,48,107,0.15)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70px' }}>
                         <span style={{ fontFamily: "'Fraunces', serif", fontVariationSettings: '"opsz" 144', fontSize: '1.3rem', color: textColor, lineHeight: 1 }}>{val}</span>
                         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', color: textColor, opacity: 0.8, marginTop: '0.3rem' }}>{pct}%</span>
                       </div>
@@ -252,7 +253,7 @@ function ConfusionMatrix({ cm, classKeys, maxVal }) {
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.65rem', color: 'var(--ink-3)', letterSpacing: '0.05em' }}>0</span>
         <div style={{ display: 'flex', height: 14, border: '1px solid rgba(8,48,107,0.2)' }}>
           {Array.from({ length: 24 }).map((_, i) => (
-            <div key={i} style={{ width: 12, height: '100%', background: bluesScale(i / 23) }}></div>
+            <div key={i} style={{ width: 12, height: '100%', background: `rgba(8, 48, 107, ${(0.16 + Math.pow(i / 23, 0.55) * 0.84).toFixed(3)})` }}></div>
           ))}
         </div>
         <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.65rem', color: 'var(--ink-3)' }}>{maxVal}</span>

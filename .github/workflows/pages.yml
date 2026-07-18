@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'index.html'
-      - '*.jsx'
+      - 'frontend/**'
+      - 'Scripts_nobpfo100/export_frontend_results.py'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -31,8 +31,7 @@ jobs:
       - name: Prepare site
         run: |
           mkdir site
-          cp index.html site/
-          cp *.jsx site/
+          cp -r frontend/. site/
 
       - name: Configure Pages
         uses: actions/configure-pages@v6
