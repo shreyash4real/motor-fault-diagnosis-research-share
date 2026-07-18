@@ -4,11 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'index.html'
-      - '*.jsx'
-      - 'results-data.json'
-      - 'sample_gallery/**'
-      - 'motor_fault_diagnosis_report.md'
+      - 'frontend/**'
       - 'Scripts_nobpfo100/export_frontend_results.py'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
@@ -35,11 +31,7 @@ jobs:
       - name: Prepare site
         run: |
           mkdir site
-          cp index.html site/
-          cp *.jsx site/
-          cp results-data.json site/
-          cp motor_fault_diagnosis_report.md site/
-          cp -r sample_gallery site/
+          cp -r frontend/. site/
 
       - name: Configure Pages
         uses: actions/configure-pages@v6

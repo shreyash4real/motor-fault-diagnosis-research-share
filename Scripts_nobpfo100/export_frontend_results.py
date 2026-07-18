@@ -17,7 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_ROOT = ROOT / "Outputs_nobpfo100" / "training"
-OUT_PATH = ROOT / "results-data.json"
+OUT_PATH = ROOT / "frontend" / "data" / "results-data.json"
 CLASS_NAMES = ["healthy 1", "stator short 1", "bearing bpfo 3", "broken rotor bar"]
 CLASS_KEYS = ["healthy", "stator_short", "bearing_bpfo", "broken_rotor_bar"]
 CLASS_TO_KEY = dict(zip(CLASS_NAMES, CLASS_KEYS))
@@ -110,7 +110,7 @@ def confusion(labels: list[int], predictions: list[int]) -> list[list[int]]:
 
 def gallery_index() -> dict[tuple[str, int, int, int], dict[str, str]]:
     result: dict[tuple[str, int, int, int], dict[str, str]] = {}
-    manifest = ROOT / "sample_gallery" / "manifest.csv"
+    manifest = ROOT / "frontend" / "sample_gallery" / "manifest.csv"
     for row in read_csv(manifest):
         source = row["source"].replace("\\", "/")
         match = re.search(

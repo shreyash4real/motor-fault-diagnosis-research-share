@@ -18,7 +18,7 @@ Included:
 - training outputs under `Outputs/4class/training/`
 - BPFO-3 diagnostics under `Outputs/4class/diagnostics/`
 - canonical split metadata under `Outputs/4class/v2_speed_strat/`
-- representative gallery images under `sample_gallery/` (3 reps × 4 classes × 3 speeds = 36 PNGs)
+- the presentation frontend under `frontend/`, including the committed result bundle and representative gallery images
 - `graphify-out/GRAPH_REPORT.md` and `code_review_graph_summary.md`
 
 Excluded intentionally:
