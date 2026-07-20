@@ -1,14 +1,9 @@
 // Cinematic scroll-driven Motor Fault Detection app
 const { useState, useEffect, useRef, useMemo } = React;
 
-// ─── Sample data ────────────────────────────────────────────────────────────
-// Numbers below are pulled from the real project pipeline:
-//   - SAMPLE_DATASET = one 3-phase recording (Ia/Ib/Ic) at 20 kHz · 15 s.
-//   - STAGES walks the canonical pipeline (validate → denoise → segment → STFT
-//     → DWT → envelope → fusion).
-//   - CONFUSION / PER_CLASS / HEADLINE come from the actual best ensemble run
-//     Outputs/4class/training/ENSEMBLE_stft_dwt_envelope_v3_temperature/
-//     (test n=1368, accuracy 96.71 %, macro-F1 0.9560, 1 May 2026).
+// ─── Reference case and pipeline profile ────────────────────────────────────
+// SAMPLE_DATASET is a 3-phase reference recording. The artifact-backed results
+// below are loaded from frontend/data/results-data.json.
 const SAMPLE_DATASET = { count: 3, size: '91.4 MB', duration: '15 s · 300 000 samples', channels: 'I_a · I_b · I_c' };
 
 const STAGES = [
@@ -22,65 +17,6 @@ const STAGES = [
 ];
 // Total stage time is 45 s — used by the elapsed counter below.
 const TOTAL_STAGE_SEC = 45;
-
-const CLASS_KEYS = ['healthy', 'stator_short', 'bearing_bpfo', 'broken_rotor_bar'];
-
-// Real per-class metrics from per_class_metrics.csv. TP/FP/FN/TN derived from
-// the confusion matrix below (TN = N − TP − FP − FN, N = 1368).
-const PER_CLASS = [
-  { cls: 'healthy',          precision: 0.9510, recall: 0.9988, f1: 0.9743, support: 855, tp: 854, fp: 44, fn:  1, tn:  469 },
-  { cls: 'stator_short',     precision: 1.0000, recall: 1.0000, f1: 1.0000, support: 171, tp: 171, fp:  0, fn:  0, tn: 1197 },
-  { cls: 'bearing_bpfo',     precision: 0.9922, recall: 0.7427, f1: 0.8495, support: 171, tp: 127, fp:  1, fn: 44, tn: 1196 },
-  { cls: 'broken_rotor_bar', precision: 1.0000, recall: 1.0000, f1: 1.0000, support: 171, tp: 171, fp:  0, fn:  0, tn: 1197 },
-];
-
-// Real 4×4 confusion matrix reconstructed from misclassified_samples.csv:
-//   45 / 1368 errors  →  44 bearing_bpfo→healthy (all on col_index=5 @ 100 % speed)
-//                       + 1 healthy→bearing_bpfo (col 16, seg 6 @ 100 % speed).
-const CONFUSION = [
-  [854,   0,   1,   0],  // true: healthy
-  [  0, 171,   0,   0],  // true: stator_short
-  [ 44,   0, 127,   0],  // true: bearing_bpfo
-  [  0,   0,   0, 171],  // true: broken_rotor_bar
-];
-
-const HEADLINE = [
-  { label: 'Accuracy',      value: '96.7', sub: '1 323 / 1 368', color: '#1e3a8a',
-    formula: '(TP + TN) / Total samples',
-    breakdown: [
-      { k: 'Î£ Diagonal (correct)', v: '1 323' },
-      { k: 'Total predictions',    v: '1 368' },
-    ],
-    calc: '1 323 / 1 368 = 0.9671 → 96.7 %' },
-  { label: 'Macro F1',      value: '95.6', sub: 'unweighted mean', color: '#0369a1',
-    formula: '(F1₁ + F1₂ + F1₃ + F1₄) / 4',
-    breakdown: [
-      { k: 'F1 healthy',          v: '97.4 %' },
-      { k: 'F1 stator_short',     v: '100.0 %' },
-      { k: 'F1 bearing_bpfo',     v: '85.0 %' },
-      { k: 'F1 broken_rotor_bar', v: '100.0 %' },
-    ],
-    calc: '(0.9743 + 1.0000 + 0.8495 + 1.0000) / 4 = 0.9560 → 95.6 %' },
-  { label: 'Weighted F1',   value: '96.5', sub: 'support-weighted', color: '#a16207',
-    formula: 'Î£ (Fáµ¢ · supportáµ¢) / Î£ supportáµ¢',
-    breakdown: [
-      { k: 'healthy · 855',           v: '0.9743 × 855 = 832.99' },
-      { k: 'stator_short · 171',      v: '1.0000 × 171 = 171.00' },
-      { k: 'bearing_bpfo · 171',      v: '0.8495 × 171 = 145.27' },
-      { k: 'broken_rotor_bar · 171',  v: '1.0000 × 171 = 171.00' },
-      { k: 'Î£',                        v: '1 320.26 / 1 368' },
-    ],
-    calc: '1 320.26 / 1 368 = 0.9651 → 96.5 %' },
-  { label: 'Cohen Îº',       value: '0.94', sub: 'agreement vs chance', color: '#b8431f',
-    formula: '(p_o − p_e) / (1 − p_e)',
-    breakdown: [
-      { k: 'p_o  (observed)',  v: '0.9671' },
-      { k: 'p_e  (expected)',  v: '0.4533' },
-      { k: 'Numerator',         v: '0.5138' },
-      { k: 'Denominator',       v: '0.5467' },
-    ],
-    calc: '(0.9671 − 0.4533) / (1 − 0.4533) = 0.940' },
-];
 
 // ─── Scroll progress hook ──────────────────────────────────────────────────
 // Sections aren't always exactly 1 viewport tall — content can push them past
@@ -135,10 +71,10 @@ function TopBar({ activeSection, light }) {
     <div className="top-bar">
       <div>
         <div className="brand" style={{ color: txt, mixBlendMode: 'normal' }}>
-          Motor Fault <span className="ampersand" style={{ color: amp }}>&</span> Diagnostics
+          Current<span className="ampersand" style={{ color: amp }}>Guard</span>
         </div>
         <div className="brand-tag" style={{ color: tag, mixBlendMode: 'normal' }}>
-          Lab Notebook · MFDS-04 · 2026
+          Motor-current diagnostics · Prototype · 2026
         </div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -171,22 +107,21 @@ function StepRail({ activeSection, onClick, light }) {
 
 // ─── Section 0: Hero / Upload ──────────────────────────────────────────────
 function SectionHero({ files, onUpload, goSection }) {
-  const inputRef = useRef();
   const [over, setOver] = useState(false);
   return (
     <section className="cinema" id="sec-hero" data-screen-label="01 Upload">
       <div className="hero-wrap">
         <div>
-          <div className="hero-eyebrow">Field study · Industrial 5.5 kW induction motor</div>
+          <div className="hero-eyebrow">Condition monitoring · Industrial induction motors</div>
           <h1 className="hero-title">
-            What does a<br />
-            failing motor<br />
-            <em>sound like?</em>
+            Read the motor<br />
+            through its<br />
+            <em>current.</em>
           </h1>
           <p className="hero-lede">
-            Drop in a window of three-phase current samples — twenty kilohertz, any
-            duration past two seconds — and we will tell you whether the machine is
-            whole, or which of three failure modes is taking root.
+            CurrentGuard turns the three phases already present at an induction motor
+            into a condition-monitoring signal. This prototype lets a plant team inspect
+            the diagnostic evidence behind healthy, stator, bearing, and rotor-fault states.
           </p>
           <div className="hero-meta-grid">
             <div className="hero-meta-item">
@@ -206,24 +141,23 @@ function SectionHero({ files, onUpload, goSection }) {
 
         <div className="glass-panel">
           <div className="glass-panel-header">
-            <h2>Drop your data</h2>
+            <h2>Open a reference case</h2>
             <span className="step-roman">I.</span>
           </div>
 
           <div
             className={`dropzone ${over ? 'over' : ''}`}
-            onClick={() => inputRef.current?.click()}
+            onClick={onUpload}
             onDragOver={e => { e.preventDefault(); setOver(true); }}
             onDragLeave={() => setOver(false)}
             onDrop={e => { e.preventDefault(); setOver(false); onUpload(); }}
           >
-            <input ref={inputRef} type="file" multiple style={{ display: 'none' }} onChange={onUpload} />
             <div className="dropzone-content">
               <div className="dropzone-icon-row">
-                <span>·csv</span><span>·tdms</span><span>·mat</span><span>·parquet</span>
+                <span>·I_a</span><span>·I_b</span><span>·I_c</span><span>·20 kHz</span>
               </div>
-              <div className="dropzone-title">Drag &amp; drop, or click to browse</div>
-              <div className="dropzone-sub">3-phase current · ≥ 2 s · ≤ 100 MB total</div>
+              <div className="dropzone-title">Load the verified reference recording</div>
+              <div className="dropzone-sub">3-phase current · 15 s · stored evaluation evidence</div>
             </div>
           </div>
 
@@ -234,13 +168,13 @@ function SectionHero({ files, onUpload, goSection }) {
             </div>
           ) : (
             <p style={{ marginTop: '1.4rem', fontSize: '0.78rem', color: 'rgba(241, 237, 228, 0.5)', fontFamily: "'Fraunces', serif", fontStyle: 'italic' }}>
-              No files yet. The page is ready when you are.
+              This public demo uses a committed reference case. Live plant-file ingestion is the next pilot integration.
             </p>
           )}
 
           <div className="btn-row">
-            <button className="btn" onClick={onUpload}>{files ? 'Replace' : 'Use sample dataset'}</button>
-            <button className="btn ghost" onClick={() => goSection(1)}>Continue ↓</button>
+            <button className="btn" onClick={onUpload}>{files ? 'Reload reference case' : 'Load reference case'}</button>
+            <button className="btn ghost" onClick={() => goSection(1)}>Inspect methodology ↓</button>
           </div>
         </div>
       </div>
@@ -355,14 +289,14 @@ function SectionConfigure({ goSection, model, setModel }) {
               marginBottom: '1rem', lineHeight: 1.5,
             }}>
               The only operator decision on this page — pick a representation. All three
-              feed identical 4-class softmax heads; numbers shown are held-out test
-              accuracy on the v2 speed-stratified split.
+              feed identical 4-class softmax heads; numbers shown are stored evaluation
+              results within the declared current-sensing operating envelope.
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.85rem' }}>
               {[
                 { k: 'stft-dwt-temperature', name: 'STFT + DWT · temperature', acc: '99.08 %', desc: 'Equal soft vote after validation-set temperature scaling.' },
                 { k: 'stft-dwt-validation-f1', name: 'STFT + DWT · validation-F1', acc: '98.55 %', desc: 'Per-class validation-F1 weighted soft vote.' },
-                { k: 'stft-dwt-envelope-temperature', name: 'STFT + DWT + Envelope · temperature', acc: '99.85 %', desc: 'Three current-derived views with calibrated equal voting.', recommended: true },
+                { k: 'stft-dwt-envelope-temperature', name: 'STFT + DWT + Envelope · temperature', acc: '99.85 %', desc: 'Three current-derived views with calibrated equal voting, within the declared scope.' },
                 { k: 'stft-dwt-envelope-validation-f1', name: 'STFT + DWT + Envelope · validation-F1', acc: '99.77 %', desc: 'Three current-derived views with per-class F1 weights.' },
               ].map(m => {
                 const active = model === m.k;
@@ -453,9 +387,9 @@ function SectionProcessing({ active, goSection }) {
   return (
     <section className="cinema" id="sec-processing" data-screen-label="03 Processing">
       <div className="proc-wrap">
-        <h2 className="proc-title">Three phases of current,<br /><em>sliced into pictures of frequency.</em></h2>
+        <h2 className="proc-title">Replay the pipeline,<br /><em>inspect the evidence.</em></h2>
         <p className="proc-status">
-          <span className="dot"></span>{stageProgress >= 1 ? `Complete · ${STAGES.length} of ${STAGES.length}` : `Stage ${stageIdx + 1} of ${STAGES.length} · ${STAGES[stageIdx].name}`}
+          <span className="dot"></span>{stageProgress >= 1 ? `Playback complete · ${STAGES.length} of ${STAGES.length}` : `Playback stage ${stageIdx + 1} of ${STAGES.length} · ${STAGES[stageIdx].name}`}
         </p>
 
         <div className="proc-grid">
@@ -476,7 +410,7 @@ function SectionProcessing({ active, goSection }) {
 
           <div className="proc-readout">
             <div>
-              <h3>Elapsed</h3>
+              <h3>Pipeline profile</h3>
               <p className="big-num">{elapsed}<span>m</span></p>
             </div>
             <div>
@@ -492,7 +426,7 @@ function SectionProcessing({ active, goSection }) {
             <div style={{ borderTop: '1px solid var(--glass-rule)', paddingTop: '1rem' }}>
               <h3>Next</h3>
               <p style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1rem', color: 'var(--paper)' }}>
-                Three calibrated softmaxes will be averaged into a single 4-class verdict.
+                This is a visual replay of the fixed pipeline used to produce the stored evaluation—not live inference on a newly uploaded file.
               </p>
             </div>
           </div>
@@ -510,90 +444,6 @@ function SectionProcessing({ active, goSection }) {
 }
 
 // ─── Section 3: Results ────────────────────────────────────────────────────
-// Retained as a historical visual reference; App mounts the artifact-backed
-// SectionResults below instead.
-function SectionResultsLegacy({ goSection }) {
-  const fmt = (v) => (v * 100).toFixed(1);
-  const maxVal = Math.max(...CONFUSION.flat());
-
-  return (
-    <section className="cinema results-section" id="sec-results" data-screen-label="04 Results">
-      <div className="results-wrap">
-        <div className="results-eyebrow">Findings · 1 May 2026 · 1 368 samples · v2 speed-stratified split</div>
-        <h2 className="results-title">A motor that <em>mostly</em> tells<br />the truth about itself.</h2>
-        <p className="results-lede">
-          Across 1 368 held-out windows, the temperature-calibrated STFT + DWT + Envelope
-          ensemble named the state of the machine correctly 96.7 % of the time — perfect
-          on stator-short and broken-rotor faults, with the entire residual error
-          concentrated in a single bearing bpfo-3 column at 100 % speed.
-        </p>
-
-        <div className="results-headline-row">
-          {HEADLINE.map((h, i) => <MetricCard key={i} {...h} />)}
-        </div>
-
-        <div className="results-section-block">
-          <div className="results-block-header">
-            <h3>Confusion matrix</h3>
-            <span className="num">§ 4.1 · n = 1 000</span>
-          </div>
-          <ConfusionMatrix cm={CONFUSION} classKeys={CLASS_KEYS} maxVal={maxVal} />
-        </div>
-
-        <div className="results-section-block">
-          <div className="results-block-header">
-            <h3>Per-class performance</h3>
-            <span className="num">§ 4.2 · click rows for derivation</span>
-          </div>
-          <div style={{ background: 'var(--surface)', border: '1px solid var(--rule-soft)', borderRadius: '2px', padding: '0.4rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '2.2fr 1fr 1fr 1fr 1fr 32px', gap: '0.5rem', padding: '0.6rem 1rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--ink-3)', borderBottom: '1px solid var(--rule-soft)' }}>
-              <div>Class</div>
-              <div style={{ textAlign: 'right' }}>Precision</div>
-              <div style={{ textAlign: 'right' }}>Recall</div>
-              <div style={{ textAlign: 'right' }}>F1</div>
-              <div style={{ textAlign: 'right' }}>Support</div>
-              <div></div>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', padding: '0.4rem 0' }}>
-              {PER_CLASS.map((p, i) => <ExpandableMetricRow key={i} p={p} fmt={fmt} />)}
-            </div>
-          </div>
-        </div>
-
-        <div className="results-section-block">
-          <div className="results-block-header">
-            <h3>What the machine got wrong</h3>
-            <span className="num">§ 4.3 · narrative</span>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.4rem' }}>
-            {[
-              { title: 'BPFO-3 → Healthy', count: 44, body: 'Every bearing-bpfo error landed on col_index = 5 at 100 % speed — the only bpfo-3 column the v2 split places at the highest speed for test. The ensemble reads its outer-race modulation as healthy harmonics. This is the residual ceiling; LOO across all seven bpfo-3 @ 100 % columns is the next step.' },
-              { title: 'Healthy → BPFO-3', count: 1, body: 'A single healthy segment at 100 % speed (col 16, seg 6) crossed the threshold — softmax 0.567 on bpfo-3 vs 0.421 on healthy. A finer slip-aware feature would split this.' },
-            ].map((e, i) => (
-              <div key={i} style={{ padding: '1.25rem 1.4rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)', borderLeft: '2px solid var(--accent)', borderRadius: '2px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.6rem' }}>
-                  <p style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1.1rem', color: 'var(--ink)' }}>{e.title}</p>
-                  <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.78rem', color: 'var(--accent)' }}>{e.count} samples</p>
-                </div>
-                <p style={{ fontFamily: "'Fraunces', serif", fontSize: '0.95rem', color: 'var(--ink-2)', lineHeight: 1.6 }}>{e.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="btn-row" style={{ justifyContent: 'space-between', borderTop: '1px solid var(--rule)', paddingTop: '1.6rem', marginTop: '2.5rem' }}>
-          <button className="btn ghost" style={{ color: 'var(--ink)', borderColor: 'var(--rule)' }} onClick={() => goSection(0)}>↑ Run another</button>
-          <div style={{ display: 'flex', gap: '0.8rem' }}>
-            <button className="btn dark">Export CSV</button>
-            <button className="btn">Download report (PDF)</button>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ─── Root ──────────────────────────────────────────────────────────────────
 function SectionResults({ goSection, data, selectedExperiment, setSelectedExperiment }) {
   const [selectedSampleIndex, setSelectedSampleIndex] = useState(null);
 
@@ -637,6 +487,9 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
         <div className="results-eyebrow">Precomputed motor-current evaluation · {data.source.testWindows.toLocaleString()} windows · {data.source.split} split</div>
         <h2 className="results-title">A motor that <em>reveals</em><br />its state in current.</h2>
         <p className="results-lede">Select an ensemble configuration to inspect the stored evaluation. These results use three-phase electric current signals and are not live inference.</p>
+        <div style={{ margin: '1.2rem 0 2rem', padding: '1rem 1.15rem', borderLeft: '3px solid var(--accent)', background: 'var(--surface2)', fontFamily: "'Fraunces', serif", lineHeight: 1.55, color: 'var(--ink-2)' }}>
+          <strong style={{ color: 'var(--ink)' }}>Scope note.</strong> {data.source.note} The full original split recorded {(data.source.fullSplit.accuracy * 100).toFixed(2)}% accuracy and {(data.source.fullSplit.macroF1 * 100).toFixed(2)}% macro-F1 across {data.source.fullSplit.testWindows.toLocaleString()} windows; this explorer shows the bounded-scope result alongside that known sensing limit.
+        </div>
 
         <div className="results-section-block">
           <div className="results-block-header"><h3>Ensemble configurations</h3><span className="num">same held-out split · select a run</span></div>
@@ -666,6 +519,14 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
           <MetricCard label="Accuracy" value={(current.accuracy * 100).toFixed(2)} sub={`${current.samples.length - current.errors} / ${current.samples.length} windows`} color="#1e3a8a" />
           <MetricCard label="Macro F1" value={(current.macroF1 * 100).toFixed(2)} sub="unweighted mean" color="#0369a1" />
           <MetricCard label="Errors" value={String(current.errors)} sub={`of ${current.samples.length} windows`} color="#b8431f" />
+        </div>
+
+        <div className="results-section-block">
+          <div className="results-block-header"><h3>Capability finding</h3><span className="num">measurement boundary, not a bigger-model problem</span></div>
+          <div style={{ padding: '1.2rem 1.3rem', background: 'var(--surface2)', borderLeft: '3px solid var(--accent)', color: 'var(--ink-2)', lineHeight: 1.6 }}>
+            <p style={{ fontFamily: "'Fraunces', serif", fontSize: '1.08rem', marginBottom: '0.75rem' }}>A CNN can learn only the fault signatures present in the measured current. It cannot recover a distinction the sensing chain does not expose.</p>
+            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.73rem', lineHeight: 1.7 }}>On the full real-data split, one BPFO-3-at-100% source column was repeatedly indistinguishable from healthy operation across several representations and model families. That is useful engineering evidence: a deployment should flag this operating point as outside its validated envelope and escalate to another measurement or inspection, rather than return false certainty.</p>
+          </div>
         </div>
 
         <div className="results-section-block">
@@ -702,7 +563,7 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.7rem', marginTop: '1rem' }}>{data.experiments.map(experiment => { const sample = sampleAt(experiment, activeSampleIndex); return <div key={experiment.id} style={{ padding: '0.8rem 1rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.7rem' }}><div style={{ color: 'var(--ink-3)', marginBottom: '0.35rem' }}>{experimentLabel(experiment)}</div><div>{labelFor(sample.prediction)} · {pct(sample.confidence, 1)} · {sample.correct ? 'correct' : 'error'}</div></div>; })}</div>
         </div>
 
-        <div className="results-section-block"><div className="results-block-header"><h3>Evaluation note</h3><span className="num">{data.source.split}</span></div><p className="results-lede" style={{ color: 'var(--ink-2)', marginBottom: 0 }}>This bundle contains precomputed motor-current predictions. The split excludes BPFO-3 at 100% speed by design; the window count includes overlapping 1-second segments from {data.source.testColumnGroups} held-out column groups.</p></div>
+        <div className="results-section-block"><div className="results-block-header"><h3>Evaluation note</h3><span className="num">{data.source.split} · {data.source.scope}</span></div><p className="results-lede" style={{ color: 'var(--ink-2)', marginBottom: '0.8rem' }}>This bundle contains precomputed motor-current predictions. The window count includes overlapping 1-second segments from {data.source.testColumnGroups} held-out column groups.</p><a href="https://github.com/shreyash4real/motor-fault-diagnosis-research-share/blob/main/MODEL_CARD.md" target="_blank" rel="noreferrer" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.7rem', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Read the model card and deployment boundary ↗</a></div>
 
         <div className="btn-row" style={{ justifyContent: 'space-between', borderTop: '1px solid var(--rule)', paddingTop: '1.6rem', marginTop: '2.5rem' }}><button className="btn ghost" style={{ color: 'var(--ink)', borderColor: 'var(--rule)' }} onClick={() => goSection(0)}>↑ Run another</button><div style={{ display: 'flex', gap: '0.8rem' }}><a className="btn dark" href="data/results-data.json" download>Download data</a><a className="btn" href="docs/motor_fault_diagnosis_report.md">Read report</a></div></div>
       </div>

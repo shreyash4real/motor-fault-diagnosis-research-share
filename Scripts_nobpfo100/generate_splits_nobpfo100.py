@@ -1,95 +1,108 @@
-"""
-STEP 3 (v2) — SPEED-STRATIFIED COLUMN SPLITS (4-class) [NO-BPFO-100 VERSION]
-====================================================================
-Reads the canonical splits.csv and reassigns every `bearing bpfo 3` column
-at 100% speed currently marked `test` to `train`. The result: the test set
-has no bpfo-3 @ 100% data at all, so the residual col5@100% issue cannot
-contaminate the test metrics.
+"""Create an auditable source-level split for the motor-fault pipeline.
 
-OUTPUT
-------
-  C:\\Project Work\\Outputs_nobpfo100\\splits.csv
-  C:\\Project Work\\Outputs_nobpfo100\\split_report.txt
-
-Usage
------
-    python generate_splits_nobpfo100.py
+By default this copies and validates the supplied canonical split unchanged.
+The historical ``nobpfo100`` exclusion is retained as an explicit scoped
+evaluation because the available current measurement could not reliably
+separate one BPFO-3-at-100% source column from the healthy operating regime.
+It is valid only when reported as that bounded operating envelope, never as a
+claim of full condition coverage.
 """
 
 from __future__ import annotations
 
-import sys
-from datetime import datetime
+import argparse
+import json
+from datetime import datetime, timezone
 from pathlib import Path
+
 import pandas as pd
 
-# ─── CONFIGURE ────────────────────────────────────────────────────────────────
-CANONICAL_SPLITS = r"C:\Project Work\Outputs\4class\v2_speed_strat\splits.csv"
-OUT_DIR          = r"C:\Project Work\Outputs_nobpfo100"
-# ──────────────────────────────────────────────────────────────────────────────
+from validate_experiment import validate
 
-def main():
-    print("=" * 70)
-    print(f"GENERATE SPLITS — nobpfo100 (exclude bpfo-3 @ 100% from test)")
-    print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    print("=" * 70)
 
-    val_path = Path(CANONICAL_SPLITS)
-    out_dir  = Path(OUT_DIR)
-    out_dir.mkdir(parents=True, exist_ok=True)
-
-    if not val_path.exists():
-        print(f"ERROR: {val_path} not found.")
-        sys.exit(1)
-
-    splits_df = pd.read_csv(val_path)
-
-    # Move every bpfo-3 @ 100% test row to train. Train/val/test split is
-    # otherwise unchanged from canonical v2.
-    target_mask = (
-        (splits_df["class_label"] == "bearing bpfo 3")
-        & (splits_df["speed_pct"] == 100)
-        & (splits_df["split"] == "test")
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--canonical-splits", type=Path, required=True)
+    parser.add_argument("--out-dir", type=Path, required=True)
+    parser.add_argument(
+        "--legacy-exclude-bpfo100",
+        action="store_true",
+        help="Create the historical scoped evaluation with BPFO-3 at 100%% absent from test.",
     )
-    n_moved = int(target_mask.sum())
-    moved_cols = sorted(splits_df.loc[target_mask, "col_index"].unique().tolist())
-    splits_df.loc[target_mask, "split"] = "train"
-    print(f"\nMoved {n_moved} rows (cols {moved_cols}) of bpfo-3 @ 100% from test → train")
+    return parser.parse_args()
 
-    # Sanity: no bpfo-3 @ 100% should remain in test.
-    remaining = splits_df[
-        (splits_df["class_label"] == "bearing bpfo 3")
-        & (splits_df["speed_pct"] == 100)
-        & (splits_df["split"] == "test")
+
+def main() -> None:
+    args = parse_args()
+    if not args.canonical_splits.is_file():
+        raise SystemExit(f"Canonical splits not found: {args.canonical_splits}")
+
+    splits = pd.read_csv(args.canonical_splits)
+    # Establish that the source file is a valid, fully covered evaluation split
+    # before copying it or intentionally producing a marked legacy ablation.
+    validate(splits, allow_missing_test_strata=False)
+
+    scope = "canonical"
+    moved_columns: list[int] = []
+    if args.legacy_exclude_bpfo100:
+        scope = "legacy_nobpfo100_ablation"
+        target = (
+            (splits["class_label"] == "bearing bpfo 3")
+            & (splits["speed_pct"] == 100)
+            & (splits["split"] == "test")
+        )
+        moved_columns = sorted(splits.loc[target, "col_index"].unique().tolist())
+        splits.loc[target, "split"] = "train"
+        validate(splits, allow_missing_test_strata=True)
+    else:
+        validate(splits, allow_missing_test_strata=False)
+
+    args.out_dir.mkdir(parents=True, exist_ok=True)
+    splits_path = args.out_dir / "splits.csv"
+    splits.to_csv(splits_path, index=False)
+
+    manifest = {
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "scope": scope,
+        "canonical_splits": str(args.canonical_splits.resolve()),
+        "output_splits": str(splits_path.resolve()),
+        "legacy_exclude_bpfo100": args.legacy_exclude_bpfo100,
+        "moved_bpfo100_test_column_indices": moved_columns,
+        "metric_scope": (
+            "bounded_operating_envelope" if args.legacy_exclude_bpfo100 else "full_split_coverage"
+        ),
+        "warning": (
+            "This split has no BPFO-3 at 100% speed in test because the available current measurement "
+            "could not reliably distinguish that operating condition. Report metrics only within this declared scope."
+            if args.legacy_exclude_bpfo100
+            else "Canonical split copied unchanged and validated for source-level isolation and class/speed test coverage."
+        ),
+    }
+    (args.out_dir / "split_manifest.json").write_text(
+        json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+    )
+
+    ch1 = splits[splits["full_path"].astype(str).str.contains(r"-ch1\.csv$", case=False, regex=True)]
+    report = [
+        f"Split report — {scope}",
+        f"Created: {manifest['created_at']}",
+        f"Metric scope: {manifest['metric_scope']}",
+        manifest["warning"],
+        "",
+        "Source columns per class / split:",
+        ch1.groupby(["class_label", "split"]).size().unstack(fill_value=0).to_string(),
+        "",
+        "Source columns per class / speed / split:",
+        ch1.groupby(["class_label", "speed_pct", "split"]).size().unstack(fill_value=0).to_string(),
     ]
-    assert len(remaining) == 0, f"FAILED: {len(remaining)} bpfo-3@100% rows still in test"
+    (args.out_dir / "split_report.txt").write_text("\n".join(report) + "\n", encoding="utf-8")
 
-    splits_path = out_dir / "splits.csv"
-    splits_df.to_csv(splits_path, index=False)
-    print(f"\nWrote {splits_path}  ({len(splits_df)} rows)")
+    print(f"Wrote {splits_path}")
+    print(f"Wrote {args.out_dir / 'split_manifest.json'}")
+    print(f"Scope: {scope}")
+    if moved_columns:
+        print(f"Legacy-only moved BPFO-3 @100% test columns: {moved_columns}")
 
-    ch1_only = splits_df[splits_df["full_path"].str.contains("-ch1.csv")]
-    report = []
-    report.append(f"Split Report — nobpfo100 - {datetime.now().isoformat(timespec='seconds')}")
-    report.append("=" * 60)
-    report.append(f"Moved {n_moved} bpfo-3 @ 100% test rows (cols {moved_cols}) to train.")
-    report.append("")
-
-    cls_split = ch1_only.groupby(["class_label", "split"]).size().unstack(fill_value=0)
-    if "train" in cls_split.columns:
-        cls_split = cls_split[[c for c in ["train", "val", "test"] if c in cls_split.columns]]
-    cls_split["total"] = cls_split.sum(axis=1)
-    report.append("COLUMNS per class x split:")
-    report.append(cls_split.to_string())
-    report.append("")
-
-    spd_split = ch1_only.groupby(["class_label", "split", "speed_pct"]).size().unstack(fill_value=0)
-    report.append("COLUMNS per class x split x speed:")
-    report.append(spd_split.to_string())
-    report.append("")
-
-    (out_dir / "split_report.txt").write_text("\n".join(report), encoding="utf-8")
-    print(f"Wrote {out_dir / 'split_report.txt'}")
 
 if __name__ == "__main__":
     main()

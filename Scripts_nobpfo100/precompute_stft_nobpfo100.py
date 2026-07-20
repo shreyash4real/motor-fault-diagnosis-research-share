@@ -59,6 +59,8 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from pipeline_paths import path_value
+
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 # ─── CONFIGURE ────────────────────────────────────────────────────────────────
@@ -324,10 +326,13 @@ def process_split(splits_df: pd.DataFrame, split: str,
 # ──────────────────────────────────────────────────────────────────────────────
 
 def main():
-    global SPLITS_CSV, FEATURES_DIR, SAVE_PNGS, IMAGES_DIR
-    SAVE_PNGS = False
-    SPLITS_CSV = r"C:\Project Work\Outputs_nobpfo100\splits.csv"
-    FEATURES_DIR = r"C:\Project Work\Outputs_nobpfo100\features\stft"
+    global RAW_ROOT, DENOISED_ROOT, SPLITS_CSV, FEATURES_DIR, SAVE_PNGS, IMAGES_DIR
+    RAW_ROOT = path_value("MFDS_RAW_ROOT", RAW_ROOT)
+    DENOISED_ROOT = path_value("MFDS_DENOISED_ROOT", DENOISED_ROOT)
+    SPLITS_CSV = path_value("MFDS_SPLITS_CSV", SPLITS_CSV)
+    FEATURES_DIR = path_value("MFDS_STFT_FEATURES_DIR", FEATURES_DIR)
+    IMAGES_DIR = path_value("MFDS_STFT_IMAGES_DIR", IMAGES_DIR)
+    SAVE_PNGS = os.environ.get("MFDS_SAVE_PNGS", "0") == "1"
 
     print("=" * 70)
     print("PRECOMPUTE STFT FEATURES + PER-CHANNEL PNGS — 4 classes")

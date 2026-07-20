@@ -67,6 +67,8 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import (confusion_matrix, precision_recall_fscore_support,
                               f1_score, accuracy_score)
 
+from pipeline_paths import path_value
+
 warnings.filterwarnings("ignore", category=UserWarning)
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -796,8 +798,7 @@ def main():
 
 
 if __name__ == "__main__":
-    FEATURES_DIR = r"C:\Project Work\Outputs_nobpfo100\features\dwt"
-    OUTPUT_BASE  = r"C:\Project Work\Outputs_nobpfo100\training"
+    FEATURES_DIR = path_value("MFDS_DWT_FEATURES_DIR", FEATURES_DIR)
+    OUTPUT_BASE  = path_value("MFDS_TRAINING_DIR", OUTPUT_BASE)
 
     main()
-

@@ -62,6 +62,8 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import (confusion_matrix, precision_recall_fscore_support,
                               f1_score, accuracy_score)
 
+from pipeline_paths import path_value
+
 warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=FutureWarning)
 
@@ -104,37 +106,37 @@ CLASS_NAMES = ["healthy 1", "stator short 1", "bearing bpfo 3", "broken rotor ba
 #                  (determines how to load features and run inference)
 
 
-OUTPUT_BASE = r"C:\Project Work\Outputs_nobpfo100\training"
-BASE_V2     = r"C:\Project Work\Outputs_nobpfo100"
+OUTPUT_BASE = path_value("MFDS_TRAINING_DIR", r"C:\Project Work\Outputs_nobpfo100\training")
+BASE_V2     = path_value("MFDS_OUTPUT_DIR", r"C:\Project Work\Outputs_nobpfo100")
 
 
 MODEL_REGISTRY = {
     "stft": {
         "run_name":     "E4_mod_alexnet_227",
-        "features_dir": fr"{BASE_V2}\features\stft",
-        "checkpoint":   fr"{OUTPUT_BASE}\E4_mod_alexnet_227\best_model.pt",
+        "features_dir": str(Path(BASE_V2) / "features" / "stft"),
+        "checkpoint":   str(Path(OUTPUT_BASE) / "E4_mod_alexnet_227" / "best_model.pt"),
         "kind":         "stft",
     },
     "dwt": {
         "run_name":     "DWT_multibranch_plain_v1",
-        "features_dir": fr"{BASE_V2}\features\dwt",
-        "checkpoint":   fr"{OUTPUT_BASE}\DWT_multibranch_plain_v1\best_model.pt",
+        "features_dir": str(Path(BASE_V2) / "features" / "dwt"),
+        "checkpoint":   str(Path(OUTPUT_BASE) / "DWT_multibranch_plain_v1" / "best_model.pt"),
         "kind":         "dwt",
     },
     "envelope": {
         # Canonical envelope member — regularized 940k ResNet1D (v3).
         # Solo bpfo-3 F1 = 0.823, the highest single-branch result in the project.
         "run_name":     "ENVELOPE_resnet_v3_reg",
-        "features_dir": fr"{BASE_V2}\features\envelope",
-        "checkpoint":   fr"{OUTPUT_BASE}\ENVELOPE_resnet_v3_reg\best_model.pt",
+        "features_dir": str(Path(BASE_V2) / "features" / "envelope"),
+        "checkpoint":   str(Path(OUTPUT_BASE) / "ENVELOPE_resnet_v3_reg" / "best_model.pt"),
         "kind":         "envelope_v3",
     },
     "envelope_dilated": {
         # Archived — original dilated 1D envelope CNN. Kept reachable so future
         # comparison ensembles can include it; not in default ENSEMBLES.
         "run_name":     "ENVELOPE_dilated1d_v1",
-        "features_dir": fr"{BASE_V2}\features\envelope",
-        "checkpoint":   fr"{OUTPUT_BASE}\ENVELOPE_dilated1d_v1\best_model.pt",
+        "features_dir": str(Path(BASE_V2) / "features" / "envelope"),
+        "checkpoint":   str(Path(OUTPUT_BASE) / "ENVELOPE_dilated1d_v1" / "best_model.pt"),
         "kind":         "envelope",
     },
 }

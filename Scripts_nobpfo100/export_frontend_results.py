@@ -293,11 +293,18 @@ def main() -> None:
         "version": 1,
         "source": {
             "split": "nobpfo100",
+            "scope": "declared current-sensing operating envelope",
             "testWindows": len(labels),
             "testColumnGroups": len({(sample["trueClass"], sample["speedPct"], sample["column"]) for sample in metadata}),
             "windowSeconds": 1.0,
             "windowStrideSeconds": 0.25,
-            "note": "Precomputed motor-current evaluation. BPFO-3 at 100% speed is excluded from this test split by design.",
+            "note": "BPFO-3 at 100% speed is excluded because the available current measurement could not reliably separate a held-out source column from healthy operation. Report these metrics only within this declared scope.",
+            "fullSplit": {
+                "testWindows": 1368,
+                "accuracy": 0.9671,
+                "macroF1": 0.9560,
+                "note": "Full original split, including the measurement-confounded BPFO-3-at-100% source column.",
+            },
         },
         "classes": [
             {"key": key, "label": label}
