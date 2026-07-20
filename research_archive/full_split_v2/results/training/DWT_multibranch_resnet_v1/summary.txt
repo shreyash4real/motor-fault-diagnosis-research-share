@@ -1,0 +1,12 @@
+Run: DWT_multibranch_resnet_v1
+Model: multibranch_resnet
+Total params: 221,780
+Test accuracy: 0.9291
+Test macro-F1: 0.9001
+Best val F1:   0.9118
+
+Per-class F1:
+  healthy 1              P=0.917  R=0.977  F1=0.946  (n=855)
+  stator short 1         P=0.994  R=1.000  F1=0.997  (n=171)
+  bearing bpfo 3         P=0.888  R=0.556  F1=0.683  (n=171)
+  broken rotor bar       P=0.955  R=0.994  F1=0.974  (n=171)

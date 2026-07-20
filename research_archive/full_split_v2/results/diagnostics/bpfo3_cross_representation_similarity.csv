@@ -1,0 +1,5 @@
+representation,"cos(col5@100, healthy@100)","cos(col5@100, bpfo-3 non-col5)",closer_to,n_col5,n_healthy,n_other_bpfo,features_path
+stft,0.9942301511764526,0.8316893577575684,healthy,57,285,114,C:\Project Work\Outputs\4class\v2_speed_strat\features\test.pt
+clarke,0.9558010697364807,0.2739446759223938,healthy,57,285,114,C:\Project Work\Outputs\4class\v2_speed_strat\clarke_features\test.pt
+env,0.980319619178772,0.5421196222305298,healthy,57,285,114,C:\Project Work\Outputs\4class\v2_speed_strat\envelope\features\test.pt
+dwt,0.04483399912714958,0.003483422799035907,healthy,57,285,114,C:\Project Work\Outputs\4class\v2_speed_strat\dwt\features\test.pt

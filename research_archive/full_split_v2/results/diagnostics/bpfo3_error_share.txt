@@ -1,0 +1,15 @@
+col5@100% share of bearing-bpfo-3 errors per run
+(true_class=bearing bpfo 3; counted as segment errors)
+======================================================================
+  A_v2_baseline                        col5@100% =  54/72   ( 75.0%)
+  CLARKE_mod_alexnet_v1                col5@100% =  40/80   ( 50.0%)
+  DWT_multibranch_plain_v1             col5@100% =  40/51   ( 78.4%)
+  DWT_multibranch_resnet_v1            col5@100% =  57/76   ( 75.0%)
+  E4_mod_alexnet_227                   col5@100% =  48/50   ( 96.0%)
+  E4_mod_alexnet_mel96                 col5@100% =  46/46   (100.0%)
+  E5_mod_resnet                        col5@100% =  32/98   ( 32.7%)
+  ENVELOPE_dilated1d_v1                col5@100% =  43/48   ( 89.6%)
+  STFTFreqNet_v1                       col5@100% =  51/67   ( 76.1%)
+  STFTFreqNet_v2                       col5@100% =  48/70   ( 68.6%)
+
+Test column composition for bpfo-3@100%: only col_index=5 (see splits.csv; v2 speed-stratified split at seed=42).

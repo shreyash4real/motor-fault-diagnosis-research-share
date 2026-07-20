@@ -22,7 +22,7 @@ The public demo is deliberately an **evidence explorer**, not a live production 
 - A polished static product demo with a four-step condition-monitoring journey.
 - Three current-derived representations: short-time Fourier transform (STFT), discrete wavelet transform (DWT), and envelope spectrum.
 - Four classes: healthy baseline, stator winding short, outer-race bearing defect, and broken rotor bar.
-- Four stored ensemble configurations with per-class metrics, confusion matrices, probability views, and sample-level exploration.
+- A deliberately separate historical full-split baseline and four comparable scoped ensemble configurations, with per-class metrics, confusion matrices, probability views, and sample-level exploration.
 - A reproducible export script that regenerates the frontend evidence bundle entirely from committed evaluation artefacts.
 
 The displayed three-view configuration reports **99.85% accuracy** and **99.75% macro-F1** within its declared current-sensing operating envelope. A full original split, including a real measurement-confounded BPFO-3-at-100% source column, reports **96.71% accuracy** and **95.60% macro-F1**. Both belong in the story: the first shows performance within the validated scope; the second shows the real sensing limit that a production system must detect and escalate. See [MODEL_CARD.md](MODEL_CARD.md).
@@ -49,7 +49,7 @@ To work with the research and training scripts, install the pinned packages:
 python3 -m pip install -r requirements.txt
 ```
 
-The raw recordings, bulk denoised signals, feature tensors, and model checkpoints are intentionally not part of this share package.
+The raw recordings, bulk denoised signals, and feature tensors are intentionally not part of this share package. The historical full-split result archive retains its original checkpoints and logits as reproducibility evidence; it is not a live deployment bundle.
 
 ## Repository map
 
@@ -57,6 +57,7 @@ The raw recordings, bulk denoised signals, feature tensors, and model checkpoint
 - `Scripts_nobpfo100/export_frontend_results.py` — deterministic exporter for `frontend/data/results-data.json`.
 - `Scripts_nobpfo100/` — training, feature-precomputation, split, and ensemble-evaluation scripts.
 - `Outputs_nobpfo100/training/` — committed metrics and prediction artefacts used by the demo.
+- `research_archive/full_split_v2/` — portable historical scripts and the complete full-split v2 evidence bundle, clearly separated from the scoped evaluation.
 - `frontend/docs/motor_fault_diagnosis_report.md` — technical methodology and evaluation notes.
 - `MODEL_CARD.md` — intended use, evaluated operating scope, and known sensing limitation.
 - `DEVPOST.md` — submission copy, demo-video outline, and final checklist.

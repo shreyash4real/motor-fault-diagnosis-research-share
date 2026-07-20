@@ -1,0 +1,12 @@
+Run: ENV_STFT_custom_cnn_v1
+Model: envelope_cnn
+Total params: 98,484
+Test accuracy: 0.9276
+Test macro-F1: 0.9036
+Best val F1:   0.9157
+
+Per-class F1:
+  healthy 1              P=0.916  R=0.973  F1=0.944  (n=855)
+  stator short 1         P=0.970  R=0.930  F1=0.949  (n=171)
+  bearing bpfo 3         P=0.884  R=0.626  F1=0.733  (n=171)
+  broken rotor bar       P=0.977  R=1.000  F1=0.988  (n=171)

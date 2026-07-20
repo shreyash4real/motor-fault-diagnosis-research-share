@@ -38,7 +38,8 @@ The public demo currently explores stored results; it does not perform live infe
 
 ## Reproducibility trail
 
-- The full-split ensemble result and BPFO diagnostics are preserved in repository history at commit `ac41fa5` under `Outputs/4class/`.
+- The full-split ensemble result, all historical configurations, and BPFO diagnostics are restored under `research_archive/full_split_v2/` from commit `ac41fa5`.
+- `research_archive/full_split_v2/README.md` documents the full-split scope and portable archived-script paths without rewriting historical result metadata.
 - The scoped evaluation artefacts are under `Outputs_nobpfo100/`.
 - `Scripts_nobpfo100/validate_experiment.py` checks source-level split isolation and class/speed test coverage.
 - `Scripts_nobpfo100/generate_splits_nobpfo100.py` now requires the scoped BPFO-3-at-100% exclusion to be selected explicitly and writes its scope to `split_manifest.json`.

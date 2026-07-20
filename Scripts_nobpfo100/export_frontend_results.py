@@ -17,6 +17,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_ROOT = ROOT / "Outputs_nobpfo100" / "training"
+ARCHIVE_ROOT = ROOT / "research_archive" / "full_split_v2" / "results"
 OUT_PATH = ROOT / "frontend" / "data" / "results-data.json"
 CLASS_NAMES = ["healthy 1", "stator short 1", "bearing bpfo 3", "broken rotor bar"]
 CLASS_KEYS = ["healthy", "stator_short", "bearing_bpfo", "broken_rotor_bar"]
@@ -169,6 +170,38 @@ def per_class(path: Path) -> list[dict]:
     ]
 
 
+def full_split_baseline() -> dict:
+    """Export the historical full-split run as provenance, not a selector run."""
+    run = "ENSEMBLE_stft_dwt_envelope_v3_temperature"
+    run_dir = ARCHIVE_ROOT / "training" / run
+    test_windows, accuracy, macro_f1, errors = parse_summary(run_dir / "summary.txt")
+    archive_url = (
+        "https://github.com/shreyash4real/motor-fault-diagnosis-research-share/"
+        "blob/main/research_archive/full_split_v2/results"
+    )
+    return {
+        "run": run,
+        "representations": ["stft", "dwt", "envelope"],
+        "testWindows": test_windows,
+        "accuracy": accuracy,
+        "macroF1": macro_f1,
+        "errors": errors,
+        "perClass": per_class(run_dir / "per_class_metrics.csv"),
+        "errorBreakdown": {
+            "bpfo3At100": 44,
+            "other": 1,
+            "note": "44 of 45 errors came from the held-out BPFO-3-at-100% source column (col_index=5).",
+        },
+        "note": "Full original split, including the measurement-confounded BPFO-3-at-100% source column.",
+        "artifacts": {
+            "summary": f"{archive_url}/training/{run}/summary.txt",
+            "confusionMatrix": f"{archive_url}/training/{run}/confusion_matrix.png",
+            "errorAnalysis": f"{archive_url}/diagnostics/bpfo3_error_share.txt",
+            "archive": "https://github.com/shreyash4real/motor-fault-diagnosis-research-share/tree/main/research_archive/full_split_v2",
+        },
+    }
+
+
 def main() -> None:
     definitions = [
         {
@@ -299,12 +332,7 @@ def main() -> None:
             "windowSeconds": 1.0,
             "windowStrideSeconds": 0.25,
             "note": "BPFO-3 at 100% speed is excluded because the available current measurement could not reliably separate a held-out source column from healthy operation. Report these metrics only within this declared scope.",
-            "fullSplit": {
-                "testWindows": 1368,
-                "accuracy": 0.9671,
-                "macroF1": 0.9560,
-                "note": "Full original split, including the measurement-confounded BPFO-3-at-100% source column.",
-            },
+            "fullSplit": full_split_baseline(),
         },
         "classes": [
             {"key": key, "label": label}

@@ -1,0 +1,29 @@
+RUN NAME         : ENSEMBLE_stft_dwt_envelope_temperature_perclass_f1
+Created          : 2026-04-27T13:31:25
+Strategy         : soft voting (per-class val-F1 weighted on temperature-calibrated softmaxes)
+Members          : ['stft', 'dwt', 'envelope']
+
+Per-member temperature:
+  stft        T = 2.3996
+  dwt         T = 0.7431
+  envelope    T = 1.1725
+
+Member sources:
+  stft        run=E4_mod_alexnet_227
+             ckpt=C:\Project Work\Outputs\4class\training\E4_mod_alexnet_227\best_model.pt
+  dwt         run=DWT_multibranch_plain_v1
+             ckpt=C:\Project Work\Outputs\4class\training\DWT_multibranch_plain_v1\best_model.pt
+  envelope    run=ENVELOPE_dilated1d_v1
+             ckpt=C:\Project Work\Outputs\4class\training\ENVELOPE_dilated1d_v1\best_model.pt
+
+Per-class val F1 (T-invariant):
+  member      healthy 1           stator short 1      bearing bpfo 3      broken rotor bar  
+  stft        0.9563              1.0000              0.7885              1.0000            
+  dwt         0.9630              1.0000              0.8378              1.0000            
+  envelope    0.9367              0.9038              0.8024              1.0000            
+
+Member weights per class (column-stochastic):
+  member      healthy 1           stator short 1      bearing bpfo 3      broken rotor bar  
+  stft        0.3349              0.3444              0.3247              0.3333            
+  dwt         0.3372              0.3444              0.3450              0.3333            
+  envelope    0.3280              0.3112              0.3304              0.3333            

@@ -1,0 +1,12 @@
+Run: ENSEMBLE_stft_dwt_clarke
+Ensemble members (soft voting (equal-weight mean of softmaxes)): ['stft', 'dwt', 'clarke']
+Test samples: 1368
+Test accuracy: 0.9576
+Test macro-F1: 0.9421
+Misclassified: 58 / 1368  (4.24%)
+
+Per-class F1:
+  healthy 1              P=0.940  R=0.995  F1=0.967  (n=855)
+  stator short 1         P=1.000  R=1.000  F1=1.000  (n=171)
+  bearing bpfo 3         P=0.967  R=0.684  F1=0.801  (n=171)
+  broken rotor bar       P=1.000  R=1.000  F1=1.000  (n=171)

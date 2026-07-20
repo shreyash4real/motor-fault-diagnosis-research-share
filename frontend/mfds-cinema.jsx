@@ -460,6 +460,7 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
   }
 
   const current = data.experiments.find(item => item.id === selectedExperiment) || data.experiments[0];
+  const fullSplit = data.source.fullSplit;
   const labelFor = (key) => (data.classes.find(item => item.key === key) || { label: key }).label;
   const pct = (value, digits = 2) => `${(value * 100).toFixed(digits)} %`;
   const experimentLabel = (experiment) => experiment.fusion === 'temperature'
@@ -488,11 +489,31 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
         <h2 className="results-title">A motor that <em>reveals</em><br />its state in current.</h2>
         <p className="results-lede">Select an ensemble configuration to inspect the stored evaluation. These results use three-phase electric current signals and are not live inference.</p>
         <div style={{ margin: '1.2rem 0 2rem', padding: '1rem 1.15rem', borderLeft: '3px solid var(--accent)', background: 'var(--surface2)', fontFamily: "'Fraunces', serif", lineHeight: 1.55, color: 'var(--ink-2)' }}>
-          <strong style={{ color: 'var(--ink)' }}>Scope note.</strong> {data.source.note} The full original split recorded {(data.source.fullSplit.accuracy * 100).toFixed(2)}% accuracy and {(data.source.fullSplit.macroF1 * 100).toFixed(2)}% macro-F1 across {data.source.fullSplit.testWindows.toLocaleString()} windows; this explorer shows the bounded-scope result alongside that known sensing limit.
+          <strong style={{ color: 'var(--ink)' }}>Scope note.</strong> {data.source.note} The current selector intentionally compares only configurations evaluated on the same bounded split; it does not mix experiments with different test scopes.
         </div>
 
         <div className="results-section-block">
-          <div className="results-block-header"><h3>Ensemble configurations</h3><span className="num">same held-out split · select a run</span></div>
+          <div className="results-block-header"><h3>Evidence at a glance</h3><span className="num">same motor-current problem · different declared scope</span></div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.8rem' }}>
+            <div style={{ padding: '1rem 1.1rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)' }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink-3)' }}>Full original split · archived baseline</div>
+              <div style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1.25rem', marginTop: '0.4rem' }}>{pct(fullSplit.accuracy)} accuracy</div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem', marginTop: '0.45rem', color: 'var(--ink-2)' }}>{pct(fullSplit.macroF1)} macro-F1 · {fullSplit.testWindows.toLocaleString()} windows · {fullSplit.errors} errors</div>
+              <p style={{ marginTop: '0.8rem', fontFamily: "'Fraunces', serif", lineHeight: 1.5, color: 'var(--ink-2)' }}>{fullSplit.errorBreakdown.note}</p>
+              <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', marginTop: '0.8rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}><a href={fullSplit.artifacts.summary} target="_blank" rel="noreferrer">Summary ↗</a><a href={fullSplit.artifacts.confusionMatrix} target="_blank" rel="noreferrer">Confusion matrix ↗</a><a href={fullSplit.artifacts.errorAnalysis} target="_blank" rel="noreferrer">Error analysis ↗</a></div>
+            </div>
+            <div style={{ padding: '1rem 1.1rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)' }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)' }}>Declared current-sensing operating envelope</div>
+              <div style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1.25rem', marginTop: '0.4rem' }}>{pct(current.accuracy)} accuracy</div>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem', marginTop: '0.45rem', color: 'var(--ink-2)' }}>{pct(current.macroF1)} macro-F1 · {data.source.testWindows.toLocaleString()} windows · {current.errors} errors</div>
+              <p style={{ marginTop: '0.8rem', fontFamily: "'Fraunces', serif", lineHeight: 1.5, color: 'var(--ink-2)' }}>This is the operationally bounded result: it excludes the source group that this current measurement could not reliably separate, and must be reported with that boundary.</p>
+              <a href="https://github.com/shreyash4real/motor-fault-diagnosis-research-share/blob/main/MODEL_CARD.md" target="_blank" rel="noreferrer" style={{ display: 'inline-block', marginTop: '0.8rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Read operating boundary ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <div className="results-section-block">
+          <div className="results-block-header"><h3>Scoped configuration comparison</h3><span className="num">same held-out split · select a run</span></div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.7rem', marginBottom: '0.8rem' }}>
             {[['Representation set', [['STFT + DWT', false], ['STFT + DWT + Envelope', true]], usesEnvelope], ['Fusion method', [['Temperature calibrated', true], ['Validation-F1 weighted', false]], usesTemperature]].map(([label, options, active]) => (
               <div key={label} style={{ padding: '0.7rem 0.8rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)' }}>

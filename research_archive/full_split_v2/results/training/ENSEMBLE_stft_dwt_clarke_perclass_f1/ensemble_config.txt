@@ -1,0 +1,24 @@
+RUN NAME         : ENSEMBLE_stft_dwt_clarke_perclass_f1
+Created          : 2026-04-27T13:31:13
+Strategy         : soft voting (per-class val-F1 weighted, raw probs)
+Members          : ['stft', 'dwt', 'clarke']
+
+Member sources:
+  stft        run=E4_mod_alexnet_227
+             ckpt=C:\Project Work\Outputs\4class\training\E4_mod_alexnet_227\best_model.pt
+  dwt         run=DWT_multibranch_plain_v1
+             ckpt=C:\Project Work\Outputs\4class\training\DWT_multibranch_plain_v1\best_model.pt
+  clarke      run=CLARKE_mod_alexnet_v1
+             ckpt=C:\Project Work\Outputs\4class\training\CLARKE_mod_alexnet_v1\best_model.pt
+
+Per-class val F1 (rows=members, cols=classes):
+  member      healthy 1           stator short 1      bearing bpfo 3      broken rotor bar  
+  stft        0.9563              1.0000              0.7885              1.0000            
+  dwt         0.9630              1.0000              0.8378              1.0000            
+  clarke      0.8819              0.9398              0.4942              0.9231            
+
+Member weights per class (column-stochastic, sum=1 over members):
+  member      healthy 1           stator short 1      bearing bpfo 3      broken rotor bar  
+  stft        0.3414              0.3402              0.3718              0.3421            
+  dwt         0.3438              0.3402              0.3951              0.3421            
+  clarke      0.3148              0.3197              0.2331              0.3158            

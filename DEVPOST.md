@@ -18,6 +18,7 @@ I used Codex to turn an electrical-engineering concept and a research pipeline i
 
 - The demo uses committed evaluation artefacts, rather than invented UI numbers.
 - It reports both the 99.85% scoped result and the 96.71% full-split result; the latter exposes a real, sensor-confounded BPFO-3-at-100% operating point.
+- The repository retains the complete historical scripts and output bundle, while the product interface keeps the two evaluation scopes visibly separate.
 - The interface labels the product as a controlled, current-sensing evidence explorer—not field-wide validation or live browser inference.
 - It exposes errors and per-class performance, including the measurement boundary, instead of presenting a single headline metric.
 
