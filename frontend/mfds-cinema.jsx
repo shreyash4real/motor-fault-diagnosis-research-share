@@ -71,7 +71,7 @@ function TopBar({ activeSection, light }) {
     <div className="top-bar">
       <div>
         <div className="brand" style={{ color: txt, mixBlendMode: 'normal' }}>
-          Current<span className="ampersand" style={{ color: amp }}>Guard</span>
+          Motor <span className="ampersand" style={{ color: amp }}>Hakeem</span>
         </div>
         <div className="brand-tag" style={{ color: tag, mixBlendMode: 'normal' }}>
           Motor-current diagnostics · Prototype · 2026
@@ -119,7 +119,7 @@ function SectionHero({ files, onUpload, goSection }) {
             <em>current.</em>
           </h1>
           <p className="hero-lede">
-            CurrentGuard turns the three phases already present at an induction motor
+            Motor Hakeem turns the three phases already present at an induction motor
             into a condition-monitoring signal. This prototype lets a plant team inspect
             the diagnostic evidence behind healthy, stator, bearing, and rotor-fault states.
           </p>

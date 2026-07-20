@@ -1,8 +1,8 @@
-# CurrentGuard working guide
+# Motor Hakeem working guide
 
 ## Purpose
 
-CurrentGuard is an electrical-engineering-led motor-current diagnostics prototype. It turns short, three-phase induction-motor current recordings into STFT, DWT, and envelope representations for four-class maintenance decision support.
+Motor Hakeem is an electrical-engineering-led motor-current diagnostics prototype. It turns short, three-phase induction-motor current recordings into STFT, DWT, and envelope representations for four-class maintenance decision support.
 
 ## Start here
 

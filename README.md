@@ -1,14 +1,14 @@
-# CurrentGuard
+# Motor Hakeem
 
 **Motor-current diagnostics for the induction motors industry already depends on.**
 
 [Open the product demo](https://shreyash4real.github.io/motor-fault-diagnosis-research-share/)
 
-CurrentGuard is an electrical-engineering-led prototype for spotting common induction-motor fault patterns from three-phase current—the signal a plant can often acquire more cheaply and conveniently than dedicated vibration instrumentation. It translates current recordings into complementary spectral views and presents the diagnostic evidence in a plant-friendly product flow.
+Motor Hakeem is an electrical-engineering-led prototype for spotting common induction-motor fault patterns from three-phase current—the signal a plant can often acquire more cheaply and conveniently than dedicated vibration instrumentation. It translates current recordings into complementary spectral views and presents the diagnostic evidence in a plant-friendly product flow.
 
 ## The product idea
 
-Induction motors are everywhere, run for long hours, and often operate away from ideal loading or supply conditions. Faults can reduce efficiency, raise maintenance risk, and eventually create costly downtime. CurrentGuard is designed as the front end of a practical service:
+Induction motors are everywhere, run for long hours, and often operate away from ideal loading or supply conditions. Faults can reduce efficiency, raise maintenance risk, and eventually create costly downtime. Motor Hakeem is designed as the front end of a practical service:
 
 1. A plant supplies a short three-phase current recording from a motor under observation.
 2. The diagnostic pipeline validates, filters, segments, and represents the signal as STFT, DWT, and envelope views.

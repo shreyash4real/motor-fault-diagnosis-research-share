@@ -11,7 +11,7 @@ python run_all_nobpfo100.py \
   --canonical-splits /data/splits.csv \
   --raw-root /data/raw/Motor-2 \
   --denoised-root /data/denoised/Motor-2 \
-  --out-dir /data/currentguard-run
+  --out-dir /data/motor-hakeem-run
 """
 
 from __future__ import annotations
@@ -113,7 +113,7 @@ def main() -> None:
     ]
 
     with log_path.open("w", encoding="utf-8") as log_file:
-        log_file.write(f"CurrentGuard pipeline started: {datetime.now(timezone.utc).isoformat()}\n")
+        log_file.write(f"Motor Hakeem pipeline started: {datetime.now(timezone.utc).isoformat()}\n")
         log_file.write(f"Scope: {'legacy_nobpfo100_ablation' if args.legacy_exclude_bpfo100 else 'canonical'}\n")
         for label, command in steps:
             run_step(label, command, env, log_file)
