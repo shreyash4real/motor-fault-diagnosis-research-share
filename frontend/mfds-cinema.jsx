@@ -487,28 +487,26 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
       <div className="results-wrap">
         <div className="results-eyebrow">Precomputed motor-current evaluation · {data.source.testWindows.toLocaleString()} windows · {data.source.split} split</div>
         <h2 className="results-title">A motor that <em>reveals</em><br />its state in current.</h2>
-        <p className="results-lede">Select an ensemble configuration to inspect the stored evaluation. These results use three-phase electric current signals and are not live inference.</p>
-        <div style={{ margin: '1.2rem 0 2rem', padding: '1rem 1.15rem', borderLeft: '3px solid var(--accent)', background: 'var(--surface2)', fontFamily: "'Fraunces', serif", lineHeight: 1.55, color: 'var(--ink-2)' }}>
-          <strong style={{ color: 'var(--ink)' }}>Scope note.</strong> {data.source.note} The current selector intentionally compares only configurations evaluated on the same bounded split; it does not mix experiments with different test scopes.
-        </div>
-
-        <div className="results-section-block">
-          <div className="results-block-header"><h3>Evidence at a glance</h3><span className="num">same motor-current problem · different declared scope</span></div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.8rem' }}>
-            <div style={{ padding: '1rem 1.1rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)' }}>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--ink-3)' }}>Full original split · archived baseline</div>
-              <div style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1.25rem', marginTop: '0.4rem' }}>{pct(fullSplit.accuracy)} accuracy</div>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem', marginTop: '0.45rem', color: 'var(--ink-2)' }}>{pct(fullSplit.macroF1)} macro-F1 · {fullSplit.testWindows.toLocaleString()} windows · {fullSplit.errors} errors</div>
-              <p style={{ marginTop: '0.8rem', fontFamily: "'Fraunces', serif", lineHeight: 1.5, color: 'var(--ink-2)' }}>{fullSplit.errorBreakdown.note}</p>
-              <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', marginTop: '0.8rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}><a href={fullSplit.artifacts.summary} target="_blank" rel="noreferrer">Summary ↗</a><a href={fullSplit.artifacts.confusionMatrix} target="_blank" rel="noreferrer">Confusion matrix ↗</a><a href={fullSplit.artifacts.errorAnalysis} target="_blank" rel="noreferrer">Error analysis ↗</a></div>
-            </div>
-            <div style={{ padding: '1rem 1.1rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)' }}>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)' }}>Declared current-sensing operating envelope</div>
-              <div style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1.25rem', marginTop: '0.4rem' }}>{pct(current.accuracy)} accuracy</div>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.72rem', marginTop: '0.45rem', color: 'var(--ink-2)' }}>{pct(current.macroF1)} macro-F1 · {data.source.testWindows.toLocaleString()} windows · {current.errors} errors</div>
-              <p style={{ marginTop: '0.8rem', fontFamily: "'Fraunces', serif", lineHeight: 1.5, color: 'var(--ink-2)' }}>This is the operationally bounded result: it excludes the source group that this current measurement could not reliably separate, and must be reported with that boundary.</p>
-              <a href="https://github.com/shreyash4real/motor-fault-diagnosis-research-share/blob/main/MODEL_CARD.md" target="_blank" rel="noreferrer" style={{ display: 'inline-block', marginTop: '0.8rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Read operating boundary ↗</a>
-            </div>
+        <p className="results-lede">Stored current-signal evidence — inspect the candidate, not a simulated browser prediction.</p>
+        <div style={{ margin: '1.25rem 0 2.2rem', display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.8rem' }}>
+          <div style={{ position: 'relative', overflow: 'hidden', padding: '1rem 1.1rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)' }}>
+            <div style={{ position: 'absolute', inset: '0 auto 0 0', width: '4px', background: 'var(--ink-3)' }} />
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.59rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--ink-3)' }}>Full split · archived baseline</div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.55rem', marginTop: '0.35rem' }}><span style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '2rem' }}>{pct(fullSplit.accuracy)}</span><span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.64rem', color: 'var(--ink-3)' }}>ACCURACY</span></div>
+            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.3rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.66rem', color: 'var(--ink-2)' }}><span>{pct(fullSplit.macroF1)} F1</span><span>{fullSplit.testWindows.toLocaleString()} windows</span></div>
+            <a href={fullSplit.artifacts.errorAnalysis} target="_blank" rel="noreferrer" style={{ display: 'inline-block', marginTop: '0.75rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Open archive evidence ↗</a>
+          </div>
+          <div style={{ position: 'relative', overflow: 'hidden', padding: '1rem 1.1rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)' }}>
+            <div style={{ position: 'absolute', inset: '0 auto 0 0', width: '4px', background: 'var(--accent)' }} />
+            <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.59rem', letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--accent)' }}>Validated current-sensing envelope</div>
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.55rem', marginTop: '0.35rem' }}><span style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '2rem' }}>{pct(current.accuracy)}</span><span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.64rem', color: 'var(--ink-3)' }}>ACCURACY</span></div>
+            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.3rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.66rem', color: 'var(--ink-2)' }}><span>{pct(current.macroF1)} F1</span><span>{data.source.testWindows.toLocaleString()} windows</span></div>
+            <a href="https://github.com/shreyash4real/motor-fault-diagnosis-research-share/blob/main/MODEL_CARD.md" target="_blank" rel="noreferrer" style={{ display: 'inline-block', marginTop: '0.75rem', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.6rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>View scope boundary ↗</a>
+          </div>
+          <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', gap: '0.85rem', padding: '0.75rem 1rem', background: 'var(--surface2)', border: '1px solid var(--rule-soft)' }}>
+            <span style={{ flex: '0 0 auto', padding: '0.28rem 0.45rem', color: 'var(--paper)', background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.08em' }}>44 / 45</span>
+            <span style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', color: 'var(--ink-2)' }}>full-split errors came from BPFO-3 at 100% speed</span>
+            <span style={{ marginLeft: 'auto', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.6rem', color: 'var(--ink-3)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>current-only → escalate</span>
           </div>
         </div>
 
@@ -542,12 +540,9 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
           <MetricCard label="Errors" value={String(current.errors)} sub={`of ${current.samples.length} windows`} color="#b8431f" />
         </div>
 
-        <div className="results-section-block">
-          <div className="results-block-header"><h3>Capability finding</h3><span className="num">measurement boundary, not a bigger-model problem</span></div>
-          <div style={{ padding: '1.2rem 1.3rem', background: 'var(--surface2)', borderLeft: '3px solid var(--accent)', color: 'var(--ink-2)', lineHeight: 1.6 }}>
-            <p style={{ fontFamily: "'Fraunces', serif", fontSize: '1.08rem', marginBottom: '0.75rem' }}>A CNN can learn only the fault signatures present in the measured current. It cannot recover a distinction the sensing chain does not expose.</p>
-            <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.73rem', lineHeight: 1.7 }}>On the full real-data split, one BPFO-3-at-100% source column was repeatedly indistinguishable from healthy operation across several representations and model families. That is useful engineering evidence: a deployment should flag this operating point as outside its validated envelope and escalate to another measurement or inspection, rather than return false certainty.</p>
-          </div>
+        <div className="results-section-block" style={{ padding: '1.15rem 1.25rem', background: 'var(--surface2)', borderLeft: '3px solid var(--accent)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'baseline' }}><span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.13em', color: 'var(--accent)', textTransform: 'uppercase' }}>Capability finding</span><span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.58rem', color: 'var(--ink-3)', textTransform: 'uppercase' }}>decision: escalate</span></div>
+          <p style={{ marginTop: '0.55rem', fontFamily: "'Fraunces', serif", fontStyle: 'italic', fontSize: '1.16rem', lineHeight: 1.35, color: 'var(--ink-2)' }}>A CNN cannot recover a fault signature the current measurement never exposes.</p>
         </div>
 
         <div className="results-section-block">
@@ -583,8 +578,6 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
           </div>}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.7rem', marginTop: '1rem' }}>{data.experiments.map(experiment => { const sample = sampleAt(experiment, activeSampleIndex); return <div key={experiment.id} style={{ padding: '0.8rem 1rem', background: 'var(--surface)', border: '1px solid var(--rule-soft)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.7rem' }}><div style={{ color: 'var(--ink-3)', marginBottom: '0.35rem' }}>{experimentLabel(experiment)}</div><div>{labelFor(sample.prediction)} · {pct(sample.confidence, 1)} · {sample.correct ? 'correct' : 'error'}</div></div>; })}</div>
         </div>
-
-        <div className="results-section-block"><div className="results-block-header"><h3>Evaluation note</h3><span className="num">{data.source.split} · {data.source.scope}</span></div><p className="results-lede" style={{ color: 'var(--ink-2)', marginBottom: '0.8rem' }}>This bundle contains precomputed motor-current predictions. The window count includes overlapping 1-second segments from {data.source.testColumnGroups} held-out column groups.</p><a href="https://github.com/shreyash4real/motor-fault-diagnosis-research-share/blob/main/MODEL_CARD.md" target="_blank" rel="noreferrer" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.7rem', color: 'var(--accent)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Read the model card and deployment boundary ↗</a></div>
 
         <div className="btn-row" style={{ justifyContent: 'space-between', borderTop: '1px solid var(--rule)', paddingTop: '1.6rem', marginTop: '2.5rem' }}><button className="btn ghost" style={{ color: 'var(--ink)', borderColor: 'var(--rule)' }} onClick={() => goSection(0)}>↑ Run another</button><div style={{ display: 'flex', gap: '0.8rem' }}><a className="btn dark" href="data/results-data.json" download>Download data</a><a className="btn" href="docs/motor_fault_diagnosis_report.md">Read report</a></div></div>
       </div>
