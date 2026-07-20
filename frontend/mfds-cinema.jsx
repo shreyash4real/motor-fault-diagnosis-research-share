@@ -187,7 +187,7 @@ function SectionHero({ files, onUpload, goSection }) {
 }
 
 // ─── Section 1: Configure ──────────────────────────────────────────────────
-// All parameters are FIXED by the trained pipeline (see CLAUDE.md hard invariants).
+// All parameters are fixed by the trained pipeline (see AGENTS.md and MODEL_CARD.md).
 // This page is a read-only manifest of the locked acquisition + spectral + inference
 // configuration that produced the model weights — not an editable form.
 function SectionConfigure({ goSection, model, setModel }) {

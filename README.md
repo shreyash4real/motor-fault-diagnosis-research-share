@@ -61,6 +61,7 @@ The raw recordings, bulk denoised signals, and feature tensors are intentionally
 - `frontend/docs/motor_fault_diagnosis_report.md` — technical methodology and evaluation notes.
 - `MODEL_CARD.md` — intended use, evaluated operating scope, and known sensing limitation.
 - `DEVPOST.md` — submission copy, demo-video outline, and final checklist.
+- `docs/engineering-reference.md` — deeper pipeline and evaluation context; not required for routine product work.
 
 ## Built with Codex
 

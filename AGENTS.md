@@ -1,38 +1,38 @@
-<!-- code-review-graph MCP tools -->
-## MCP Tools: code-review-graph
+# CurrentGuard working guide
 
-**IMPORTANT: This project has a knowledge graph. ALWAYS use the
-code-review-graph MCP tools BEFORE using Grep/Glob/Read to explore
-the codebase.** The graph is faster, cheaper (fewer tokens), and gives
-you structural context (callers, dependents, test coverage) that file
-scanning cannot.
+## Purpose
 
-### When to use graph tools FIRST
+CurrentGuard is an electrical-engineering-led motor-current diagnostics prototype. It turns short, three-phase induction-motor current recordings into STFT, DWT, and envelope representations for four-class maintenance decision support.
 
-- **Exploring code**: `semantic_search_nodes` or `query_graph` instead of Grep
-- **Understanding impact**: `get_impact_radius` instead of manually tracing imports
-- **Code review**: `detect_changes` + `get_review_context` instead of reading entire files
-- **Finding relationships**: `query_graph` with callers_of/callees_of/imports_of/tests_for
-- **Architecture questions**: `get_architecture_overview` + `list_communities`
+## Start here
 
-Fall back to Grep/Glob/Read **only** when the graph doesn't cover what you need.
+1. Read `README.md` for the product and repository map.
+2. Read `MODEL_CARD.md` before changing claims, metrics, or evaluation presentation.
+3. Read `docs/engineering-reference.md` only for pipeline, data, or reproducibility work.
 
-### Key Tools
+## Canonical paths
 
-| Tool | Use when |
-|------|----------|
-| `detect_changes` | Reviewing code changes — gives risk-scored analysis |
-| `get_review_context` | Need source snippets for review — token-efficient |
-| `get_impact_radius` | Understanding blast radius of a change |
-| `get_affected_flows` | Finding which execution paths are impacted |
-| `query_graph` | Tracing callers, callees, imports, tests, dependencies |
-| `semantic_search_nodes` | Finding functions/classes by name or keyword |
-| `get_architecture_overview` | Understanding high-level codebase structure |
-| `refactor_tool` | Planning renames, finding dead code |
+- Product frontend: `frontend/`
+- Current research pipeline: `Scripts_nobpfo100/`
+- Current stored evaluation: `Outputs_nobpfo100/`
+- Historical full-split evidence: `research_archive/full_split_v2/`
 
-### Workflow
+Do not treat the historical archive and bounded-scope evaluation as one comparable leaderboard.
 
-1. The graph auto-updates on file changes (via hooks).
-2. Use `detect_changes` for code review.
-3. Use `get_affected_flows` to understand impact.
-4. Use `query_graph` pattern="tests_for" to check coverage.
+## Non-negotiables
+
+- Split at the source-column level before creating overlapping windows.
+- The public frontend is a stored-evidence explorer, not live browser inference.
+- Report 99.85% / 99.75% only within the declared current-sensing operating envelope.
+- Keep the full-split 96.71% / 95.60% baseline visible when discussing the measurement boundary.
+- Do not add raw recordings, bulk feature tensors, or unreviewed customer data to the repository.
+
+## Verify a change
+
+```bash
+python3 -m compileall -q Scripts_nobpfo100
+python3 Scripts_nobpfo100/export_frontend_results.py
+python3 -m json.tool frontend/data/results-data.json >/dev/null
+```
+
+For frontend-only changes, also verify the JSX transform and serve `frontend/` locally. Keep documentation concise, product-facing, and consistent with the model card.
