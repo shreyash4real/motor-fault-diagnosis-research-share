@@ -181,6 +181,9 @@ function ExpandableMetricRow({ p, fmt }) {
 function ConfusionMatrix({ cm, classKeys, maxVal }) {
   const n = cm.length;
   const cellSize = 92;
+  const cellHeight = 76;
+  const axisWidth = 34;
+  const labelWidth = 156;
   // Blues palette: dark navy at high counts → near-white at zero
   const bluesScale = (intensity) => {
     // 0 → very light blue, 1 → deep navy
@@ -205,47 +208,28 @@ function ConfusionMatrix({ cm, classKeys, maxVal }) {
       <p style={{ fontSize: '0.78rem', color: 'var(--ink-3)', marginBottom: '1.25rem', fontFamily: "'Fraunces', serif", fontStyle: 'italic' }}>
         Rows: <span style={{ color: '#08306b' }}>true class</span> · Columns: <span style={{ color: '#08306b' }}>predicted class</span>. Color intensity encodes count (Blues colormap).
       </p>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <div style={{ display: 'inline-flex', flexDirection: 'column' }}>
-          <div style={{ textAlign: 'center', fontSize: '0.62rem', fontFamily: "'JetBrains Mono', monospace", color: 'var(--ink-2)', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '0.6rem', marginLeft: '160px' }}>Predicted ↓</div>
-          <div style={{ display: 'grid', gridTemplateColumns: `160px repeat(${n}, ${cellSize}px)`, gap: '2px' }}>
-            <div></div>
-            {classKeys.map(k => {
-              const meta = CLASS_META[k];
-              return (
-                <div key={k} style={{ padding: '0.4rem 0.2rem', textAlign: 'center', fontSize: '0.7rem', fontFamily: "'JetBrains Mono', monospace", color: 'var(--ink-2)', fontWeight: 500, lineHeight: 1.25, borderBottom: `2px solid ${meta.color}`, paddingBottom: '0.5rem' }}>
-                  {meta.label.split(' ').map((w,i) => <div key={i}>{w}</div>)}
-                </div>
-              );
+      <div style={{ display: 'flex', justifyContent: 'center', overflowX: 'auto', paddingBottom: '0.2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: `${axisWidth}px ${labelWidth}px repeat(${n}, ${cellSize}px)`, gridTemplateRows: `1.4rem auto repeat(${n}, ${cellHeight}px)`, gap: '2px', minWidth: `${axisWidth + labelWidth + n * cellSize}px` }}>
+          <div style={{ gridColumn: `3 / span ${n}`, gridRow: 1, textAlign: 'center', fontSize: '0.62rem', fontFamily: "'JetBrains Mono', monospace", color: 'var(--ink-2)', letterSpacing: '0.18em', textTransform: 'uppercase' }}>Predicted ↓</div>
+          <div style={{ gridColumn: 2, gridRow: 2 }} />
+          {classKeys.map((k, index) => {
+            const meta = CLASS_META[k];
+            return <div key={k} style={{ gridColumn: index + 3, gridRow: 2, padding: '0.4rem 0.2rem 0.5rem', textAlign: 'center', fontSize: '0.7rem', fontFamily: "'JetBrains Mono', monospace", color: 'var(--ink-2)', fontWeight: 500, lineHeight: 1.25, borderBottom: `2px solid ${meta.color}` }}>{meta.label.split(' ').map((word, wordIndex) => <div key={wordIndex}>{word}</div>)}</div>;
+          })}
+          <div style={{ gridColumn: 1, gridRow: `3 / span ${n}`, writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontSize: '0.62rem', fontFamily: "'JetBrains Mono', monospace", color: 'var(--ink-2)', letterSpacing: '0.18em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>True →</div>
+          {cm.map((row, i) => <React.Fragment key={i}>
+            <div style={{ gridColumn: 2, gridRow: i + 3, padding: '0 0.85rem', fontSize: '0.85rem', fontFamily: "'Fraunces', serif", color: 'var(--ink)', textAlign: 'right', borderRight: `2px solid ${CLASS_META[classKeys[i]].color}`, display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>{CLASS_META[classKeys[i]].label}</div>
+            {row.map((val, j) => {
+              const intensity = Math.max(0, Math.min(1, val / Math.max(1, maxVal)));
+              const opacity = val === 0 ? 0.06 : 0.16 + Math.pow(intensity, 0.55) * 0.84;
+              const bg = `rgba(8, 48, 107, ${opacity.toFixed(3)})`;
+              const isDiag = i === j;
+              const textColor = opacity > 0.56 ? '#f7fbff' : '#08306b';
+              const rowSum = row.reduce((a,b)=>a+b,0);
+              const pct = rowSum ? ((val/rowSum)*100).toFixed(1) : '0';
+              return <div key={j} title={`${val} samples · ${Math.round(intensity * 100)}% of matrix maximum`} aria-label={`${val} samples`} style={{ gridColumn: j + 3, gridRow: i + 3, background: bg, padding: '0.85rem 0.3rem', textAlign: 'center', border: isDiag ? '2px solid #08306b' : '1px solid rgba(8,48,107,0.15)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}><span style={{ fontFamily: "'Fraunces', serif", fontVariationSettings: '"opsz" 144', fontSize: '1.3rem', color: textColor, lineHeight: 1 }}>{val}</span><span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', color: textColor, opacity: 0.8, marginTop: '0.3rem' }}>{pct}%</span></div>;
             })}
-          </div>
-          <div style={{ position: 'relative', display: 'flex', marginTop: '0.4rem' }}>
-            <div style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontSize: '0.62rem', fontFamily: "'JetBrains Mono', monospace", color: 'var(--ink-2)', letterSpacing: '0.18em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingRight: '0.6rem' }}>True →</div>
-            <div style={{ display: 'grid', gridTemplateColumns: `160px repeat(${n}, ${cellSize}px)`, gap: '2px', flex: 1 }}>
-              {cm.map((row, i) => (
-                <React.Fragment key={i}>
-                  <div style={{ padding: '0 0.85rem', fontSize: '0.85rem', fontFamily: "'Fraunces', serif", color: 'var(--ink)', textAlign: 'right', alignSelf: 'center', borderRight: `2px solid ${CLASS_META[classKeys[i]].color}`, paddingRight: '0.85rem' }}>
-                    {CLASS_META[classKeys[i]].label}
-                  </div>
-                  {row.map((val, j) => {
-                    const intensity = Math.max(0, Math.min(1, val / Math.max(1, maxVal)));
-                    const opacity = val === 0 ? 0.06 : 0.16 + Math.pow(intensity, 0.55) * 0.84;
-                    const bg = `rgba(8, 48, 107, ${opacity.toFixed(3)})`;
-                    const isDiag = i === j;
-                    const textColor = opacity > 0.56 ? '#f7fbff' : '#08306b';
-                    const rowSum = row.reduce((a,b)=>a+b,0);
-                    const pct = rowSum ? ((val/rowSum)*100).toFixed(1) : '0';
-                    return (
-                      <div key={j} title={`${val} samples · ${Math.round(intensity * 100)}% of matrix maximum`} aria-label={`${val} samples`} style={{ background: bg, padding: '0.85rem 0.3rem', textAlign: 'center', border: isDiag ? '2px solid #08306b' : '1px solid rgba(8,48,107,0.15)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70px' }}>
-                        <span style={{ fontFamily: "'Fraunces', serif", fontVariationSettings: '"opsz" 144', fontSize: '1.3rem', color: textColor, lineHeight: 1 }}>{val}</span>
-                        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', color: textColor, opacity: 0.8, marginTop: '0.3rem' }}>{pct}%</span>
-                      </div>
-                    );
-                  })}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
+          </React.Fragment>)}
         </div>
       </div>
       {/* Color scale legend */}
