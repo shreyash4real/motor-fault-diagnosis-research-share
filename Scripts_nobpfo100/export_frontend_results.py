@@ -22,6 +22,7 @@ OUT_PATH = ROOT / "frontend" / "data" / "results-data.json"
 CLASS_NAMES = ["healthy 1", "stator short 1", "bearing bpfo 3", "broken rotor bar"]
 CLASS_KEYS = ["healthy", "stator_short", "bearing_bpfo", "broken_rotor_bar"]
 CLASS_TO_KEY = dict(zip(CLASS_NAMES, CLASS_KEYS))
+DISPLAY_CLASS_LABELS = ["Healthy", "Stator fault", "Bearing fault", "Rotor-bar fault"]
 
 
 def read_npy(path: Path) -> tuple[tuple[int, ...], list[float | int]]:
@@ -190,7 +191,7 @@ def full_split_baseline() -> dict:
         "errorBreakdown": {
             "bpfo3At100": 44,
             "other": 1,
-            "note": "44 of 45 errors came from the held-out BPFO-3-at-100% source column (col_index=5).",
+            "note": "44 of 45 errors came from the held-out bearing-fault source group at 100% speed.",
         },
         "note": "Full original split, including the measurement-confounded BPFO-3-at-100% source column.",
         "artifacts": {
@@ -331,12 +332,12 @@ def main() -> None:
             "testColumnGroups": len({(sample["trueClass"], sample["speedPct"], sample["column"]) for sample in metadata}),
             "windowSeconds": 1.0,
             "windowStrideSeconds": 0.25,
-            "note": "BPFO-3 at 100% speed is excluded because the available current measurement could not reliably separate a held-out source column from healthy operation. Report these metrics only within this declared scope.",
+            "note": "The bearing-fault source group at 100% speed is excluded because the available current measurement could not reliably separate a held-out source column from healthy operation. Report these metrics only within this declared scope.",
             "fullSplit": full_split_baseline(),
         },
         "classes": [
             {"key": key, "label": label}
-            for key, label in zip(CLASS_KEYS, CLASS_NAMES)
+            for key, label in zip(CLASS_KEYS, DISPLAY_CLASS_LABELS)
         ],
         "experiments": experiments,
     }

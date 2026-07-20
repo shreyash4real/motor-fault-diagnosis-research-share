@@ -13,9 +13,9 @@ const STEP_INDEX = { upload: 0, configure: 1, processing: 2, results: 3 };
 // Conventional ML palette — dark blue → light blue confusion matrix
 const CLASS_META = {
   healthy:          { label: 'Healthy',          color: '#1e3a8a', hex: '#1e3a8a', short: 'HLT', glyph: '○' },
-  stator_short:     { label: 'Stator Short',     color: '#b8431f', hex: '#b8431f', short: 'STS', glyph: '◐' },
-  bearing_bpfo:     { label: 'Bearing BPFO',     color: '#0369a1', hex: '#0369a1', short: 'BPF', glyph: '◑' },
-  broken_rotor_bar: { label: 'Broken Rotor Bar', color: '#a16207', hex: '#a16207', short: 'BRB', glyph: '●' },
+  stator_short:     { label: 'Stator fault',     color: '#b8431f', hex: '#b8431f', short: 'STF', glyph: '◐' },
+  bearing_bpfo:     { label: 'Bearing fault',    color: '#0369a1', hex: '#0369a1', short: 'BRG', glyph: '◑' },
+  broken_rotor_bar: { label: 'Rotor-bar fault',  color: '#a16207', hex: '#a16207', short: 'RBF', glyph: '●' },
 };
 
 function Card({ title, icon, children, style }) {

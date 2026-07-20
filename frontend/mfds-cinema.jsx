@@ -461,7 +461,12 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
 
   const current = data.experiments.find(item => item.id === selectedExperiment) || data.experiments[0];
   const fullSplit = data.source.fullSplit;
-  const labelFor = (key) => (data.classes.find(item => item.key === key) || { label: key }).label;
+  const labelFor = (key) => ({
+    healthy: 'Healthy',
+    stator_short: 'Stator fault',
+    bearing_bpfo: 'Bearing fault',
+    broken_rotor_bar: 'Rotor-bar fault',
+  }[key] || key);
   const pct = (value, digits = 2) => `${(value * 100).toFixed(digits)} %`;
   const experimentLabel = (experiment) => experiment.fusion === 'temperature'
     ? 'Temperature-calibrated equal vote'
@@ -505,7 +510,7 @@ function SectionResults({ goSection, data, selectedExperiment, setSelectedExperi
           </div>
           <div style={{ gridColumn: '1 / -1', display: 'flex', alignItems: 'center', gap: '0.85rem', padding: '0.75rem 1rem', background: 'var(--surface2)', border: '1px solid var(--rule-soft)' }}>
             <span style={{ flex: '0 0 auto', padding: '0.28rem 0.45rem', color: 'var(--paper)', background: 'var(--accent)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', letterSpacing: '0.08em' }}>44 / 45</span>
-            <span style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', color: 'var(--ink-2)' }}>full-split errors came from BPFO-3 at 100% speed</span>
+            <span style={{ fontFamily: "'Fraunces', serif", fontStyle: 'italic', color: 'var(--ink-2)' }}>full-split errors came from one bearing-fault group at 100% speed</span>
             <span style={{ marginLeft: 'auto', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.6rem', color: 'var(--ink-3)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>current-only → escalate</span>
           </div>
         </div>
