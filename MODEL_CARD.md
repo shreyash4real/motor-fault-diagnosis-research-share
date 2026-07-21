@@ -1,8 +1,8 @@
-# Motor Hakeem model card
+# Motor Current Analytics model card
 
 ## Intended use
 
-Motor Hakeem is a research prototype for maintenance decision support from a short, three-phase induction-motor current recording. It is intended to surface evidence for a healthy baseline, stator short, outer-race bearing defect (BPFO-3), or broken rotor bar. It is not an autonomous maintenance decision-maker.
+Motor Current Analytics is a research prototype for maintenance decision support from a short, three-phase induction-motor current recording. It is intended to surface evidence for a healthy baseline, stator short, outer-race bearing defect (BPFO-3), or broken rotor bar. It is not an autonomous maintenance decision-maker.
 
 ## Measurement boundary discovered in real data
 

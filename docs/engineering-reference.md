@@ -4,7 +4,7 @@ Use this reference for work on the research pipeline, stored results, or product
 
 ## System boundary
 
-Motor Hakeem is a research prototype for maintenance decision support from three-phase induction-motor current. Its public product is a static evidence explorer; it does not run arbitrary uploaded recordings in the browser.
+Motor Current Analytics is a research prototype for maintenance decision support from three-phase induction-motor current. Its public product is a static evidence explorer; it does not run arbitrary uploaded recordings in the browser.
 
 The four labelled states are healthy operation, stator short, BPFO-3 outer-race bearing defect, and broken rotor bar. The product uses complementary STFT, DWT, and envelope views of the same current signal.
 
