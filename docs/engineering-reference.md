@@ -12,10 +12,10 @@ The four labelled states are healthy operation, stator short, BPFO-3 outer-race 
 
 | Scope | Test windows | Accuracy | Macro-F1 | Interpretation |
 | --- | ---: | ---: | ---: | --- |
-| Full original split | 1,368 | 96.71% | 95.60% | Includes the BPFO-3-at-100% source column. |
-| Declared current-sensing envelope | 1,311 | 99.85% | 99.75% | Excludes that measurement-confounded held-out source group. |
+| Full original split | 1,368 overlapping windows / 24 source columns | 96.71% | 95.60% | Includes the BPFO-3-at-100% source column. |
+| Retrospective scoped analysis | 1,311 overlapping windows / 23 source columns | 99.85% | 99.75% | Excludes that measurement-confounded held-out source group. |
 
-The scoped result is not a replacement for the full split. In the full split, 44 of 45 errors in the best three-view temperature-calibrated ensemble came from the BPFO-3-at-100% source column (`col_index=5`). Repeated failure across representations and model families indicates a measurement/identifiability boundary, not a claim that bearing faults are universally invisible to current sensing.
+The scoped result is a retrospective bounded ablation, not a replacement for the full split. In the full split, 44 of 45 errors in the best three-view temperature-calibrated ensemble came from the BPFO-3-at-100% source column (`col_index=5`). Repeated failure across the tested representations and model families is consistent with a measurement/identifiability boundary in this evaluation; it does not prove that bearing faults are universally invisible to current sensing.
 
 ## Data and split invariants
 
@@ -24,12 +24,12 @@ The scoped result is not a replacement for the full split. In the full split, 44
 - The scoped exclusion must be explicit. `Scripts_nobpfo100/generate_splits_nobpfo100.py` writes its declared scope; `validate_experiment.py` validates source isolation and class/speed coverage.
 - Raw recordings, denoised bulk signals, and feature tensors are intentionally excluded from the public package.
 
-## Working paths
+## Stored-artifact workflow and current path limitation
 
-- `Scripts_nobpfo100/run_all_nobpfo100.py` is the portable pipeline runner.
+- `Scripts_nobpfo100/run_all_nobpfo100.py` is the intended end-to-end runner, but its committed manifests retain legacy Windows paths that are not yet normalized correctly on macOS/Linux. Do not describe it as cross-platform portable until the path layer is fixed and dry-run tested.
 - `Scripts_nobpfo100/export_frontend_results.py` deterministically regenerates `frontend/data/results-data.json` from committed result artifacts.
 - `Outputs_nobpfo100/training/` provides the stored metrics and predictions shown by the frontend.
-- `research_archive/full_split_v2/` retains the full historical script/output record. Its legacy metadata paths are evidence, while its restored scripts use environment-configurable paths described in that archive’s README.
+- `research_archive/full_split_v2/` retains the full historical script/output record. Its legacy metadata is evidence; its end-to-end execution has the same path-normalization limitation and should not be presented as portable yet.
 
 ## Product language
 

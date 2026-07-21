@@ -258,7 +258,7 @@ function SectionConfigure({ goSection, model, setModel }) {
             <h3>Signal &amp; machine</h3>
             <div className="cfg-panel-divider"></div>
             <div>
-              <Row k="Sample rate" v="20 000 Hz" hint="Dataset standard, 20 kS/s per channel." />
+              <Row k="Sample rate" v="20 000 Hz" hint="Recorded signal profile, 20 kS/s per channel." />
               <Row k="Poles" v="4" hint="Two pole pairs · 5.5 kW induction motor." />
               <Row k="Line frequency" v="50 Hz" hint="Mains carrier — stripped during envelope analysis." />
               <Row k="Channels" v="3 · I_a · I_b · I_c" />

@@ -29,16 +29,18 @@ I used Codex with GPT-5.6 to turn an electrical-engineering concept and an exist
 ## What makes it credible
 
 - The interface reads committed evaluation artefacts; it does not invent dashboard numbers.
-- The declared current-sensing operating envelope reports **99.85% accuracy** and **99.75% macro-F1**.
-- The original full split reports **96.71% accuracy** and **95.60% macro-F1**, including a real BPFO-3-at-100% measurement-confounded source group.
-- The project exposes that boundary: 44 of 45 errors in the best historic ensemble arose from that source group. A production system must escalate instead of forcing a confident label outside the validated envelope.
+- The full original split reports **96.71% accuracy** and **95.60% macro-F1** across 24 held-out source columns.
+- A retrospective scoped analysis reports **99.85% accuracy** and **99.75% macro-F1** across 23 held-out source columns (1,311 overlapping one-second windows); it is not a replacement for the broader result.
+- The project exposes the difficult condition instead of hiding it: 44 of 45 errors in the best historic ensemble arose from one held-out source group. A production system must escalate instead of forcing a confident label outside the evaluated scope.
 - The repository contains the runnable static demo, setup instructions, MIT license, current pipeline, and separated historical evidence archive.
 
 ## How Codex and GPT-5.6 were used
 
 Use this answer if the form has a dedicated AI-usage field:
 
-> I used Codex with GPT-5.6 as an implementation partner across the project: it helped me map and review the research repository, make the archived scripts portable, trace evaluation outputs into a deterministic frontend export, build and refine the product interface, test the static demo, and tighten the evidence and limitation language. I directed the electrical-engineering problem framing and the decisions about sensing, source-level evaluation, operating scope, and maintenance workflow. The result is not generated data or a fabricated interface: the demo presents stored outputs from the real current-signal evaluation pipeline.
+> I used Codex with GPT-5.6 as an implementation partner across the project: it helped me map and review the research repository, audit the historical scripts and reproducibility boundary, trace evaluation outputs into a deterministic frontend export, build and refine the product interface, test the static demo, and tighten the evidence and limitation language. I directed the electrical-engineering problem framing and the decisions about sensing, source-level evaluation, operating scope, and maintenance workflow. The result is not generated data or a fabricated interface: the demo presents stored outputs from a controlled current-signal evaluation pipeline.
+
+For the pre-existing-research versus Build Week cutover and an auditable process account, see [docs/codex-gpt-5-6-process.md](docs/codex-gpt-5-6-process.md).
 
 ## Three-minute video script
 
@@ -49,8 +51,8 @@ Record a public YouTube video under three minutes. Show the live demo working an
 | 0:00–0:22 | You on camera, then an induction-motor image or the Motor Current Analytics landing view | “I’m an electrical engineer. Induction motors run a huge amount of industry, and a fault can quietly become energy loss and downtime. I wanted a lower-friction monitoring path built around the three-phase current already available at the motor.” |
 | 0:22–0:48 | The live demo’s hero and product flow | “This is Motor Current Analytics: current-based fault diagnostics for induction motors. This public version is an evidence explorer. A production pilot would accept a calibrated current recording; this demo lets you inspect the committed diagnostic evidence behind the result.” |
 | 0:48–1:18 | Acquisition and representation sections | “The pipeline turns three-phase current into STFT, DWT, and envelope-spectrum views. They give the model complementary ways to inspect the same physical signal.” |
-| 1:18–1:52 | Results selector, 99.85% / 99.75% configuration, confusion matrix | “Within the declared current-sensing operating envelope, this three-view ensemble reports 99.85% accuracy and 99.75% macro-F1. The interface exposes the configuration, confusion matrix, per-class metrics, and sample probabilities instead of hiding behind one score.” |
-| 1:52–2:16 | Measurement-boundary evidence / model card | “The full original split also matters: it includes a real bearing-fault source group at 100% speed that current alone could not reliably separate from healthy. I kept that result visible. In production, that is an escalate-for-inspection case, not a forced diagnosis.” |
+| 1:18–1:52 | Results selector, full baseline and scoped configuration, confusion matrix | “The broader full-split baseline reports 96.71% accuracy and 95.60% macro-F1. A separate retrospective scoped analysis reports 99.85% accuracy and 99.75% macro-F1 across 23 held-out source columns. The interface exposes the configuration, confusion matrix, per-class metrics, and sample probabilities instead of hiding behind one score.” |
+| 1:52–2:16 | Measurement-boundary evidence / model card | “The full split includes a bearing-fault pattern at 100% speed that the tested current-only models did not reliably separate from healthy. I kept that result visible. In production, that is an escalate-for-inspection case, not a forced diagnosis.” |
 | 2:16–2:42 | Repository README, exporter, and product page | “I used Codex with GPT-5.6 to turn the electrical-engineering workflow into this reviewable product: tracing the research pipeline, linking committed outputs to the frontend, validating the exporter, and shaping a credible demo. I made the engineering choices about current sensing, source-level evaluation, and product scope.” |
 | 2:42–2:58 | Return to product overview | “The business path is a pilot with plant current data, calibration for the target motor fleet, and a maintenance report that helps engineers decide what to inspect next. This is Motor Current Analytics.” |
 

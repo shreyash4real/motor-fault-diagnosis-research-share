@@ -25,7 +25,7 @@ The public demo is deliberately an **evidence explorer**, not a live production 
 - A deliberately separate historical full-split baseline and four comparable scoped ensemble configurations, with per-class metrics, confusion matrices, probability views, and sample-level exploration.
 - A reproducible export script that regenerates the frontend evidence bundle entirely from committed evaluation artefacts.
 
-The displayed three-view configuration reports **99.85% accuracy** and **99.75% macro-F1** within its declared current-sensing operating envelope. A full original split, including a real measurement-confounded BPFO-3-at-100% source column, reports **96.71% accuracy** and **95.60% macro-F1**. Both belong in the story: the first shows performance within the validated scope; the second shows the real sensing limit that a production system must detect and escalate. See [MODEL_CARD.md](MODEL_CARD.md).
+The displayed three-view configuration reports **99.85% accuracy** and **99.75% macro-F1** in a retrospective scoped analysis of **23 held-out source columns** (1,311 overlapping one-second windows). The full original split reports **96.71% accuracy** and **95.60% macro-F1** over 24 held-out source columns. Both belong in the story: the first is a deliberately bounded analysis; the second is the broader controlled evaluation and includes a condition the tested current-only models did not reliably distinguish. Neither result is field or fleet validation. See [MODEL_CARD.md](MODEL_CARD.md).
 
 ## Run it locally
 
@@ -57,16 +57,18 @@ The raw recordings, bulk denoised signals, and feature tensors are intentionally
 - `Scripts_nobpfo100/export_frontend_results.py` — deterministic exporter for `frontend/data/results-data.json`.
 - `Scripts_nobpfo100/` — training, feature-precomputation, split, and ensemble-evaluation scripts.
 - `Outputs_nobpfo100/training/` — committed metrics and prediction artefacts used by the demo.
-- `research_archive/full_split_v2/` — portable historical scripts and the complete full-split v2 evidence bundle, clearly separated from the scoped evaluation.
+- `research_archive/full_split_v2/` — historical scripts and the complete full-split v2 evidence bundle, clearly separated from the scoped evaluation.
 - `frontend/docs/motor_fault_diagnosis_report.md` — technical methodology and evaluation notes.
 - `MODEL_CARD.md` — intended use, evaluated operating scope, and known sensing limitation.
 - `DEVPOST.md` — submission copy, demo-video outline, and final checklist.
 - `docs/engineering-reference.md` — deeper pipeline and evaluation context; not required for routine product work.
 
-## Built with Codex
+## Built with Codex and GPT-5.6
 
-I am an electrical engineer who framed the motor and fault-physics problem, then used Codex as the implementation partner that helped turn it into a reviewable product experience. Codex accelerated the work of tracing the research pipeline, validating the evaluation-to-frontend export path, tightening the product claims, and shaping a coherent demo from the existing artifacts.
+I am an electrical engineer who framed the motor and fault-physics problem, then used Codex with GPT-5.6 as an implementation partner to turn it into a reviewable product experience. Codex accelerated the work of tracing the research pipeline, validating the evaluation-to-frontend export path, tightening the product claims, and shaping a coherent demo from the existing artifacts.
 
 The key engineering decisions remained explicit: use current rather than add-on vibration sensing as the product input; keep source-level splits ahead of overlapping segmentation to avoid leakage; preserve three complementary signal views; expose held-out evidence rather than hiding behind a single accuracy number; and present the result as decision support, not autonomous maintenance approval.
+
+The repository contains pre-existing research work and Build Week productization work. The specific cutover, observable Codex/GPT-5.6 contribution, verification approach, and required submission evidence are documented in [docs/codex-gpt-5-6-process.md](docs/codex-gpt-5-6-process.md).
 
 See [DEVPOST.md](DEVPOST.md) for the submission-ready project description, video structure, and the final items that must be completed in the Devpost form.

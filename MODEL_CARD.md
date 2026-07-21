@@ -4,26 +4,26 @@
 
 Motor Current Analytics is a research prototype for maintenance decision support from a short, three-phase induction-motor current recording. It is intended to surface evidence for a healthy baseline, stator short, outer-race bearing defect (BPFO-3), or broken rotor bar. It is not an autonomous maintenance decision-maker.
 
-## Measurement boundary discovered in real data
+## Measurement boundary in controlled measurements
 
-This project uses real motor-current recordings, not simulated signals. That matters: a physically labelled fault does not guarantee that the available sensing chain exposes a separable signature at every operating point.
+This project uses physically measured motor-current signals from controlled fault states, rather than synthetically generated waveforms. That matters: a physically labelled fault does not guarantee that the available sensing chain exposes a separable signature at every operating point.
 
 In the original full test split, one held-out BPFO-3 source column at 100% speed (`col_index=5`) was consistently predicted as healthy. It contributed 44 of the 45 errors in the three-view temperature-calibrated ensemble. The archived diagnostics show that the same column dominated BPFO errors across multiple representations and model families; it is therefore treated as a measurement-confounded operating point, not silently discarded data.
 
 ## CNN capability finding
 
-This is a useful result about the boundary of a vision-style CNN on signal representations. STFT, DWT, and envelope transforms give a CNN different views of the same measured current; a larger model can learn a stronger mapping only when at least one view contains a repeatable discriminative signature. Repeated failure across those views and model families is evidence that the distinction was not reliably observable through this sensing chain at that operating point.
+This is a useful result about the boundary of a vision-style CNN on signal representations. STFT, DWT, and envelope transforms give a CNN different views of the same measured current; a larger model can learn a stronger mapping only when at least one view contains a repeatable discriminative signature. Repeated failure across the tested views and model families shows that those models did not reliably distinguish this condition through this sensing setup in this evaluation.
 
-It does **not** mean that bearing faults are universally undetectable from current, or that a CNN is categorically inadequate. It means this particular motor, current measurement setup, and operating condition need either additional calibration data, a different sensing modality, or an abstention/escalation decision rather than a forced four-class label.
+It does **not** prove that bearing faults are universally undetectable from current, that the hardware itself is categorically incapable, or that a CNN is categorically inadequate. It is consistent with an identifiability limitation in this particular motor, current measurement setup, and operating condition; that calls for additional calibration data, a different sensing modality, or an abstention/escalation decision rather than a forced four-class label.
 
 ## Evaluation results
 
-| Evaluation scope | Test windows | Accuracy | Macro-F1 | BPFO-3 F1 | Meaning |
+| Evaluation scope | Evaluation unit | Window-level accuracy | Macro-F1 | BPFO-3 F1 | Meaning |
 | --- | ---: | ---: | ---: | ---: | --- |
-| Full original split | 1,368 | 96.71% | 95.60% | 84.9% | Includes the confounded BPFO-3-at-100% source column. |
-| Declared bounded operating envelope | 1,311 | 99.85% | 99.75% | 99.1% | Excludes that source column from test and is valid only for this stated sensing/operating scope. |
+| Full original split | 24 held-out source columns / 1,368 overlapping windows | 96.71% | 95.60% | 84.9% | Includes the confounded BPFO-3-at-100% source column. |
+| Retrospective scoped analysis | 23 held-out source columns / 1,311 overlapping windows | 99.85% | 99.75% | 99.1% | Excludes that source column from test and is valid only for this stated sensing/operating scope. |
 
-The second figure is not a replacement for the first. It answers a narrower engineering question: how the current-signal pipeline behaves where this measurement setup can distinguish the operating states.
+The second figure is not a replacement for the first, and the overlapping windows are not independent motor recordings. It answers a narrower retrospective question: how the selected pipeline behaves where this measurement setup distinguished the evaluated states. It needs a new unseen calibration/pilot set before it can support a deployment claim.
 
 ## Product implication
 
@@ -39,7 +39,7 @@ The public demo currently explores stored results; it does not perform live infe
 ## Reproducibility trail
 
 - The full-split ensemble result, all historical configurations, and BPFO diagnostics are restored under `research_archive/full_split_v2/` from commit `ac41fa5`.
-- `research_archive/full_split_v2/README.md` documents the full-split scope and portable archived-script paths without rewriting historical result metadata.
+- `research_archive/full_split_v2/README.md` documents the full-split scope and historical-script paths without rewriting historical result metadata.
 - The scoped evaluation artefacts are under `Outputs_nobpfo100/`.
 - `Scripts_nobpfo100/validate_experiment.py` checks source-level split isolation and class/speed test coverage.
 - `Scripts_nobpfo100/generate_splits_nobpfo100.py` now requires the scoped BPFO-3-at-100% exclusion to be selected explicitly and writes its scope to `split_manifest.json`.

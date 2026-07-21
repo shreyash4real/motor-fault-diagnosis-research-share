@@ -1,7 +1,7 @@
 # Comprehensive Technical Report: Multi-Representation Motor Fault Diagnosis
 
 ## 1. Project Overview & Objectives
-The objective of this research pipeline is to develop a robust machine-learning system for **motor fault diagnosis using 3-phase electric current signals** originating from a centrifugal pump testbench. 
+The objective of this research pipeline is to develop a robust machine-learning system for **motor fault diagnosis using controlled 3-phase electric-current recordings**.
 The system is designed to classify signals into four canonical categories across three variable frequency drive (VFD) speeds (50%, 75%, 100%):
 1. `healthy 1` (Baseline)
 2. `stator short 1` (Stator winding short)
@@ -10,8 +10,8 @@ The system is designed to classify signals into four canonical categories across
 
 The central thesis of the pipeline is that no single signal representation captures all fault physics optimally. Therefore, the architecture extracts three distinct physical perspectives—**Time-Frequency (STFT), Time-Scale (DWT), and Demodulated Low-Frequency (Envelope)**—trains bespoke parallel deep-learning models for each, and fuses them via temperature-calibrated soft voting.
 
-## 2. Dataset & Foundational Constraints
-* **Dataset:** Motor Current and Vibration Monitoring Dataset for Fault Detection in E-motor-driven Centrifugal Pump (S. Bruinsma et al.).
+## 2. Evaluation corpus & foundational constraints
+* **Recordings:** Controlled three-phase motor-current measurements. The raw recording corpus is intentionally not distributed in this share package.
 * **Signal Specs:** 15-second recordings, sampled at **20 kHz** ($F_s = 20,000$). Each recording contains 300,000 samples across 3 simultaneous electric phases.
 * **Volume:** 231 total electric files.
 
@@ -71,9 +71,9 @@ Each representation is trained on a bespoke deep learning architecture optimized
 * **Stem Configuration:** The initial kernel size (`k`) and stride (`s`) scale based on the band length. Large bands (e.g., >2000 length) use `k=15, s=4`. Small bands (e.g., <100 length) use `k=3, s=1`.
 * **Fusion:** Each branch reduces to a 48-dimensional vector via GAP. The 10 branches are concatenated (480-d) -> Dense(128) -> GELU -> Dropout(0.4) -> Output.
 
-#### Model C: Envelope 1D ResNet (v3 Regularized)
-* **Architecture:** A 1D ResNet utilizing Squeeze-and-Excitation (SE) blocks and dilated convolutions to capture harmonic peaks across the frequency axis.
-* **Configuration:** Employs heavy regularization to prevent overfitting: Dropout (0.5), Weight Decay (1e-3), Label Smoothing (0.1), and Inverse-Frequency Class Weighting.
+#### Model C: Envelope 1D CNN variants
+* **Historical full-split baseline:** A regularized 1D ResNet v3 using Squeeze-and-Excitation (SE) blocks and dilated convolutions to capture harmonic peaks across the frequency axis. Its configuration includes Dropout (0.5), Weight Decay (1e-3), Label Smoothing (0.1), and Inverse-Frequency Class Weighting.
+* **Retrospective scoped analysis:** The selected three-view result instead uses the `envelope_dilated` branch recorded in its ensemble configuration. The full and scoped figures therefore change both evaluation scope and envelope-model selection; they are not a controlled architecture-only comparison.
 
 #### Common Training Hyperparameters
 * **Optimizer:** AdamW.
@@ -87,4 +87,4 @@ Rather than hard voting or concatenating features, the pipeline utilizes **Tempe
 2. **Temperature Scaling (LBFGS):** For each model independently, a scalar temperature $T$ is optimized to minimize the Cross-Entropy Loss (NLL) on the *validation set*. $T > 1$ softens over-confident models; $T < 1$ sharpens under-confident ones.
 3. **Soft Voting:** The calibrated softmax probabilities ($P = \text{softmax}(\text{logits} / T)$) from the STFT, DWT, and Envelope models are averaged with equal weights to produce the final classification.
 
-**Final Ensemble Output:** The fused architecture achieves ~96.7% Test Accuracy and ~0.956 Macro-F1 on the canonical dataset split.
+**Reported ensemble outputs:** The historical full-split ensemble achieves ~96.7% window-level Test Accuracy and ~0.956 Macro-F1 over 24 held-out source columns. A separate retrospective scoped analysis reports 99.85% window-level accuracy and 99.75% Macro-F1 over 23 held-out source columns. Its 1,311 overlapping one-second windows are not 1,311 independent recordings.
