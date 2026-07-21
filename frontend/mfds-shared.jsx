@@ -90,36 +90,14 @@ Object.assign(window, {
   STEPS, STEP_INDEX, CLASS_META,
 });
 
-function MetricCard({ label, value, sub, color, formula, breakdown, calc }) {
-  const [open, setOpen] = useState(false);
+function MetricCard({ label, value, sub, color }) {
   return (
     <div style={{ background: 'var(--surface)', border: '1px solid var(--rule-soft)', borderTop: `2px solid ${color}`, borderRadius: '2px', overflow: 'hidden' }}>
-      <div onClick={() => setOpen(!open)} style={{ padding: '1.1rem 1.2rem', cursor: 'pointer', position: 'relative' }}>
+      <div style={{ padding: '1.1rem 1.2rem' }}>
         <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.62rem', textTransform: 'uppercase', letterSpacing: '0.16em', color: 'var(--ink-3)', marginBottom: '0.65rem' }}>{label}</p>
         <p style={{ fontFamily: "'Fraunces', serif", fontVariationSettings: '"opsz" 144', fontWeight: 400, fontSize: '2.1rem', color, lineHeight: 1, letterSpacing: '-0.02em' }}>{value}</p>
         <p style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.7rem', color: 'var(--ink-3)', marginTop: '0.4rem' }}>{sub}</p>
-        <span style={{ position: 'absolute', top: '1rem', right: '1rem', color: 'var(--ink-4)', fontSize: '0.75rem', transform: open ? 'rotate(180deg)' : 'none', transition: 'transform 0.15s' }}>▾</span>
       </div>
-      {open && (
-        <div style={{ padding: '1rem 1.2rem', background: 'var(--surface2)', borderTop: '1px solid var(--rule-soft)', fontFamily: "'JetBrains Mono', monospace", fontSize: '0.76rem' }}>
-          <p style={{ fontSize: '0.6rem', color: 'var(--ink-3)', marginBottom: '0.5rem', letterSpacing: '0.16em', textTransform: 'uppercase' }}>Formula</p>
-          <p style={{ color: 'var(--ink)', marginBottom: '0.85rem', lineHeight: 1.6 }}>{formula}</p>
-          {breakdown && breakdown.length > 0 && (
-            <>
-              <p style={{ fontSize: '0.6rem', color: 'var(--ink-3)', marginBottom: '0.5rem', letterSpacing: '0.16em', textTransform: 'uppercase' }}>Components</p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', marginBottom: '0.85rem' }}>
-                {breakdown.map((b, i) => (
-                  <div key={i} style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--ink-3)', borderBottom: '1px dotted var(--rule-soft)', paddingBottom: '0.2rem' }}>
-                    <span>{b.k}</span><span style={{ color: 'var(--ink)' }}>{b.v}</span>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-          <p style={{ fontSize: '0.6rem', color: 'var(--ink-3)', marginBottom: '0.5rem', letterSpacing: '0.16em', textTransform: 'uppercase' }}>Calculation</p>
-          <p style={{ color: color, lineHeight: 1.6, wordBreak: 'break-word', fontWeight: 500 }}>{calc}</p>
-        </div>
-      )}
     </div>
   );
 }
